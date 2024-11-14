@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0058)https://docs.juce.com/master/tutorial_audio_thumbnail.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Draw audio waveforms</title>
+<link href="./JUCE_ Tutorial_ Draw audio waveforms_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Draw audio waveforms_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Draw audio waveforms_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Draw audio waveforms_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Draw audio waveforms_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Draw audio waveforms_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Draw audio waveforms_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Draw audio waveforms_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Draw audio waveforms_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Draw audio waveforms_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Draw audio waveforms_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Draw audio waveforms_files/css">
+<script src="./JUCE_ Tutorial_ Draw audio waveforms_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Draw audio waveforms_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Draw audio waveforms_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Draw audio waveforms</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_setting_up_the_audio_thumbnail">Setting up the AudioThumbnail</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_additional_objects">Additional objects</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_initialising_the_objects">Initialising the objects</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_responding_to_changes">Responding to changes</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_opening_the_file">Opening the file</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_performing_the_drawing">Performing the drawing</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_adding_a_time_position_marker">Adding a time position marker</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_adding_a_timer">Adding a timer</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_drawing_the_position_line">Drawing the position line</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_thumbnail.html#tutorial_audio_thumbnail_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>This tutorial introduces the display of audio waveforms using the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class. This provides an easy way of drawing any number of waveforms within your audio applications.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a>, <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a>, <a class="el" href="https://docs.juce.com/master/classAudioFormatReader.html" title="Reads samples from an audio file stream.">AudioFormatReader</a>, <a class="el" href="https://docs.juce.com/master/classChangeListener.html" title="Receives change event callbacks that are sent out by a ChangeBroadcaster.">ChangeListener</a></p>
+<h1><a class="anchor" id="tutorial_audio_thumbnail_getting_started"></a>
+Getting started</h1>
+<dl class="section note"><dt>Note</dt><dd>This tutorial leads on from <a class="el" href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Tutorial: Build an audio player</a>, which you should have read and understood first. It also assumes that you are familiar with the <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> class and the Component::paint() function for performing drawing within a component (see <a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a>).</dd></dl>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/AudioThumbnailTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/AudioThumbnailTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_audio_thumbnail_demo_project"></a>
+The demo project</h1>
+<p>The demo project presents three buttons in the same way as <a class="el" href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Tutorial: Build an audio player</a> (for opening, playing, and stopping a sound file).</p>
+<p>There is also a rectangular area where the waveform from the sound file can be drawn. In its default state (with no sound file loaded) the application looks like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Draw audio waveforms_files/tutorial_audio_thumbnail_screenshot1.png" alt="">
+<div class="caption">
+The demo project showing its initial state</div></div>
+<p>Once a sound file is loaded, the application looks like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Draw audio waveforms_files/tutorial_audio_thumbnail_screenshot2.png" alt="">
+<div class="caption">
+The demo project showing a file opened and displayed using the AudioThumbnail class</div></div>
+<p>Drawing an audio waveform, especially for long files, generally involves storing a low resolution version of the audio data in a format that makes drawing the waveform efficient and also clear to the user. The <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class handles this low resolution version for you and it is created and updated when needed.</p>
+<h1><a class="anchor" id="tutorial_audio_thumbnail_setting_up_the_audio_thumbnail"></a>
+Setting up the AudioThumbnail</h1>
+<p>The first important point is that the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class <b>is not</b> a subclass of the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> class. The <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class is used to perform the drawing of the audio waveform within the <code class="project_code">paint()</code> function of another <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> object. The code below shows how to add this functionality based on the demo project from <a class="el" href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Tutorial: Build an audio player</a>.</p>
+<h2><a class="anchor" id="tutorial_audio_thumbnail_additional_objects"></a>
+Additional objects</h2>
+<p>In our <code class="project_code">MainContentComponent</code> class we need to add two members: an <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> object and an <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object. The <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> class is used to cache the necessary low resolution version of one or more audio files. This means, for example, if we close a file, open a new file, then return to open the first file, the <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> will still contain the low resolution version of the first file and won't need to rescan and recalculate the data. Another useful feature is that <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> objects can be shared between different instances of the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class</p>
+<div class="fragment"><div class="line">    juce::TextButton openButton;</div>
+<div class="line">    juce::TextButton playButton;</div>
+<div class="line">    juce::TextButton stopButton;</div>
+<div class="line"> </div>
+<div class="line">    std::unique_ptr&lt;juce::FileChooser&gt; chooser;</div>
+<div class="line"> </div>
+<div class="line">    juce::AudioFormatManager formatManager;                    <span class="comment">// [3]</span></div>
+<div class="line">    std::unique_ptr&lt;juce::AudioFormatReaderSource&gt; readerSource;</div>
+<div class="line">    juce::AudioTransportSource transportSource;</div>
+<div class="line">    TransportState state;</div>
+<div class="line">    juce::AudioThumbnailCache thumbnailCache;                  <span class="comment">// [1]</span></div>
+<div class="line">    juce::AudioThumbnail thumbnail;                            <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>If statically allocated objects like this are used, it is important that the <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> object <span class="comment">[1]</span> is listed before the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object <span class="comment">[2]</span> since it is passed as an argument to the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html#abfa7516538eb0518cddeec4c71cf329d">constructor.</a> It is also important that the <a class="el" href="https://docs.juce.com/master/classAudioFormatManager.html" title="A class for keeping a list of available audio formats, and for deciding which one to use to open a gi...">AudioFormatManager</a> object <span class="comment">[3]</span> is listed before the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object for the same reason.</p>
+<h2><a class="anchor" id="tutorial_audio_thumbnail_initialising_the_objects"></a>
+Initialising the objects</h2>
+<p>In the initialiser list for the <code class="project_code">MainContentComponent</code> constructor we set up these objects:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">       : state (Stopped),</div>
+<div class="line">         thumbnailCache (5),                            <span class="comment">// [4]</span></div>
+<div class="line">         thumbnail (512, formatManager, thumbnailCache) <span class="comment">// [5]</span></div>
+<div class="line">    {</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[4]</span> : The <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> objects must be constructed with the number of thumbnails to store.</li>
+<li><span class="comment">[5]</span> : The <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object itself needs to be constructed by telling it how many source samples will be used to create a single thumbnail sample. This governs the resolution of the low resolution version. The other two arguments are the <a class="el" href="https://docs.juce.com/master/classAudioFormatManager.html" title="A class for keeping a list of available audio formats, and for deciding which one to use to open a gi...">AudioFormatManager</a> and <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> objects, as discussed above.</li>
+</ul>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class is also a type of <a class="el" href="https://docs.juce.com/master/classChangeBroadcaster.html" title="Holds a list of ChangeListeners, and sends messages to them when instructed.">ChangeBroadcaster</a> class. We can register as a listener for changes <span class="comment">[6]</span> (in our <code class="project_code">MainContentComponent</code> constructor). These changes will be when the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object has changed such that we need to update our drawing of the waveform.</p>
+<div class="fragment"><div class="line">        thumbnail.addChangeListener (<span class="keyword">this</span>);            <span class="comment">// [6]</span></div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_audio_thumbnail_responding_to_changes"></a>
+Responding to changes</h2>
+<p>In our <code class="project_code">changeListenerCallback()</code> function we need to determine whether the change is being broadcasted from the <a class="el" href="https://docs.juce.com/master/classAudioTransportSource.html" title="An AudioSource that takes a PositionableAudioSource and allows it to be played, stopped,...">AudioTransportSource</a> object or the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> changeListenerCallback (juce::ChangeBroadcaster* source)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (source == &amp;transportSource) transportSourceChanged();</div>
+<div class="line">        <span class="keywordflow">if</span> (source == &amp;thumbnail)       thumbnailChanged();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <code class="project_code">transportSourceChanged()</code> function just contains our original code for responding to changes in the <a class="el" href="https://docs.juce.com/master/classAudioTransportSource.html" title="An AudioSource that takes a PositionableAudioSource and allows it to be played, stopped,...">AudioTransportSource</a> object:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> transportSourceChanged()</div>
+<div class="line">    {</div>
+<div class="line">        changeState (transportSource.isPlaying() ? Playing : Stopped);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>If it is the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object that has changed, we call the Component::repaint() function. This will cause our <code class="project_code">paint()</code> function to be called during the next screen drawing operation:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> thumbnailChanged()</div>
+<div class="line">    {</div>
+<div class="line">        repaint();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_audio_thumbnail_opening_the_file"></a>
+Opening the file</h2>
+<p>When we open the sound file successfully we also need to pass the file to the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object <span class="comment">[7]</span> within a <a class="el" href="https://docs.juce.com/master/classFileInputSource.html" title="A type of InputSource that represents a normal file.">FileInputSource</a> object.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> openButtonClicked()</div>
+<div class="line">    {</div>
+<div class="line">        chooser = std::make_unique&lt;juce::FileChooser&gt; (<span class="stringliteral">"Select a Wave file to play..."</span>,</div>
+<div class="line">                                                       juce::File{},</div>
+<div class="line">                                                       <span class="stringliteral">"*.wav"</span>);</div>
+<div class="line">        <span class="keyword">auto</span> chooserFlags = juce::FileBrowserComponent::openMode</div>
+<div class="line">                          | juce::FileBrowserComponent::canSelectFiles;</div>
+<div class="line"> </div>
+<div class="line">        chooser-&gt;launchAsync (chooserFlags, [<span class="keyword">this</span>] (<span class="keyword">const</span> juce::FileChooser&amp; fc)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> file = fc.getResult();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (file != juce::File{})</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span>* reader = formatManager.createReaderFor (file);</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">if</span> (reader != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">auto</span> newSource = std::make_unique&lt;juce::AudioFormatReaderSource&gt; (reader, <span class="keyword">true</span>);</div>
+<div class="line">                    transportSource.setSource (newSource.get(), 0, <span class="keyword">nullptr</span>, reader-&gt;sampleRate);</div>
+<div class="line">                    playButton.setEnabled (<span class="keyword">true</span>);</div>
+<div class="line">                    thumbnail.setSource (<span class="keyword">new</span> juce::FileInputSource (file));                            <span class="comment">// [7]</span></div>
+<div class="line">                    readerSource.reset (newSource.release());</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        });</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_audio_thumbnail_performing_the_drawing"></a>
+Performing the drawing</h2>
+<p>In our <code class="project_code">paint()</code> function, first we calculate the rectangle into which we will draw. Then we check how many channels the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object contains, which tells us whether we have a file loaded or not:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::Rectangle&lt;int&gt; thumbnailBounds (10, 100, getWidth() - 20, getHeight() - 120);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (thumbnail.getNumChannels() == 0)</div>
+<div class="line">            paintIfNoFileLoaded (g, thumbnailBounds);</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            paintIfFileLoaded (g, thumbnailBounds);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>If we have no file loaded then we display the message <b class="onscreen_text">No File Loaded</b> by passing our <code class="project_code">paintIfNoFileLoaded()</code> function the <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> object and the bounds rectangle:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paintIfNoFileLoaded (juce::Graphics&amp; g, <span class="keyword">const</span> juce::Rectangle&lt;int&gt;&amp; thumbnailBounds)</div>
+<div class="line">    {</div>
+<div class="line">        g.setColour (juce::Colours::darkgrey);</div>
+<div class="line">        g.fillRect (thumbnailBounds);</div>
+<div class="line">        g.setColour (juce::Colours::white);</div>
+<div class="line">        g.drawFittedText (<span class="stringliteral">"No File Loaded"</span>, thumbnailBounds, juce::Justification::centred, 1);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The important part is next. If we <em>do</em> have a file loaded we can draw the waveform:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paintIfFileLoaded (juce::Graphics&amp; g, <span class="keyword">const</span> juce::Rectangle&lt;int&gt;&amp; thumbnailBounds)</div>
+<div class="line">    {</div>
+<div class="line">        g.setColour (juce::Colours::white);</div>
+<div class="line">        g.fillRect (thumbnailBounds);</div>
+<div class="line"> </div>
+<div class="line">        g.setColour (juce::Colours::red);                               <span class="comment">// [8]</span></div>
+<div class="line"> </div>
+<div class="line">        thumbnail.drawChannels (g,                                      <span class="comment">// [9]</span></div>
+<div class="line">                                thumbnailBounds,</div>
+<div class="line">                                0.0,                                    <span class="comment">// start time</span></div>
+<div class="line">                                thumbnail.getTotalLength(),             <span class="comment">// end time</span></div>
+<div class="line">                                1.0f);                                  <span class="comment">// vertical zoom</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[8]</span> : Notice that we set the current colour for the <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> object. This will govern the colour used by the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object to draw the waveform.</li>
+<li><span class="comment">[9]</span> : We call the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html#a8fc354b03e88e66771ef3b9647fdd9fa" title="Draws the waveforms for all channels in the thumbnail.">AudioThumbnail::drawChannels()</a> function passing it the <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> object with which to draw, the rectangle into which it should draw, the start and end times (in seconds), and the vertical zoom factor. Here we use the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html#a76892e0159356999dfe317fa1c5e044b" title="Returns the length of the audio file, in seconds.">AudioThumbnail::getTotalLength()</a> function to get the file duration so that we can draw the whole file. (We could have obtained the length from our <a class="el" href="https://docs.juce.com/master/classAudioTransportSource.html" title="An AudioSource that takes a PositionableAudioSource and allows it to be played, stopped,...">AudioTransportSource</a> object using the <a class="el" href="https://docs.juce.com/master/classAudioTransportSource.html#aa2896785ea5864f2cd961676bfbe21b7" title="Returns the stream&#39;s length in seconds.">AudioTransportSource::getLengthInSeconds()</a> function to get the same result.)</li>
+</ul>
+<p>This covers all the basic points for using an <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> object.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>In practice you will commonly want to display only certain regions of the sound files. It should be clear from the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html#a8fc354b03e88e66771ef3b9647fdd9fa" title="Draws the waveforms for all channels in the thumbnail.">AudioThumbnail::drawChannels()</a> function how simple this is to implement using JUCE. Try modifying the code to display only a specific region of the file. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_audio_thumbnail_adding_a_time_position_marker"></a>
+Adding a time position marker</h1>
+<p>In this section we will walk you through adding a vertical line to the display that will show the current time position of the file playback.</p>
+<h2><a class="anchor" id="tutorial_audio_thumbnail_adding_a_timer"></a>
+Adding a timer</h2>
+<p>First of all we need to add the <a class="el" href="https://docs.juce.com/master/classTimer.html" title="Makes repeated callbacks to a virtual method at a specified time interval.">Timer</a> class to our list of base classes <span class="comment">[10]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::AudioAppComponent,</div>
+<div class="line">                               <span class="keyword">public</span> juce::ChangeListener,</div>
+<div class="line">                               <span class="keyword">private</span> juce::Timer               <span class="comment">// [10]</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>Then we need to make the timer callback repaint our component. Make sure this code is added to the <code class="code">private</code> section as you will notice we inherited privately from the <a class="el" href="https://docs.juce.com/master/classTimer.html" title="Makes repeated callbacks to a virtual method at a specified time interval.">Timer</a> class:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> timerCallback()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        repaint();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">MainContentComponent</code> constructor we need to start the timer <span class="comment">[11]</span> — every 40ms should be sufficient:</p>
+<div class="fragment"><div class="line">        startTimer (40);                                  <span class="comment">// [11]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section attention">
+<dt>Exercise</dt>
+<dd><p class="startdd">In fact you could delay starting the timer, by starting it once the file is successfully opened.</p>
+<p class="enddd"></p>
+</dd>
+</dl>
+<h2><a class="anchor" id="tutorial_audio_thumbnail_drawing_the_position_line"></a>
+Drawing the position line</h2>
+<p>Finally, to draw the line we need to calculate the position of the line and draw it <em>after</em> drawing the thumbnail:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paintIfFileLoaded (juce::Graphics&amp; g, <span class="keyword">const</span> juce::Rectangle&lt;int&gt;&amp; thumbnailBounds)</div>
+<div class="line">    {</div>
+<div class="line">        g.setColour (juce::Colours::white);</div>
+<div class="line">        g.fillRect (thumbnailBounds);</div>
+<div class="line"> </div>
+<div class="line">        g.setColour (juce::Colours::red);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> audioLength = (float) thumbnail.getTotalLength();                               <span class="comment">// [12]</span></div>
+<div class="line">        thumbnail.drawChannels (g, thumbnailBounds, 0.0, audioLength, 1.0f);</div>
+<div class="line"> </div>
+<div class="line">        g.setColour (juce::Colours::green);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> audioPosition = (float) transportSource.getCurrentPosition();</div>
+<div class="line">        <span class="keyword">auto</span> drawPosition = (audioPosition / audioLength) * (<span class="keywordtype">float</span>) thumbnailBounds.getWidth()</div>
+<div class="line">                            + (float) thumbnailBounds.getX();                                <span class="comment">// [13]</span></div>
+<div class="line">        g.drawLine (drawPosition, (<span class="keywordtype">float</span>) thumbnailBounds.getY(), drawPosition,</div>
+<div class="line">                    (float) thumbnailBounds.getBottom(), 2.0f);                              <span class="comment">// [14]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[12]</span> : Store the length of the file in a variable since we need to use this value twice.</li>
+<li><span class="comment">[13]</span> : The position is calculated as a proportion of the total length of the audio file. The position to draw the line needs to be based on the same proportion of the width of the rectangle that the thumbnail is drawn within. We need to offset the drawing position based on the x-coordinate of the rectangle.</li>
+<li><span class="comment">[14]</span> : Here we draw a line that is 2 pixels wide between the top (y) and bottom of the rectangle.</li>
+</ul>
+<p>And that's it: you should be able to build and run the application now.</p>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the application can be found in the <code class="filename">AudioThumbnailTutorial_02.h</code> file of the demo project.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>The problem with this example is that we force the component to be repainted every 40ms. While this may be acceptable for a simple example you will probably hit performance problems in more complex cases. Take a look at the exercise, below, for more on this.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd><p class="startdd">Separate the drawing into a separate child components (see <a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a>). You should have three components:</p><ul>
+<li>A component that draws the audio waveform.</li>
+<li>A component that draws the playback position as a vertical line.</li>
+<li>The main parent component that contains these two child components (laid on top of each other).</li>
+</ul>
+<p class="enddd">Not only will this make the code easier to follow but, if done correctly, it will be much more efficient since we can avoid redrawing the waveform every frame. You could also add functionality to change the playback position if the user clicks on the waveform. </p>
+</dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The source code for possible implementations of this exercise can be found in the <code class="filename">AudioThumbnailTutorial_03.h</code> and <code class="filename">AudioThumbnailTutorial_04.h</code> files of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_audio_thumbnail_summary"></a>
+Summary</h1>
+<p>This tutorial has introduced the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class and how it can be integrated into an audio application. In particular we have covered:</p>
+<ul>
+<li>Initialising <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> and <a class="el" href="https://docs.juce.com/master/classAudioThumbnailCache.html" title="An instance of this class is used to manage multiple AudioThumbnail objects.">AudioThumbnailCache</a> objects.</li>
+<li>Using the <a class="el" href="https://docs.juce.com/master/classAudioThumbnail.html" title="Makes it easy to quickly draw scaled views of the waveform shape of an audio file.">AudioThumbnail</a> class within a component.</li>
+<li>Structuring components so that content that is complex to draw isn't forced to be redrawn unnecessarily.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_audio_thumbnail_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Tutorial: Build an audio player</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Draw audio waveforms_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

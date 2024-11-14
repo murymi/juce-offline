@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0048)https://docs.juce.com/master/tutorial_label.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: The Label class</title>
+<link href="./JUCE_ Tutorial_ The Label class_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Label class_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Label class_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ The Label class_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Label class_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Label class_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ The Label class_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Label class_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Label class_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ The Label class_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ The Label class_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ The Label class_files/css">
+<script src="./JUCE_ Tutorial_ The Label class_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ The Label class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ The Label class_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: The Label class</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_displaying_text">Displaying text</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_basic_label_configuration">Basic label configuration</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_attaching_a_label">Attaching a label to another component</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_making_a_label_editable">Making a label editable</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_responging_to_changes">Responding to changes</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_other_customisations">Other customisations</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_displaying_multiline_text">Displaying multiline text</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_changing_the_editor_appearance">Changing the editor appearance</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_label.html#tutorial_label_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>This tutorial introduces the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class, which is a component for displaying text. A <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> component can also be set to be editable so it's really useful for displaying text and simple text entry.</p>
+<p><span class="headerlabel">Level:</span> Beginner</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a>, <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a>, <a class="el" href="https://docs.juce.com/master/classFont.html" title="Represents a particular font, including its size, style, etc.">Font</a>, <a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a></p>
+<h1><a class="anchor" id="tutorial_label_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/LabelTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/LabelTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_label_demo_project"></a>
+The demo project</h1>
+<p>The demo project includes a number of labels. Some of these are for displaying text, but one of them is for entering text. Run the demo project and it should look like the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Label class_files/tutorial_label_screenshot1.png" alt="">
+<div class="caption">
+The initial appearance of the application</div></div>
+<p>When you click on the label with the white background it becomes editable, the label shows a subtle border, and a caret appears. This is shown in the following screenshot.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Label class_files/tutorial_label_screenshot2.png" alt="">
+<div class="caption">
+The application with the text entry label focused</div></div>
+<p>Text can then be entered into this label as shown below:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Label class_files/tutorial_label_screenshot3.png" alt="">
+<div class="caption">
+Entering text into the text entry label</div></div>
+<p>When you hit return or click away from the label it goes out of its editable state. This commits a change that is broadcasted to its listeners. In this case we convert the text to uppercase and display it in another label:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Label class_files/tutorial_label_screenshot4.png" alt="">
+<div class="caption">
+The text is converted to uppercase and displayed in another label</div></div>
+<p>This illustrates several different uses of the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class for both displaying and entering text. There are actually five labels here that are used in slightly different ways:</p><ul>
+<li>The green label at the top that is used as a heading.</li>
+<li>The two orange labels that are used to display other fixed text.</li>
+<li>The two rectangular boxes that are used to display dynamically changing text (one of which is to allow text entry from the user).</li>
+</ul>
+<p>The second of the rectangular boxes is very slightly greyed out to distinguish it from the text entry box.</p>
+<h1><a class="anchor" id="tutorial_label_displaying_text"></a>
+Displaying text</h1>
+<p>This tutorial covers most of the main features of the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class. The most fundamental feature of a label is that it displays some text! While you can draw your own text in your component's <code class="project_code">paint()</code> function (see <a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a>) it is usually much more convenient to manage the layout of text using <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> objects (or <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> objects in some cases).</p>
+<p>As you would expect, the text within a <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> object can be displayed in any font, font size, bold, italics, and so on. The text can also be justified (aligned) within the component bounds to the left, right, centre, top, bottom, and using various other options.</p>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class can only contain a single run of text in the same font, size, and justification. To display multiple runs of text in different styles (as you would find in a word processor application) see the <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> class. The <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> class can also include horizontal and vertical scroll bars to display large amounts of text.</dd></dl>
+<p>If the bounds of the component are too small to display all of the text requested then the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class will try a few things to make the text fit. First, it will make the glyphs of the font a little narrower. If the glyphs are too narrow then the text will be unreadable, so beyond a certain point it gives up. In this case it truncates the text showing an ellipsis (...) at the end to show that this has been done. You can try this now by typing in the text "The quick brown fox jumps over the lazy dog" in the text entry label. In fact you can copy the text ("CMD-C" to copy on Mac OS X or "Ctrl-C" on Windows) from this page and paste it into the label using keyboard shortcuts ("CMD-V" to paste on Mac OS X or "Ctrl-V" on Windows). This capability is built in without you needing to add any code!</p>
+<p>The result should be something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Label class_files/tutorial_label_screenshot5.png" alt="">
+<div class="caption">
+Two ways that the Label class copes with too much text</div></div>
+<p>The original text just about fits but it is slightly squashed in the horizontal axis. The uppercase version is going to be a little wider since uppercase glyphs are usually wider than lowercase glyphs. The <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class decided that the uppercase version is too wide for it to squash the text in the horizontal axis and keep it readable. In this case it has truncated the text at the "L" in "LAZY" and added the ellipsis.</p>
+<dl class="section note"><dt>Note</dt><dd>You can change the amount by which the text will be scaled using the <a class="el" href="https://docs.juce.com/master/classLabel.html#a3529019ec38b097daec0fb97fe7218d1" title="Specifies the minimum amount that the font can be squashed horizontally before it starts using ellips...">Label::setMinimumHorizontalScale()</a> function for each <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> object. Using a value of <code class="code">1.0f</code> will disable the scaling. You can measure the height required for a single line in a particular font using the <a class="el" href="https://docs.juce.com/master/classFont.html#a96e4ccc975ce4180c10107aa77ea8c7d" title="Returns the total height of this font, in pixels.">Font::getHeight()</a> function. To measure the width that an entire string would require to fit on a single line you can use the <a class="el" href="https://docs.juce.com/master/classFont.html#a23539f1990fd39341b84566a413c051d" title="Returns the total width of a string as it would be drawn using this font.">Font::getStringWidth()</a> function.</dd></dl>
+<h2><a class="anchor" id="tutorial_label_basic_label_configuration"></a>
+Basic label configuration</h2>
+<p>In the <code class="project_code">MainContentComponent</code> constructor each of the labels in our application is configured. First we set up the title with a 16-point bold font, the text it should contain, the colour of the text, and we justify the text to the centre.</p>
+<p>Add the label to the parent component:</p>
+<div class="fragment"><div class="line">        addAndMakeVisible (titleLabel);</div>
+</div><!-- fragment --><p>Set the font for the label:</p>
+<div class="fragment"><div class="line">        titleLabel.setFont (juce::Font (16.0f, juce::Font::bold));</div>
+</div><!-- fragment --><p>Set the text to be displayed within the label:</p>
+<div class="fragment"><div class="line">        titleLabel.setText (<span class="stringliteral">"Click in the white box to enter some text..."</span>, juce::dontSendNotification);</div>
+</div><!-- fragment --><p>Set the colour of the label text:</p>
+<div class="fragment"><div class="line">        titleLabel.setColour (juce::Label::textColourId, juce::Colours::lightgreen);</div>
+</div><!-- fragment --><p>Justify the display of the label text:</p>
+<div class="fragment"><div class="line">        titleLabel.setJustificationType (juce::Justification::centred);</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The <a class="el" href="https://docs.juce.com/master/classJustification.html#a1f8c07756c56fe8f31ed44964e51bfbcaf9d9adde20dce1aa38ff9a69be2b4384" title="Indicates that the item should be centred vertically and horizontally.">Justification::centred</a> value centres the text in both vertical and horizontal axes. Have a look at the <a class="el" href="https://docs.juce.com/master/classJustification.html" title="Represents a type of justification to be used when positioning graphical items.">Justification</a> class for more options.</dd></dl>
+<h2><a class="anchor" id="tutorial_label_attaching_a_label"></a>
+Attaching a label to another component</h2>
+<p>As its name suggests, a <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> component is often used as a label for another component. In this case a <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> object can be <em>attached</em> to another component. Once a label is attached only the <em>owner</em> component needs to be positioned. The attached label will follow its owner around the parent component. In our case we want the <code class="project_code">inputLabel</code> object (that displays the text <b class="onscreen_text">Text input:</b> ) to be attached to the <code class="project_code">inputText</code> object. The second argument to the <a class="el" href="https://docs.juce.com/master/classLabel.html#a3c2397c0da1249f9e27e2279e0f2d4eb" title="Makes this label &quot;stick to&quot; another component.">Label::attachToComponent()</a> function states whether the label should be attached to the left or above the owner. The <code class="code">true</code> argument means that it should be attached to the left:</p>
+<div class="fragment"><div class="line">        addAndMakeVisible (inputLabel);</div>
+<div class="line">        inputLabel.setText (<span class="stringliteral">"Text input:"</span>, juce::dontSendNotification);</div>
+<div class="line">        inputLabel.attachToComponent (&amp;inputText, <span class="keyword">true</span>);</div>
+<div class="line">        inputLabel.setColour (juce::Label::textColourId, juce::Colours::orange);</div>
+<div class="line">        inputLabel.setJustificationType (juce::Justification::right);</div>
+</div><!-- fragment --><p>The labels to display the uppercase text are set up similarly:</p>
+<div class="fragment"><div class="line">        addAndMakeVisible (uppercaseLabel);</div>
+<div class="line">        uppercaseLabel.setText (<span class="stringliteral">"Uppercase:"</span>, juce::dontSendNotification);</div>
+<div class="line">        uppercaseLabel.attachToComponent (&amp;uppercaseText, <span class="keyword">true</span>);</div>
+<div class="line">        uppercaseLabel.setColour (juce::Label::textColourId, juce::Colours::orange);</div>
+<div class="line">        uppercaseLabel.setJustificationType (juce::Justification::right);</div>
+<div class="line"> </div>
+<div class="line">        addAndMakeVisible (uppercaseText);</div>
+<div class="line">        uppercaseText.setColour (juce::Label::backgroundColourId, juce::Colours::darkblue);</div>
+</div><!-- fragment --><p>In the <code class="project_code">resized()</code> function we need to position only three of our five labels:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> resized()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        titleLabel   .setBounds (10,  10, getWidth() - 20,  30);</div>
+<div class="line">        inputText    .setBounds (100, 50, getWidth() - 110, 20);</div>
+<div class="line">        uppercaseText.setBounds (100, 80, getWidth() - 110, 20);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_label_making_a_label_editable"></a>
+Making a label editable</h2>
+<p>The final label that we set up in the <code class="project_code">MainContentComponent</code> constructor is the editable text field.</p>
+<div class="fragment"><div class="line">        addAndMakeVisible (inputText);</div>
+<div class="line">        inputText.setEditable (<span class="keyword">true</span>);</div>
+<div class="line">        inputText.setColour (juce::Label::backgroundColourId, juce::Colours::darkblue);</div>
+<div class="line">        inputText.onTextChange = [<span class="keyword">this</span>] { uppercaseText.setText (inputText.getText().toUpperCase(), juce::dontSendNotification); };</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The default behaviour when setting the label to editable using the <a class="el" href="https://docs.juce.com/master/classLabel.html#a9342a397932d82bb1d196ebf9a8969d8" title="Makes the label turn into a TextEditor when clicked.">Label::setEditable()</a> function is to show the editor on a single click. The label can be set up to be editable on a double-click instead. If the user clicks off the label after entering some text then this will be confirmed even if the user doesn't hit the "Return" key. You can also changes this to make sure that users must hit the "Return" key to confirm data entry, if you prefer. See the API reference for this function for more information.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Add a button to the interface and use this to clear the text entry label. (See <a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a>.) </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_label_responging_to_changes"></a>
+Responding to changes</h2>
+<p>The lambda function is the callback for the <a class="el" href="https://docs.juce.com/master/classLabel.html#a5ba80ea5ea965a001e2eacf75fc0314b" title="You can assign a lambda to this callback object to have it called when the label text is changed.">Label::onTextChange</a> helper object. Here we get the entered text, convert it to uppercase using the <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> class, and set the text of the <code class="project_code">uppercaseText</code> label.</p>
+<div class="fragment"><div class="line">inputText.onTextChange = [<span class="keyword">this</span>] { uppercaseText.setText (inputText.getText().toUpperCase(), <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__events-messages.html#gga25a31a4bdc02a0d0adb743e26dd14ba9a057928146704d53dfee6f4ac33c92629">dontSendNotification</a>); };</div>
+<div class="ttc" id="agroup__juce__events-messages_html_gga25a31a4bdc02a0d0adb743e26dd14ba9a057928146704d53dfee6f4ac33c92629"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__events-messages.html#gga25a31a4bdc02a0d0adb743e26dd14ba9a057928146704d53dfee6f4ac33c92629">dontSendNotification</a></div><div class="ttdeci">@ dontSendNotification</div><div class="ttdoc">No notification message should be sent.</div><div class="ttdef"><b>Definition</b> juce_NotificationType.h:48</div></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>We can use <code class="code">sendNotification</code> instead of <code class="code">dontSendNotification</code> when calling <a class="el" href="https://docs.juce.com/master/classLabel.html#a3f0ca22cb63e924d3db23da48c210790" title="Changes the label text.">Label::setText()</a>. This will cause a label's listeners to be notified of the change (if the text is different from its current contents) in addition to the user changing the text from the user interface.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Add another label that displays the text entered in lowercase. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_label_other_customisations"></a>
+Other customisations</h1>
+<p>There are a few other customisations that can be made. In particular labels can display multiline text. You may also want to customise the editor for editable labels.</p>
+<h2><a class="anchor" id="tutorial_label_displaying_multiline_text"></a>
+Displaying multiline text</h2>
+<p>While the <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> class is more flexible for large amounts of text, the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class can display multiple lines of text. To do this, you just need to ensure that the height of the component is large enough to display more than one line of text.</p>
+<p>To illustrate this, add the following member to the <code class="project_code">MainContentComponent</code> class:</p>
+<div class="fragment"><div class="line">juce::Label infoLabel;</div>
+</div><!-- fragment --><p>And add the following code to the <code class="project_code">MainContentComponent</code> constructor:</p>
+<div class="fragment"><div class="line">addAndMakeVisible (infoLabel);</div>
+<div class="line">juce::String infoText;</div>
+<div class="line">infoText &lt;&lt; <span class="stringliteral">"This simple application takes some text input from the user, "</span>;</div>
+<div class="line">infoText &lt;&lt; <span class="stringliteral">"converts it to uppercase, and displays this in another label. "</span>;</div>
+<div class="line">infoText &lt;&lt; <span class="stringliteral">"The application demonstrates a number of useful features of the Label class."</span>;</div>
+<div class="line">infoLabel.setText (infoText, juce::dontSendNotification);</div>
+<div class="line">infoLabel.setColour (juce::Label::backgroundColourId, juce::Colours::darkblue);</div>
+</div><!-- fragment --><p>Finally, set the bounds of the <code class="project_code">infoLabel</code> component in the <code class="project_code">resized()</code> function:</p>
+<div class="fragment"><div class="line">infoLabel.setBounds (10, 110, getWidth() - 20, getHeight() - 120);</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>You might need to adjust the bounds a little if you added a button and another label in the earlier exercises.</dd></dl>
+<p>Run the application and it should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Label class_files/tutorial_label_screenshot6.png" alt="">
+<div class="caption">
+Displaying multiline text</div></div>
+<h2><a class="anchor" id="tutorial_label_changing_the_editor_appearance"></a>
+Changing the editor appearance</h2>
+<p>Some of the editor features can be set via the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class itself. When the editor is created the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class copies the font style and colours to the editor. Some of the <a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701" title="A set of colour IDs to use to change the colour of various aspects of the label.">Label::ColourIds</a> values relate to the editor. For example, to change the border around the label when it is being edited you can use the <a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701a6c7adfce6c830c9faa94efd3445f78cf" title="An optional border colour when the label is being edited.">Label::outlineWhenEditingColourId</a> value for the Component::setColour() function:</p>
+<div class="fragment"><div class="line">addAndMakeVisible (inputText);</div>
+<div class="line">inputText.setEditable (<span class="keyword">true</span>);</div>
+<div class="line">inputText.setColour (juce::Label::backgroundColourId, juce::Colours::darkblue);</div>
+<div class="line">inputText.setColour (juce::Label::outlineWhenEditingColourId, juce::Colours::orangered);</div>
+</div><!-- fragment --><p>Other customisations can be achieved by implementing the <a class="el" href="https://docs.juce.com/master/classLabel.html#ae8e66977501dc15f678cc1b80fa218ce" title="You can assign a lambda to this callback object to have it called when the label&#39;s editor is shown.">Label::onEditorShow</a> helper object. For example, you could make the text italic when being edited like this:</p>
+<div class="fragment"><div class="line">inputText.onEditorShow = [<span class="keyword">this</span>]</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span>* editor = inputText.getCurrentTextEditor();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> editorFont = editor-&gt;getFont();</div>
+<div class="line">    editorFont.setItalic (<span class="keyword">true</span>);</div>
+<div class="line">    editor-&gt;setFont (editorFont);</div>
+<div class="line">};</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>In practice — especially for large-scale applications — you would probably use the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class to customise the appearance of all of your components for consistency across your application.</dd></dl>
+<h1><a class="anchor" id="tutorial_label_summary"></a>
+Summary</h1>
+<p>This tutorial has examined the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class. While it is very easy to use, there are a number of useful features that make it powerful. We have covered:</p>
+<ul>
+<li>Changing the font of the text displayed in the label.</li>
+<li>Changing the colours of the text displayed in the label.</li>
+<li>Using a label as a simple text editor and customising its appearance.</li>
+<li>Displaying multiline text.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_label_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_colours.html">Tutorial: Colours in JUCE</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_table_list_box.html">Tutorial: The TableListBox class</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ The Label class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

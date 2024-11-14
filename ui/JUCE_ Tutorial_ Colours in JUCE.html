@@ -1,0 +1,516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0050)https://docs.juce.com/master/tutorial_colours.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Colours in JUCE</title>
+<link href="./JUCE_ Tutorial_ Colours in JUCE_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Colours in JUCE_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Colours in JUCE_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Colours in JUCE_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Colours in JUCE_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Colours in JUCE_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Colours in JUCE_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Colours in JUCE_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Colours in JUCE_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Colours in JUCE_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Colours in JUCE_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Colours in JUCE_files/css">
+<script src="./JUCE_ Tutorial_ Colours in JUCE_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Colours in JUCE_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Colours in JUCE_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Colours in JUCE</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_colours_and_general_painting">Colours and general painting operations</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_colour_by_name">Specifying colours by name</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_colour_from_values">Specifying colours from values</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_colour_from_hsb">Hue, saturation, and brightness</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_manipulating_colour_values">Manipulating colour values</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_specifying_component_colours">Specifying component colours</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_look_and_feel_colours">Setting look-and-feel colours</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_custom_look_and_feel_colours">Custom look-and-feel colours</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_colours.html#tutorial_colours_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Specify and apply colours within your application in various ways.</p>
+<p><span class="headerlabel">Level:</span> Beginner</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classColour.html" title="Represents a colour, also including a transparency value.">Colour</a>, <a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a>, <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a></p>
+<h1><a class="anchor" id="tutorial_colours_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/ColoursTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/ColoursTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_colours_demo_project"></a>
+The demo project</h1>
+<p>The demo project displays some child components and performs some simple drawing commands, which are used to illustrate how colours are specified and applied to components in JUCE. The application should look similar to the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot1.png" alt="">
+<div class="caption">
+The colours demo application</div></div>
+<p>The first part of this tutorial looks at specifying colours more generally. This is illustrated by modifying the drawing code in the <code class="project_code">paint()</code> function within the demo application. The second part of the tutorial shows how colours are specified for elements of the built-in component types (such as labels, sliders, and so on).</p>
+<h1><a class="anchor" id="tutorial_colours_colours_and_general_painting"></a>
+Colours and general painting operations</h1>
+<p>JUCE specifies colours using red, green, blue, and alpha (transparency) values. This is, of course, a widely used method of specificy colours in computing, but all implementations are slightly different. In particular, JUCE provides some useful methods for manipulating colours, which can help you maintain a consistent colour palette for your application. First, let's look at the <code class="project_code">paint()</code> function from the demo application:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        g.fillAll (juce::Colours::lightgreen);</div>
+<div class="line">        g.setColour (juce::Colours::orange);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> centralArea = getLocalBounds().toFloat().reduced (10.0f);</div>
+<div class="line">        g.drawRoundedRectangle (centralArea, 5.0f, 3.0f);</div>
+<div class="line"> </div>
+<div class="line">        juce::Array&lt;juce::Colour&gt; colours { juce::Colours::red, juce::Colours::green, juce::Colours::blue };</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> colourBarArea = centralArea.reduced (4.0f).withHeight (20.0f);</div>
+<div class="line">        <span class="keyword">auto</span> colourArea = colourBarArea.withWidth (colourBarArea.getWidth() / (<span class="keywordtype">float</span>) colours.size());</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> colour : colours)</div>
+<div class="line">        {</div>
+<div class="line">            g.setColour (colour);</div>
+<div class="line">            g.fillRect (colourArea);</div>
+<div class="line"> </div>
+<div class="line">            colourArea.translate (colourArea.getWidth(), 0.0f);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The first line fills the entire graphics context with a single colour (which means the entire component's bounds):</p>
+<div class="fragment"><div class="line">g.fillAll (juce::Colours::lightgreen);</div>
+</div><!-- fragment --><p>The next line sets the colour for future drawing operations for a given graphics context.</p>
+<div class="fragment"><div class="line">g.setColour (juce::Colours::orange);</div>
+</div><!-- fragment --><p>Then we define a slightly inset rectangle and draw a rounded rectangle, as a border, using the current colour:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> centralArea = getLocalBounds().toFloat().reduced (10.0f);</div>
+<div class="line">g.drawRoundedRectangle (centralArea, 5.0f, 3.0f);</div>
+</div><!-- fragment --><p>Next, we set up an array of colours, which we will use to draw a row of different coloured rectangles.</p>
+<div class="fragment"><div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colours::red, juce::Colours::green, juce::Colours::blue };</div>
+</div><!-- fragment --><p>To draw this row of coloured rectangles, we first define the area within which they will be placed:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> colourBarArea = centralArea.reduced (4.0f).withHeight (20.0f);</div>
+</div><!-- fragment --><p>Then we define the area for the first coloured rectangle. This will be a proportion of the total width of the <code class="project_code">colourBarArea</code> rectangle, divided by the number of colours that we are using:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> colourArea = colourBarArea.withWidth (colourBarArea.getWidth() / colours.size());</div>
+</div><!-- fragment --><p>Finally, we iterate over the array of colours, fill the rectangle with the specified colour, and move the <code class="project_code">colourArea</code> rectangle to the right for the next iteration:</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> colour : colours)</div>
+<div class="line">{</div>
+<div class="line">    g.setColour (colour);</div>
+<div class="line">    g.fillRect (colourArea);</div>
+<div class="line"> </div>
+<div class="line">    colourArea.translate (colourArea.getWidth(), 0.0f);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>In the next few examples we will demonstrate some methods for specifying colours by changing the colours added to the <code class="project_code">colours</code> array.</p>
+<h2><a class="anchor" id="tutorial_colours_colour_by_name"></a>
+Specifying colours by name</h2>
+<p>As shown in the demo project and the code above, colours can be specified in JUCE using some constants in the <a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a> namespace.</p>
+<dl class="section note"><dt>Note</dt><dd>Have a look at the API documentation for the <a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a> namespace for a full list, which are mostly standard HTML colours.</dd></dl>
+<p>In addition to the constants within the <a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a> namespace, you can use the <a class="el" href="https://docs.juce.com/master/namespaceColours.html#af4f192e53312f7dd625afc1ce029025f" title="Attempts to look up a string in the list of known colour names, and return the appropriate colour.">Colours::findColourForName()</a> function, using a string to look up the desired colour name. For example, we could use the same red, green, and blue colours using the following code to fill our <code class="project_code">colours</code> array:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> defaultColour = <a class="code hl_variable" href="https://docs.juce.com/master/namespaceColours.html#ab5f46ac613c2b717ac885b7cf995ffc6">Colours::black</a>;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colours::findColourForName (<span class="stringliteral">"red"</span>, defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (<span class="stringliteral">"green"</span>, defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (<span class="stringliteral">"blue"</span>, defaultColour) };</div>
+<div class="ttc" id="anamespaceColours_html_ab5f46ac613c2b717ac885b7cf995ffc6"><div class="ttname"><a href="https://docs.juce.com/master/namespaceColours.html#ab5f46ac613c2b717ac885b7cf995ffc6">Colours::black</a></div><div class="ttdeci">const Colour black</div><div class="ttdef"><b>Definition</b> juce_Colours.h:58</div></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>We need to provide a default colour (in this case we just use black) just in case the search for the named colour fails.</dd></dl>
+<p>The <a class="el" href="https://docs.juce.com/master/namespaceColours.html#af4f192e53312f7dd625afc1ce029025f" title="Attempts to look up a string in the list of known colour names, and return the appropriate colour.">Colours::findColourForName()</a> function performs a case-insensitive search and trims whitespace from the start and end of the string, but not spaces within the string. For example, the following code will still work as expected, even though the colours are stored internally using all lowercase strings:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> defaultColour = juce::Colours::black;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colours::findColourForName (<span class="stringliteral">"DarkRed"</span>, defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (<span class="stringliteral">"DarkGreen"</span>, defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (<span class="stringliteral">"DarkBlue"</span>, defaultColour) };</div>
+</div><!-- fragment --><p>This produces the following colours:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot2.png" alt="">
+<div class="caption">
+Dark red, green, and blue</div></div>
+<p>But including spaces within the colour name will fail, in our case returning a black colour in each case:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> defaultColour = <a class="code hl_variable" href="https://docs.juce.com/master/namespaceColours.html#ab5f46ac613c2b717ac885b7cf995ffc6">Colours::black</a>;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colours::findColourForName (<span class="stringliteral">"Dark Red"</span>, defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (<span class="stringliteral">"Dark Green"</span>, defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (<span class="stringliteral">"Dark Blue"</span>, defaultColour) };</div>
+</div><!-- fragment --><p>It is straightforward to write your own functions to suit your needs in these instances. For example, you could write a function to remove all spaces from a string:</p>
+<div class="fragment"><div class="line"><span class="keyword">static</span> juce::String removeSpaces (<span class="keyword">const</span> juce::String&amp; text)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> text.removeCharacters (<span class="stringliteral">" "</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>And use that when passing a string to the <a class="el" href="https://docs.juce.com/master/namespaceColours.html#af4f192e53312f7dd625afc1ce029025f" title="Attempts to look up a string in the list of known colour names, and return the appropriate colour.">Colours::findColourForName()</a> function:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> defaultColour = juce::Colours::black;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colours::findColourForName (removeSpaces (<span class="stringliteral">"Dark Red"</span>), defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (removeSpaces (<span class="stringliteral">"Dark Green"</span>), defaultColour),</div>
+<div class="line">                                    juce::Colours::findColourForName (removeSpaces (<span class="stringliteral">"Dark Blue"</span>), defaultColour) };</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_colours_colour_from_values"></a>
+Specifying colours from values</h2>
+<p><a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a> can also be specified using the raw red, green, blue, and alpha values. Here you can create a <a class="el" href="https://docs.juce.com/master/classColour.html" title="Represents a colour, also including a transparency value.">Colour</a> object using either floating point values in the range 0.0-1.0, or integers (of type uint8) between 0-255. Using integers we can create the same red, green, and blue colours as follows:</p>
+<div class="fragment"><div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colour (255, 0, 0),   <span class="comment">// red</span></div>
+<div class="line">                                    juce::Colour (0, 128, 0),   <span class="comment">// green</span></div>
+<div class="line">                                    juce::Colour (0, 0, 255) }; <span class="comment">// blue</span></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The standard "green" colour does not have the maximum value 255 in the green element of the colour.</dd></dl>
+<p>Omitting the alpha value in this case sets the alpha value to the maximum (255) making the colour completely opaque.</p>
+<p>We can also use a single hexadecimal value to specify a colour. In this case the order of the colour value elements is: alpha, red, green, and blue:</p>
+<div class="fragment"><div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colour (0xffff0000),   <span class="comment">// red</span></div>
+<div class="line">                                    juce::Colour (0xff008000),   <span class="comment">// green</span></div>
+<div class="line">                                    juce::Colour (0xff0000ff) }; <span class="comment">// blue</span></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>In this case we MUST specify the alpha value otherwise it will be set to zero (and therefore transparent).</dd></dl>
+<p>We can also use floating point values using the <a class="el" href="https://docs.juce.com/master/classColour.html#a3992d5ea9bdaf0471bd6caa0595b0185" title="Creates a colour using floating point red, green, blue and alpha values.">Colour::fromFloatRGBA()</a> function:</p>
+<div class="fragment"><div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colour::fromFloatRGBA (1.0f, 0.0f, 0.0f, 1.0f),   <span class="comment">// red</span></div>
+<div class="line">                                    juce::Colour::fromFloatRGBA (0.0f, 0.5f, 0.0f, 1.0f),   <span class="comment">// green</span></div>
+<div class="line">                                    juce::Colour::fromFloatRGBA (0.0f, 0.0f, 1.0f, 1.0f) }; <span class="comment">// blue</span></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>A integer value of 128 is equivalent to a floating point value of around 0.501961. Therefore the green colours is not <em>quite</em> the same as the previous example, but 0.5 is close enough for this demonstration.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Try out different colour values and review the results by running the application. You are not limited to adding three colours to the <code class="project_code">colours</code> array, you can use any number of colours (greater than or equal to one). </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_colours_colour_from_hsb"></a>
+Hue, saturation, and brightness</h2>
+<p><a class="el" href="https://docs.juce.com/master/classColour.html" title="Represents a colour, also including a transparency value.">Colour</a> objects can also be initialised from hue, saturation, and brightness values. This is one way to generate different colours that share some perceptual qualities.</p>
+<p>For example we could create a series of light and dark reds using the following code:</p>
+<div class="fragment"><div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colour::fromHSV (0.0f,    <span class="comment">// hue</span></div>
+<div class="line">                                                           0.5f,    <span class="comment">// saturation</span></div>
+<div class="line">                                                           0.3f,    <span class="comment">// brightness</span></div>
+<div class="line">                                                           1.0f),   <span class="comment">// alpha</span></div>
+<div class="line">                                    juce::Colour::fromHSV (0.0f, 0.5f, 0.5f, 1.0f),</div>
+<div class="line">                                    juce::Colour::fromHSV (0.0f, 0.5f, 0.7f, 1.0f) };</div>
+</div><!-- fragment --><p>Here the hue, saturation, and alpha values are constant for each colour (a hue of 0.0f should generate colours perceived as "reds"). The result is shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot3.png" alt="">
+<div class="caption">
+Reds with saturation 0.5 and brightnesses 0.3, 0.5, and 0.7</div></div>
+<p>We can also obtain the hue, saturation, and brightness values from a <a class="el" href="https://docs.juce.com/master/classColour.html" title="Represents a colour, also including a transparency value.">Colour</a> object. For example, if we wanted a series of purples of different brightnesses, we could use the following code:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> purpleHue = juce::Colours::purple.getHue();</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { juce::Colour::fromHSV (purpleHue, 0.5f, 0.3f, 1.0f),</div>
+<div class="line">                                    juce::Colour::fromHSV (purpleHue, 0.5f, 0.5f, 1.0f),</div>
+<div class="line">                                    juce::Colour::fromHSV (purpleHue, 0.5f, 0.7f, 1.0f) };</div>
+</div><!-- fragment --><p>The result of this is shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot4.png" alt="">
+<div class="caption">
+Purples with saturation 0.5 and brightnesses 0.3, 0.5, and 0.7</div></div>
+<h2><a class="anchor" id="tutorial_colours_manipulating_colour_values"></a>
+Manipulating colour values</h2>
+<p>We can also use existing colours to create new colours. For example, to make colours that are slightly brighter or darker than an existing colour we can use the <a class="el" href="https://docs.juce.com/master/classColour.html#a614c7699a1b47dcf324106d548238bac" title="Returns a brighter version of this colour.">Colour::brighter()</a> or <a class="el" href="https://docs.juce.com/master/classColour.html#a9910d9b8385825a87ea0d62d96115872" title="Returns a darker version of this colour.">Colour::darker()</a> functions respectively:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> baseColour = juce::Colours::orange;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { baseColour.darker(),</div>
+<div class="line">                                    baseColour,</div>
+<div class="line">                                    baseColour.brighter() };</div>
+</div><!-- fragment --><p>Or you can blend between two colours using the <a class="el" href="https://docs.juce.com/master/classColour.html#ac1500fb05c7775db2e1b21f07cc28c0c" title="Returns a colour that lies somewhere between this one and another.">Colour::interpolatedWith()</a> function:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> colour1 = juce::Colours::red;</div>
+<div class="line"><span class="keyword">auto</span> colour2 = juce::Colours::purple;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { colour1,</div>
+<div class="line">                                    colour1.interpolatedWith (colour2, 0.5f),</div>
+<div class="line">                                    colour2 };</div>
+</div><!-- fragment --><p>The result of this is shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot5.png" alt="">
+<div class="caption">
+Red and purple with an equal blend of red and purple in between</div></div>
+<p>Given one colour you can create another colour that will be clearly visible against another colour using the <a class="el" href="https://docs.juce.com/master/classColour.html#a50e8a45cda60f6853cb74ed1ff1fb7d7" title="Returns a colour that will be clearly visible against this colour.">Colour::contrasting()</a> function. This allows you to specify the amount of contrast using an argument:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> baseColour = juce::Colours::darkcyan;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { baseColour,</div>
+<div class="line">                                    baseColour.contrasting (0.5f) };</div>
+</div><!-- fragment --><p>You can even create a colour that is contrasting against two other colours:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> colour1 = <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>;:<a class="code hl_variable" href="https://docs.juce.com/master/namespaceColours.html#a30b9fab446b3ad473ee696af684bce5d">Colours::lightblue</a>;</div>
+<div class="line"><span class="keyword">auto</span> colour2 = <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>;:<a class="code hl_variable" href="https://docs.juce.com/master/namespaceColours.html#a5b6edc49a88186b8cf3d66332685100e">Colours::darkred</a>;</div>
+<div class="line"> </div>
+<div class="line">juce::Array&lt;juce::Colour&gt; colours { colour1,</div>
+<div class="line">                                    juce::Colour::contrasting (colour1, colour2),</div>
+<div class="line">                                    colour2 };</div>
+<div class="ttc" id="anamespaceColours_html_a30b9fab446b3ad473ee696af684bce5d"><div class="ttname"><a href="https://docs.juce.com/master/namespaceColours.html#a30b9fab446b3ad473ee696af684bce5d">Colours::lightblue</a></div><div class="ttdeci">const Colour lightblue</div><div class="ttdef"><b>Definition</b> juce_Colours.h:114</div></div>
+<div class="ttc" id="anamespaceColours_html_a5b6edc49a88186b8cf3d66332685100e"><div class="ttname"><a href="https://docs.juce.com/master/namespaceColours.html#a5b6edc49a88186b8cf3d66332685100e">Colours::darkred</a></div><div class="ttdeci">const Colour darkred</div><div class="ttdef"><b>Definition</b> juce_Colours.h:82</div></div>
+<div class="ttc" id="anamespacejuce_html"><div class="ttname"><a href="https://docs.juce.com/master/namespacejuce.html">juce</a></div><div class="ttdef"><b>Definition</b> juce_AudioWorkgroup_mac.h:36</div></div>
+</div><!-- fragment --><p>There are various other manipulations that can be performed such as blending two colours taking into account the alpha channel of the overlaid colour using the <a class="el" href="https://docs.juce.com/master/classColour.html#a3c6c94ff6f05b403b783acaf7c68b439" title="Returns a colour that is the result of alpha-compositing a new colour over this one.">Colour::overlaidWith()</a> function.</p>
+<h1><a class="anchor" id="tutorial_colours_specifying_component_colours"></a>
+Specifying component colours</h1>
+<p>The previous section explored the use of colours when performing your own drawing operations with your component's <code class="project_code">paint()</code> function. To customise the colours of the built-in components (such as sliders, labels, and so on) you need to use Component::setColour() or <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html#a167a1e914771f32e433a0d45aaba45e3" title="Registers a colour to be used for a particular purpose.">LookAndFeel::setColour()</a> functions.</p>
+<p>Essentially, each of the built-in <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> subclasses contains an <code class="code">enum</code> that lists the various elements of the component that can have a specific colour. Each of these items is referred to as a <em>colour ID</em>. (The values of these colour IDs are unique across the JUCE library.) For example, the colour IDs for the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class are as follows (from <a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701" title="A set of colour IDs to use to change the colour of various aspects of the label.">Label::ColourIds</a>):</p>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701a80bf4bb58a466a4debb994f3ee2c8cab" title="The background colour to fill the label with.">Label::backgroundColourId</a> :   The background colour to fill the label with.   </li>
+</ul>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701a1f25238374bf53d43f8c73e68c8e937c" title="The colour for the text.">Label::textColourId</a> :   The colour for the text.   </li>
+</ul>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701ab67bf6af853bcef12b41b3e81f7d18bb" title="An optional colour to use to draw a border around the label.">Label::outlineColourId</a> :   An optional colour to use to draw a border around the label.   </li>
+</ul>
+<p>Leave this transparent to not have an outline.   </p><ul>
+<li><a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701a6ccfd805ecc818013ea4bdde69d4258b" title="The background colour when the label is being edited.">Label::backgroundWhenEditingColourId</a> :   The background colour when the label is being edited.   </li>
+</ul>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701adb6284340066b8c4d9ea389087c7d69d" title="The colour for the text when the label is being edited.">Label::textWhenEditingColourId</a> :   The colour for the text when the label is being edited.   </li>
+</ul>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/classLabel.html#a41756012394513222e1323bb432fa701a6c7adfce6c830c9faa94efd3445f78cf" title="An optional border colour when the label is being edited.">Label::outlineWhenEditingColourId</a> :   An optional border colour when the label is being edited.   </li>
+</ul>
+<p>Let's try changing some of these colours. If you look in the <code class="project_code">MainContentComponent</code> constructor you will see a <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a>, a <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a>, a <a class="el" href="https://docs.juce.com/master/classTextButton.html" title="A button that uses the standard lozenge-shaped background with a line of text on it.">TextButton</a>, and two <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> objects added as child components. Add the line <span class="comment">[1]</span> as shown below to change the label's text colour to black:</p>
+<div class="fragment"><div class="line">MainContentComponent()</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>.setColour (juce::Label::textColourId, <a class="code hl_variable" href="https://docs.juce.com/master/namespaceColours.html#ab5f46ac613c2b717ac885b7cf995ffc6">Colours::black</a>);            <span class="comment">// [1]</span></div>
+<div class="line">    <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>.setEditable (<span class="keyword">true</span>);</div>
+<div class="line">    addAndMakeVisible (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>);</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="ttc" id="agroup__juce__gui__basics-accessibility_html_ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">AccessibilityRole::label</a></div><div class="ttdeci">@ label</div></div>
+</div><!-- fragment --><p>The result should be similar to the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot6.png" alt="">
+<div class="caption">
+Showing a label with a customised text colour</div></div>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Look at the colour IDs for the <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a>, <a class="el" href="https://docs.juce.com/master/classTextButton.html" title="A button that uses the standard lozenge-shaped background with a line of text on it.">TextButton</a>, and <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> classes (<a class="el" href="https://docs.juce.com/master/classTextEditor.html#aa805220923c93cd808a92fff0e3fb71d" title="A set of colour IDs to use to change the colour of various aspects of the editor.">TextEditor::ColourIds</a>, <a class="el" href="https://docs.juce.com/master/classTextButton.html#afb6c1da587aebb63b58a2569bed70c2c" title="A set of colour IDs to use to change the colour of various aspects of the button.">TextButton::ColourIds</a>, and <a class="el" href="https://docs.juce.com/master/classSlider.html#a1012002c53381ccc7c1fe7e604a75f44" title="A set of colour IDs to use to change the colour of various aspects of the slider.">Slider::ColourIds</a>) and experiment with setting different colours for the child components in the demo application. </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_colours_look_and_feel_colours"></a>
+Setting look-and-feel colours</h2>
+<p>It is very common for applications, or parts of applications, to require the same colour palette for all components of the same type. You may have found in the exercise in the previous section that you needed to repeat the calls to the Component::setColour() function for both sliders in order to give them the same appearance. One use of the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class is to provide a single point where these colours can be specified. To illustrate this, return the <code class="project_code">MainContentComponent</code> constructor back to its original state as shown below:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>.setEditable (<span class="keyword">true</span>);</div>
+<div class="line">        addAndMakeVisible (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>);</div>
+<div class="line"> </div>
+<div class="line">        textEditor.setText (<span class="stringliteral">"This is a text editor."</span>);</div>
+<div class="line">        addAndMakeVisible (textEditor);</div>
+<div class="line"> </div>
+<div class="line">        textButton.setClickingTogglesState (<span class="keyword">true</span>);</div>
+<div class="line">        addAndMakeVisible (textButton);</div>
+<div class="line"> </div>
+<div class="line">        addAndMakeVisible (slider1);</div>
+<div class="line">        addAndMakeVisible (slider2);</div>
+<div class="line"> </div>
+<div class="line">        setSize (600, 210);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Now add the following line <span class="comment">[2]</span> to set the colour of the thumbs for both sliders:</p>
+<div class="fragment"><div class="line"><span class="comment">//...</span></div>
+<div class="line">getLookAndFeel().setColour (juce::Slider::thumbColourId, juce::Colours::red);  <span class="comment">// [2]</span></div>
+<div class="line">addAndMakeVisible (slider1);</div>
+<div class="line">addAndMakeVisible (slider2);</div>
+<div class="line"><span class="comment">//...</span></div>
+</div><!-- fragment --><p>This should produce a result similar to the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Colours in JUCE_files/tutorial_colours_screenshot7.png" alt="">
+<div class="caption">
+Customising the colour of multiple slider thumbs using a single line of code</div></div>
+<h2><a class="anchor" id="tutorial_colours_custom_look_and_feel_colours"></a>
+Custom look-and-feel colours</h2>
+<p>You can also make a subclass of one of the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> classes (<a class="el" href="https://docs.juce.com/master/classLookAndFeel__V1.html" title="The original JUCE look-and-feel, as used back from 2002 to about 2007ish.">LookAndFeel_V1</a>, <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V2.html" title="This LookAndFeel subclass implements the juce style from around 2008-12.">LookAndFeel_V2</a>, <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V3.html" title="The latest JUCE look-and-feel style, as introduced in 2013.">LookAndFeel_V3</a>, or <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V4.html" title="The latest JUCE look-and-feel style, as introduced in 2017.">LookAndFeel_V4</a>) and customise specific colours in its constructor. To do this you could add the following class as a nested class of our <code class="project_code">MainContentComponent</code> class:</p>
+<div class="fragment"><div class="line">    <span class="keyword">class </span>CustomLookAndFeel  : <span class="keyword">public</span> juce::LookAndFeel_V4</div>
+<div class="line">    {</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        CustomLookAndFeel()</div>
+<div class="line">        {</div>
+<div class="line">            setColour (juce::Slider::thumbColourId, juce::Colours::red);</div>
+<div class="line">        }</div>
+<div class="line">    };</div>
+</div><!-- fragment --><p>Add an instance of this class to our private member section <span class="comment">[3]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    CustomLookAndFeel lf; <span class="comment">// [3]</span></div>
+<div class="line">    juce::Label <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>            { {}, <span class="stringliteral">"This is some label text."</span> };</div>
+</div><!-- fragment --><p>And set the MainContentComponent class to use this look-and-feel in its constructor <span class="comment">[4]</span> :</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        setLookAndFeel (&amp;lf); <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682cad304ba20e96d87411588eeabac850e34">label</a>.setEditable (<span class="keyword">true</span>);</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The changed code for this subsection can be found in the <code class="filename">ColoursTutorial_02.h</code> file of the demo project.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Customise more colours in the <code class="project_code">CustomLookAndFeel</code> constructor. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_colours_summary"></a>
+Summary</h1>
+<p>In this tutorial we have looked at the following items that you can use in your own applications:</p>
+<ul>
+<li>How to use the <a class="el" href="https://docs.juce.com/master/classColour.html" title="Represents a colour, also including a transparency value.">Colour</a> class and <a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a> namespace to specify colours in JUCE.</li>
+<li>Using colours in your component's <code class="project_code">paint()</code> function when performing drawing operations.</li>
+<li>Specifying the colours for the elements of built-in components using colour IDs.</li>
+<li>Specifying colours across parts of your application or your whole application using the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_colours_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_random.html">Tutorial: The Random class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html">Tutorial: Customise the look and feel of your app</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_point_line_rectangle.html">Tutorial: The Point, Line, and Rectangle classes</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_rectangle_advanced.html">Tutorial: Advanced GUI layout techniques</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Colours in JUCE_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

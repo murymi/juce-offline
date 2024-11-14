@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0058)https://docs.juce.com/master/tutorial_plugin_examples.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Plugin examples</title>
+<link href="./JUCE_ Tutorial_ Plugin examples_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Plugin examples_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Plugin examples_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Plugin examples_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Plugin examples_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Plugin examples_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Plugin examples_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Plugin examples_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Plugin examples_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Plugin examples_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Plugin examples_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Plugin examples_files/css">
+<script src="./JUCE_ Tutorial_ Plugin examples_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Plugin examples_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Plugin examples_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Plugin examples</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_demo_project">The demo projects</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_arpeggiator">The Arpeggiator Plugin</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_arpeggiator_implementation">Arpeggiator Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_noise_gate">The Noise Gate Plugin</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_noise_gate_implementation">Noise Gate Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_multi_out_synth">The Multi-Out Synth Plugin</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_multi_out_synth_implementation">Multi-Out Synth Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_surround">The Surround Plugin</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_surround_implementation">Surround Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>This tutorial explains several audio/midi plug-in examples in detail and explores the open possibilities of plug-in development.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS</p>
+<p><span class="headerlabel">Plugin Format:</span> VST , VST3 , AU , AAX , Standalone</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a>, <a class="el" href="https://docs.juce.com/master/classSortedSet.html" title="Holds a set of unique primitive objects, such as ints or doubles.">SortedSet</a>, <a class="el" href="https://docs.juce.com/master/classAudioParameterFloat.html" title="A subclass of AudioProcessorParameter that provides an easy way to create a parameter which maps onto...">AudioParameterFloat</a>, <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a>, <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a>, <a class="el" href="https://docs.juce.com/master/classMidiMessage.html" title="Encapsulates a MIDI message.">MidiMessage</a>, <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a>, <a class="el" href="https://docs.juce.com/master/classGenericAudioProcessorEditor.html" title="A type of UI component that displays the parameters of an AudioProcessor as a simple list of sliders,...">GenericAudioProcessorEditor</a></p>
+<h1><a class="anchor" id="tutorial_plugin_examples_getting_started"></a>
+Getting started</h1>
+<p>There are several demo projects to accompany this tutorial. Download links to these projects are provided in the relevant sections of the tutorial.</p>
+<p>If you need help with this step in each of these sections, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_plugin_examples_demo_project"></a>
+The demo projects</h1>
+<p>The demo projects provided with this tutorial illustrate several different examples of audio/midi plugins. In summary, these plugins are:</p>
+<ul>
+<li>Creating interesting musical patterns with a simple arpeggiator. Jump to <a class="el" href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_arpeggiator">The Arpeggiator Plugin</a>.</li>
+<li>Filtering out unwanted noises using a noise gate. Jump to <a class="el" href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_noise_gate">The Noise Gate Plugin</a>.</li>
+<li>Expanding the channel count to a multi-out synthesiser. Jump to <a class="el" href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_multi_out_synth">The Multi-Out Synth Plugin</a>.</li>
+<li>Expanding the channel count to a surround compatible plugin. Jump to <a class="el" href="https://docs.juce.com/master/tutorial_plugin_examples.html#tutorial_plugin_examples_surround">The Surround Plugin</a>.</li>
+</ul>
+<p>We use the <a class="el" href="https://docs.juce.com/master/classGenericAudioProcessorEditor.html" title="A type of UI component that displays the parameters of an AudioProcessor as a simple list of sliders,...">GenericAudioProcessorEditor</a> class common to all projects to lay out all of our GUI components across plugin examples.</p>
+<dl class="section note"><dt>Note</dt><dd>The code presented here is broadly similar to the <b class="onscreen_text">PlugInSamples</b> from the JUCE Examples.</dd></dl>
+<h1><a class="anchor" id="tutorial_plugin_examples_arpeggiator"></a>
+The Arpeggiator Plugin</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/ArpeggiatorTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/ArpeggiatorTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section note"><dt>Note</dt><dd>Make sure to enable the "MIDI Effect Plugin" option in the "Plugin Characteristics" field of the project settings in the Projucer.</dd></dl>
+<p>The Arpeggiator is a MIDI plugin without any audio processing that can be inserted on a software instrument or MIDI track in a DAW to modify the incoming MIDI signals.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Plugin examples_files/tutorial_plugin_examples_arpeggiator_screenshot1.png" alt="">
+<div class="caption">
+Arpeggiator plugin window</div></div>
+<h2><a class="anchor" id="tutorial_plugin_examples_arpeggiator_implementation"></a>
+Arpeggiator Implementation</h2>
+<p>In the <code class="project_code">Arpeggiator</code> class, we have defined several private member variables to implement our arpeggiator behaviour as shown below:</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AudioParameterFloat* speed;</div>
+<div class="line">    <span class="keywordtype">int</span> currentNote, lastNoteValue;</div>
+<div class="line">    <span class="keywordtype">int</span> time;</div>
+<div class="line">    <span class="keywordtype">float</span> rate;</div>
+<div class="line">    juce::SortedSet&lt;int&gt; notes;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (Arpeggiator)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Among these we have a <a class="el" href="https://docs.juce.com/master/classSortedSet.html" title="Holds a set of unique primitive objects, such as ints or doubles.">SortedSet</a> object that holds a set of unique int variables according to a certain sorting rule. This will allow us to reorder the MIDI notes efficiently to produce the desired musical patterns.</p>
+<p>In the class constructor, we initialise the plugin without any audio bus as we are creating a MIDI plugin. We also add a single parameter for the speed of the arpeggiator as shown here:</p>
+<div class="fragment"><div class="line">    Arpeggiator()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a> (BusesProperties()) <span class="comment">// add no audio buses at all</span></div>
+<div class="line">    {</div>
+<div class="line">        addParameter (speed = <span class="keyword">new</span> juce::AudioParameterFloat (<span class="stringliteral">"speed"</span>, <span class="stringliteral">"Arpeggiator Speed"</span>, 0.0, 1.0, 0.5));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">prepareToPlay()</code> function, we initialise some variables to prepare for subsequent processing like follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> sampleRate, <span class="keywordtype">int</span>)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        notes.clear();                          <span class="comment">// [1]</span></div>
+<div class="line">        currentNote = 0;                        <span class="comment">// [2]</span></div>
+<div class="line">        lastNoteValue = -1;                     <span class="comment">// [3]</span></div>
+<div class="line">        time = 0;                               <span class="comment">// [4]</span></div>
+<div class="line">        rate = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (sampleRate); <span class="comment">// [5]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : First, we empty the <a class="el" href="https://docs.juce.com/master/classSortedSet.html" title="Holds a set of unique primitive objects, such as ints or doubles.">SortedSet</a> of MIDI note numbers.</li>
+<li><span class="comment">[2]</span> : The currentNote variable temporarily holds the current index for the <a class="el" href="https://docs.juce.com/master/classSortedSet.html" title="Holds a set of unique primitive objects, such as ints or doubles.">SortedSet</a> of notes.</li>
+<li><span class="comment">[3]</span> : The lastNoteValue variable temporarily holds the previous index to be able to stop the note.</li>
+<li><span class="comment">[4]</span> : The time variable keeps track of the note duration with respect to the buffer size and sample rate.</li>
+<li><span class="comment">[5]</span> : The rate stores the current sample rate in a float variable.</li>
+</ul>
+<p>Next, we perform the actual processing in the <code class="project_code">processBlock()</code> function as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midi)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// the audio buffer in a midi effect will have zero channels!</span></div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (buffer.getNumChannels() == 0);                                                         <span class="comment">// [6]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// however we use the buffer to get timing information</span></div>
+<div class="line">        <span class="keyword">auto</span> numSamples = buffer.getNumSamples();                                                       <span class="comment">// [7]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get note duration</span></div>
+<div class="line">        <span class="keyword">auto</span> noteDuration = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span> (std::ceil (rate * 0.25f * (0.1f + (1.0f - (*speed)))));   <span class="comment">// [8]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> metadata : midi)                                                                <span class="comment">// [9]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> msg = metadata.getMessage();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span>      (msg.isNoteOn())  notes.add (msg.getNoteNumber());</div>
+<div class="line">            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (msg.isNoteOff()) notes.removeValue (msg.getNoteNumber());</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        midi.clear();                                                                                   <span class="comment">// [10]</span></div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[6]</span> : To ensure that we deal with a MIDI plugin, assert that there are no audio channels in the audio buffer.</li>
+<li><span class="comment">[7]</span> : We still retrieve the number of samples in the block from the audio buffer.</li>
+<li><span class="comment">[8]</span> : According to the speed parameter of our user interface and the sample rate, we calculate the note duration in number of samples.</li>
+<li><span class="comment">[9]</span> : For every event in the <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a>, we add the note to the <a class="el" href="https://docs.juce.com/master/classSortedSet.html" title="Holds a set of unique primitive objects, such as ints or doubles.">SortedSet</a> if the event is a "Note On" and remove the note if the event is a "Note Off".</li>
+<li><span class="comment">[10]</span> : We then empty the <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a> to add the single notes back in the buffer one by one in the next step.</li>
+</ul>
+<div class="fragment"><div class="line">        <span class="keywordflow">if</span> ((time + numSamples) &gt;= noteDuration)                                                        <span class="comment">// [11]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> offset = juce::jmax (0, juce::jmin ((<span class="keywordtype">int</span>) (noteDuration - time), numSamples - 1));     <span class="comment">// [12]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (lastNoteValue &gt; 0)                                                                      <span class="comment">// [13]</span></div>
+<div class="line">            {</div>
+<div class="line">                midi.addEvent (juce::MidiMessage::noteOff (1, lastNoteValue), offset);</div>
+<div class="line">                lastNoteValue = -1;</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (notes.size() &gt; 0)                                                                       <span class="comment">// [14]</span></div>
+<div class="line">            {</div>
+<div class="line">                currentNote = (currentNote + 1) % notes.size();</div>
+<div class="line">                lastNoteValue = notes[currentNote];</div>
+<div class="line">                midi.addEvent (juce::MidiMessage::noteOn  (1, lastNoteValue, (juce::uint8) 127), offset);</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        time = (time + numSamples) % noteDuration;                                                      <span class="comment">// [15]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[11]</span> : We check whether the current time with the number of samples in the current block added to it is greater than the note duration. If it is the case this means that by the end of the current block, we would reach a note transition and we therefore proceed to modify the <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a>. Otherwise we keep the MIDI state as is.</li>
+<li><span class="comment">[12]</span> : Calculate the sample offset at which the note transition occurs within the current audio block.</li>
+<li><span class="comment">[13]</span> : If the previous note is still playing, the lastNoteValue variable is greater than 0 and therefore we need to send a "Note Off" event to stop the note from playing with the correct sample offset. We then reset the lastNoteValue variable.</li>
+<li><span class="comment">[14]</span> : If there are notes to shuffle and play in the <a class="el" href="https://docs.juce.com/master/classSortedSet.html" title="Holds a set of unique primitive objects, such as ints or doubles.">SortedSet</a>, we send a "Note On" event to play the first note in the set after having stored the previous note number and retrieved the next note number.</li>
+<li><span class="comment">[15]</span> : Finally we keep track of our current time relative to the note duration whether we reach a note transition or not.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_plugin_examples_noise_gate"></a>
+The Noise Gate Plugin</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/NoiseGateTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/NoiseGateTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>The noise gate is an audio plugin that filters out the input sound below a certain sidechain threshold when placed as an insert in a DAW track.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Plugin examples_files/tutorial_plugin_examples_noise_gate_screenshot1.png" alt="">
+<div class="caption">
+Noise gate plugin window</div></div>
+<h2><a class="anchor" id="tutorial_plugin_examples_noise_gate_implementation"></a>
+Noise Gate Implementation</h2>
+<p>In the <code class="project_code">NoiseGate</code> class, we have defined several private member variables to implement our noise gate behaviour as shown below:</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AudioParameterFloat* threshold;</div>
+<div class="line">    juce::AudioParameterFloat* alpha;</div>
+<div class="line">    <span class="keywordtype">int</span> sampleCountDown;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">float</span> lowPassCoeff;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (NoiseGate)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>In the class constructor, we initialise the plugin with three stereo buses for the input, output and sidechain respectively <span class="comment">[1]</span> . We also add two parameters namely threshold and alpha <span class="comment">[2]</span> as shown here:</p>
+<div class="fragment"><div class="line">    NoiseGate()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a> (BusesProperties().withInput  (<span class="stringliteral">"Input"</span>,     <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo())           <span class="comment">// [1]</span></div>
+<div class="line">                                           .withOutput (<span class="stringliteral">"Output"</span>,    <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo())</div>
+<div class="line">                                           .withInput  (<span class="stringliteral">"Sidechain"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo()))</div>
+<div class="line">    {</div>
+<div class="line">        addParameter (threshold = <span class="keyword">new</span> juce::AudioParameterFloat (<span class="stringliteral">"threshold"</span>, <span class="stringliteral">"Threshold"</span>, 0.0f, 1.0f, 0.5f));  <span class="comment">// [2]</span></div>
+<div class="line">        addParameter (alpha     = <span class="keyword">new</span> juce::AudioParameterFloat (<span class="stringliteral">"alpha"</span>,     <span class="stringliteral">"Alpha"</span>,     0.0f, 1.0f, 0.8f));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The threshold parameter determines the power level at which the noise gate should act upon the input signal. The alpha parameter controls the filtering of the sidechain signal.</p>
+<p>In the <code class="project_code">isBusesLayoutSupported()</code> function, we ensure that the number of input channels is identical to the number of output channels and that the input buses are enabled:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isBusesLayoutSupported (<span class="keyword">const</span> BusesLayout&amp; layouts)<span class="keyword"> const override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// the sidechain can take any layout, the main bus needs to be the same on the input and output</span></div>
+<div class="line">        <span class="keywordflow">return</span> layouts.getMainInputChannelSet() == layouts.getMainOutputChannelSet()</div>
+<div class="line">                 &amp;&amp; ! layouts.getMainInputChannelSet().isDisabled();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">prepareToPlay()</code> function, we initialise some variables to prepare for subsequent processing like follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span>, <span class="keywordtype">int</span>)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        lowPassCoeff = 0.0f;    <span class="comment">// [3]</span></div>
+<div class="line">        sampleCountDown = 0;    <span class="comment">// [4]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[3]</span> : The low-pass coefficient will be calculated from the sidechain signal and the alpha parameter to determine the gating behaviour.</li>
+<li><span class="comment">[4]</span> : The sample countdown allows us to keep track of the number of samples left with regards to the sample rate before the gating occurs.</li>
+</ul>
+<p>Next, we perform the actual processing in the <code class="project_code">processBlock()</code> function as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> mainInputOutput = getBusBuffer (buffer, <span class="keyword">true</span>, 0);                                  <span class="comment">// [5]</span></div>
+<div class="line">        <span class="keyword">auto</span> sideChainInput  = getBusBuffer (buffer, <span class="keyword">true</span>, 1);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> alphaCopy = alpha-&gt;get();                                                          <span class="comment">// [6]</span></div>
+<div class="line">        <span class="keyword">auto</span> thresholdCopy = threshold-&gt;get();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> j = 0; j &lt; buffer.getNumSamples(); ++j)                                       <span class="comment">// [7]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> mixedSamples = 0.0f;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; sideChainInput.getNumChannels(); ++i)                          <span class="comment">// [8]</span></div>
+<div class="line">                mixedSamples += sideChainInput.getReadPointer (i) [j];</div>
+<div class="line"> </div>
+<div class="line">            mixedSamples /= <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (sideChainInput.getNumChannels());</div>
+<div class="line">            lowPassCoeff = (alphaCopy * lowPassCoeff) + ((1.0f - alphaCopy) * mixedSamples);    <span class="comment">// [9]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (lowPassCoeff &gt;= thresholdCopy)                                                  <span class="comment">// [10]</span></div>
+<div class="line">                sampleCountDown = (int) getSampleRate();</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// very in-effective way of doing this</span></div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; mainInputOutput.getNumChannels(); ++i)                         <span class="comment">// [11]</span></div>
+<div class="line">                *mainInputOutput.getWritePointer (i, j) = sampleCountDown &gt; 0 ? *mainInputOutput.getReadPointer (i, j)</div>
+<div class="line">                                                                              : 0.0f;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (sampleCountDown &gt; 0)                                                            <span class="comment">// [12]</span></div>
+<div class="line">                --sampleCountDown;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[5]</span> : First, we separate the sidechain buffer from the main IO buffer for separate processing in subsequent steps.</li>
+<li><span class="comment">[6]</span> : Then we retrieve copies of the threshold and alpha parameters.</li>
+<li><span class="comment">[7]</span> : The outer loop will process the individual samples in the audio buffer block while the inner loops will process the channels in an interleaved manner. This allows us to keep the same state for each channel in a single sample processing.</li>
+<li><span class="comment">[8]</span> : For each channel in the sidechain, we add the signals together and divide by the number of sidechain channels in order to sum the signal to mono.</li>
+<li><span class="comment">[9]</span> : Next we calculate the low-pass coefficient from the alpha parameter and the sidechain mono signal using the formula <span style="font-family: times; font-style: italic">y[i] = ((1 - alpha) * sidechain) + (alpha * y[i - 1])</span> .</li>
+<li><span class="comment">[10]</span> : If this coefficient is greater than or equal to the threshold, we reset the sample countdown to the sample rate.</li>
+<li><span class="comment">[11]</span> : For every input channel, we copy the input buffer sample to the output buffer if the countdown is non-zero. Otherwise, we mute the output signal by writing zero samples.</li>
+<li><span class="comment">[12]</span> : We make sure to decrement the sample countdown value for every sample processed.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>The implementation shown here is not how you would typically program a noise gate. There are much more efficient and better algorithms out there.</dd></dl>
+<h1><a class="anchor" id="tutorial_plugin_examples_multi_out_synth"></a>
+The Multi-Out Synth Plugin</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/MultiOutSynthTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/MultiOutSynthTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section note"><dt>Note</dt><dd>Make sure to enable the "Plugin MIDI Input" option in the "Plugin Characteristics" field of the project settings in the Projucer.</dd></dl>
+<p>The multi-out synth is a software instrument plugin that produces up to five synthesiser voices based on an audio file sample and outputs the signal to up to 16 multiple outputs.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Plugin examples_files/tutorial_plugin_examples_multi_out_synth_screenshot1.png" alt="">
+<div class="caption">
+Multi-out synth plugin window</div></div>
+<h2><a class="anchor" id="tutorial_plugin_examples_multi_out_synth_implementation"></a>
+Multi-Out Synth Implementation</h2>
+<p>In the <code class="project_code">MultiOutSynth</code> class, we have defined several private member variables to implement our multi-out synth behaviour as shown below:</p>
+<div class="fragment"><div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AudioFormatManager formatManager;</div>
+<div class="line">    juce::OwnedArray&lt;juce::Synthesiser&gt; synth;</div>
+<div class="line">    juce::SynthesiserSound::Ptr sound;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MultiOutSynth)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Among these we have an <a class="el" href="https://docs.juce.com/master/classAudioFormatManager.html" title="A class for keeping a list of available audio formats, and for deciding which one to use to open a gi...">AudioFormatManager</a> in order to register audio file formats to read our sample sound. We also have an array of <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> objects that holds one synth per channel and a smart pointer to the sample sound we use in the tutorial.</p>
+<p>We also declare some useful constants as an enum for the maximum number of midi channels and the maximum number of synth voices:</p>
+<div class="fragment"><div class="line">    <span class="keyword">enum</span></div>
+<div class="line">    {</div>
+<div class="line">        maxMidiChannel = 16,</div>
+<div class="line">        maxNumberOfVoices = 5</div>
+<div class="line">    };</div>
+</div><!-- fragment --><p>In the class constructor, we initialise the plugin with 16 stereo output buses but no input bus <span class="comment">[1]</span> as we are creating a software instrument plugin. We also register basic audio file formats on the <a class="el" href="https://docs.juce.com/master/classAudioFormatManager.html" title="A class for keeping a list of available audio formats, and for deciding which one to use to open a gi...">AudioFormatManager</a> object in order to read the ".ogg" sample file <span class="comment">[2]</span> as shown here:</p>
+<div class="fragment"><div class="line">    MultiOutSynth()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a> (BusesProperties()</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #1"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), true)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #2"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #3"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #4"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #5"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #6"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #7"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #8"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #9"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #10"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #11"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #12"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #13"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #14"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #15"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false)</div>
+<div class="line">                          .withOutput (<span class="stringliteral">"Output #16"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), false))   <span class="comment">// [1]</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// initialize other stuff (not related to buses)</span></div>
+<div class="line">        formatManager.registerBasicFormats();                                                   <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> midiChannel = 0; midiChannel &lt; maxMidiChannel; ++midiChannel)                 <span class="comment">// [3]</span></div>
+<div class="line">        {</div>
+<div class="line">            synth.add (<span class="keyword">new</span> juce::Synthesiser());</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; maxNumberOfVoices; ++i)</div>
+<div class="line">                synth[midiChannel]-&gt;addVoice (<span class="keyword">new</span> juce::SamplerVoice());                        <span class="comment">// [4]</span></div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        loadNewSample (juce::MemoryBlock (singing_ogg, singing_oggSize));                       <span class="comment">// [5]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>For each midi/output channel, we instantiate a new <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> object, add it to the array <span class="comment">[3]</span> and create 5 <a class="el" href="https://docs.juce.com/master/classSamplerVoice.html" title="A subclass of SynthesiserVoice that can play a SamplerSound.">SamplerVoice</a> objects per synth <span class="comment">[4]</span> . We also load the sample file as binary data <span class="comment">[5]</span> using the <code class="project_code">loadNewSample()</code> private function defined hereafter:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> loadNewSample (<span class="keyword">const</span> juce::MemoryBlock&amp; sampleData)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> soundBuffer = std::make_unique&lt;juce::MemoryInputStream&gt; (sampleData, <span class="keyword">false</span>);   <span class="comment">// [6]</span></div>
+<div class="line">        std::unique_ptr&lt;juce::AudioFormatReader&gt; formatReader (formatManager.findFormatForFileExtension (<span class="stringliteral">"ogg"</span>)-&gt;createReaderFor (soundBuffer.release(), <span class="keyword">true</span>));</div>
+<div class="line"> </div>
+<div class="line">        juce::BigInteger midiNotes;</div>
+<div class="line">        midiNotes.setRange (0, 126, <span class="keyword">true</span>);</div>
+<div class="line">        juce::SynthesiserSound::Ptr newSound = <span class="keyword">new</span> juce::SamplerSound (<span class="stringliteral">"Voice"</span>, *formatReader, midiNotes, 0x40, 0.0, 0.0, 10.0); <span class="comment">// [7]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> channel = 0; channel &lt; maxMidiChannel; ++channel)             <span class="comment">// [8]</span></div>
+<div class="line">            synth[channel]-&gt;removeSound (0);</div>
+<div class="line"> </div>
+<div class="line">        sound = newSound;                                                       <span class="comment">// [9]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> channel = 0; channel &lt; maxMidiChannel; ++channel)             <span class="comment">// [10]</span></div>
+<div class="line">            synth[channel]-&gt;addSound (sound);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[6]</span> : First create a <a class="el" href="https://docs.juce.com/master/classMemoryInputStream.html" title="Allows a block of data to be accessed as a stream.">MemoryInputStream</a> from the sample binary data and convert the stream to read the file as an "ogg" format.</li>
+<li><span class="comment">[7]</span> : Declare a <a class="el" href="https://docs.juce.com/master/classSamplerSound.html" title="A subclass of SynthesiserSound that represents a sampled audio clip.">SamplerSound</a> object with the previously created stream reader and constrain the range of midi notes using a <a class="el" href="https://docs.juce.com/master/classBigInteger.html" title="An arbitrarily large integer class.">BigInteger</a>.</li>
+<li><span class="comment">[8]</span> : For every <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> object in the synth array, we make sure to clear the currently loaded <a class="el" href="https://docs.juce.com/master/classSynthesiserSound.html" title="Describes one of the sounds that a Synthesiser can play.">SynthesiserSound</a> before loading a new one.</li>
+<li><span class="comment">[9]</span> : Then assign the newly created <a class="el" href="https://docs.juce.com/master/classSamplerSound.html" title="A subclass of SynthesiserSound that represents a sampled audio clip.">SamplerSound</a> to the smart pointer to keep a reference to the sound.</li>
+<li><span class="comment">[10]</span> : Finally, for every Synthesizer object we load the new sound as a <a class="el" href="https://docs.juce.com/master/classSamplerSound.html" title="A subclass of SynthesiserSound that represents a sampled audio clip.">SamplerSound</a> object.</li>
+</ul>
+<p>To make sure that no buses are added or removed beyond our requirements, we override two functions from the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> class as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> canAddBus    (<span class="keywordtype">bool</span> isInput)<span class="keyword"> const override   </span>{ <span class="keywordflow">return</span> (! isInput &amp;&amp; getBusCount (<span class="keyword">false</span>) &lt; maxMidiChannel); }</div>
+<div class="line">    <span class="keywordtype">bool</span> canRemoveBus (<span class="keywordtype">bool</span> isInput)<span class="keyword"> const override   </span>{ <span class="keywordflow">return</span> (! isInput &amp;&amp; getBusCount (<span class="keyword">false</span>) &gt; 1); }</div>
+</div><!-- fragment --><p>This prevents input buses from being added or removed and output buses from being added beyond 16 channels or removed completely.</p>
+<p>In the <code class="project_code">prepareToPlay()</code> function, we prepare for subsequent processing by setting the sample rate for every <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> object in the synth array by calling the <code class="project_code">setCurrentPlaybackSampleRate()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> newSampleRate, <span class="keywordtype">int</span> samplesPerBlock)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::ignoreUnused (samplesPerBlock);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> midiChannel = 0; midiChannel &lt; maxMidiChannel; ++midiChannel)</div>
+<div class="line">            synth[midiChannel]-&gt;setCurrentPlaybackSampleRate (newSampleRate);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, we perform the actual processing in the <code class="project_code">processBlock()</code> function as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiBuffer)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> busCount = getBusCount (<span class="keyword">false</span>);                <span class="comment">// [11]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> busNr = 0; busNr &lt; busCount; ++busNr)     <span class="comment">// [12]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> midiChannelBuffer = filterMidiMessagesForChannel (midiBuffer, busNr + 1);</div>
+<div class="line">            <span class="keyword">auto</span> audioBusBuffer = getBusBuffer (buffer, <span class="keyword">false</span>, busNr);</div>
+<div class="line"> </div>
+<div class="line">            synth [busNr]-&gt;renderNextBlock (audioBusBuffer, midiChannelBuffer, 0, audioBusBuffer.getNumSamples()); <span class="comment">// [13]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[11]</span> : First, we retrieve the number of output buses.</li>
+<li><span class="comment">[12]</span> : For every output bus (and therefore for every <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> instance), we filter out the unnecessary audio bus buffers and filter out the midi messages that do not correspond to the midi channel of the synthesiser by calling a private helper function defined thereafter.</li>
+<li><span class="comment">[13]</span> : We can then call the <code class="project_code">renderNextBlock()</code> function directly on the corresponding <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> object to generate the sound by supplying the correct audio bus buffer and midi channel buffer.</li>
+</ul>
+<p>The helper function to filter out midi channels is implemented as described below:</p>
+<div class="fragment"><div class="line">    <span class="keyword">static</span> juce::MidiBuffer filterMidiMessagesForChannel (<span class="keyword">const</span> juce::MidiBuffer&amp; input, <span class="keywordtype">int</span> channel)</div>
+<div class="line">    {</div>
+<div class="line">        juce::MidiBuffer output;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> metadata : input)     <span class="comment">// [14]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> message = metadata.getMessage();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (message.getChannel() == channel)</div>
+<div class="line">                output.addEvent (message, metadata.samplePosition);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> output;                  <span class="comment">// [15]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[14]</span> : For every midi channel buffer, we check whether the midi message channel matches the midi channel of the output bus we are looking for and if so we add the <a class="el" href="https://docs.juce.com/master/classMidiMessage.html" title="Encapsulates a MIDI message.">MidiMessage</a> to a newly-created <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a>.</li>
+<li><span class="comment">[15]</span> : When we have iterated over all midi messages in all midi channels, we return with a buffer containing only the midi messages of the selected channel.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_plugin_examples_surround"></a>
+The Surround Plugin</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/SurroundTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/SurroundTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>The surround utility is a plugin that monitors incoming signal on individual channels including surround configurations and allows you to send ping sine waves to the channel of your choice.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Plugin examples_files/tutorial_plugin_examples_surround_screenshot1.png" alt="">
+<div class="caption">
+Surround plugin window</div></div>
+<h2><a class="anchor" id="tutorial_plugin_examples_surround_implementation"></a>
+Surround Implementation</h2>
+<p>In the <code class="project_code">SurroundProcessor</code> class, we have defined several private member variables to implement our surround behaviour as shown below:</p>
+<div class="fragment"><div class="line">    juce::Array&lt;int&gt; channelActive;</div>
+<div class="line">    juce::Array&lt;float&gt; alphaCoeffs;</div>
+<div class="line">    <span class="keywordtype">int</span> channelClicked;</div>
+<div class="line">    <span class="keywordtype">int</span> sampleOffset;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (SurroundProcessor)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Among these we have an array to keep track of the number of samples in active channels of the plugin and an array to keep track of the alpha coefficients for each channel.</p>
+<p>In the class constructor, we initialise the plugin with two stereo pairs of buses for the input and output respectively by default but the configuration will be changed according to the currently-used bus layout setup.</p>
+<div class="fragment"><div class="line">    SurroundProcessor()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a>(BusesProperties().withInput  (<span class="stringliteral">"Input"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo())</div>
+<div class="line">                                          .withOutput (<span class="stringliteral">"Output"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo()))</div>
+<div class="line">    {}</div>
+</div><!-- fragment --><p>In the <code class="project_code">isBusesLayoutSupported()</code> function, we ensure that the input/output channels are discrete channels <span class="comment">[1]</span> , that the number of input channels is identical to the number of output channels <span class="comment">[2]</span> and that the input buses are enabled <span class="comment">[3]</span> as shown below:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isBusesLayoutSupported (<span class="keyword">const</span> BusesLayout&amp; layouts)<span class="keyword"> const override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> ((! layouts.getMainInputChannelSet() .isDiscreteLayout())                <span class="comment">// [1]</span></div>
+<div class="line">             &amp;&amp; (! layouts.getMainOutputChannelSet().isDiscreteLayout())</div>
+<div class="line">             &amp;&amp; (layouts.getMainInputChannelSet() == layouts.getMainOutputChannelSet()) <span class="comment">// [2]</span></div>
+<div class="line">             &amp;&amp; (! layouts.getMainInputChannelSet().isDisabled()));                     <span class="comment">// [3]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">prepareToPlay()</code> function, we initialise some variables to prepare for subsequent processing like follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> sampleRate, <span class="keywordtype">int</span> samplesPerBlock)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        channelClicked = 0;                                             <span class="comment">// [4]</span></div>
+<div class="line">        sampleOffset = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span> (std::ceil (sampleRate));       <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> numChannels = getChannelCountOfBus (<span class="keyword">true</span>, 0);              <span class="comment">// [6]</span></div>
+<div class="line">        channelActive.resize (numChannels);</div>
+<div class="line">        alphaCoeffs.resize (numChannels);</div>
+<div class="line">        reset();                                                        <span class="comment">// [7]</span></div>
+<div class="line"> </div>
+<div class="line">        triggerAsyncUpdate();                                           <span class="comment">// [8]</span></div>
+<div class="line"> </div>
+<div class="line">        juce::ignoreUnused (samplesPerBlock);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[4]</span> : First, we reset the temporary variable that designates the channel index that is clicked by the user.</li>
+<li><span class="comment">[5]</span> : Then we store the sample rate before processing the block and later on incrementing this temporary variable to keep track of phase with sample offsets.</li>
+<li><span class="comment">[6]</span> : We need to resize the active channels and coefficients arrays to the currently active number of channels for the block.</li>
+<li><span class="comment">[7]</span> : The <code class="project_code">reset()</code> function is called at several places to clear the active channels array as defined later.</li>
+<li><span class="comment">[8]</span> : Finally, we trigger an asynchronous update to the GUI thread and handle the callback later on.</li>
+</ul>
+<p>The <code class="project_code">reset()</code> function is also called in the <code class="project_code">releaseResources()</code> function after the block processing finishes:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> releaseResources()<span class="keyword"> override </span>{ reset(); }</div>
+</div><!-- fragment --><p>The <code class="project_code">reset()</code> function is implemented by setting every channel value to 0 like follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; channel : channelActive)</div>
+<div class="line">            channel = 0;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>As for the asynchronous update of the GUI, we handle the callback by calling the <code class="project_code">updateGUI()</code> function on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorEditor.html" title="Base class for the component that acts as the GUI for an AudioProcessor.">AudioProcessorEditor</a>:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> handleAsyncUpdate()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (<span class="keyword">auto</span>* editor = getActiveEditor())</div>
+<div class="line">            <span class="keywordflow">if</span> (<span class="keyword">auto</span>* surroundEditor = <span class="keyword">dynamic_cast&lt;</span>SurroundEditor*<span class="keyword">&gt;</span> (editor))</div>
+<div class="line">                surroundEditor-&gt;updateGUI();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Since the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> inherits from the ChannelClickListener class defined in the <code class="project_code">SurroundEditor</code> class, we have to override its virtual functions. The <code class="project_code">channelButtonClicked()</code> callback function is triggered when the user clicks on a channel button. It provides the channel index that was pressed and resets the sample offset variable like so:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> channelButtonClicked (<span class="keywordtype">int</span> channelIndex)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        channelClicked = channelIndex;</div>
+<div class="line">        sampleOffset = 0;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <code class="project_code">isChannelActive()</code> helper function returns whether the specified channel is active by checking whether the active channel array still has samples to process:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isChannelActive (<span class="keywordtype">int</span> channelIndex)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> channelActive[channelIndex] &gt; 0;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, we perform the actual processing in the <code class="project_code">processBlock()</code> function as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> ch = 0; ch &lt; buffer.getNumChannels(); ++ch)                   <span class="comment">// [9]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>&amp; channelTime = channelActive.getReference (ch);</div>
+<div class="line">            <span class="keyword">auto</span>&amp; alpha = alphaCoeffs.getReference (ch);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> j = 0; j &lt; buffer.getNumSamples(); ++j)                   <span class="comment">// [10]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span> sample = buffer.getReadPointer (ch)[j];</div>
+<div class="line">                alpha = (0.8f * alpha) + (0.2f * sample);</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">if</span> (std::abs (alpha) &gt;= 0.1f)                                   <span class="comment">// [11]</span></div>
+<div class="line">                    channelTime = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span> (getSampleRate() / 2.0);</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            channelTime = juce::jmax (0, channelTime - buffer.getNumSamples()); <span class="comment">// [12]</span></div>
+<div class="line">        }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[9]</span> : For each channel in the audio buffer, we get a reference to the active channel countdown samples and the alpha coefficient values.</li>
+<li><span class="comment">[10]</span> : Then for every sample in the buffer block, we get the input sample value of the channel and calculate the alpha coefficient using the formula <span style="font-family: times; font-style: italic">alpha[i] = ((1 - x) * sample) + (x * alpha[i - 1])</span> where <span style="font-family: times; font-style: italic">x = 0.8</span> in this case.</li>
+<li><span class="comment">[11]</span> : If the alpha coefficient is greater than or equals to a certain threshold in this case 0.1, we set the countdown samples for that specific channel to half of the sample rate.</li>
+<li><span class="comment">[12]</span> : We also make sure to subtract the number of samples in the current block from the number of samples in the countdown.</li>
+</ul>
+<div class="fragment"><div class="line">        <span class="keyword">auto</span> fillSamples = juce::jmin (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span> (std::ceil (getSampleRate())) - sampleOffset,</div>
+<div class="line">                                       buffer.getNumSamples());                 <span class="comment">// [13]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (juce::isPositiveAndBelow (channelClicked, buffer.getNumChannels())) <span class="comment">// [14]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>* channelBuffer = buffer.getWritePointer (channelClicked);</div>
+<div class="line">            <span class="keyword">auto</span> freq = (float) (440.0 / getSampleRate());</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; fillSamples; ++i)                              <span class="comment">// [15]</span></div>
+<div class="line">                channelBuffer[i] += std::sin (2.0f * juce::MathConstants&lt;float&gt;::pi * freq * <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (sampleOffset++));</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[13]</span> : Next we calculate the number of output samples to fill by taking the smallest number of the two from the sample offset and the number of samples in the block.</li>
+<li><span class="comment">[14]</span> : Then we can check whether the channel index clicked is valid and get the write pointer for the correct channel buffer.</li>
+<li><span class="comment">[15]</span> : Finally we calculate the frequency of the sine wave by dividing the A4 frequency by the sample rate. Then for every sample to fill, we produce a sine wave with appropriate frequency and phase offset using the sample offset variable that we increment after the assignment for the next sample.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_plugin_examples_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have examined some audio/midi plugin examples. In particular, we have:</p>
+<ul>
+<li>Built a simple arpeggiator to create interesting musical patterns.</li>
+<li>Built a noise gate to filter out unwanted noise.</li>
+<li>Built a synthesiser with multiple outputs.</li>
+<li>Built a surround compatible plugin to expand the channel count.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_plugin_examples_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_create_projucer_basic_plugin.html">Tutorial: Create a basic Audio/MIDI plugin, Part 1: Setting up</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_code_basic_plugin.html">Tutorial: Create a basic Audio/MIDI plugin, Part 2: Coding your plug-in</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_midi_message.html">Tutorial: Create MIDI data</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_handling_midi_events.html">Tutorial: Handling MIDI events</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_processor_graph.html">Tutorial: Cascading plug-in effects</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Plugin examples_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

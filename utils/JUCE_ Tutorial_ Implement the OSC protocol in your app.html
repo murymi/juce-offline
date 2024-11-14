@@ -1,0 +1,535 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0062)https://docs.juce.com/master/tutorial_osc_sender_receiver.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Implement the OSC protocol in your app</title>
+<link href="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/css">
+<script src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Implement the OSC protocol in your app</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_demo_project">The demo projects</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_osc_sender">OSC Sender</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_osc_sender_implementation">OSC Sender Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_osc_receiver">OSC Receiver</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_osc_receiver_implementation">OSC Receiver Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_osc_monitor">OSC Monitor</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_osc_monitor_implementation">OSC Monitor Implementation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_osc_sender_receiver.html#tutorial_osc_sender_receiver_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Learn how to harness the Open Sound Control protocol to connect several applications together over a network. Send and receive interaction data between applications.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classOSCSender.html" title="An OSC message sender.">OSCSender</a>, <a class="el" href="https://docs.juce.com/master/classOSCReceiver.html" title="A class for receiving OSC data.">OSCReceiver</a>, <a class="el" href="https://docs.juce.com/master/classOSCReceiver_1_1Listener.html" title="A class for receiving OSC data from an OSCReceiver.">OSCReceiver::Listener</a>, <a class="el" href="https://docs.juce.com/master/classOSCReceiver_1_1ListenerWithOSCAddress.html" title="A class for receiving only those OSC messages from an OSCReceiver that match a given OSC address.">OSCReceiver::ListenerWithOSCAddress</a>, <a class="el" href="https://docs.juce.com/master/classOSCMessage.html" title="An OSC Message.">OSCMessage</a>, <a class="el" href="https://docs.juce.com/master/classOSCBundle.html" title="An OSC bundle.">OSCBundle</a></p>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_getting_started"></a>
+Getting started</h1>
+<p>There are several demo projects to accompany this tutorial. Download links to these projects are provided in the relevant sections of the tutorial.</p>
+<p>If you need help with this step in each of these sections, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_demo_project"></a>
+The demo projects</h1>
+<p>The demo projects provided with this tutorial present different applications necessary for OSC interactions. In summary, these applications are:</p>
+<ul>
+<li>OSC Sender: The sender application contains a rotary knob and sends information out to other instances.</li>
+<li>OSC Receiver: The receiver application connects to the sender instance and receives the information to process and display.</li>
+<li>OSC Monitor: The monitor application also connects to the sender instance but monitors and logs the interactions more precisely.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Only one sender and one receiver/monitor application should be open at the same time for this tutorial to function properly.</dd>
+<dd>
+The code presented here is broadly similar to the OSC demo apps from the JUCE Examples.</dd></dl>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_osc_sender"></a>
+OSC Sender</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/OSCSenderTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/OSCSenderTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>When completed, the OSC sender application will display a single rotary knob that we can interact with when launched:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/tutorial_osc_sender_receiver_screenshot1.png" alt="">
+<div class="caption">
+OSC sender app window</div></div>
+<h2><a class="anchor" id="tutorial_osc_sender_receiver_osc_sender_implementation"></a>
+OSC Sender Implementation</h2>
+<p>Let's start by implementing the sender application.</p>
+<p>In the <code class="project_code">MainContentComponent</code> class, start by declaring private member variables for this application like so:</p>
+<div class="fragment"><div class="line">    juce::Slider rotaryKnob;    <span class="comment">// [1]</span></div>
+<div class="line">    juce::OSCSender sender;     <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Add a <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object to capture user interactions <span class="comment">[1]</span> and an <a class="el" href="https://docs.juce.com/master/classOSCSender.html" title="An OSC message sender.">OSCSender</a> object to connect to a receiver later on <span class="comment">[2]</span> .</p>
+<p>In the class constructor, set the slider parameters and attempt to connect to the network like follows:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        rotaryKnob.setRange (0.0, 1.0);</div>
+<div class="line">        rotaryKnob.setSliderStyle (juce::Slider::RotaryVerticalDrag);</div>
+<div class="line">        rotaryKnob.setTextBoxStyle (juce::Slider::TextBoxBelow, <span class="keyword">true</span>, 150, 25);</div>
+<div class="line">        rotaryKnob.setBounds (10, 10, 180, 180);</div>
+<div class="line">        addAndMakeVisible (rotaryKnob);             <span class="comment">// [3]</span></div>
+</div><!-- fragment --> <div class="fragment"><div class="line">        <span class="comment">// specify here where to send OSC messages to: host URL and UDP port number</span></div>
+<div class="line">        <span class="keywordflow">if</span> (! sender.connect (<span class="stringliteral">"127.0.0.1"</span>, 9001))   <span class="comment">// [4]</span></div>
+<div class="line">            showConnectionErrorMessage (<span class="stringliteral">"Error: could not connect to UDP port 9001."</span>);</div>
+<div class="line"> </div>
+<div class="line">        setSize (200, 200);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[3]</span> : Set the range, style and bounds of the slider and add the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> to this class.</li>
+<li><span class="comment">[4]</span> : Here we attempt to connect to the <b>localhost</b> or IP address "127.0.0.1" on UDP port number 9001 by calling the <code class="project_code">connect()</code> function on the <a class="el" href="https://docs.juce.com/master/classOSCSender.html" title="An OSC message sender.">OSCSender</a> object. If the connection fails, we call the private function <code class="project_code">showConnectionErrorMessage()</code> declared later to display the error message to the user.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>For the purpose of this tutorial, we connect to the local network of our development machine on an arbitrary port number that we specify later on in the receiver.</dd></dl>
+<p>Next, implement the <a class="el" href="https://docs.juce.com/master/classSlider.html#a680d007f6a824a28a60aa05b4045e794" title="You can assign a lambda to this callback object to have it called when the slider value is changed.">Slider::onValueChange</a> callback for the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object to send the OSC message to the receiver application like this:</p>
+<div class="fragment"><div class="line">        rotaryKnob.onValueChange = [<span class="keyword">this</span>]</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// create and send an OSC message with an address and a float value:</span></div>
+<div class="line">            <span class="keywordflow">if</span> (! sender.send (<span class="stringliteral">"/juce/rotaryknob"</span>, (<span class="keywordtype">float</span>) rotaryKnob.getValue()))</div>
+<div class="line">                showConnectionErrorMessage (<span class="stringliteral">"Error: could not send OSC message."</span>);</div>
+<div class="line">        };</div>
+</div><!-- fragment --><p>In the lambda function, send the OSC message using the <code class="project_code">send()</code> function on the <a class="el" href="https://docs.juce.com/master/classOSCSender.html" title="An OSC message sender.">OSCSender</a> object with the address and the rotary knob value <span class="comment">[5]</span> . The address provided here as "/juce/rotaryknob" allows us to classify messages in the receiver later on. If the message fails to send, we call the same helper function <code class="project_code">showConnectionErrorMessage()</code> to display the error.</p>
+<p>We implement this function by displaying the error text in a dialog box asynchronously using the function <code class="project_code"><a class="el" href="https://docs.juce.com/master/classAlertWindow.html#abf9c608d6e03ddf828fa9629cff1418b" title="Shows a dialog box that just has a message and a single button to get rid of it.">AlertWindow::showMessageBoxAsync()</a></code> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> showConnectionErrorMessage (<span class="keyword">const</span> juce::String&amp; messageText)</div>
+<div class="line">    {</div>
+<div class="line">        juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,</div>
+<div class="line">                                                <span class="stringliteral">"Connection error"</span>,</div>
+<div class="line">                                                messageText,</div>
+<div class="line">                                                <span class="stringliteral">"OK"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The sender implementation is now complete.</p>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">OSCSenderTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_osc_receiver"></a>
+OSC Receiver</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/OSCReceiverTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/OSCReceiverTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>When completed, the OSC receiver application will display a single rotary knob that we cannot interact with when launched:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/tutorial_osc_sender_receiver_screenshot2.png" alt="">
+<div class="caption">
+OSC receiver app window</div></div>
+<h2><a class="anchor" id="tutorial_osc_sender_receiver_osc_receiver_implementation"></a>
+OSC Receiver Implementation</h2>
+<p>To implement the receiver, simply declare a <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object in <code class="project_code">MainContentComponent</code> class to reflect the changes made with the sender rotary knob:</p>
+<div class="fragment"><div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::Slider rotaryKnob;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Instead of declaring an <a class="el" href="https://docs.juce.com/master/classOSCSender.html" title="An OSC message sender.">OSCSender</a> object as a member like in the sender application, we inherit this time from <a class="el" href="https://docs.juce.com/master/classOSCReceiver.html" title="A class for receiving OSC data.">OSCReceiver</a> to implement the MainContentComponent as a subclass <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                               <span class="keyword">private</span> juce::OSCReceiver, <span class="comment">// [1]</span></div>
+<div class="line">                               <span class="keyword">private</span> juce::OSCReceiver::ListenerWithOSCAddress&lt;juce::OSCReceiver::MessageLoopCallback&gt; <span class="comment">// [2]</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>Also we need to inherit from OSCReceiver::ListenerWithOSCAddress&lt;OSCReceiver::MessageLoopCallback&gt; in order to receive callbacks when messages are received <span class="comment">[2]</span> .</p>
+<p>In the class constructor, set the same parameters for the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object as in the sender application:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        rotaryKnob.setRange (0.0, 1.0);</div>
+<div class="line">        rotaryKnob.setSliderStyle (juce::Slider::RotaryVerticalDrag);</div>
+<div class="line">        rotaryKnob.setTextBoxStyle (juce::Slider::TextBoxBelow, <span class="keyword">true</span>, 150, 25);</div>
+<div class="line">        rotaryKnob.setBounds (10, 10, 180, 180);</div>
+<div class="line">        rotaryKnob.setInterceptsMouseClicks (<span class="keyword">false</span>, <span class="keyword">false</span>);</div>
+<div class="line">        addAndMakeVisible (rotaryKnob);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// specify here on which UDP port number to receive incoming OSC messages</span></div>
+<div class="line">        <span class="keywordflow">if</span> (! connect (9001))                       <span class="comment">// [3]</span></div>
+<div class="line">            showConnectionErrorMessage (<span class="stringliteral">"Error: could not connect to UDP port 9001."</span>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// tell the component to listen for OSC messages matching this address:</span></div>
+<div class="line">        addListener (<span class="keyword">this</span>, <span class="stringliteral">"/juce/rotaryknob"</span>);     <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        setSize (200, 200);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>As a subclass to <a class="el" href="https://docs.juce.com/master/classOSCReceiver.html" title="A class for receiving OSC data.">OSCReceiver</a>, directly connect to the correct port number to receive messages <span class="comment">[3]</span> and register this class as a listener to itself by providing the address to listen to <span class="comment">[4]</span> .</p>
+<dl class="section warning"><dt>Warning</dt><dd>Make sure that the port number and the OSC address match with the sender application.</dd></dl>
+<p>When an <a class="el" href="https://docs.juce.com/master/classOSCMessage.html" title="An OSC Message.">OSCMessage</a> object is received, the <code class="project_code">oscMessageReceived()</code> callback function is called:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> oscMessageReceived (<span class="keyword">const</span> juce::OSCMessage&amp; message)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (message.size() == 1 &amp;&amp; message[0].isFloat32())                              <span class="comment">// [5]</span></div>
+<div class="line">            rotaryKnob.setValue (juce::jlimit (0.0f, 10.0f, message[0].getFloat32()));  <span class="comment">// [6]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Override this function by first checking the size of the message and the value type <span class="comment">[5]</span> . Then set the value of the rotary knob by making sure that the range conforms to the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> range <span class="comment">[6]</span> .</p>
+<p>Implement the same error logging function as the sender application in case the connection fails:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> showConnectionErrorMessage (<span class="keyword">const</span> juce::String&amp; messageText)</div>
+<div class="line">    {</div>
+<div class="line">        juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,</div>
+<div class="line">                                                <span class="stringliteral">"Connection error"</span>,</div>
+<div class="line">                                                messageText,</div>
+<div class="line">                                                <span class="stringliteral">"OK"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>You should now be able to control the receiver knob by moving the sender knob when both applications are launched.</p>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">OSCReceiverTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_osc_monitor"></a>
+OSC Monitor</h1>
+<p>Download the demo project for this section here: <a href="https://docs.juce.com/tutorials/PIPs/OSCMonitorTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/OSCMonitorTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>When completed, the OSC monitor application will display a window that logs the interactions. When first launched without a sender instance, the monitor application cannot connect and the window should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/tutorial_osc_sender_receiver_screenshot3.png" alt="">
+<div class="caption">
+OSC monitor app window</div></div>
+<p>If launched while a sender instance is running, the monitor application will be able to connect to it and the window should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/tutorial_osc_sender_receiver_screenshot4.png" alt="">
+<div class="caption">
+OSC monitor app window</div></div>
+<h2><a class="anchor" id="tutorial_osc_sender_receiver_osc_monitor_implementation"></a>
+OSC Monitor Implementation</h2>
+<p>Let's implement a different type of receiver that displays the <a class="el" href="https://docs.juce.com/master/classOSCMessage.html" title="An OSC Message.">OSCMessage</a> objects as text.</p>
+<p>In the <code class="project_code">MainContentComponent</code> class, we can see that the class inherits from the <a class="el" href="https://docs.juce.com/master/classOSCReceiver_1_1Listener.html" title="A class for receiving OSC data from an OSCReceiver.">OSCReceiver::Listener</a> class <span class="comment">[1]</span> . Notice that we do not inherit from <a class="el" href="https://docs.juce.com/master/classOSCReceiver_1_1ListenerWithOSCAddress.html" title="A class for receiving only those OSC messages from an OSCReceiver that match a given OSC address.">OSCReceiver::ListenerWithOSCAddress</a> as we want to receive all the messages sent regardless of the address:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                               <span class="keyword">private</span> juce::OSCReceiver::Listener&lt;juce::OSCReceiver::MessageLoopCallback&gt; <span class="comment">// [1]</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>Declare OSCLogListBox and <a class="el" href="https://docs.juce.com/master/classOSCReceiver.html" title="A class for receiving OSC data.">OSCReceiver</a> objects as private member variables <span class="comment">[2]</span> and define a temporary int variable to store the port number <span class="comment">[3]</span> as shown below:</p>
+<div class="fragment"><div class="line">    OSCLogListBox oscLogListBox;        <span class="comment">// [2]</span></div>
+<div class="line">    juce::OSCReceiver oscReceiver;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">int</span> currentPortNumber = -1;         <span class="comment">// [3]</span></div>
+</div><!-- fragment --><p>In the constructor, set corresponding parameters as follows:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">        oscLogListBox.setBounds (0, 60, 700, 340);  <span class="comment">// [4]</span></div>
+<div class="line">        addAndMakeVisible (oscLogListBox);</div>
+<div class="line"> </div>
+<div class="line">        oscReceiver.addListener (<span class="keyword">this</span>);             <span class="comment">// [5]</span></div>
+<div class="line">        oscReceiver.registerFormatErrorHandler ([<span class="keyword">this</span>] (<span class="keyword">const</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> dataSize) <span class="comment">// [6]</span></div>
+<div class="line">                                                {</div>
+<div class="line">                                                    oscLogListBox.addInvalidOSCPacket (data, dataSize);</div>
+<div class="line">                                                });</div>
+<div class="line"> </div>
+<div class="line">        setSize (700, 400);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[4]</span> : Set the bounds to the OSCLogListBox and make the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> visible.</li>
+<li><span class="comment">[5]</span> : Add this class as a listener to the <a class="el" href="https://docs.juce.com/master/classOSCReceiver.html" title="A class for receiving OSC data.">OSCReceiver</a> object to receive callbacks.</li>
+<li><span class="comment">[6]</span> : Install a custom error handler format on the <a class="el" href="https://docs.juce.com/master/classOSCReceiver.html" title="A class for receiving OSC data.">OSCReceiver</a> by using a lambda function. Here we provide a pointer to the data that failed to parse and its size to the OSCLogListBox object.</li>
+</ul>
+<p>When a button is clicked on the user interface of the monitor application, we call the corresponding function that we implement in the next step.</p>
+<p>If the user clicks on the "connect" button, it should connect/disconnect depending on the application state <span class="comment">[7]</span> . In addition, every time the "connect" button is pressed, we call the <code class="project_code">updateConnectionStatusLabel()</code> helper function <span class="comment">[8]</span> as shown here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> connectButtonClicked()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (! isConnected())            <span class="comment">// [7]</span></div>
+<div class="line">            connect();</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            disconnect();</div>
+<div class="line"> </div>
+<div class="line">        updateConnectionStatusLabel();  <span class="comment">// [8]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>To update the status label, simply change the text and colour depending on the connection state as described below:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> updateConnectionStatusLabel()</div>
+<div class="line">    {</div>
+<div class="line">        juce::String text = <span class="stringliteral">"Status: "</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (isConnected())</div>
+<div class="line">            text += <span class="stringliteral">"Connected to UDP port "</span> + juce::String (currentPortNumber);</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            text += <span class="stringliteral">"Disconnected"</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> textColour = isConnected() ? juce::Colours::green : juce::Colours::red;</div>
+</div><!-- fragment --><p>To determine the connection state, we check whether the port number was changed from its default value of -1:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isConnected()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> currentPortNumber != -1;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Otherwise, when the user presses the "clear" button, simply send a clear instruction to the OSCLogListBox and reset the screen log:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> clearButtonClicked()</div>
+<div class="line">    {</div>
+<div class="line">        oscLogListBox.clear();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>To connect to the sender application, let's implement the <code class="project_code">connect()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> connect()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> portToConnect = portNumberField.getText().getIntValue();   <span class="comment">// [9]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (! isValidOscPort (portToConnect))                           <span class="comment">// [10]</span></div>
+<div class="line">        {</div>
+<div class="line">            handleInvalidPortNumberEntered();</div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (oscReceiver.connect (portToConnect))                        <span class="comment">// [11]</span></div>
+<div class="line">        {</div>
+<div class="line">            currentPortNumber = portToConnect;</div>
+<div class="line">            connectButton.setButtonText (<span class="stringliteral">"Disconnect"</span>);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span>                                                            <span class="comment">// [12]</span></div>
+<div class="line">        {</div>
+<div class="line">            handleConnectError (portToConnect);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[9]</span> : Convert the port number text to an int value and store it in a temporary variable.</li>
+<li><span class="comment">[10]</span> : If the port number is invalid, we display a error message using the <code class="project_code">handleInvalidPortNumberEntered()</code> helper function.</li>
+<li><span class="comment">[11]</span> : Otherwise, this means that the port number is valid and we can attempt to connect. If the connection is successful, we update the temporary port number variable to the correct value and change the "connect" button text.</li>
+<li><span class="comment">[12]</span> : If the connection fails, call the corresponding <code class="project_code">handleConnectError()</code> helper function to display the error.</li>
+</ul>
+<p>In order to verify that the port number is valid, check if the range corresponds to <span style="font-family: times; font-style: italic">1 .. 65535</span> inclusive:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isValidOscPort (<span class="keywordtype">int</span> port)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> port &gt; 0 &amp;&amp; port &lt; 65536;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>To disconnect from the network, check if the disconnection was successful and if so, reset the port number to -1 and change the "connect" button text <span class="comment">[13]</span> . Otherwise, call the <code class="project_code">handleDisconnectError()</code> helper function <span class="comment">[14]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> disconnect()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (oscReceiver.disconnect())   <span class="comment">// [13]</span></div>
+<div class="line">        {</div>
+<div class="line">            currentPortNumber = -1;</div>
+<div class="line">            connectButton.setButtonText (<span class="stringliteral">"Connect"</span>);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">            handleDisconnectError();    <span class="comment">// [14]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>When an <a class="el" href="https://docs.juce.com/master/classOSCMessage.html" title="An OSC Message.">OSCMessage</a> is received, the following callback function is called and we transfer the content of the message to the OSCLogListBox:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> oscMessageReceived (<span class="keyword">const</span> juce::OSCMessage&amp; message)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        oscLogListBox.addOSCMessage (message);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>If an <a class="el" href="https://docs.juce.com/master/classOSCBundle.html" title="An OSC bundle.">OSCBundle</a> is received, a different callback function is called and we transfer the content of the bundle to the OSCLogListBox:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> oscBundleReceived (<span class="keyword">const</span> juce::OSCBundle&amp; bundle)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        oscLogListBox.addOSCBundle (bundle);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Complete the implementation by showing message box for each type of error:</p>
+<div class="fragment"><div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keywordtype">void</span> handleConnectError (<span class="keywordtype">int</span> failedPort)</div>
+<div class="line">    {</div>
+<div class="line">        juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,</div>
+<div class="line">                                                <span class="stringliteral">"OSC Connection error"</span>,</div>
+<div class="line">                                                <span class="stringliteral">"Error: could not connect to port "</span> + juce::String (failedPort),</div>
+<div class="line">                                                <span class="stringliteral">"OK"</span>);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keywordtype">void</span> handleDisconnectError()</div>
+<div class="line">    {</div>
+<div class="line">        juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,</div>
+<div class="line">                                                <span class="stringliteral">"Unknown error"</span>,</div>
+<div class="line">                                                <span class="stringliteral">"An unknown error occured while trying to disconnect from UDP port."</span>,</div>
+<div class="line">                                                <span class="stringliteral">"OK"</span>);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keywordtype">void</span> handleInvalidPortNumberEntered()</div>
+<div class="line">    {</div>
+<div class="line">        juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,</div>
+<div class="line">                                                <span class="stringliteral">"Invalid port number"</span>,</div>
+<div class="line">                                                <span class="stringliteral">"Error: you have entered an invalid UDP port number."</span>,</div>
+<div class="line">                                                <span class="stringliteral">"OK"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Now when the sender rotary knob is interacted with, the monitor application will log all the messages received and the window should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/tutorial_osc_sender_receiver_screenshot5.png" alt="">
+<div class="caption">
+OSC monitor app window</div></div>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">OSCMonitorTutorial_02.h</code> file of the demo project.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the sender and receiver applications to handle different OSC messages using other GUI components such as <a class="el" href="https://docs.juce.com/master/classToggleButton.html" title="A button that can be toggled on/off.">ToggleButton</a> or <a class="el" href="https://docs.juce.com/master/classComboBox.html" title="A component that lets the user choose from a drop-down list of choices.">ComboBox</a> objects. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to implement the OSC protocol to send information between application instances. In particular, we have:</p>
+<ul>
+<li>Sent OSC messages using a rotary knob in the sender application.</li>
+<li>Connected to the receiver application and handled the corresponding messages.</li>
+<li>Displayed the OSC interactions in a verbose manner using the monitor application.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_osc_sender_receiver_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_slider_values.html">Tutorial: The Slider class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html">Tutorial: Customise the look and feel of your app</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Implement the OSC protocol in your app_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

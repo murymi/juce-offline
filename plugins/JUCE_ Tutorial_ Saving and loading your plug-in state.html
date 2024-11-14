@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0075)https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Saving and loading your plug-in state</title>
+<link href="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/css">
+<script src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Saving and loading your plug-in state</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_gain_processor">The gain processor</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_configuring_params">Configuring the parameters</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_gain_processing">Performing the gain processing</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_storing_params">Storing and retrieving parameters</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_gain_editor">The gain editor</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_component_attach">Component attachments</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_programatic_parameters">Adding Parameters Programatically</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_deprecated_methods">Deprecated Methods</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html#tutorial_audio_processor_value_tree_state_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Automatic management of your plug-in parameters. Storing and accessing parameters becomes a breeze and, in particular, makes building effective user interfaces much easier.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a>, <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a>, <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a></p>
+<h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/AudioProcessorValueTreeStateTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/AudioProcessorValueTreeStateTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<p>You should also know how to build an audio plug-in using JUCE and load this into your preferred audio host (such as a Digital Audio Workstation). See <a class="el" href="https://docs.juce.com/master/tutorial_create_projucer_basic_plugin.html">Tutorial: Create a basic Audio/MIDI plugin, Part 1: Setting up</a> for an introduction. Ideally, you should also have read <a class="el" href="https://docs.juce.com/master/tutorial_audio_parameter.html">Tutorial: Adding plug-in parameters</a>, as an introduction to audio processor parameters.</p>
+<h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_demo_project"></a>
+The demo project</h1>
+<p>The demo project is loosely based on the <em>GainPlugin</em> project in the <code class="filename">JUCE/examples/Plugins</code> directory. This plugin changes the gain of an incoming signal using a single parameter. In addition to this, it also has a phase invert* parameter to invert the phase of the incoming signal.</p>
+<h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_gain_processor"></a>
+The gain processor</h1>
+<p>Most of the code in the <code class="project_code">TutorialProcessor</code> class is the same as that generated by the Projucer when you use the <b class="onscreen_text">Audio Plug-In</b> project template. For simplicity, we have bundled the processor code into a single <code class="filename">.h</code> file rather than being split across a <code class="filename">.cpp</code> and an <code class="filename">.h</code> file. The editor for the processor is in the <code class="project_code">GenericEditor</code> class.</p>
+<p>There are several advantages to using the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> class for managing your plug-in's parameters:</p><ul>
+<li>The <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> class inherently provides undo support.</li>
+<li><a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> objects already have support for serialising and deserialising (to XML).</li>
+<li><a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> objects can have listeners attached to them. This means that the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> class can almost automatically connect to sliders and buttons to keep the state of the UI and the processor up-to-date in a thread safe manner.</li>
+</ul>
+<p>To use an <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> object, you can store one in your processor class:</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AudioProcessorValueTreeState parameters;</div>
+</div><!-- fragment --><p>You may store your <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> object elsewhere but you must be careful that each <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> object must be:</p><ul>
+<li>attached to only one processor; and</li>
+<li>have the same lifetime as the processor (as they will have dependencies on each other).</li>
+</ul>
+<p>Storing the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> object in the processor class makes it easier to ensure that you satisfy these requirements.</p>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> constructor requires a reference to the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> subclass that it will be attached to, a pointer to an <a class="el" href="https://docs.juce.com/master/classUndoManager.html" title="Manages a list of undo/redo commands.">UndoManager</a> object, an <a class="el" href="https://docs.juce.com/master/classIdentifier.html" title="Represents a string identifier, designed for accessing properties by name.">Identifier</a> for the <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> and an <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1ParameterLayout.html" title="A class to contain a set of RangedAudioParameters and AudioProcessorParameterGroups containing Ranged...">AudioProcessorValueTreeState::ParameterLayout</a> containing the parameters to manage.</p>
+<div class="fragment"><div class="line"><a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html">AudioProcessorValueTreeState</a> (<a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a>&amp; processorToConnectTo,</div>
+<div class="line">                              <a class="code hl_class" href="https://docs.juce.com/master/classUndoManager.html">UndoManager</a>* undoManagerToUse,</div>
+<div class="line">                              <span class="keyword">const</span> juce::Identifier&amp; valueTreeType,</div>
+<div class="line">                              ParameterLayout parameterLayout);</div>
+<div class="ttc" id="aclassAudioProcessorValueTreeState_html"><div class="ttname"><a href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html">AudioProcessorValueTreeState</a></div><div class="ttdoc">This class contains a ValueTree that is used to manage an AudioProcessor's entire state.</div><div class="ttdef"><b>Definition</b> juce_AudioProcessorValueTreeState.h:124</div></div>
+<div class="ttc" id="aclassAudioProcessor_html"><div class="ttname"><a href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a></div><div class="ttdoc">Base class for audio processing classes or plugins.</div><div class="ttdef"><b>Definition</b> juce_AudioProcessor.h:60</div></div>
+<div class="ttc" id="aclassUndoManager_html"><div class="ttname"><a href="https://docs.juce.com/master/classUndoManager.html">UndoManager</a></div><div class="ttdoc">Manages a list of undo/redo commands.</div><div class="ttdef"><b>Definition</b> juce_UndoManager.h:64</div></div>
+</div><!-- fragment --><p>In this case, we will use a <code class="code">nullptr</code> value for the <a class="el" href="https://docs.juce.com/master/classUndoManager.html" title="Manages a list of undo/redo commands.">UndoManager</a> object as we're not going to implement undo support in this tutorial. The <code class="code">nullptr</code> value indicates that we do not want to use undo support.</p>
+<h2><a class="anchor" id="tutorial_audio_processor_value_tree_state_configuring_params"></a>
+Configuring the parameters</h2>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1ParameterLayout.html" title="A class to contain a set of RangedAudioParameters and AudioProcessorParameterGroups containing Ranged...">AudioProcessorValueTreeState::ParameterLayout</a> parameter of the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> contains the parameters of our plug-in. The <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> can manage any parameters derived from <a class="el" href="https://docs.juce.com/master/classRangedAudioParameter.html" title="This abstract base class is used by some AudioProcessorParameter helper classes.">RangedAudioParameter</a>, and the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1ParameterLayout.html" title="A class to contain a set of RangedAudioParameters and AudioProcessorParameterGroups containing Ranged...">AudioProcessorValueTreeState::ParameterLayout</a> constructor can take a variable number of <a class="el" href="https://docs.juce.com/master/classRangedAudioParameter.html" title="This abstract base class is used by some AudioProcessorParameter helper classes.">RangedAudioParameter</a> subclasses or AudioProcessorParameterGroups containing RangedAudioParameters.</p>
+<p>Parameters and groups are passed using std::unique_ptr as the APVTS will take ownership of the parameters and groups.</p>
+<p>JUCE's built-in parameter types, the same ones we used in <a class="el" href="https://docs.juce.com/master/tutorial_audio_parameter.html">Tutorial: Adding plug-in parameters</a>, are subclasses of <a class="el" href="https://docs.juce.com/master/classRangedAudioParameter.html" title="This abstract base class is used by some AudioProcessorParameter helper classes.">RangedAudioParameter</a>, so we can use them here too.</p>
+<div class="fragment"><div class="line">    TutorialProcessor()</div>
+<div class="line">        : parameters (*this, nullptr, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classIdentifier.html">Identifier</a> (<span class="stringliteral">"APVTSTutorial"</span>),</div>
+<div class="line">                      {</div>
+<div class="line">                          std::make_unique&lt;juce::AudioParameterFloat&gt; (<span class="stringliteral">"gain"</span>,            <span class="comment">// parameterID</span></div>
+<div class="line">                                                                       <span class="stringliteral">"Gain"</span>,            <span class="comment">// parameter name</span></div>
+<div class="line">                                                                       0.0f,              <span class="comment">// minimum value</span></div>
+<div class="line">                                                                       1.0f,              <span class="comment">// maximum value</span></div>
+<div class="line">                                                                       0.5f),             <span class="comment">// default value</span></div>
+<div class="line">                          std::make_unique&lt;juce::AudioParameterBool&gt; (<span class="stringliteral">"invertPhase"</span>,      <span class="comment">// parameterID</span></div>
+<div class="line">                                                                      <span class="stringliteral">"Invert Phase"</span>,     <span class="comment">// parameter name</span></div>
+<div class="line">                                                                      <span class="keyword">false</span>)              <span class="comment">// default value</span></div>
+<div class="line">                      })</div>
+<div class="line">    {</div>
+</div><!-- fragment --><p>Adding your parameters to an <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> automatically adds them to the attached <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> too.</p>
+<p>The <em>parameter ID</em> should be a unique identifier for this parameter. Think of this like a variable name; it can contain alphanumeric characters and underscores, but no spaces. The <em>parameter name</em> is the name that will be displayed on the screen.</p>
+<h2><a class="anchor" id="tutorial_audio_processor_value_tree_state_gain_processing"></a>
+Performing the gain processing</h2>
+<p>To help avoid clicks in the signal, we smooth gain changes and changes in signal phase. To do this, we store the previously calculated gain value in our processor <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AudioProcessorValueTreeState parameters;</div>
+<div class="line">    <span class="keywordtype">float</span> previousGain; <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">    std::atomic&lt;float&gt;* phaseParameter = <span class="keyword">nullptr</span>;</div>
+<div class="line">    std::atomic&lt;float&gt;* gainParameter  = <span class="keyword">nullptr</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (TutorialProcessor)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>We also store pointers to our parameters at the end of our constructor to dereference them later on:</p>
+<div class="fragment"><div class="line">        phaseParameter = parameters.getRawParameterValue (<span class="stringliteral">"invertPhase"</span>);</div>
+<div class="line">        gainParameter  = parameters.getRawParameterValue (<span class="stringliteral">"gain"</span>);</div>
+</div><!-- fragment --><p>The changes are initialised in the <code class="project_code">TutorialProcessor::prepareToPlay()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span>, <span class="keywordtype">int</span>)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> phase = *phaseParameter &lt; 0.5f ? 1.0f : -1.0f;</div>
+<div class="line">        previousGain = *gainParameter * phase;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we calculate the phase inversion factor (+1 or -1) and multiply this by the gain, ready for the first processing callback. You can see that we use the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html#a645123ccd146258f28d77b6095169c91" title="Returns a pointer to a floating point representation of a particular parameter which a realtime proce...">AudioProcessorValueTreeState::getRawParameterValue()</a> function to get a pointer to the <code class="code">float</code> value representing the parameter value. We dereference this to get the actual value. The processing is performed in the <code class="project_code">TutorialProcessor::processBlock()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioSampleBuffer&amp; buffer, juce::MidiBuffer&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> phase = *phaseParameter &lt; 0.5f ? 1.0f : -1.0f;</div>
+<div class="line">        <span class="keyword">auto</span> currentGain = *gainParameter * phase;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (juce::approximatelyEqual (currentGain, previousGain))</div>
+<div class="line">        {</div>
+<div class="line">            buffer.applyGain (currentGain);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">            buffer.applyGainRamp (0, buffer.getNumSamples(), previousGain, currentGain);</div>
+<div class="line">            previousGain = currentGain;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here you can see that if the value hasn't changed, then we simply apply a constant gain. If the value has changed, then we apply the gain ramp, then update the <code class="project_code">previousGain</code> value for next time.</p>
+<h2><a class="anchor" id="tutorial_audio_processor_value_tree_state_storing_params"></a>
+Storing and retrieving parameters</h2>
+<p>In addition to providing routines for processing audio you also need to provide methods for storing and retrieving the <em>entire</em> state of your plug-in into a block of memory. This should include the current values of all of your parameters, but it can also include other state information if needed (for example, if your plug-in deals with files, it might store the file paths).</p>
+<p>Using an <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> object to store your plug-in's state makes this really simple as a <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> object can easily be converted to and from XML.</p>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html#a5d79591b367a7c0516e4ef4d1d6c32b2" title="The host will call this method when it wants to save the processor&#39;s internal state.">AudioProcessor::getStateInformation()</a> callback asks your plug-in to store its state into a <a class="el" href="https://docs.juce.com/master/classMemoryBlock.html" title="A class to hold a resizable block of raw data.">MemoryBlock</a> object. To do this using XML via the <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> object the code is simply:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> getStateInformation (juce::MemoryBlock&amp; destData)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> state = parameters.copyState();</div>
+<div class="line">        std::unique_ptr&lt;juce::XmlElement&gt; xml (state.createXml());</div>
+<div class="line">        copyXmlToBinary (*xml, destData);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> object created will have a <em>tag name</em> of "APVTSTutorial", which we used to initialise the <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> object earlier.</p>
+<p>Restoring the state from XML is almost as straightforward:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> setStateInformation (<span class="keyword">const</span> <span class="keywordtype">void</span>* data, <span class="keywordtype">int</span> sizeInBytes)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        std::unique_ptr&lt;juce::XmlElement&gt; xmlState (getXmlFromBinary (data, sizeInBytes));</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (xmlState.get() != <span class="keyword">nullptr</span>)</div>
+<div class="line">            <span class="keywordflow">if</span> (xmlState-&gt;hasTagName (parameters.state.getType()))</div>
+<div class="line">                parameters.replaceState (juce::ValueTree::fromXml (*xmlState));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we include some error checking for safety. We also check that the ValueTree-generated XML is of the correct <a class="el" href="https://docs.juce.com/master/classValueTree.html" title="A powerful tree structure that can be used to hold free-form data, and which can handle its own undo ...">ValueTree</a> <em>type</em> for our plug-in by inspecting the XML element's <em>tag name</em>.</p>
+<h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_gain_editor"></a>
+The gain editor</h1>
+<p>Take a look at the <code class="project_code">GenericEditor</code> class in the project. You might notice that the declaration of the <code class="project_code">GenericEditor</code> class is very simple:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>GenericEditor : <span class="keyword">public</span> juce::AudioProcessorEditor</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>You might expect that we would need to inherit from the <a class="el" href="https://docs.juce.com/master/classSlider.html#a1977aeac9b4363e8ed0cac0ac103055a">Slider::Listener</a> class and the <a class="el" href="https://docs.juce.com/master/classButton_1_1Listener.html" title="Used to receive callbacks when a button is clicked.">Button::Listener</a> class in order to respond to slider and button interaction. But this is again one of the benefits of using the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> class. Instead we can use the <em>attachment</em> classes within the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> class.</p>
+<h2><a class="anchor" id="tutorial_audio_processor_value_tree_state_component_attach"></a>
+Component attachments</h2>
+<p>In fact, as the names of these classes can become very long, we have included a <code class="code">typedef</code> for each of the attachment classes we need:</p>
+<div class="fragment"><div class="line">    <span class="keyword">typedef</span> juce::AudioProcessorValueTreeState::SliderAttachment SliderAttachment;</div>
+<div class="line">    <span class="keyword">typedef</span> juce::AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;</div>
+</div><!-- fragment --><p>Our <code class="project_code">GenericEditor</code> class contains a number of members, including a slider, a toggle button, and some of these attachment objects:</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::AudioProcessorValueTreeState&amp; valueTreeState;</div>
+<div class="line"> </div>
+<div class="line">    juce::Label gainLabel;</div>
+<div class="line">    juce::Slider gainSlider;</div>
+<div class="line">    std::unique_ptr&lt;SliderAttachment&gt; gainAttachment;</div>
+<div class="line"> </div>
+<div class="line">    juce::ToggleButton invertButton;</div>
+<div class="line">    std::unique_ptr&lt;ButtonAttachment&gt; invertAttachment;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>We also need to refer to the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> object so we also keep a reference to that.</p>
+<p>The constructor for our <code class="project_code">GenericEditor</code> class sets up these objects:</p>
+<div class="fragment"><div class="line">    GenericEditor (juce::AudioProcessor&amp; parent, juce::AudioProcessorValueTreeState&amp; vts)</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorEditor.html">AudioProcessorEditor</a> (parent),</div>
+<div class="line">          valueTreeState (vts)</div>
+<div class="line">    {</div>
+<div class="line">        gainLabel.setText (<span class="stringliteral">"Gain"</span>, juce::dontSendNotification);</div>
+<div class="line">        addAndMakeVisible (gainLabel);</div>
+<div class="line"> </div>
+<div class="line">        addAndMakeVisible (gainSlider);</div>
+<div class="line">        gainAttachment.reset (<span class="keyword">new</span> SliderAttachment (valueTreeState, <span class="stringliteral">"gain"</span>, gainSlider));</div>
+<div class="line"> </div>
+<div class="line">        invertButton.setButtonText (<span class="stringliteral">"Invert Phase"</span>);</div>
+<div class="line">        addAndMakeVisible (invertButton);</div>
+<div class="line">        invertAttachment.reset (<span class="keyword">new</span> ButtonAttachment (valueTreeState, <span class="stringliteral">"invertPhase"</span>, invertButton));</div>
+<div class="line"> </div>
+<div class="line">        setSize (paramSliderWidth + paramLabelWidth, juce::jmax (100, paramControlHeight * 2));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>This is called by our processor's <code class="project_code">TutorialProcessor::createEditor()</code> function:</p>
+<div class="fragment"><div class="line">    juce::AudioProcessorEditor* createEditor()<span class="keyword"> override          </span>{ <span class="keywordflow">return</span> <span class="keyword">new</span> GenericEditor (*<span class="keyword">this</span>, parameters); }</div>
+</div><!-- fragment --><p>You may notice that we don't even need to set up the slider's value range. This is done automatically by the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1SliderAttachment.html">SliderAttachment </a> class. All we need to do is pass the <em>attachment</em> constructor the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a>, the <em>parameter ID</em> and the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object that it should attach to.</p>
+<dl class="section note"><dt>Note</dt><dd>We still retain ownership of the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object. You should ensure that the <em>attachment</em> class has the same lifetime as the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object.</dd></dl>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1ButtonAttachment.html">ButtonAttachment </a> class still requires us to provide the button name. (And the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1ComboBoxAttachment.html" title="An object of this class maintains a connection between a ComboBox and a parameter in an AudioProcesso...">AudioProcessorValueTreeState::ComboBoxAttachment</a> class, which can attach to a <a class="el" href="https://docs.juce.com/master/classComboBox.html" title="A component that lets the user choose from a drop-down list of choices.">ComboBox</a> object, requires us to populate the <a class="el" href="https://docs.juce.com/master/classComboBox.html" title="A component that lets the user choose from a drop-down list of choices.">ComboBox</a> manually.)</p>
+<dl class="section attention">
+<dt>Exercises</dt>
+<dd><ul>
+<li>Change the plug-in to support only a 2-channel main bus and add a channel swap parameter that can optionally swap the left and right channels.</li>
+<li>Again using a 2-channel only plug-in, add a balance parameter to balance the left and right channel levels. </li>
+</ul>
+</dd>
+</dl>
+<h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_programatic_parameters"></a>
+Adding Parameters Programatically</h1>
+<p>You can also add parameters (or AudioProcessorParameterGroups) to an <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> programatically, by calling <code>add</code> on it. An example of how to do this is shown below:</p>
+<div class="fragment"><div class="line">juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()</div>
+<div class="line">{</div>
+<div class="line">    juce::AudioProcessorValueTreeState::ParameterLayout params;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; 9; ++i)</div>
+<div class="line">        params.add (std::make_unique&lt;AudioParameterInt&gt; (<a class="code hl_class" href="https://docs.juce.com/master/classString.html">String</a> (i), <a class="code hl_class" href="https://docs.juce.com/master/classString.html">String</a> (i), 0, i, 0));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> params;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">YourAudioProcessor()</div>
+<div class="line">    : parameters (*this, nullptr, <span class="stringliteral">"PARAMETERS"</span>, createParameterLayout())</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="ttc" id="aclassString_html"><div class="ttname"><a href="https://docs.juce.com/master/classString.html">String</a></div><div class="ttdoc">The JUCE String class!</div><div class="ttdef"><b>Definition</b> juce_String.h:68</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_deprecated_methods"></a>
+Deprecated Methods</h1>
+<p>Before JUCE version 5.4 the only way to add parameters to an <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> was to use the now deprecated createAndAddParameter method with many function parameters.</p>
+<p>Code that previously looked like</p>
+<div class="fragment"><div class="line">createAndAddParameter (paramID1, paramName1, ...);</div>
+</div><!-- fragment --><p>can be re-written as</p>
+<div class="fragment"><div class="line"><span class="keyword">using </span>Parameter = juce::AudioProcessorValueTreeState::Parameter;</div>
+<div class="line">createAndAddParameter (std::make_unique&lt;Parameter&gt; (paramID1, paramName1, ...));</div>
+</div><!-- fragment --><p>but using the new <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> constructor described in this tutorial is a much better approach:</p>
+<div class="fragment"><div class="line"><span class="keyword">using </span>Parameter = <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1Parameter.html">AudioProcessorValueTreeState::Parameter</a>;</div>
+<div class="line">YourAudioProcessor()</div>
+<div class="line">    : apvts (*this, nullptr, <span class="stringliteral">"PARAMETERS"</span>, { std::make_unique&lt;Parameter&gt; (paramID1, paramName1, ...),</div>
+<div class="line">                                             std::make_unique&lt;Parameter&gt; (paramID2, paramName2, ...),</div>
+<div class="line">                                             ... })</div>
+<div class="ttc" id="aclassAudioProcessorValueTreeState_1_1Parameter_html"><div class="ttname"><a href="https://docs.juce.com/master/classAudioProcessorValueTreeState_1_1Parameter.html">AudioProcessorValueTreeState::Parameter</a></div><div class="ttdoc">A parameter class that maintains backwards compatibility with deprecated AudioProcessorValueTreeState...</div><div class="ttdef"><b>Definition</b> juce_AudioProcessorValueTreeState.h:459</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_summary"></a>
+Summary</h1>
+<p>In this tutorial we have introduced the <a class="el" href="https://docs.juce.com/master/classAudioProcessorValueTreeState.html" title="This class contains a ValueTree that is used to manage an AudioProcessor&#39;s entire state.">AudioProcessorValueTreeState</a> class and shown how it can help you to:</p>
+<ul>
+<li>Manage your plug-in parameters.</li>
+<li>Store and retrieve your plug-in state using XML.</li>
+<li>Connect your plug-in parameters to buttons and sliders in a threadsafe manner.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_audio_processor_value_tree_state_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_parameter.html">Tutorial: Adding plug-in parameters</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_bus_layouts.html">Tutorial: Configuring the right bus layouts for your plugins</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_value_tree.html">Tutorial: The ValueTree class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_processor_graph.html">Tutorial: Cascading plug-in effects</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Saving and loading your plug-in state_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

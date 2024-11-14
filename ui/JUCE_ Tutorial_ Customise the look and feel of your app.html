@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0070)https://docs.juce.com/master/tutorial_look_and_feel_customisation.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Customise the look and feel of your app</title>
+<link href="./JUCE_ Tutorial_ Customise the look and feel of your app_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Customise the look and feel of your app_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Customise the look and feel of your app_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Customise the look and feel of your app_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Customise the look and feel of your app_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Customise the look and feel of your app_files/css">
+<script src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Customise the look and feel of your app</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_colours">Customising colours</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_custom_lf">Custom look-and-feel</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_drawing">Customising drawing</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_sliders">Slider customisation</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_buttons">Button customisation</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_look_and_feel_customisation.html#tutorial_look_and_feel_customisation_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Customise the drawing of fundamental widgets in your application. Make a custom <em>skin</em> for your application by drawing your own buttons, sliders, and other components.</p>
+<p><span class="headerlabel">Level:</span> Beginner</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a>, <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a>, <a class="el" href="https://docs.juce.com/master/classButton.html" title="A base class for buttons.">Button</a>, <a class="el" href="https://docs.juce.com/master/classPath.html" title="A path is a sequence of lines and curves that may either form a closed shape or be open-ended.">Path</a>, <a class="el" href="https://docs.juce.com/master/classAffineTransform.html" title="Represents a 2D affine-transformation matrix.">AffineTransform</a></p>
+<h1><a class="anchor" id="tutorial_look_and_feel_customisation_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/LookAndFeelCustomisationTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/LookAndFeelCustomisationTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_look_and_feel_customisation_demo_project"></a>
+The demo project</h1>
+<p>The demo project creates a GUI with two buttons and two rotary sliders using the standard JUCE look-and-feel:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/tutorial_look_and_feel_customisation_screenshot1.png" alt="">
+<div class="caption">
+Standard look-and-feel buttons and sliders</div></div>
+<p>The <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class is fundamental to creating customised GUIs in JUCE. Using the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class you can perform simple customisations such as changing the default colours of certain components. But you can also customise the drawing of many types of component. For example, this allows you to create buttons and sliders with a custom appearance.</p>
+<h1><a class="anchor" id="tutorial_look_and_feel_customisation_colours"></a>
+Customising colours</h1>
+<p>When a <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> object is applied to a component, it is applied to that component <em>and</em> its child components (see <a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a>) unless the child components have specifically had a different look-and-feel assigned.</p>
+<p>One thing that you can do with the look-and-feel system is to override specific colours for elements of the standard JUCE components (see <a class="el" href="https://docs.juce.com/master/tutorial_colours.html">Tutorial: Colours in JUCE</a>.) For example, if you add the following line to the <code class="project_code">MainContentComponent</code> constructor, then <em>both</em> dials will be red:</p>
+<div class="fragment"><div class="line">getLookAndFeel().setColour (juce::Slider::thumbColourId, juce::Colours::red);</div>
+</div><!-- fragment --><p>This should look something like the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/tutorial_look_and_feel_customisation_screenshot2.png" alt="">
+<div class="caption">
+Overriding look-and-feel colours</div></div>
+<p>To set the two dials differently we could make a new <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> instance and apply that to only one of the dials. First add a <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V4.html" title="The latest JUCE look-and-feel style, as introduced in 2017.">LookAndFeel_V4</a> object as a member <span class="comment">[1]</span> (this is the class that implements the default JUCE look-and-feel).</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::LookAndFeel_V4 otherLookAndFeel; <span class="comment">// [1]</span></div>
+<div class="line">    juce::Slider dial1;</div>
+<div class="line">    juce::Slider dial2;</div>
+<div class="line">    juce::TextButton button1;</div>
+<div class="line">    juce::TextButton button2;</div>
+</div><!-- fragment --><p>Then change the line of code in the constructor, that we just added, to this:</p>
+<div class="fragment"><div class="line">otherLookAndFeel.setColour (juce::Slider::thumbColourId, juce::Colours::red);</div>
+</div><!-- fragment --><p>Let's use this look-and-feel <em>only</em> for the first dial. Add this line of code to the <code class="project_code">MainContentComponent</code> constructor:</p>
+<div class="fragment"><div class="line">        dial1.setLookAndFeel (&amp;otherLookAndFeel);</div>
+</div><!-- fragment --><p>This should now create a UI like the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/tutorial_look_and_feel_customisation_screenshot3.png" alt="">
+<div class="caption">
+Using different look-and-feel objects for different components</div></div>
+<p>Of course, in this simple example this approach offers no benefits compared to setting the <a class="el" href="https://docs.juce.com/master/classSlider.html#a1012002c53381ccc7c1fe7e604a75f44aee563b22e0033b0ed4f38e5296889835" title="The colour to draw the thumb with.">Slider::thumbColourId</a> colour on the slider objects directly. But your app may use multiple sliders for different purposes where you want sliders for one purpose to use one set of colours and sliders for other purposes to use different sets of colours. This approach allows you to change these colours globally as long as each slider is assigned the appropriate look-and-feel for its type.</p>
+<p>The benefits of this approach are clearer once we start to customise the actual drawing code. In particular, we need to create a custom look-and-feel class.</p>
+<h1><a class="anchor" id="tutorial_look_and_feel_customisation_custom_lf"></a>
+Custom look-and-feel</h1>
+<p>To customise the drawing of certain components we need to create a new class that inherits from the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class. If you inherit directly from the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class itself then you'll need to implement <em>all</em> of the pure virtual functions. It's much more practical to inherit from one of the classes that already has all of these functions defined. Then you need override only the ones you need. Let's create a simple custom look-and-feel that has only this one colour change defined compared to the default look-and-feel.</p>
+<p>First, remove this line from the constructor, which we added earlier:</p>
+<div class="fragment"><div class="line">otherLookAndFeel.setColour (juce::Slider::thumbColourId, juce::Colours::red);</div>
+</div><!-- fragment --><p>Now, add our new class, which inherits from the <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V4.html" title="The latest JUCE look-and-feel style, as introduced in 2017.">LookAndFeel_V4</a> class, before the <code class="project_code">MainContentComponent</code> class:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>OtherLookAndFeel : <span class="keyword">public</span> juce::LookAndFeel_V4</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    OtherLookAndFeel()</div>
+<div class="line">    {</div>
+<div class="line">        setColour (juce::Slider::thumbColourId, juce::Colours::red);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Before we run this code, change the class name of our <code class="project_code">otherLookAndFeel</code> member to OtherLookAndFeel <span class="comment">[2]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    OtherLookAndFeel otherLookAndFeel; <span class="comment">// [2]</span></div>
+<div class="line">    juce::Slider dial1;</div>
+<div class="line">    juce::Slider dial2;</div>
+<div class="line">    juce::TextButton button1;</div>
+<div class="line">    juce::TextButton button2;</div>
+</div><!-- fragment --><p>Build and run the application and the result should appear identical to the previous screenshot.</p>
+<h2><a class="anchor" id="tutorial_look_and_feel_customisation_drawing"></a>
+Customising drawing</h2>
+<p>There are many functions in the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class for many different types of components. The functions that are designated for a specific component type are easy to find as these are all declared within a nested class named <code class="code">LookAndFeelMethods</code> within the relevant component class.</p>
+<h2><a class="anchor" id="tutorial_look_and_feel_customisation_sliders"></a>
+Slider customisation</h2>
+<p>For example, take a look at the <a class="el" href="https://docs.juce.com/master/structSlider_1_1LookAndFeelMethods.html" title="This abstract base class is implemented by LookAndFeel classes to provide slider drawing functionalit...">Slider::LookAndFeelMethods</a> within the JUCE API documentation. In this list you will notice a function named <a class="el" href="https://docs.juce.com/master/structSlider_1_1LookAndFeelMethods.html#ae63a9d8adce084cd5dbe02b960c73a9a">Slider::LookAndFeelMethods::drawRotarySlider()</a>.</p>
+<p>Let's override this in our <code class="project_code">OtherLookAndFeel</code> class. Add the declaration to the class:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> drawRotarySlider (juce::Graphics&amp; g, <span class="keywordtype">int</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">float</span> sliderPos,</div>
+<div class="line">                           <span class="keyword">const</span> <span class="keywordtype">float</span> rotaryStartAngle, <span class="keyword">const</span> <span class="keywordtype">float</span> rotaryEndAngle, juce::Slider&amp;) <span class="keyword">override</span></div>
+</div><!-- fragment --><p>Here you can see that we are passed the following data:</p><ul>
+<li><code class="code">g</code> : The <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> context.</li>
+<li><code class="code">x</code> : The x coordinate of the top-left of the rectangle within which we should draw our rotary slider.</li>
+<li><code class="code">y</code> : The y coordinate of the top-left of the rectangle within which we should draw our rotary slider.</li>
+<li><code class="code">width</code> : The width of the rectangle within which we should draw our rotary slider.</li>
+<li><code class="code">height</code> : The height of the rectangle within which we should draw our rotary slider.</li>
+<li><code class="code">sliderPos</code> : The <em>position</em> of the slider as a proportion in the range 0..1 (this is independent of the slider's actual range of values).</li>
+<li><code class="code">rotaryStartAngle</code> : The start angle of the dial rotation (in radians).</li>
+<li><code class="code">rotaryEndAngle</code> : The end angle of the dial rotation (in radians).</li>
+<li><code class="code">slider</code> : The <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object itself.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>The x, y, width, and height arguments take into account the size and position of any <em>text box</em> that the slider may be using. This is why we can just access the slider position and size and use those values.</dd></dl>
+<p>Now let's write the function body such that it draws a simple dial that is just a filled circle with a line representing the pointer of the dial. First, we will need some temporary variables to help with our calculations based on the values we have been passed:</p>
+<div class="fragment"><div class="line">        <span class="keyword">auto</span> radius = (float) juce::jmin (width / 2, height / 2) - 4.0f;</div>
+<div class="line">        <span class="keyword">auto</span> centreX = (float) <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> + (<span class="keywordtype">float</span>) width  * 0.5f;</div>
+<div class="line">        <span class="keyword">auto</span> centreY = (float) <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> + (<span class="keywordtype">float</span>) height * 0.5f;</div>
+<div class="line">        <span class="keyword">auto</span> rx = centreX - radius;</div>
+<div class="line">        <span class="keyword">auto</span> ry = centreY - radius;</div>
+<div class="line">        <span class="keyword">auto</span> rw = radius * 2.0f;</div>
+<div class="line">        <span class="keyword">auto</span> angle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>You can see that the final <code class="project_code">angle</code> variable contains the angle at which the dial should point.</dd></dl>
+<p>Now let's add code to fill in the colour of the dial and draw an outline:</p>
+<div class="fragment"><div class="line">        <span class="comment">// fill</span></div>
+<div class="line">        g.setColour (juce::Colours::orange);</div>
+<div class="line">        g.fillEllipse (rx, ry, rw, rw);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// outline</span></div>
+<div class="line">        g.setColour (juce::Colours::red);</div>
+<div class="line">        g.drawEllipse (rx, ry, rw, rw, 1.0f);</div>
+</div><!-- fragment --><p>To draw the pointer itself, first we'll use a <a class="el" href="https://docs.juce.com/master/classPath.html" title="A path is a sequence of lines and curves that may either form a closed shape or be open-ended.">Path</a> object that we will translate and rotate into position by the required angle:</p>
+<div class="fragment"><div class="line">        juce::Path p;</div>
+<div class="line">        <span class="keyword">auto</span> pointerLength = radius * 0.33f;</div>
+<div class="line">        <span class="keyword">auto</span> pointerThickness = 2.0f;</div>
+<div class="line">        p.addRectangle (-pointerThickness * 0.5f, -radius, pointerThickness, pointerLength);</div>
+<div class="line">        p.applyTransform (juce::AffineTransform::rotation (angle).translated (centreX, centreY));</div>
+</div><!-- fragment --><p>Then we fill this path to draw the pointer:</p>
+<div class="fragment"><div class="line">        <span class="comment">// pointer</span></div>
+<div class="line">        g.setColour (juce::Colours::yellow);</div>
+<div class="line">        g.fillPath (p);</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The completed code for this section can be found in the <code class="filename">LookAndFeelCustomisationTutorial_02.h</code> file of the demo project for this tutorial.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the drawing of the pointer. You could try different lengths, a slightly thicker but rounded rectangle, or draw an arrow. </dd>
+</dl>
+<p>This shows you only one simple customisation of one of the <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> look-and-feel methods. But the principle applies to the other methods. Perhaps the best approach for creating other customisations is to look at the existing implementation in the <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V4.html" title="The latest JUCE look-and-feel style, as introduced in 2017.">LookAndFeel_V4</a> or <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V3.html" title="The latest JUCE look-and-feel style, as introduced in 2013.">LookAndFeel_V3</a> classes and use this as a basis for your own code.</p>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V4.html" title="The latest JUCE look-and-feel style, as introduced in 2017.">LookAndFeel_V4</a> class inherits from the <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V3.html" title="The latest JUCE look-and-feel style, as introduced in 2013.">LookAndFeel_V3</a> class and some methods are not redefined in the <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V4.html" title="The latest JUCE look-and-feel style, as introduced in 2017.">LookAndFeel_V4</a> class.</dd></dl>
+<h2><a class="anchor" id="tutorial_look_and_feel_customisation_buttons"></a>
+Button customisation</h2>
+<p>Let's look at customising the buttons. First, let's set our <code class="project_code">OtherLookAndFeel</code> class as the look-and-feel for our whole <code class="project_code">MainContentComponent</code> by using this line in its constructor:</p>
+<div class="fragment"><div class="line">        setLookAndFeel (&amp;otherLookAndFeel);</div>
+</div><!-- fragment --><p>Let's also make sure that the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> object is not used on shutdown by the <code class="project_code">MainContentComponent</code> anymore by supplying this line in its destructor:</p>
+<div class="fragment"><div class="line">    ~MainContentComponent()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        setLookAndFeel (<span class="keyword">nullptr</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>This will, of course, mean that both of our dials take on the appearance we customised in the previous section. Now let's add the <a class="el" href="https://docs.juce.com/master/structButton_1_1LookAndFeelMethods.html#a06f95e4c63f74cfe3af3f21698c9107a">Button::LookAndFeelMethods::drawButtonBackground()</a> function declaration:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> drawButtonBackground (juce::Graphics&amp; g, juce::Button&amp; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>, <span class="keyword">const</span> juce::Colour&amp; backgroundColour,</div>
+<div class="line">                               <span class="keywordtype">bool</span>, <span class="keywordtype">bool</span> isButtonDown) <span class="keyword">override</span></div>
+</div><!-- fragment --><p>Here, we are passed the following data:</p>
+<ul>
+<li><code class="code">g</code> : The <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> context.</li>
+<li><code class="code">button</code> : The <a class="el" href="https://docs.juce.com/master/classButton.html" title="A base class for buttons.">Button</a> object itself.</li>
+<li><code class="code">backgroundColour</code> : The base background colour that should be used (which will have been chosen from the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> colours based on the toggle state of the button).</li>
+<li><code class="code">isMouseOverButton</code> : Whether the mouse pointer is within the bounds of the button.</li>
+<li><code class="code">isButtonDown</code> : Whether the mouse button is down.</li>
+</ul>
+<p>Now, let's add the function body to make a really simple button background that simply fills the button rectangle with the background colour:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> buttonArea = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getLocalBounds();</div>
+<div class="line">g.setColour (backgroundColour);</div>
+<div class="line">g.fillRect (buttonArea);</div>
+<div class="ttc" id="agroup__juce__audio__plugin__client-Unity_html_gac9a690ac771d86f797f87594f6dfa694"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a></div><div class="ttdeci">float float UnityEventModifiers int button</div><div class="ttdef"><b>Definition</b> juce_UnityPluginInterface.h:200</div></div>
+</div><!-- fragment --><p>If you build and run this, it should look similar to the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/tutorial_look_and_feel_customisation_screenshot4.png" alt="">
+<div class="caption">
+Simple button</div></div>
+<p>If you interact with this, you will notice that the buttons do not respond visually to mouse pointer interaction. Let's implement a simple shadow effect. Change the <code class="project_code">drawButtonBackground()</code> function to this:</p>
+<div class="fragment"><div class="line">        <span class="keyword">auto</span> buttonArea = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getLocalBounds();</div>
+<div class="line">        <span class="keyword">auto</span> edge = 4;</div>
+<div class="line"> </div>
+<div class="line">        buttonArea.removeFromLeft (edge);</div>
+<div class="line">        buttonArea.removeFromTop (edge);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// shadow</span></div>
+<div class="line">        g.setColour (juce::Colours::darkgrey.withAlpha (0.5f));</div>
+<div class="line">        g.fillRect (buttonArea);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> offset = isButtonDown ? -edge / 2 : -edge;</div>
+<div class="line">        buttonArea.translate (offset, offset);</div>
+<div class="line"> </div>
+<div class="line">        g.setColour (backgroundColour);</div>
+<div class="line">        g.fillRect (buttonArea);</div>
+</div><!-- fragment --><p>The button will now appear to move as we click the button. Unfortunately, the text stays static, so we need to override the <a class="el" href="https://docs.juce.com/master/structButton_1_1LookAndFeelMethods.html#a3c7f5449c273361a926f5b82b8547383" title="Draws the text for a TextButton.">Button::LookAndFeelMethods::drawButtonText()</a> function to make this more believable. To write this function we'll start with a copy of the code from the <a class="el" href="https://docs.juce.com/master/classLookAndFeel__V2.html" title="This LookAndFeel subclass implements the juce style from around 2008-12.">LookAndFeel_V2</a> class and add it to our OtherLookAndFeel class:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> drawButtonText (juce::Graphics&amp; g, juce::TextButton&amp; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>, <span class="keywordtype">bool</span> isMouseOverButton, <span class="keywordtype">bool</span> isButtonDown)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    <span class="keyword">auto</span> font = getTextButtonFont (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getHeight());</div>
+<div class="line">    g.setFont (font);</div>
+<div class="line">    g.setColour (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.findColour (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getToggleState() ? juce::TextButton::textColourOnId</div>
+<div class="line">                                                            : <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classTextButton.html">TextButton</a>::textColourOffId)</div>
+<div class="line">                       .withMultipliedAlpha (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.isEnabled() ? 1.0f : 0.5f));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> yIndent = juce::jmin (4, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.proportionOfHeight (0.3f));</div>
+<div class="line">    <span class="keyword">auto</span> cornerSize = juce::jmin (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getHeight(), <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getWidth()) / 2;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> fontHeight = juce::roundToInt (font.getHeight() * 0.6f);</div>
+<div class="line">    <span class="keyword">auto</span> leftIndent  = juce::jmin (fontHeight, 2 + cornerSize / (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.isConnectedOnLeft()  ? 4 : 2));</div>
+<div class="line">    <span class="keyword">auto</span> rightIndent = juce::jmin (fontHeight, 2 + cornerSize / (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.isConnectedOnRight() ? 4 : 2));</div>
+<div class="line">    <span class="keyword">auto</span> textWidth = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getWidth() - leftIndent - rightIndent;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (textWidth &gt; 0)</div>
+<div class="line">        g.drawFittedText (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getButtonText(),</div>
+<div class="line">                          leftIndent, yIndent, textWidth, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getHeight() - yIndent * 2,</div>
+<div class="line">                          juce::Justification::centred, 2);</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassTextButton_html"><div class="ttname"><a href="https://docs.juce.com/master/classTextButton.html">TextButton</a></div><div class="ttdoc">A button that uses the standard lozenge-shaped background with a line of text on it.</div><div class="ttdef"><b>Definition</b> juce_TextButton.h:51</div></div>
+<div class="ttc" id="anamespacejuce_html"><div class="ttname"><a href="https://docs.juce.com/master/namespacejuce.html">juce</a></div><div class="ttdef"><b>Definition</b> juce_AudioWorkgroup_mac.h:36</div></div>
+</div><!-- fragment --><p>We just need to change the offset at which the text is drawn to match the apparent movement in our <code class="project_code">drawButtonBackground()</code> function. We need to change only the last few lines:</p>
+<div class="fragment"><div class="line">        <span class="keyword">auto</span> textWidth = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getWidth() - leftIndent - rightIndent;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> edge = 4;</div>
+<div class="line">        <span class="keyword">auto</span> offset = isButtonDown ? edge / 2 : 0;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (textWidth &gt; 0)</div>
+<div class="line">            g.drawFittedText (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getButtonText(),</div>
+<div class="line">                              leftIndent + offset, yIndent + offset, textWidth, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gac9a690ac771d86f797f87594f6dfa694">button</a>.getHeight() - yIndent * 2 - edge,</div>
+<div class="line">                              juce::Justification::centred, 2);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Build and run this and it should look similar to the following screenshot.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/tutorial_look_and_feel_customisation_screenshot5.png" alt="">
+<div class="caption">
+Buttons with shadows (Button 1 is shown "clicked")</div></div>
+<dl class="section note"><dt>Note</dt><dd>The completed code for this section can be found in the <code class="filename">LookAndFeelCustomisationTutorial_03.h</code> file of the demo project for this tutorial.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Add some changes to the drawing of the button to respond to the mouse pointer being over the button. For example you could adjust the background colour slightly, change the shadow colour, or subtly change the rectangle sizes or positions. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_look_and_feel_customisation_summary"></a>
+Summary</h1>
+<p>In this tutorial we have introduced the concept of customising the look-and-feel of JUCE components using the <a class="el" href="https://docs.juce.com/master/classLookAndFeel.html" title="LookAndFeel objects define the appearance of all the JUCE widgets, and subclasses can be used to appl...">LookAndFeel</a> class. In particular you should now be able to:</p>
+<ul>
+<li>Customise colours in the default look-and-feel.</li>
+<li>Create a new look-and-feel class.</li>
+<li>Customise slider and button drawing code.</li>
+<li>Find the look-and-feel methods for other components so you can customise any JUCE component.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_look_and_feel_customisation_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_colours.html">Tutorial: Colours in JUCE</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_slider_values.html">Tutorial: The Slider class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_animation.html">Tutorial: Animating geometry</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_open_gl_application.html">Tutorial: Build an OpenGL application</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Customise the look and feel of your app_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

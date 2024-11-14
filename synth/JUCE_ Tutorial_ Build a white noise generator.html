@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0061)https://docs.juce.com/master/tutorial_simple_synth_noise.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Build a white noise generator</title>
+<link href="./JUCE_ Tutorial_ Build a white noise generator_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a white noise generator_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a white noise generator_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Build a white noise generator_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a white noise generator_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a white noise generator_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Build a white noise generator_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a white noise generator_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a white noise generator_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Build a white noise generator_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Build a white noise generator_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Build a white noise generator_files/css">
+<script src="./JUCE_ Tutorial_ Build a white noise generator_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Build a white noise generator_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Build a white noise generator_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Build a white noise generator</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_audio_application_templace">The Audio Application template</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_audio_application_lifecycle">The audio application lifecycle</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_audio_application_initialising">Initialising the audio application</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_generating_audio_data">Generating audio data</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_AudioSampleBuffer_class">The AudioSampleBuffer class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_noise_using_Random">Generating white noise using the Random class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_shutting_down">Shutting down the audio application</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simple_synth_noise.html#tutorial_simple_synth_noise_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>This tutorial introduces simple synthesis and audio output. This is key to developing an understanding of audio application (and plug-in) concepts in JUCE.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html" title="A base class for writing audio apps that stream from the audio i/o devices.">AudioAppComponent</a>, <a class="el" href="https://docs.juce.com/master/structAudioSourceChannelInfo.html" title="Used by AudioSource::getNextAudioBlock().">AudioSourceChannelInfo</a>, <a class="el" href="https://docs.juce.com/master/classAudioBuffer.html" title="A multi-channel buffer containing floating point audio samples.">AudioBuffer</a>, <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a></p>
+<h1><a class="anchor" id="tutorial_simple_synth_noise_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/SimpleSynthNoiseTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/SimpleSynthNoiseTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<p>This tutorial assumes that you are familiar with the basic principles of digital audio. In particular, you should know how audio signals are represented using sampling. You should also be familiar with the idea of the <em>sample rate</em> in this context (which you may know as <em>sampling rate</em>, <em>sampling frequency</em>, or other similar terms).</p>
+<h1><a class="anchor" id="tutorial_simple_synth_noise_demo_project"></a>
+The demo project</h1>
+<p>The demo project was created using <a href="https://juce.com/projucer">The Projucer</a> <b class="onscreen_text">Audio Application</b> template.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Build a white noise generator_files/tutorial_simple_synth_noise_screenshot1.png" alt="">
+<div class="caption">
+The Audio Application template shown highlighted within The Projucer.</div></div>
+<p>This is a useful starting point for your own audio applications in JUCE. The demo project synthesises white noise and plays it out of the target device's default audio hardware.</p>
+<h1><a class="anchor" id="tutorial_simple_synth_noise_audio_application_templace"></a>
+The Audio Application template</h1>
+<p>This tutorial implements only audio output. Audio input and real-time audio processing of audio input data are explored in other tutorials. The Audio Application template is very similar to the GUI Application template, except that:</p>
+<ul>
+<li>The <code class="project_code">MainContentComponent</code> class inherits from the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html" title="A base class for writing audio apps that stream from the audio i/o devices.">AudioAppComponent</a> class rather than the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> class.</li>
+<li>The <code class="module">juce_audio_utils</code> module is added to the project, in addition to the other audio-related modules that are added to projects by default.</li>
+</ul>
+<p>The Audio Application template may be used for simple applications, such as the example provided here. It is also scalable for more complex applications, essentially any application that needs to interact directly with the target device's audio hardware. Creating audio plug-ins with JUCE is explored in other tutorials.</p>
+<h2><a class="anchor" id="tutorial_simple_synth_noise_audio_application_lifecycle"></a>
+The audio application lifecycle</h2>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html" title="A base class for writing audio apps that stream from the audio i/o devices.">AudioAppComponent</a> class is an abstract base class, it has three <a href="http://www.learncpp.com/cpp-tutorial/126-pure-virtual-functions-abstract-base-classes-and-interface-classes/">pure virtual</a> functions that represent the lifecycle of our audio application that we <em>must</em> implement in our derived class:</p><ul>
+<li><a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a70634aa3ffaf6e7ff0d233e5933a063d" title="Tells the source to prepare for playing.">AudioAppComponent::prepareToPlay()</a>: This is called just before audio processing starts.</li>
+<li><a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a588d9b990fc308774215548959e0fc50" title="Allows the source to release anything it no longer needs after playback has stopped.">AudioAppComponent::releaseResources()</a>: This is called when audio processing has finished.</li>
+<li><a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#aec5e36e694a5bd2edae903d1079166b1" title="Called repeatedly to fetch subsequent blocks of audio data.">AudioAppComponent::getNextAudioBlock()</a>: This is called each time the audio hardware needs a new block of audio data.</li>
+</ul>
+<p>Of these three, the most important is perhaps <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#aec5e36e694a5bd2edae903d1079166b1" title="Called repeatedly to fetch subsequent blocks of audio data.">AudioAppComponent::getNextAudioBlock()</a>, since this is where you will either generate or process audio in your JUCE audio application. To understand how this works, we need to know a little about how modern computers generate audio. The audio hardware needs to generate a certain number of samples per channel for each second of audio. The CD-quality sample rate is 44.1kHz, which means there needs to be 44100 samples per second per channel sent to the audio hardware for playback. Rather than being passed to the audio hardware a single sample at a time, the samples are passed in buffers — or blocks — containing a certain number of samples. For example, at 44.1kHz and a block size of 441 our <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#aec5e36e694a5bd2edae903d1079166b1" title="Called repeatedly to fetch subsequent blocks of audio data.">AudioAppComponent::getNextAudioBlock()</a> function would be called 100 times per second.</p>
+<dl class="section note"><dt>Note</dt><dd>The buffer size of 441 samples, above, is used to keep the arithmetic simple for the purposes of explanation. In practice, a buffer size of 441 would be unusual. Hardware buffer sizes would almost certainly be a even number and would tend to be powers-of-two (256, 512, 1024, and so on). It is important that your application is prepared to deal with <em>any</em> buffer size. For more information on the settings for sample rate and buffer sizes, see <a class="el" href="https://docs.juce.com/master/tutorial_audio_device_manager.html">Tutorial: The AudioDeviceManager class</a>.</dd></dl>
+<p>Essentially, our <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#aec5e36e694a5bd2edae903d1079166b1" title="Called repeatedly to fetch subsequent blocks of audio data.">AudioAppComponent::getNextAudioBlock()</a> is servicing the <em>audio callback</em> of the audio hardware. It is important to note that this function will be called from another thread (the <em>audio thread</em> in most cases).</p>
+<p>For our JUCE audio application to work correctly, there are two more important functions. This time we need to call them, rather than implement them:</p><ul>
+<li><a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a1cb6b457848fa80df7efc39cf095d465" title="A subclass should call this from their constructor, to set up the audio.">AudioAppComponent::setAudioChannels()</a>: We must call this to register the number of input and output channels we need. Typically, we do this in our constructor. In turn, this function triggers the start of audio processing in our application.</li>
+<li><a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a40f1e657f048d02c5d065de566a84d92" title="Shuts down the audio device and clears the audio source.">AudioAppComponent::shutdownAudio()</a>: We must call this to shutdown the audio system. Typically, we do this in our destructor.</li>
+</ul>
+<h2><a class="anchor" id="tutorial_simple_synth_noise_audio_application_initialising"></a>
+Initialising the audio application</h2>
+<p>Let's now explore our simple implementation of a noise generator by examining the life cycle of an audio application in more detail. Our constructor needs to set up the size of the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> object (see <a class="el" href="https://docs.juce.com/master/tutorial_main_component.html">Tutorial: The main component</a>). We also need to initialise at least one audio output:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        setSize (800, 600);</div>
+<div class="line">        setAudioChannels (0, 2); <span class="comment">// no inputs, two outputs</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>As mentioned above, the call to the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a1cb6b457848fa80df7efc39cf095d465" title="A subclass should call this from their constructor, to set up the audio.">AudioAppComponent::setAudioChannels()</a> function triggers the audio system to start up. In particular, it will call the <code class="project_code">prepareToPlay()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">int</span> samplesPerBlockExpected, <span class="keywordtype">double</span> sampleRate)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::String message;</div>
+<div class="line">        message &lt;&lt; <span class="stringliteral">"Preparing to play audio...\n"</span>;</div>
+<div class="line">        message &lt;&lt; <span class="stringliteral">" samplesPerBlockExpected = "</span> &lt;&lt; samplesPerBlockExpected &lt;&lt; <span class="stringliteral">"\n"</span>;</div>
+<div class="line">        message &lt;&lt; <span class="stringliteral">" sampleRate = "</span> &lt;&lt; sampleRate;</div>
+<div class="line">        juce::Logger::getCurrentLogger()-&gt;writeToLog (message);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In this case we don't really need to do anything here, but as it is a <a href="http://www.learncpp.com/cpp-tutorial/126-pure-virtual-functions-abstract-base-classes-and-interface-classes/">pure virtual</a> function we <em>must</em> implement at least an empty function. Here we log some useful information that we can gain about the audio system on the target device at this point. The <code class="project_code">samplesPerBlockExpected</code> argument, as its name suggests, is the size (in samples) of the buffers of audio that we can expect to be asked for each time a buffer of audio is requested in our <code class="project_code">getNextAudioBlock()</code> function. This buffer size might vary between callbacks, but it is a good indication. The <code class="project_code">sampleRate</code> argument tells us the current sample rate of the hardware. We would need this if we were doing something that is frequency-dependent, such as synthesising tones (see <a class="el" href="https://docs.juce.com/master/tutorial_sine_synth.html">Tutorial: Build a sine wave synthesiser</a>) or using equalisation. We would also need to know the sample rate if we were using delay effects. We don't need this information to generate noise.</p>
+<h2><a class="anchor" id="tutorial_simple_synth_noise_generating_audio_data"></a>
+Generating audio data</h2>
+<p>Soon after this call to our <code class="project_code">prepareToPlay()</code> function the audio thread will begin requesting blocks of audio via the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#aec5e36e694a5bd2edae903d1079166b1" title="Called repeatedly to fetch subsequent blocks of audio data.">AudioAppComponent::getNextAudioBlock()</a> function. This function is passed a single <code class="project_code">bufferToFill</code> argument that is an <a class="el" href="https://docs.juce.com/master/structAudioSourceChannelInfo.html" title="Used by AudioSource::getNextAudioBlock().">AudioSourceChannelInfo</a> struct. The <a class="el" href="https://docs.juce.com/master/structAudioSourceChannelInfo.html" title="Used by AudioSource::getNextAudioBlock().">AudioSourceChannelInfo</a> struct contains a multichannel buffer of audio samples. It also contains two integer values that specify which region of this buffer should be processed on this call. In more detail, the <a class="el" href="https://docs.juce.com/master/structAudioSourceChannelInfo.html" title="Used by AudioSource::getNextAudioBlock().">AudioSourceChannelInfo</a> contains the following members:</p>
+<ul>
+<li><code class="project_code">AudioSampleBuffer* buffer</code> : An AudioSampleBuffer object is a multichannel buffer of audio data that is essentially a multidimensional array of <code class="code">float</code> values. When our <code class="project_code">getNextAudioBlock()</code> function is called, this buffer contains any audio data from the target device's audio input (if we requested audio input). When our <code class="project_code">getNextAudioBlock()</code> function returns, we must have filled the relevant section of the buffer with audio that we want to play.</li>
+<li><code class="project_code">int startSample</code> : This is the sample index within the buffer where our <code class="project_code">getNextAudioBlock()</code> function should start reading or writing audio.</li>
+<li><code class="project_code">int numSamples</code> : This is the number of samples in the buffer that should be read or written.</li>
+</ul>
+<p>Audio data stored as floating point values is very straightforward. Each sample of the audio signal is stored as a value that is nominally in the range ±1.0.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Build a white noise generator_files/tutorial_simple_synth_noise_graph1.png" alt="">
+<div class="caption">
+A full scale ±1.0 sine wave.</div></div>
+<p>At a peak level of ±1.0 like this the output level will be <em>very</em> loud. In fact, this is the loudest the audio system will be able to generate without clipping. Typically, we will need to output audio that doesn't exceed this ±1.0 limit (although it is fine for intermediate stages of processing to go beyond this limit, as long as the final output is lower).</p>
+<h2><a class="anchor" id="tutorial_simple_synth_noise_AudioSampleBuffer_class"></a>
+The AudioSampleBuffer class</h2>
+<p>While the AudioSampleBuffer class is (at a very basic level) just a multichannel array of <code class="code">float</code> values, it provides a useful set of functions for dealing with audio data. Many of these functions will be covered in later tutorials, but here we make use of the following functions:</p><ul>
+<li><a class="el" href="https://docs.juce.com/master/classAudioBuffer.html#a3a9ecde91bf5b96871ce3a474c1d831f">AudioSampleBuffer::getNumChannels()</a>: This returns the number of audio channels stored in the buffer. In this case the value should match the number of output channels we requested in our call to the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a1cb6b457848fa80df7efc39cf095d465" title="A subclass should call this from their constructor, to set up the audio.">AudioAppComponent::setAudioChannels()</a> function earlier. (This value will always be the maximum of the number of input and output channels.)</li>
+<li><a class="el" href="https://docs.juce.com/master/classAudioBuffer.html#a10cfe91eb4965895bc258cee02409d3b">AudioSampleBuffer::getWritePointer()</a>: This returns a pointer to the buffer of <code class="code">float</code> values at a specific sample offset.</li>
+</ul>
+<p>For our simple application to generate white noise, we need to fill the requested section of the buffer with random values. To do this we can iterate over the channels in the buffer, find the start sample within the buffer for that channel, and write the desired number of samples to the buffer:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> getNextAudioBlock (<span class="keyword">const</span> juce::AudioSourceChannelInfo&amp; bufferToFill)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> channel = 0; channel &lt; bufferToFill.buffer-&gt;getNumChannels(); ++channel)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// Get a pointer to the start sample in the buffer for this audio output channel</span></div>
+<div class="line">            <span class="keyword">auto</span>* buffer = bufferToFill.buffer-&gt;getWritePointer (channel, bufferToFill.startSample);</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// Fill the required number of samples with noise between -0.125 and +0.125</span></div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> sample = 0; sample &lt; bufferToFill.numSamples; ++sample)</div>
+<div class="line">                buffer[sample] = random.nextFloat() * 0.25f - 0.125f;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_simple_synth_noise_noise_using_Random"></a>
+Generating white noise using the Random class</h2>
+<p>Here we make use of the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class in order to generate our random values (see <a class="el" href="https://docs.juce.com/master/tutorial_random.html">Tutorial: The Random class</a>). To generate white noise we need to generate uniformly distributed random numbers around zero. Here we generate random values between -0.125 and +0.125 by first calling the <a class="el" href="https://docs.juce.com/master/classRandom.html#aec88d4e5cf44faaa038f6cfb41e96406" title="Returns the next random floating-point number.">Random::nextFloat()</a> function. This generates values between 0 and 1. Then we multiply the result of this by 0.25 and subtract 0.125. (See <a class="el" href="https://docs.juce.com/master/tutorial_synth_level_control.html">Tutorial: Control audio levels</a> for more information on this process.) Notice that we didn't use the <a class="el" href="https://docs.juce.com/master/classRandom.html#ad7d9d42dd0efbb68d569e975b0778518" title="The overhead of creating a new Random object is fairly small, but if you want to avoid it,...">Random::getSystemRandom()</a> function to get the shared <em>system</em> <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object, as shown in other tutorials (<a class="el" href="https://docs.juce.com/master/tutorial_random.html">Tutorial: The Random class</a>). This is because we are calling the <a class="el" href="https://docs.juce.com/master/classRandom.html#aec88d4e5cf44faaa038f6cfb41e96406" title="Returns the next random floating-point number.">Random::nextFloat()</a> function on the audio thread. We need to create our own <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object otherwise the values might get corrupted by other threads using that shared <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object. To achieve this, an instance of the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class is added to our <code class="project_code">MainContentComponent</code> class:</p>
+<div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::Random random;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_simple_synth_noise_shutting_down"></a>
+Shutting down the audio application</h2>
+<p>When our application is closed, our destructor will be called. At this point we should call the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a40f1e657f048d02c5d065de566a84d92" title="Shuts down the audio device and clears the audio source.">AudioAppComponent::shutdownAudio()</a> function:</p>
+<div class="fragment"><div class="line">    ~MainContentComponent()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        shutdownAudio();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Calling the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a40f1e657f048d02c5d065de566a84d92" title="Shuts down the audio device and clears the audio source.">AudioAppComponent::shutdownAudio()</a> function will, in turn, cause the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html#a588d9b990fc308774215548959e0fc50" title="Allows the source to release anything it no longer needs after playback has stopped.">AudioAppComponent::releaseResources()</a> function to be called. This is a good place to dispose of resources, if we allocated any during the running of our audio process (for example, if we allocated memory or opened some files). In this case, we didn't need any additional resources and we just log the function call with a simple message:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> releaseResources()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::Logger::getCurrentLogger()-&gt;writeToLog (<span class="stringliteral">"Releasing audio resources"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section attention">
+<dt>Exercise</dt>
+<dd>Try changing the number of audio outputs. Notice that mono noise sounds subtly different from stereo noise. If you have a multichannel sound card, you may be able to generate more than two channels of noise. You could also try changing the level of the noise generated. For example, to generate noise at a level of 0.1 you would need to multiply the randomly generated values by 0.2 and subtract 0.1. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_simple_synth_noise_summary"></a>
+Summary</h1>
+<p>This tutorial has introduced the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html" title="A base class for writing audio apps that stream from the audio i/o devices.">AudioAppComponent</a> class, used by the Audio Application template, in order to generate audio. We have covered the following topics:</p>
+<ul>
+<li>Initialising and shutting down the audio system.</li>
+<li>Writing audio data in response to an audio callback.</li>
+<li>Using the <a class="el" href="https://docs.juce.com/master/structAudioSourceChannelInfo.html" title="Used by AudioSource::getNextAudioBlock().">AudioSourceChannelInfo</a> struct and the AudioSampleBuffer class.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_simple_synth_noise_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_device_manager.html">Tutorial: The AudioDeviceManager class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_sine_synth.html">Tutorial: Build a sine wave synthesiser</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_synth_db_level_control.html">Tutorial: Control audio levels using decibels</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_synth_level_control.html">Tutorial: Control audio levels</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_wavetable_synth.html">Tutorial: Wavetable synthesis</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Build a white noise generator_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

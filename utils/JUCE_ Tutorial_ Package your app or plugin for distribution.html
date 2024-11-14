@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0063)https://docs.juce.com/master/tutorial_app_plugin_packaging.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Package your app or plugin for distribution</title>
+<link href="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/css">
+<script src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Package your app or plugin for distribution</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_introduction">Introduction</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_installation_locations">Installation locations</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_installers_mac">Installers for Mac</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_creating_disk_image">Creating a disk image</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_creating_drag_drop_installer">Creating a drag and drop installer</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_installers_windows">Installers for Windows</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_runtime_library_linking">Runtime library linking</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_marketplace_submissions">Marketplace submissions</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Learn how to prepare your audio application or plugin for distribution on various marketplaces. Create installers for all plugin types on different OS platforms.</p>
+<p><span class="headerlabel">Level:</span> Advanced</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS</p>
+<p><span class="headerlabel">Plugin Format:</span> VST , VST3 , AU , AUv3 , RTAS , AAX</p>
+<h1><a class="anchor" id="tutorial_app_plugin_packaging_introduction"></a>
+Introduction</h1>
+<p>So you just finished implementing the perfect plugin, bug-free on all wrappers with the best optimisation possible but don't know where to start when it comes to distributing your masterpiece?</p>
+<p>Then this tutorial is made for you! Preparing your application for distribution can be quite daunting when it comes to installations on your users' systems across a multitude of platforms. Marketplaces have become increasingly strict on their review process and the slight oversight can cause a resubmission of your binaries.</p>
+<p>In this tutorial we will first look at installation locations for plugins, then jump into creating installers for Mac and Windows and finally end with marketplace submission best practices.</p>
+<dl class="section note"><dt>Note</dt><dd>To get the most out of this tutorial please have your built plugins and binaries ready for packaging.</dd></dl>
+<h2><a class="anchor" id="tutorial_app_plugin_packaging_installation_locations"></a>
+Installation locations</h2>
+<p>Installing a plugin is nothing more than a simple copy step of the plugin into the right folder location on the user's machine.</p>
+<p>When distributing a plugin, it's important to understand the installation locations for different plugin wrappers out there. The following table lists the directories in which your installer must copy the files into, depending on the target OS:</p>
+<table class="markdownTable">
+<tbody><tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Plugin Type   </th><th class="markdownTableHeadLeft">Directory Type   </th><th class="markdownTableHeadLeft">Mac Installation Directory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft" rowspan="2">VST   </td><td class="markdownTableBodyLeft">User   </td><td class="markdownTableBodyLeft">~/Library/Audio/Plug-Ins/VST    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">System   </td><td class="markdownTableBodyLeft">Macintosh HD/Library/Audio/Plug-Ins/VST    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft" rowspan="2">VST3   </td><td class="markdownTableBodyLeft">User   </td><td class="markdownTableBodyLeft">~/Library/Audio/Plug-Ins/VST3    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">System   </td><td class="markdownTableBodyLeft">Macintosh HD/Library/Audio/Plug-Ins/VST3    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft" rowspan="2">AU   </td><td class="markdownTableBodyLeft">User   </td><td class="markdownTableBodyLeft">~/Library/Audio/Plug-Ins/Components    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">System   </td><td class="markdownTableBodyLeft">Macintosh HD/Library/Audio/Plug-Ins/Components    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">RTAS   </td><td class="markdownTableBodyLeft">System   </td><td class="markdownTableBodyLeft">Macintosh HD/Library/Application Support/Digidesign/Plug-Ins    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">AAX   </td><td class="markdownTableBodyLeft">System   </td><td class="markdownTableBodyLeft">Macintosh HD/Library/Application Support/Avid/Audio/Plug-Ins   </td></tr>
+</tbody></table>
+<table class="markdownTable">
+<tbody><tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Plugin Type   </th><th class="markdownTableHeadLeft">Directory Type   </th><th class="markdownTableHeadLeft">Windows Installation Directory    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft" rowspan="4">VST   </td><td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\VstPlugins    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\Steinberg\VstPlugins    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\Common Files\VST2    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\Common Files\Steinberg\VST2    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">VST3   </td><td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\Common Files\VST3    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">RTAS   </td><td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\Common Files\Digidesign\DAE\Plug-Ins    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">AAX   </td><td class="markdownTableBodyLeft">Shared   </td><td class="markdownTableBodyLeft">C:\Program Files\Common Files\Avid\Audio\Plug-Ins   </td></tr>
+</tbody></table>
+<dl class="section note"><dt>Note</dt><dd>Add the " (x86)" suffix to the "Program Files" folder for 32-bit plugins on 64-bit systems.</dd></dl>
+<p>It is generally recommended to install the plugins in the system folder or the "Common Files" directory as this is where most plugin manufacturers will install theirs and will have the benefit of making your plugin available to all users on the system. It will however require administrator permissions to perform the installation.</p>
+<dl class="section note"><dt>Note</dt><dd>For certain plugin formats such as AUv3 and AAX, extra steps such as code-signing and certificates are required for the installation process to succeed.</dd></dl>
+<h1><a class="anchor" id="tutorial_app_plugin_packaging_installers_mac"></a>
+Installers for Mac</h1>
+<dl class="section note"><dt>Note</dt><dd>If you are only interested in distributing for Windows, please skip to the next section <a class="el" href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_installers_windows">Installers for Windows</a> for more information.</dd></dl>
+<p>Although manually creating an installer is possible, there are many tools out there that can perform this task easily for you. One such example is the free software <a href="http://s.sudre.free.fr/Software/Packages/about.html">Packages</a> which we will use in this section to create the Mac installer.</p>
+<p>Install the software from the website and launch the application. You should come across a window prompting you for the type of project to create:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot1.png" alt="">
+<div class="caption">
+New project window</div></div>
+<p>Select "Distribution" and click the next <b class="onscreen_text">Next</b> button. You may now choose a name and a location to save the project as well as the required resources on the following screen:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot2.png" alt="">
+<div class="caption">
+Choosing a name and location for the project</div></div>
+<p>Click on <b class="onscreen_text">Create</b> to start assembling the installer. The main project window should open now.</p>
+<p>In the main window, start by adding packages by clicking on the <b class="onscreen_text">+</b> sign on the left panel for the number of plugin formats you want to install on the user's computer. For example to install VST/VST3/AU/RTAS/AAX, add five packages named accordingly with corresponding identifiers as shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot3.png" alt="">
+<div class="caption">
+Adding packages</div></div>
+<p>Next, select each package on the left panel and assign a unique identifier such as "com.yourcompany.pkg.format" and make sure that the "Require admin password for installation" checkbox is checked. (This is necessary to install plugins in the system folders as opposed to the user directories.)</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot4.png" alt="">
+<div class="caption">
+Setting identifiers</div></div>
+<p>The next step consists in configuring the payload which essentially tells the installer the location to copy the plugins. Make sure that the plugins are copied somewhere in the project directory for easy referencing. Select the <b class="onscreen_text">Payload</b> tab at the top of the interface and navigate to the installation directories for the corresponding plugin format as described in the previous section of this tutorial. If the necessary folder structure is not appearing in the navigation window, you can add the missing folders using <b class="onscreen_text">Hierarchy &gt; New Folder</b> and name them accordingly. Then add the plugin to the desired location by clicking on <b class="onscreen_text">Hierarchy &gt; Add Files...</b> and select the previously-copied plugins from your project folder.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot5.png" alt="">
+<div class="caption">
+Configuring the payload</div></div>
+<p>Now let's customise the messages displayed during the installation process by choosing the <b class="onscreen_text">Project</b> entry from the left panel and selecting the <b class="onscreen_text">Presentation</b> tab as shown here:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot6.png" alt="">
+<div class="caption">
+Customising messages</div></div>
+<p>In this screen, you can specify a location for a text file that will be used to show a custom message on the introduction screen of the installer. Click on the <b class="onscreen_text">+</b> sign to add an entry in the right hand side table and select <b class="onscreen_text">Choose...</b> to specify the location of the text file. Make sure to copy the text file into the project folder for easy referencing. You can repeat the process for the "Read Me" and "License" steps by clicking on the respective labels on the preview interface.</p>
+<p>By selecting the "Installation Type" step of the interface we can modify the order of the package names to be installed, add descriptions to them and specify their default states as well as visibility.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot7.png" alt="">
+<div class="caption">
+Listing packages</div></div>
+<p>If you are happy with the distribution and package settings, we can proceed to the final stage. Hit <b class="onscreen_text">File &gt; Save</b> then <b class="onscreen_text">Build &gt; Build</b> to start building the installer. If the procedure succeeds without error, you should see a screen like the following:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot8.png" alt="">
+<div class="caption">
+Building the distribution</div></div>
+<p>This will create a folder named <code class="filename">build</code> in the project folder with a <code class="filename">.pkg</code> file with your project name. Double-click on it to test the installation process.</p>
+<h2><a class="anchor" id="tutorial_app_plugin_packaging_creating_disk_image"></a>
+Creating a disk image</h2>
+<p>To provide a more comprehensive and customisable package for your users to download, it is generally best practice to create a disk image or <code class="filename">.dmg</code> file from the <code class="filename">.pkg</code> file we created in the previous step. We can easily do this using the built-in Mac application <code class="filename">Disk Utility</code> found in the <code class="filename">Applications/Utilities</code> folder.</p>
+<p>With your <code class="filename">.pkg</code> file ready for use, create a folder with the <code class="filename">.pkg</code> file and any additional documents you wish to include such as a "License" or "Read Me" file. This folder will be used to create the disk image and will be the content shown when unpacked.</p>
+<p>Launch <code class="filename">Disk Utility</code> and navigate to <b class="onscreen_text">File &gt; New Image &gt; Image from Folder...</b> from the menu items and select the folder you just created.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot9.png" alt="">
+<div class="caption">
+Creating the disk image</div></div>
+<p>Save the new disk image as a <code class="filename">.dmg</code> extension and select the "read/write" option from the <b class="onscreen_text">Image Format</b> field. When hitting <b class="onscreen_text">Save</b> , this should generate a modifiable disk image that we can customise in the next step. Open the newly-created disk image and you should see the contents of the folder used for its creation. You can then move the items around and optionally choose a background image by opening the Finder view options by navigating to <b class="onscreen_text">View &gt; Show View Options</b> from the menu items.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot10.png" alt="">
+<div class="caption">
+Customising the appearance</div></div>
+<p>When you are happy with the appearance of your disk image, you can simply eject the image as the changes will be saved automatically. Return to <code class="filename">Disk Utility</code> and navigate to <b class="onscreen_text">Images &gt; Convert...</b> and select the <code class="filename">.dmg</code> file. Give it the final name you want your users to see by appending the <code class="filename">.dmg</code> extension and select the "read-only" option from the <b class="onscreen_text">Image Format</b> field.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot11.png" alt="">
+<div class="caption">
+Converting the disk image</div></div>
+<p>Hit <b class="onscreen_text">Convert</b> and you should end up with the final disk image that you can confidently distribute to customers.</p>
+<h2><a class="anchor" id="tutorial_app_plugin_packaging_creating_drag_drop_installer"></a>
+Creating a drag and drop installer</h2>
+<p>Instead of creating a <code class="filename">.pkg</code> distribution and letting the installer perform all the copy/paste actions for plugin installation, we can also create a simpler version of the disk image that involves the user a bit more. This method is more error-prone as the installation is essentially done by the user but gives more control for installation locations.</p>
+<p>A drag and drop installer functions in a way where it presents folder aliases to installation locations on the user's system and invites the user to drag and drop the plugins into the appropriate folders through these aliases.</p>
+<p>To create this type of disk image, follow the same steps described in the previous section to create a disk image with a folder containing all the necessary plugins. Then open the disk image as before in order to customise its appearance.</p>
+<p>Now navigate to the desired plugin installation locations on your system for the plugin formats you are supporting (use the table at the beginning of the tutorial as a reference), select the folder and create an alias by navigating to <b class="onscreen_text">File &gt; Make Alias</b> from the menu item. The newly-created alias can then be moved into the disk image and the folder will still point to the location in the system.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot12.png" alt="">
+<div class="caption">
+Alternative disk image</div></div>
+<p>Now all the user has to do is drag and drop the plugins into the aliases in the disk image window to perform the installation.</p>
+<dl class="section note"><dt>Note</dt><dd>All the steps explained in this part of the tutorial were also applicable for packaging an application.</dd></dl>
+<h1><a class="anchor" id="tutorial_app_plugin_packaging_installers_windows"></a>
+Installers for Windows</h1>
+<dl class="section note"><dt>Note</dt><dd>If you are only interested in distributing for Mac, please jump to the previous section <a class="el" href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html#tutorial_app_plugin_packaging_installers_mac">Installers for Mac</a> for more information.</dd></dl>
+<p>Manually creating an installer can be tedious but thankfully there are many tools out there that can perform this task easily for you. One such example is the free software <a href="http://www.jrsoftware.org/isinfo.php">Inno Setup</a> which we will use in this section to create the Windows installer.</p>
+<p>Install the software from the website and launch the application. You should come across a window with a code editor where we can write our own installer script.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot13.png" alt="">
+<div class="caption">
+Inno Setup main window</div></div>
+<p>An example Inno Setup Script or <code class="filename">.iss</code> file to install VST/VST3/RTAS/AAX plugins on Windows would look something like this:</p>
+<div class="fragment"><div class="line">[Setup]</div>
+<div class="line">AppName=TestPlugin</div>
+<div class="line">AppVersion=1.0.0</div>
+<div class="line">DefaultDirName={cf}</div>
+<div class="line">DefaultGroupName=TestPlugin</div>
+<div class="line">OutputBaseFilename=TestPlugin-windows</div>
+<div class="line"> </div>
+<div class="line">[Files]</div>
+<div class="line">Source: <span class="stringliteral">"TestPlugin.dll"</span>; DestDir: <span class="stringliteral">"{app}\Steinberg\VST2"</span></div>
+<div class="line">Source: <span class="stringliteral">"TestPlugin.vst3"</span>; DestDir: <span class="stringliteral">"{app}\Steinberg\VST3"</span></div>
+<div class="line">Source: <span class="stringliteral">"TestPlugin.dpm"</span>; DestDir: <span class="stringliteral">"{app}\Digidesign\DAE\Plug-Ins"</span></div>
+<div class="line">Source: <span class="stringliteral">"TestPlugin.aaxplugin\*"</span>; DestDir: <span class="stringliteral">"{app}\Avid\Audio\Plug-Ins\TestPlugin.aaxplugin"</span>; Flags: recursesubdirs</div>
+</div><!-- fragment --><p>Here we have general properties that we can set in the <code class="project_code">[Setup]</code> section of the script and plugins we want to copy in specific folders in the <code class="project_code">[Files]</code> section.</p>
+<p>Certain shotcuts for common Windows path locations are available in this syntax format by enclosing the desired variable with curly brackets.</p>
+<ul>
+<li>{pf}: Shortcut for "Program Files" located at <code class="filename">C:\Program Files</code> .</li>
+<li>{cf}: Shortcut for "Common Files" located at <code class="filename">C:\Program Files\Common Files</code> .</li>
+<li>{app}: Shortcut for the destination application directory chosen by the user during installation.</li>
+</ul>
+<p>In order to specify the default installation directory, we set the <code class="project_code">DefaultDirName</code> variable to the "Common Files" directory but the user can still choose to install the plugins elsewhere as seen here when running the setup installer:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot14.png" alt="">
+<div class="caption">
+Choosing the destination application directory</div></div>
+<p>To instruct the installer to copy each individual plugin format into the right directory, specify the source file from the working directory as the <code class="project_code">Source</code> and the desired installation location as the <code class="project_code">DestDir</code> in the <code class="project_code">[Files]</code> section as individual lines.</p>
+<p>Notice that the AAX plugin is packaged as a folder contrary to other plugin formats and therefore the <code class="project_code">recursesubdirs</code> flag has to be set to instruct all the directory content to be copied.</p>
+<p>When you are happy with the configuration of the script, hit <b class="onscreen_text">Build &gt; Compile</b> to create the installer. This will generate a Setup application in a directory named <code class="filename">Output</code> by default in your working directory. The name of this installer will be chosen from the <code class="project_code">OutputBaseFilename</code> variable of the <code class="project_code">[Setup]</code> section of the script.</p>
+<p>To test the installer directly within Inno Setup, hit <b class="onscreen_text">Run &gt; Run</b> after successful compilation to launch the installer just generated.</p>
+<p>When the user hits the <b class="onscreen_text">Install</b> button in the final step of the setup installer, the plugins will be copied to the appropriate folders specified in the script:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot15.png" alt="">
+<div class="caption">
+Installing the plugins</div></div>
+<dl class="section note"><dt>Note</dt><dd>All the steps explained in this part of the tutorial were also applicable for packaging an application.</dd></dl>
+<h2><a class="anchor" id="tutorial_app_plugin_packaging_runtime_library_linking"></a>
+Runtime library linking</h2>
+<dl class="section warning"><dt>Warning</dt><dd>Due to a recent Windows 10 update, static linking of the runtime library has been deprecated and dynamic linking is suggested instead.</dd></dl>
+<p>When building a plugin for Windows, JUCE will choose dynamic linking of runtime libraries by default. This universal runtime is now part of the system core from Windows 10 and therefore if your plugin only targets users with Windows 10, you should not encounter any problems. However, for Windows versions between 8.1 and Vista there is a chance that the universal runtime library is not installed on the customer's computer and the plugin will not work properly.</p>
+<p>To remedy this problem, you can either prompt users to install the universal runtime through Windows Update themselves or supply an installer that downloads and installs this along with your plugin. Alternatively, you can also decide to build your plugins with static linking however, this is not recommended as Windows will restrict the number of plugins that can be loaded into a DAW to 64.</p>
+<p>You can change the way JUCE links the runtime library in the Projucer here:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot16.png" alt="">
+<div class="caption">
+Runtime library linking</div></div>
+<h1><a class="anchor" id="tutorial_app_plugin_packaging_marketplace_submissions"></a>
+Marketplace submissions</h1>
+<p>Depending on the store you want to distribute your app on, different types of requirements exist. However, there are general guidelines that you can follow to accelerate the review process on most of these stores and these include:</p>
+<ul>
+<li>Submitting an application that does not exhibit any crash or bug even in the most obscure use case.</li>
+<li>Writing an accurate description of your application that reflects exactly what it does.</li>
+<li>Supplying descriptions for all permissions and entitlements required by the application such as microphone and camera access.</li>
+</ul>
+<p>You can easily supply a descriptive text when using microphone or camera access from the Projucer exporter settings as shown below:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot17.png" alt="">
+<div class="caption">
+Describing the reason for microphone access</div></div>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot18.png" alt="">
+<div class="caption">
+Describing the reason for camera access</div></div>
+<p>Ensure that you enlist all required Capabilities/Entitlements for macOS/iOS such as "In-App Purchases" or "Push Notifications" capability:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot19.png" alt="">
+<div class="caption">
+Enabling iOS capabilities</div></div>
+<p>On Android that means listing all required functionalities in the Android manifest by enabling relevant Projucer fields:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot20.png" alt="">
+<div class="caption">
+Enabling Android capabilities</div></div>
+<p>Failing to provide correct image sizes for icons is a common reason for rejected apps. Ensure that you have all required resources such as small and large icons included:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot21.png" alt="">
+<div class="caption">
+Assigning small and large icons</div></div>
+<p>In order to provide the best user experience, ensure that you configure the minimum OS version requirements, such as "iOS Deployment Target" for iOS and "Minimum SDK version" on Android.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot22.png" alt="">
+<div class="caption">
+Setting the minimum iOS version</div></div>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/tutorial_app_plugin_distribution_screenshot23.png" alt="">
+<div class="caption">
+Setting the minimum Android version</div></div>
+<p>Finally, since JUCE does not use native UIs for interface design, you also need to be careful with the appearance of your app. Make sure you do not try to mimic native designs as these will be rejected.</p>
+<h1><a class="anchor" id="tutorial_app_plugin_packaging_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to distribute an application or plugin. In particular, we have:</p>
+<ul>
+<li>Learnt about the installation locations for plugins.</li>
+<li>Created installers for Mac and Windows.</li>
+<li>Discussed common mistakes when submitting binaries to marketplaces.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_app_plugin_packaging_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_online_unlock_status.html">Tutorial: Unlock your plugins through online registration</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_analytics_collection.html">Tutorial: App analytics collection</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_in_app_purchases.html">Tutorial: In-App Purchases on desktop and mobile devices</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_push_notifications.html">Tutorial: Push Notifications on desktop and mobile devices</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Package your app or plugin for distribution_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

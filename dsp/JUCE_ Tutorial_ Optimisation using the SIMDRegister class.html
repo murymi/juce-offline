@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0069)https://docs.juce.com/master/tutorial_simd_register_optimisation.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Optimisation using the SIMDRegister class</title>
+<link href="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/css">
+<script src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Optimisation using the SIMDRegister class</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_simd_instructions">SIMD Instructions</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_iir_filter">The IIR Filter</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_simd_optimised_iir_filter">The SIMD-Optimised IIR Filter</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html#tutorial_simd_register_optimisation_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Take advantage of the processor's parallelism to perform single instruction multiple data calculations. Optimise your audio applications without introducing concurrency.</p>
+<p><span class="headerlabel">Level:</span> Advanced</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/structdsp_1_1SIMDRegister.html" title="A wrapper around the platform&#39;s native SIMD register type.">dsp::SIMDRegister</a>, <a class="el" href="https://docs.juce.com/master/namespacedsp_1_1IIR.html" title="Classes for IIR filter processing.">dsp::IIR</a>, <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessorDuplicator.html" title="Converts a mono processor class into a multi-channel version by duplicating it and applying multichan...">dsp::ProcessorDuplicator</a>, AudioDataConverters, <a class="el" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html" title="Minimal and lightweight data-structure which contains a list of pointers to channels containing some ...">dsp::AudioBlock</a>, <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a></p>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/SIMDRegisterTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/SIMDRegisterTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_demo_project"></a>
+The demo project</h1>
+<p>The demo project can play a loaded audio file through an IIR filter in order to be processed and altered when auditioned. The purpose of this optimisation is to see how much CPU power we can alleviate using SIMD instruction sets on the same IIR filter.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/tutorial_simd_register_optimisation_screenshot1.png" alt="">
+<div class="caption">
+The demo project window</div></div>
+<dl class="section note"><dt>Note</dt><dd>The code presented here is broadly similar to the <b class="onscreen_text">SIMDRegisterDemo</b> from the DSP Demo.</dd></dl>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_simd_instructions"></a>
+SIMD Instructions</h1>
+<p>SIMD stands for "Single Instruction Multiple Data" and refers to the way modern CPUs can apply a single instruction to a set of data by loading numbers into multiple registers and performing the same calculation all at once. In the world of digital signal processing, this type of parallelism is favoured over other types such as MIMD (Multiple Instruction Multiple Data) because concurrency becomes an issue on an audio level. Making sure that the audio thread is not fighting over its data with other threads is paramount and the order of instructions should be kept in the same order in most cases when processing audio.</p>
+<p>SIMD operates on vectors of data streams instead of individual data which makes it even more suitable for audio processing as we are used to receiving blocks of data from the audio buffer. SIMD also thrives when we need to apply the same scalar operation over multiple data points which is something that is very common in DSP algorithms.</p>
+<p>The process of optimising general code is usually done by the compiler automatically nowadays but the vectorisation of DSP algorithms is not always trivial. Compilers are not always able to understand humanly what the algorithm is trying to do in order to optimise correctly. Therefore, this task is usually performed manually and the SIMDRegister class is a handy tool to do this in JUCE.</p>
+<p>The SIMDRegister class is convenient because it handles different processor types for you. Depending on the CPU, the size and number of registers can vary and it can quickly become difficult to account for all CPU vendors. This is all handled by the SIMDRegister class and all we need to do is to specify which sets of instructions we want to vectorise in our algorithms.</p>
+<p>Using the SIMDRegister class is relatively straightforward and it essentially acts as a drop-in replacement for primitive types. Let's take a look at a simple example code such as this one:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">float</span> calculateDSPEffect (<span class="keywordtype">float</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>,</div>
+<div class="line">                          <span class="keywordtype">float</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> z = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> + (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> * 2.0f);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> z;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__juce__audio__plugin__client-Unity_html_gad0da36b2558901e21e7a30f6c227a45e"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> juce_UnityPluginInterface.h:200</div></div>
+<div class="ttc" id="agroup__juce__audio__plugin__client-Unity_html_gae9ace15db486f33243a35ce689893fd9"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a></div><div class="ttdeci">float float y</div><div class="ttdef"><b>Definition</b> juce_UnityPluginInterface.h:200</div></div>
+</div><!-- fragment --><p>This can be easily vectorised by simply wrapping the primitive types with the SIMDRegister class:</p>
+<div class="fragment"><div class="line">SIMDRegister&lt;float&gt; calculateDSPEffect (SIMDRegister&lt;float&gt; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>,</div>
+<div class="line">                                        SIMDRegister&lt;float&gt; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> z = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> + (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> * 2.0f);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> z;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>In DSP code, conditional statements are very slow and branching should be generally avoided as much as possible. Therefore the following example is a good candidate for SIMD optimisation:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">float</span> calculateDSPEffect (<span class="keywordtype">float</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>,</div>
+<div class="line">                          <span class="keywordtype">float</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> z = (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> &gt; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> ? <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> + (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> * 2.0f) : <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> z;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Fortunately, the SIMDRegister class provides us with bit masks that allow us to select the correct result as follows:</p>
+<div class="fragment"><div class="line">SIMDRegister&lt;float&gt; calculateDSPEffect (SIMDRegister&lt;float&gt; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>,</div>
+<div class="line">                                        SIMDRegister&lt;float&gt; <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> mask = SIMDRegister&lt;float&gt;::greaterThan (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>);</div>
+<div class="line">    <span class="keyword">auto</span> z = ((<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> + (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> * 2.0f)) &amp; mask) + (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> &amp; (~mask));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">return</span> z;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>For the purpose of this tutorial we will optimise an IIR filter using SIMD, so let's start by taking a look at the IIR filter implementation.</p>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_iir_filter"></a>
+The IIR Filter</h1>
+<p>In the <code class="project_code">SIMDTutorialFilter</code> class, we first define member variables such as parameters for our filter as shown here:</p>
+<div class="fragment"><div class="line">    <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1ProcessorDuplicator.html">dsp::ProcessorDuplicator&lt;dsp::IIR::Filter&lt;float&gt;</a>, <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html">dsp::IIR::Coefficients&lt;float&gt;</a>&gt; iir;</div>
+<div class="line"> </div>
+<div class="line">    ChoiceParameter typeParam { { <span class="stringliteral">"Low-pass"</span>, <span class="stringliteral">"High-pass"</span>, <span class="stringliteral">"Band-pass"</span> }, 1, <span class="stringliteral">"Type"</span> };</div>
+<div class="line">    SliderParameter cutoffParam { { 20.0, 20000.0 }, 0.5, 440.0f, <span class="stringliteral">"Cutoff"</span>, <span class="stringliteral">"Hz"</span> };</div>
+<div class="line">    SliderParameter qParam { { 0.3, 20.0 }, 0.5, 0.7, <span class="stringliteral">"Q"</span> };</div>
+<div class="line"> </div>
+<div class="line">    std::vector&lt;DSPParameterBase*&gt; parameters { &amp;typeParam, &amp;cutoffParam, &amp;qParam };</div>
+<div class="line">    <span class="keywordtype">double</span> sampleRate = 0.0;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Defining the IIR filter object within a ProcessorDuplicator allows us to convert our mono processor into a multi-channel one automatically by not worrying about calling the prepare(), process() and reset() functions on each channels individually. We also define the parameters of the filter such as the type of pass filter, the cutoff frequency and the sharpness Q of the filter.</p>
+<p>In the updateParameters() function, we make sure that the parameters of the filter are updated when the on-screen controls are modified:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> updateParameters()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (sampleRate != 0.0)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> cutoff = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (cutoffParam.getCurrentValue());</div>
+<div class="line">            <span class="keyword">auto</span> qVal   = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (qParam.getCurrentValue());</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">switch</span> (typeParam.getCurrentSelectedID())</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">case</span> 1:     *iir.state = *<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#a673d25cba8d29e294996a0f03e173c10">dsp::IIR::Coefficients&lt;float&gt;::makeLowPass</a>  (sampleRate, cutoff, qVal); <span class="keywordflow">break</span>;</div>
+<div class="line">                <span class="keywordflow">case</span> 2:     *iir.state = *<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#a7d46d898caab5b76e169460e0a4651e6">dsp::IIR::Coefficients&lt;float&gt;::makeHighPass</a> (sampleRate, cutoff, qVal); <span class="keywordflow">break</span>;</div>
+<div class="line">                <span class="keywordflow">case</span> 3:     *iir.state = *<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#afe88744e3005c8d4442f8bf5de74bcbb">dsp::IIR::Coefficients&lt;float&gt;::makeBandPass</a> (sampleRate, cutoff, qVal); <span class="keywordflow">break</span>;</div>
+<div class="line">                <span class="keywordflow">default</span>:    <span class="keywordflow">break</span>;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Every time a parameter is modified, we create a new state for the IIR filter with a new set of coefficients depending on the sample rate, cutoff frequency and Q. The DSP module provides us with handy coefficients for our three filter types by using the makeLowPass(), makeHighPass() and makeBandPass() functions respectively.</p>
+<p>In the prepare() function, we set the sample rate from the ProcessSpec object, set the IIR filter coefficients for the default case of a low pass filter and prepare the filter using the prepare() function with information on the processing context:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepare (<span class="keyword">const</span> <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html">dsp::ProcessSpec</a>&amp; spec)</div>
+<div class="line">    {</div>
+<div class="line">        sampleRate = spec.<a class="code hl_variable" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html#a6c7c39e922722be2518a973f76a48fa6">sampleRate</a>;</div>
+<div class="line"> </div>
+<div class="line">        iir.state = <a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#a673d25cba8d29e294996a0f03e173c10">dsp::IIR::Coefficients&lt;float&gt;::makeLowPass</a> (sampleRate, 440.0);</div>
+<div class="line">        iir.prepare (spec);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Processing the audio file with the filter is trivial where, in the process() function we call the process() function on the filter with a context where a single block is used for both the input and output:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> process (<span class="keyword">const</span> <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html">dsp::ProcessContextReplacing&lt;float&gt;</a>&amp; context)</div>
+<div class="line">    {</div>
+<div class="line">        iir.process (context);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Finally, we reset the filter by calling reset on the filter in the reset() function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset()</div>
+<div class="line">    {</div>
+<div class="line">        iir.reset();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Let's start optimising this IIR filter now.</p>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_simd_optimised_iir_filter"></a>
+The SIMD-Optimised IIR Filter</h1>
+<p>Before optimising the code of our IIR Filter, we need to ensure that SIMD is available on our system. Use the <code class="project_code">JUCE_USE_SIMD</code> macro to check whether you are developing on a SIMD machine by wrapping the whole filter implementation like so:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#if JUCE_USE_SIMD</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//==============================================================================</span></div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">static</span> T* toBasePointer (<a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1SIMDRegister.html">dsp::SIMDRegister&lt;T&gt;</a>* r) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast&lt;</span>T*<span class="keyword">&gt;</span> (r);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> registerSize = <a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1SIMDRegister.html#a843be034d1658c5ea752469377df8276">dsp::SIMDRegister&lt;float&gt;::size</a>();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>SIMDTutorialFilter</div>
+<div class="line">{</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p>Let's first define member variables for the IIR filter as well as AudioBlock and <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a> objects to facilitate the processing at the bottom of our <code class="project_code">SIMDTutorialFilter</code> class:</p>
+<div class="fragment"><div class="line">    <a class="code hl_class" href="https://docs.juce.com/master/classReferenceCountedObjectPtr.html">dsp::IIR::Coefficients&lt;float&gt;::Ptr</a> iirCoefficients;                 <span class="comment">// [1]</span></div>
+<div class="line">    std::unique_ptr&lt;dsp::IIR::Filter&lt;dsp::SIMDRegister&lt;float&gt;&gt;&gt; iir;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_class" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html">dsp::AudioBlock&lt;dsp::SIMDRegister&lt;float&gt;</a>&gt; interleaved;              <span class="comment">// [2]</span></div>
+<div class="line">    <a class="code hl_class" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html">dsp::AudioBlock&lt;float&gt;</a> zero;</div>
+<div class="line"> </div>
+<div class="line">    juce::HeapBlock&lt;char&gt; interleavedBlockData, zeroData;               <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">    ChoiceParameter typeParam { { <span class="stringliteral">"Low-pass"</span>, <span class="stringliteral">"High-pass"</span>, <span class="stringliteral">"Band-pass"</span> }, 1, <span class="stringliteral">"Type"</span> };</div>
+<div class="line">    SliderParameter cutoffParam { { 20.0, 20000.0 }, 0.5, 440.0f, <span class="stringliteral">"Cutoff"</span>, <span class="stringliteral">"Hz"</span> };</div>
+<div class="line">    SliderParameter qParam { { 0.3, 20.0 }, 0.5, 0.7, <span class="stringliteral">"Q"</span> };</div>
+<div class="line"> </div>
+<div class="line">    std::vector&lt;DSPParameterBase*&gt; parameters { &amp;typeParam, &amp;cutoffParam, &amp;qParam };</div>
+<div class="line">    <span class="keywordtype">double</span> sampleRate = 0.0;</div>
+</div><!-- fragment --><p>Define the IIR coefficients as a pointer and the filter as a unique pointer using the SIMDRegister class to wrap the sample type <span class="comment">[1]</span> . Create an AudioBlock to store interleaved data using the SIMDRegister class to wrap the sample type and another AudioBlock for zero data used later to store the output block <span class="comment">[2]</span> . Allocate <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a> objects to hold the corresponding AudioBlock objects and some channel pointers with the size of the number of elements in a SIMDRegister vector <span class="comment">[3]</span> .</p>
+<p>In the prepare() function, set the sample rate as before and calculate the default coefficients for the filter <span class="comment">[4]</span> . Reset the filter by instantiating a new IIR filter with a SIMDRegister wrapper around the sample type and the coefficients defined earlier <span class="comment">[5]</span> as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepare (<span class="keyword">const</span> <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html">dsp::ProcessSpec</a>&amp; spec)</div>
+<div class="line">    {</div>
+<div class="line">        sampleRate = spec.<a class="code hl_variable" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html#a6c7c39e922722be2518a973f76a48fa6">sampleRate</a>;   <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        iirCoefficients = <a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#a673d25cba8d29e294996a0f03e173c10">dsp::IIR::Coefficients&lt;float&gt;::makeLowPass</a> (sampleRate, 440.0f);</div>
+<div class="line">        iir.reset (<span class="keyword">new</span> <a class="code hl_class" href="https://docs.juce.com/master/classdsp_1_1IIR_1_1Filter.html">dsp::IIR::Filter</a>&lt;<a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1SIMDRegister.html">dsp::SIMDRegister&lt;float&gt;</a>&gt; (iirCoefficients)); <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        interleaved = <a class="code hl_class" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html">dsp::AudioBlock&lt;dsp::SIMDRegister&lt;float&gt;</a>&gt; (interleavedBlockData, 1, spec.<a class="code hl_variable" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html#aa57b782ce7ef5dd262ed688b39d7ac26">maximumBlockSize</a>);</div>
+<div class="line">        zero        = <a class="code hl_class" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html">dsp::AudioBlock&lt;float&gt;</a> (zeroData, <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1SIMDRegister.html">dsp::SIMDRegister&lt;float&gt;::size</a>(), spec.<a class="code hl_variable" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html#aa57b782ce7ef5dd262ed688b39d7ac26">maximumBlockSize</a>); <span class="comment">// [6]</span></div>
+<div class="line"> </div>
+<div class="line">        zero.<a class="code hl_function" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html#af8755835909fb3f39f9ee503114e86f9">clear</a>();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> monoSpec = spec;</div>
+<div class="line">        monoSpec.<a class="code hl_variable" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html#a272bee80f09ed6b4c573de9e2f3b245e">numChannels</a> = 1;</div>
+<div class="line">        iir-&gt;prepare (monoSpec);    <span class="comment">// [7]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Create the AudioBlock objects for the interleaved data and the zero data by allocating the corresponding <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a> objects defined earlier <span class="comment">[6]</span> . The interleaved data block only need one channel and the maximum block size is retrieved from the context information. The zero data block takes the size of the SIMDRegister vector and is cleared before processing. The filter is prepared by reducing the number of channels to mono on the present context information <span class="comment">[7]</span> as the multi-channel samples will be interleaved later and processed as one channel.</p>
+<p>Finally, in the process() function we will interleave the samples for optimised processing like follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> process (<span class="keyword">const</span> <a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html">dsp::ProcessContextReplacing&lt;float&gt;</a>&amp; context)</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (context.<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html#af92e824fbee9a1582bdfa5f97b601d3e">getInputBlock</a>().<a class="code hl_function" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html#a34e1eaae7db4a3a9235ecbf4c841a360">getNumSamples</a>()  == context.<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html#aaabf11b9d3f82c3d231856cf3b210421">getOutputBlock</a>().<a class="code hl_function" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html#a34e1eaae7db4a3a9235ecbf4c841a360">getNumSamples</a>());</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (context.<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html#af92e824fbee9a1582bdfa5f97b601d3e">getInputBlock</a>().<a class="code hl_function" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html#a152734caabb996c56c34e10b2ff3698a">getNumChannels</a>() == context.<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html#aaabf11b9d3f82c3d231856cf3b210421">getOutputBlock</a>().<a class="code hl_function" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html#a152734caabb996c56c34e10b2ff3698a">getNumChannels</a>());</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; input  = context.<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html#af92e824fbee9a1582bdfa5f97b601d3e">getInputBlock</a>(); <span class="comment">// [9]</span></div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> numSamples = (int) input.<a class="code hl_function" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html#a34e1eaae7db4a3a9235ecbf4c841a360">getNumSamples</a>();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> inChannels = prepareChannelPointers (input); <span class="comment">// [10]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">using </span>Format = juce::AudioData::Format&lt;juce::AudioData::Float32, juce::AudioData::NativeEndian&gt;;</div>
+<div class="line"> </div>
+<div class="line">        juce::AudioData::interleaveSamples (juce::AudioData::NonInterleavedSource&lt;Format&gt; { inChannels.data(),                                 registerSize, },</div>
+<div class="line">                                            juce::AudioData::InterleavedDest&lt;Format&gt;      { toBasePointer (interleaved.getChannelPointer (0)), registerSize },</div>
+<div class="line">                                            numSamples); <span class="comment">// [11]</span></div>
+<div class="line"> </div>
+<div class="line">        iir-&gt;process (<a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html">dsp::ProcessContextReplacing</a>&lt;<a class="code hl_struct" href="https://docs.juce.com/master/structdsp_1_1SIMDRegister.html">dsp::SIMDRegister&lt;float&gt;</a>&gt; (interleaved)); <span class="comment">// [12]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> outChannels = prepareChannelPointers (context.<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html#aaabf11b9d3f82c3d231856cf3b210421">getOutputBlock</a>()); <span class="comment">// [13]</span></div>
+<div class="line"> </div>
+<div class="line">        juce::AudioData::deinterleaveSamples (juce::AudioData::InterleavedSource&lt;Format&gt;  { toBasePointer (interleaved.getChannelPointer (0)), registerSize },</div>
+<div class="line">                                              juce::AudioData::NonInterleavedDest&lt;Format&gt; { outChannels.data(),                                registerSize },</div>
+<div class="line">                                              numSamples); <span class="comment">// [14]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[8]</span> : First, make sure that the number of samples and the number of channels is the same for the input and output blocks.</li>
+<li><span class="comment">[9]</span> : Next, retrieve the input block and the number of samples to process.</li>
+<li><span class="comment">[10]</span> : For every channel in a SIMDRegister, check whether the channel is an input channel and copy the channel pointer into the corresponding <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a>. Otherwise, it means that it is an output channel and we copy the zero data channel pointer.</li>
+<li><span class="comment">[11]</span> : Now we interleave all the samples for the different channels by copying from the channel pointers <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a> into the interleaved AudioBlock and specifying the number of samples and the number of channels as the SIMDRegister size.</li>
+<li><span class="comment">[12]</span> : Process the audio with the filter using the interleaved data in a single block context with a SIMDRegister wrapper on the sample type.</li>
+<li><span class="comment">[13]</span> : Then, for every input channel, copy the output block channel pointer into the corresponding <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a>.</li>
+<li><span class="comment">[14]</span> : Finally, we deinterleave all the samples for the different channels by copying from the interleaved AudioBlock into the channel pointers <a class="el" href="https://docs.juce.com/master/classHeapBlock.html" title="Very simple container class to hold a pointer to some data on the heap.">HeapBlock</a> and specifying the number of samples and the number of channels as the SIMDRegister size.</li>
+</ul>
+<p>The reset() function of the filter remains the same in both cases and the optimisation is complete.</p>
+<p>We just have to update the updateParameters() function to account for the new coefficients pointer as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> updateParameters()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (sampleRate != 0.0)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> cutoff = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (cutoffParam.getCurrentValue());</div>
+<div class="line">            <span class="keyword">auto</span> qVal   = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span> (qParam.getCurrentValue());</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">switch</span> (typeParam.getCurrentSelectedID())</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">case</span> 1:   *iirCoefficients = *<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#a673d25cba8d29e294996a0f03e173c10">dsp::IIR::Coefficients&lt;float&gt;::makeLowPass</a>  (sampleRate, cutoff, qVal); <span class="keywordflow">break</span>;</div>
+<div class="line">                <span class="keywordflow">case</span> 2:   *iirCoefficients = *<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#a7d46d898caab5b76e169460e0a4651e6">dsp::IIR::Coefficients&lt;float&gt;::makeHighPass</a> (sampleRate, cutoff, qVal); <span class="keywordflow">break</span>;</div>
+<div class="line">                <span class="keywordflow">case</span> 3:   *iirCoefficients = *<a class="code hl_function" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html#afe88744e3005c8d4442f8bf5de74bcbb">dsp::IIR::Coefficients&lt;float&gt;::makeBandPass</a> (sampleRate, cutoff, qVal); <span class="keywordflow">break</span>;</div>
+<div class="line">                <span class="keywordflow">default</span>:  <span class="keywordflow">break</span>;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">SIMDRegisterTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to optimise DSP code using the SIMDRegister class. In particular, we have:</p>
+<ul>
+<li>Learnt the advantages of SIMD instructions.</li>
+<li>Processed a sound file through an IIR filter.</li>
+<li>Optimised the IIR filter using the SIMDRegister class.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_simd_register_optimisation_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_thumbnail.html">Tutorial: Draw audio waveforms</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Tutorial: Build an audio player</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_dsp_introduction.html">Tutorial: Introduction to DSP</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_looping_audio_sample_buffer.html">Tutorial: Looping audio using the AudioSampleBuffer class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_looping_audio_sample_buffer_advanced.html">Tutorial: Looping audio using the AudioSampleBuffer class (advanced)</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Optimisation using the SIMDRegister class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

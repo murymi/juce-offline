@@ -1,0 +1,967 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0061)https://docs.juce.com/master/tutorial_push_notifications.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Push Notifications on desktop and mobile devices</title>
+<link href="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/css">
+<script src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Push Notifications on desktop and mobile devices</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup">Initial Setup</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_apple_developer">Apple Developer</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_pusher">Pusher</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_generate_certificate">Generate an SSL Certificate</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_google_firebase">Google Firebase</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_generate_google_services">Generate google-services.json file</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_notification_types">Notification Types</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_registering_listener">Registering as a Listener</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_requesting_permissions">Requesting Permissions</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_requesting_permissions_macos_ios">Requesting Permissions on macOS/iOS</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_requesting_permissions_android">Requesting Permissions on Android</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_local_notifications">Local notifications</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_remote_notifications">Remote notifications</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_remote_notifications_macos_ios">Remote notifications on macOS/iOS</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_remote_notifications_android">Remote notifications on Android</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_handling_received_notifications">Handling received notifications</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_customising_notifications">Customising notifications</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Trigger local and remote notifications in your desktop and mobile applications. Learn how to send push notifications from a remote server to both macOS/iOS and Android devices.</p>
+<p><span class="headerlabel">Level:</span> Advanced</p>
+<p><span class="headerlabel">Platforms:</span> macOS , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Listener.html" title="Register a listener (ideally on application startup) to receive information about notifications recei...">PushNotifications::Listener</a>, <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Notification.html" title="Represents a notification that can be sent or received.">PushNotifications::Notification</a>, <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Channel.html" title="Android API level 26 or higher only: Represents notification channel through which notifications will...">PushNotifications::Channel</a>, <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Settings.html" title="Describes settings we want to use for current device.">PushNotifications::Settings</a></p>
+<dl class="section warning"><dt>Warning</dt><dd>This project requires an Apple Developer account on macOS/iOS and a Google Firebase account on Android. If you need help with this, follow the instructions on the <a href="https://developer.apple.com/account/">Apple Developer</a> and <a href="https://console.firebase.google.com/">Google Firebase</a> websites to open up these accounts.</dd>
+<dd>
+This project also requires a physical device to test push notifications as simulators do not support remote testing. Please make sure you have a device ready for this.</dd>
+<dd>
+The features supported in Push Notifications will vary depending on platforms and OS versions. For macOS, a minimum of 10.7 is required for remote notifications and 10.8 for local notifications. For Android, a minimum API of 14 (Ice Cream Sandwich) is required for remote notifications and a minimum of 27 for notification channels. The tutorial has a minimum SDK version of 23, but you are welcome to change it to be 14 or above.</dd></dl>
+<h1><a class="anchor" id="tutorial_push_notifications_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/PushNotificationsTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/PushNotificationsTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If using the PIP version of this project, please make sure to copy the <code class="filename">Resources</code> folder into the generated Projucer project.</dd></dl>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_push_notifications_demo_project"></a>
+The demo project</h1>
+<p>The project provides a comprehensive user interface to send and receive both local and remote notifications. Separate tables are displayed to organise notification parameters and identifiers. If we run the mobile application in the iOS simulator, the window should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot1.png" alt="">
+<div class="caption">
+The demo project app window on iOS</div></div>
+<dl class="section note"><dt>Note</dt><dd>The code presented here is broadly similar to the <b class="onscreen_text">PushNotificationsDemo</b> from the JUCE Examples.</dd></dl>
+<h1><a class="anchor" id="tutorial_push_notifications_initial_setup"></a>
+Initial Setup</h1>
+<p>In order for this project to function properly, we have to perform some initial setup procedures with appropriate developer consoles for specific deployment platform. Let's first allow appropriate permissions for push notifications in the Projucer. Under macOS and iOS, make sure to enable the <b class="onscreen_text">Push Notifications capability</b> field. Under Android, make sure to enable the <b class="onscreen_text">Remote Notifications</b> field.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot2_ios.png" alt="">
+<div class="caption">
+Project settings window on iOS</div></div>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot2_android.png" alt="">
+<div class="caption">
+Project settings window on Android</div></div>
+<p>We also need to specify custom Xcode resource folders for both macOS and iOS in order for the resources to be bundled in the executable as shown below:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot2_resources_macos.png" alt="">
+<div class="caption">
+Custom resources on macOS</div></div>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot2_resources_ios.png" alt="">
+<div class="caption">
+Custom resources on iOS</div></div>
+<p>Lastly, on Android we have to specify each resource we want to add in the executable individually as raw resources in both "Debug" and "Release" exporter settings as follows:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot2_resources_android_debug.png" alt="">
+<div class="caption">
+Raw resources on Android (Debug)</div></div>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot2_resources_android_release.png" alt="">
+<div class="caption">
+Raw resources on Android (Release)</div></div>
+<p>The full list of resources needed is the following:</p>
+<div class="fragment"><div class="line">../Resources/sounds/demonstrative.mp3</div>
+<div class="line">../Resources/sounds/isntit.mp3</div>
+<div class="line">../Resources/sounds/jinglebellssms.mp3</div>
+<div class="line">../Resources/sounds/served.mp3</div>
+<div class="line">../Resources/sounds/solemn.mp3</div>
+<div class="line">../Resources/images/ic_stat_name.png</div>
+<div class="line">../Resources/images/ic_stat_name2.png</div>
+<div class="line">../Resources/images/ic_stat_name3.png</div>
+<div class="line">../Resources/images/ic_stat_name4.png</div>
+<div class="line">../Resources/images/ic_stat_name5.png</div>
+</div><!-- fragment --><p>The Projucer will automatically add the required entitlements to your deployment targets when saving the project and opening in your favourite IDE.</p>
+<h2><a class="anchor" id="tutorial_push_notifications_initial_setup_apple_developer"></a>
+Apple Developer</h2>
+<dl class="section note"><dt>Note</dt><dd>If developing for Android, please skip to the next section <a class="el" href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_google_firebase">Google Firebase</a> for instructions.</dd></dl>
+<p>On macOS and iOS, you will need to sign in with your Apple Developer account within Xcode and choose a development team in order to sign the application. Choose a unique bundle ID for your project. Xcode should automatically provide you with a Signing Certificate and Provisioning Profile as shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot3.png" alt="">
+<div class="caption">
+General settings window in Xcode</div></div>
+<p>Also make sure that the correct app capabilities have been ticked and approved in the <b class="onscreen_text">Capabilities</b> settings window. You should see the same information as follows (note there is no Background Modes section on macOS):</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot4.png" alt="">
+<div class="caption">
+Capabilities settings window in Xcode</div></div>
+<h2><a class="anchor" id="tutorial_push_notifications_initial_setup_pusher"></a>
+Pusher</h2>
+<p>In order to test remote notifications on iOS, we require a server or an application that will send notifications using the Apple Push Notification Service (APNs). We could make use of Google Firebase to test these (like we do for the Android side of things), but thankfully there is an easier solution using an app called <a href="https://github.com/noodlewerk/NWPusher">Pusher</a>. We recommend this application for the purpose of this tutorial but you can use any other service of your choice that uses APNs.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_pusher_screenshot1.png" alt="">
+<div class="caption">
+The Pusher app to test remote notifications</div></div>
+<h2><a class="anchor" id="tutorial_push_notifications_initial_setup_generate_certificate"></a>
+Generate an SSL Certificate</h2>
+<p>In order to send push notifications using the Pusher app, we need to generate an SSL certificate. To do this, log in to your Apple Developer account and navigate to your app ID on the <b class="onscreen_text">Certificates, IDs &amp; Profiles</b> page. You should be able to configure the Push Notifications service by clicking on the <b class="onscreen_text">Edit</b> button at the bottom of the list. Follow the instructions on the website to create a certificate as shown on the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot5.png" alt="">
+<div class="caption">
+Generate an SSL Certificate on the Apple Developer portal</div></div>
+<p>Once the certificate is generated and downloaded, double-click on it to add it to your Keychain. You will be able to select it in the Pusher app under the certificate dropdown as it will be listed automatically from your Keychain.</p>
+<h2><a class="anchor" id="tutorial_push_notifications_initial_setup_google_firebase"></a>
+Google Firebase</h2>
+<dl class="section note"><dt>Note</dt><dd>If developing for macOS/iOS, please jump to the previous section <a class="el" href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_initial_setup_apple_developer">Apple Developer</a> for instructions.</dd></dl>
+<p>For the purpose of this tutorial, we make use of Google Firebase to test remote notifications on Android. First, create a new project in the Firebase console and add an Android app to the project. Choose a unique package name for your project. If you navigate to the <b class="onscreen_text">Cloud Messaging</b> tab in the project settings, you can access the server sender ID on the following screen:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot6.png" alt="">
+<div class="caption">
+Server sender ID in Google Firebase</div></div>
+<p>Insert this sender ID in the following code snippet of the <code class="project_code">MainContentComponent</code> constructor:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">      #if JUCE_ANDROID</span></div>
+<div class="line">        remoteView.sendRemoteMessageButton.onClick = [<span class="keyword">this</span>]</div>
+<div class="line">        {</div>
+<div class="line">            juce::StringPairArray data;</div>
+<div class="line">            data.set (<span class="stringliteral">"key1"</span>, <span class="stringliteral">"value1"</span>);</div>
+<div class="line">            data.set (<span class="stringliteral">"key2"</span>, <span class="stringliteral">"value2"</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">static</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 100;</div>
+<div class="line">            juce::PushNotifications::getInstance()-&gt;sendUpstreamMessage (<span class="stringliteral">"XXXXXXXXXXXX"</span>, <span class="comment">// Insert sender ID here</span></div>
+<div class="line">                                                                         <span class="stringliteral">"com.juce.pushnotificationstutorial"</span>,</div>
+<div class="line">                                                                         juce::String (<span class="keywordtype">id</span>++),</div>
+<div class="line">                                                                         <span class="stringliteral">"standardType"</span>,</div>
+<div class="line">                                                                         3600,</div>
+<div class="line">                                                                         data);</div>
+<div class="line">        };</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Make sure that the bundle ID in Google Firebase matches the one in your project settings (all in lowercase).</dd></dl>
+<h2><a class="anchor" id="tutorial_push_notifications_initial_setup_generate_google_services"></a>
+Generate google-services.json file</h2>
+<p>We also need to download the Firebase configuration file for remote notifications on Android. Navigate to the <b class="onscreen_text">General</b> tab in the project settings and click on download <b class="onscreen_text">google-services.json</b> as shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot7.png" alt="">
+<div class="caption">
+Download json file from Google Firebase</div></div>
+<p>Copy the file in your JUCE project directory and insert the relative path to the google-services.json file under the Android exporter settings in the <b class="onscreen_text">Remote Notifications Config File</b> field:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/tutorial_push_notifications_screenshot8.png" alt="">
+<div class="caption">
+Path for google-services file in exporter settings</div></div>
+<dl class="section note"><dt>Note</dt><dd>You can also specify a path to google-services.json separately for each target under the "Debug" and "Release" sections. These will override the settings in the main Android exporter section.</dd></dl>
+<p>Setup for push notifications should be complete by now and we can finally start implementing these features into the app.</p>
+<h1><a class="anchor" id="tutorial_push_notifications_notification_types"></a>
+Notification Types</h1>
+<p>Notifications are useful to keep users informed with relevant content whether the app is running or not. They can simply display a message, show a dialog box or even play a sound. In general, there are two main types of notifications on all relevant platforms:</p>
+<ul>
+<li>Local: Triggered locally by the system, they do not require internet connection and can be scheduled by the app to fire even when the app is inactive.</li>
+<li>Remote: Pushed by a remote server, they require internet connection but can be sent anytime based on data received from customer devices.</li>
+</ul>
+<p>Let's first look at simple local notifications that we can fire within the app.</p>
+<h1><a class="anchor" id="tutorial_push_notifications_registering_listener"></a>
+Registering as a Listener</h1>
+<p>The <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> class in JUCE is implemented as a <a href="https://en.wikipedia.org/wiki/Singleton_pattern">singleton</a> and its global instance can be accessed anytime using the function <code class="project_code">PushNotifications::getInstance()</code> . The <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> class offers an asynchronous interface where results of actions are propagated using the <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Listener.html" title="Register a listener (ideally on application startup) to receive information about notifications recei...">PushNotifications::Listener</a> interface. Simply register a listener with the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance to receive the callbacks. Consequently in the <code class="project_code">MainContentComponent</code> class, we inherit from <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Listener.html" title="Register a listener (ideally on application startup) to receive information about notifications recei...">PushNotifications::Listener</a> <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                               <span class="keyword">private</span> juce::ChangeListener,</div>
+<div class="line">                               <span class="keyword">private</span> juce::ComponentListener,</div>
+<div class="line">                               <span class="keyword">private</span> juce::PushNotifications::Listener <span class="comment">// [1]</span></div>
+<div class="line">{</div>
+</div><!-- fragment --><p>In the constructor of the <code class="project_code">MainContentComponent</code> class, we add this class as a listener to the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance <span class="comment">[2]</span> :</p>
+<div class="fragment"><div class="line">        juce::PushNotifications::getInstance()-&gt;addListener (<span class="keyword">this</span>);     <span class="comment">// [2]</span></div>
+</div><!-- fragment --><p>We also make sure to unsubscribe in the class destructor like so <span class="comment">[3]</span> :</p>
+<div class="fragment"><div class="line">    ~MainContentComponent()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::PushNotifications::getInstance()-&gt;removeListener (<span class="keyword">this</span>);  <span class="comment">// [3]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><h1><a class="anchor" id="tutorial_push_notifications_requesting_permissions"></a>
+Requesting Permissions</h1>
+<p>Before sending any type of notification, we first need to request permission to do so from the user. This is requested only once when the app is first launched and the settings remain saved until app deletion or until the user revokes the rights in the system settings. Therefore it is good practice to request permissions on each application startup and only when permission is not granted will the user be asked to grant it. On macOS/iOS, we call the <code class="project_code">requestPermissionsWithSettings()</code> function which takes a <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Settings.html" title="Describes settings we want to use for current device.">PushNotifications::Settings</a> object as an argument <span class="comment">[4]</span> . On Android, we call the <code class="project_code">setupChannels()</code> function which takes a <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1ChannelGroup.html" title="Android API level 26 or higher only: represents a channel group.">PushNotifications::ChannelGroup</a> object and <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Channel.html" title="Android API level 26 or higher only: Represents notification channel through which notifications will...">PushNotifications::Channel</a> objects as arguments <span class="comment">[5]</span> .</p>
+<div class="fragment"><div class="line"><span class="preprocessor">      #if JUCE_IOS || JUCE_MAC</span></div>
+<div class="line">        paramControls.fireInComboBox.onChange = [<span class="keyword">this</span>] { delayNotification(); };</div>
+<div class="line">        juce::PushNotifications::getInstance()-&gt;requestPermissionsWithSettings (getNotificationSettings()); <span class="comment">// [4]</span></div>
+<div class="line"><span class="preprocessor">      #elif JUCE_ANDROID</span></div>
+<div class="line">        juce::PushNotifications::ChannelGroup cg { <span class="stringliteral">"demoGroup"</span>, <span class="stringliteral">"demo group"</span> };</div>
+<div class="line">        juce::PushNotifications::getInstance()-&gt;setupChannels ({{ cg }}, getAndroidChannels());             <span class="comment">// [5]</span></div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Note that setupChannels() is only required from Android Oreo (API 26) onwards and it is ignored on earlier Android versions.</dd></dl>
+<h2><a class="anchor" id="tutorial_push_notifications_requesting_permissions_macos_ios"></a>
+Requesting Permissions on macOS/iOS</h2>
+<p>Let's first take a look at the macOS/iOS side.</p>
+<p>There are three different types of permissions we need to request namely Alerts, Badges and Sounds. To facilitate this initialisation, we have created a <code class="project_code">getNotificationSettings()</code> function where we insert this code. On the <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Settings.html" title="Describes settings we want to use for current device.">PushNotifications::Settings</a> object, set the corresponding variables to allow these features <span class="comment">[6]</span> . If you are deploying on macOS, this is all you need to request and you can return from the function. However, on iOS we have to define Action and Category objects defined as follows:</p>
+<ul>
+<li>Action: Represents an action that can be presented as a button or a text input to a notification.</li>
+<li>Category: Represents a set of actions that appear together in a notification.</li>
+</ul>
+<p>In the same function, define actions and categories as follows:</p>
+<div class="fragment"><div class="line">    <span class="keyword">static</span> juce::PushNotifications::Settings getNotificationSettings()</div>
+<div class="line">    {</div>
+<div class="line">        juce::PushNotifications::Settings settings;                             <span class="comment">// [6]</span></div>
+<div class="line">        settings.allowAlert = <span class="keyword">true</span>;</div>
+<div class="line">        settings.allowBadge = <span class="keyword">true</span>;</div>
+<div class="line">        settings.allowSound = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">      #if JUCE_IOS</span></div>
+<div class="line">        <span class="keyword">using </span>Action   = juce::PushNotifications::Settings::Action;</div>
+<div class="line">        <span class="keyword">using </span>Category = juce::PushNotifications::Settings::Category;</div>
+<div class="line"> </div>
+<div class="line">        Action okAction;</div>
+<div class="line">        okAction.identifier = <span class="stringliteral">"okAction"</span>;</div>
+<div class="line">        okAction.title = <span class="stringliteral">"OK!"</span>;</div>
+<div class="line">        okAction.style = Action::button;</div>
+<div class="line">        okAction.triggerInBackground = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">        Action cancelAction;</div>
+<div class="line">        cancelAction.identifier = <span class="stringliteral">"cancelAction"</span>;</div>
+<div class="line">        cancelAction.title = <span class="stringliteral">"Cancel"</span>;</div>
+<div class="line">        cancelAction.style = Action::button;</div>
+<div class="line">        cancelAction.triggerInBackground = <span class="keyword">true</span>;</div>
+<div class="line">        cancelAction.destructive = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">        Action textAction;</div>
+<div class="line">        textAction.identifier = <span class="stringliteral">"textAction"</span>;</div>
+<div class="line">        textAction.title = <span class="stringliteral">"Enter text"</span>;</div>
+<div class="line">        textAction.style = Action::text;</div>
+<div class="line">        textAction.triggerInBackground = <span class="keyword">true</span>;</div>
+<div class="line">        textAction.destructive = <span class="keyword">false</span>;</div>
+<div class="line">        textAction.textInputButtonText = <span class="stringliteral">"Ok"</span>;</div>
+<div class="line">        textAction.textInputPlaceholder = <span class="stringliteral">"Enter text..."</span>;</div>
+<div class="line"> </div>
+<div class="line">        Category okCategory;</div>
+<div class="line">        okCategory.identifier = <span class="stringliteral">"okCategory"</span>;</div>
+<div class="line">        okCategory.actions = { okAction };</div>
+<div class="line"> </div>
+<div class="line">        Category okCancelCategory;</div>
+<div class="line">        okCancelCategory.identifier = <span class="stringliteral">"okCancelCategory"</span>;</div>
+<div class="line">        okCancelCategory.actions = { okAction, cancelAction };</div>
+<div class="line"> </div>
+<div class="line">        Category textCategory;</div>
+<div class="line">        textCategory.identifier = <span class="stringliteral">"textCategory"</span>;</div>
+<div class="line">        textCategory.actions = { textAction };</div>
+<div class="line">        textCategory.sendDismissAction = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">        settings.categories = { okCategory, okCancelCategory, textCategory };   <span class="comment">// [7]</span></div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> settings;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we have created three different actions and three different categories:</p>
+<ul>
+<li>OK Action: Specifies the action style as a button with an appropriate "OK" title that triggers in the background.</li>
+<li>Cancel Action: Specifies the action style as a button with an appropriate "Cancel" title that triggers in the background and appears as destructive.</li>
+<li>Text Action: Specifies the action style as a text input with appropriate placeholders and button text that triggers in the background.</li>
+<li>OK Category: Represents only the "OK Action".</li>
+<li>OK/Cancel Category: Represents the "OK Action" and the "Cancel Action".</li>
+<li>Text Category: Represents only the "Text Action" and specifies that a dismiss action will be sent.</li>
+</ul>
+<p>All these categories are returned in the <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Settings.html" title="Describes settings we want to use for current device.">PushNotifications::Settings</a> object <span class="comment">[7]</span> .</p>
+<h2><a class="anchor" id="tutorial_push_notifications_requesting_permissions_android"></a>
+Requesting Permissions on Android</h2>
+<p>Now let's take a look at the Android side.</p>
+<p>There are different channels of importance that we can define with corresponding settings and these channels can in turn be part of channel groups to separate notifications visually. To facilitate this initialisation, we have created a <code class="project_code">getAndroidChannels()</code> function where we insert this code. Create three different <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Channel.html" title="Android API level 26 or higher only: Represents notification channel through which notifications will...">PushNotifications::Channel</a> objects to specify different parameters <span class="comment">[8]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keyword">static</span> juce::Array&lt;juce::PushNotifications::Channel&gt; getAndroidChannels()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">using </span>Channel = juce::PushNotifications::Channel;</div>
+<div class="line"> </div>
+<div class="line">        Channel ch1, ch2, ch3;</div>
+<div class="line"> </div>
+<div class="line">        ch1.identifier = <span class="stringliteral">"1"</span>;</div>
+<div class="line">        ch1.name = <span class="stringliteral">"HighImportance"</span>;</div>
+<div class="line">        ch1.importance = juce::PushNotifications::Channel::max;</div>
+<div class="line">        ch1.lockScreenAppearance = juce::PushNotifications::Notification::showCompletely;</div>
+<div class="line">        ch1.description = <span class="stringliteral">"High Priority Channel for important stuff"</span>;</div>
+<div class="line">        ch1.groupId = <span class="stringliteral">"demoGroup"</span>;</div>
+<div class="line">        ch1.ledColour = juce::Colours::red;</div>
+<div class="line">        ch1.bypassDoNotDisturb = <span class="keyword">true</span>;</div>
+<div class="line">        ch1.canShowBadge = <span class="keyword">true</span>;</div>
+<div class="line">        ch1.enableLights = <span class="keyword">true</span>;</div>
+<div class="line">        ch1.enableVibration = <span class="keyword">true</span>;</div>
+<div class="line">        ch1.soundToPlay = juce::URL (<span class="stringliteral">"demonstrative"</span>);</div>
+<div class="line">        ch1.vibrationPattern = { 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200 };</div>
+<div class="line"> </div>
+<div class="line">        ch2.identifier = <span class="stringliteral">"2"</span>;</div>
+<div class="line">        ch2.name = <span class="stringliteral">"MediumImportance"</span>;</div>
+<div class="line">        ch2.importance = juce::PushNotifications::Channel::normal;</div>
+<div class="line">        ch2.lockScreenAppearance = juce::PushNotifications::Notification::showPartially;</div>
+<div class="line">        ch2.description = <span class="stringliteral">"Medium Priority Channel for standard stuff"</span>;</div>
+<div class="line">        ch2.groupId = <span class="stringliteral">"demoGroup"</span>;</div>
+<div class="line">        ch2.ledColour = juce::Colours::yellow;</div>
+<div class="line">        ch2.canShowBadge = <span class="keyword">true</span>;</div>
+<div class="line">        ch2.enableLights = <span class="keyword">true</span>;</div>
+<div class="line">        ch2.enableVibration = <span class="keyword">true</span>;</div>
+<div class="line">        ch2.soundToPlay = juce::URL (<span class="stringliteral">"default_os_sound"</span>);</div>
+<div class="line">        ch2.vibrationPattern = { 1000, 1000 };</div>
+<div class="line"> </div>
+<div class="line">        ch3.identifier = <span class="stringliteral">"3"</span>;</div>
+<div class="line">        ch3.name = <span class="stringliteral">"LowImportance"</span>;</div>
+<div class="line">        ch3.importance = juce::PushNotifications::Channel::min;</div>
+<div class="line">        ch3.lockScreenAppearance = juce::PushNotifications::Notification::dontShow;</div>
+<div class="line">        ch3.description = <span class="stringliteral">"Low Priority Channel for silly stuff"</span>;</div>
+<div class="line">        ch3.groupId = <span class="stringliteral">"demoGroup"</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> { ch1, ch2, ch3 };</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li>Channel 1: Represents the highest importance in notifications. We can specify parameters such as colours to be red, "Do Not Disturb" to be bypassed, a custom vibration pattern to be activated and even a custom sound file to be played.</li>
+<li>Channel 2: Represents a medium importance in notifications. This time we specify colours to be yellow, a different vibration pattern to be activated and a different custom sound file to be played.</li>
+<li>Channel 3: Represents the lowest importance in notifications. We decide to leave the default parameters on these.</li>
+</ul>
+<p>All these channels are returned as an array of <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Channel.html" title="Android API level 26 or higher only: Represents notification channel through which notifications will...">PushNotifications::Channel</a> objects belonging to the same <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1ChannelGroup.html" title="Android API level 26 or higher only: represents a channel group.">PushNotifications::ChannelGroup</a> <span class="comment">[9]</span> .</p>
+<dl class="section note"><dt>Note</dt><dd>The getAndroidChannels() implementation must configure channels correctly by providing at least an identifier, a name and a group ID per channel.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Feel free to experiment and change these settings to get familiar with notification permissions on these platforms. </dd>
+</dl>
+<p>Setup for notifications is now complete on all platforms.</p>
+<h1><a class="anchor" id="tutorial_push_notifications_local_notifications"></a>
+Local notifications</h1>
+<p>When the user clicks on the send button in the local notifications tab, the following <code class="project_code">sendLocalNotification()</code> function is called. This function first creates a <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Notification.html" title="Represents a notification that can be sent or received.">PushNotifications::Notification</a> object that we subsequently fill with corresponding parameters from the user interface input <span class="comment">[1]</span> . If the notification object is invalid due to incorrect parameters, we optionally show a message for the purpose of this tutorial <span class="comment">[2]</span> . Otherwise, if the object is valid we can call the <code class="project_code">sendLocalNotification()</code> function on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance <span class="comment">[3]</span> .</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> sendLocalNotification()</div>
+<div class="line">    {</div>
+<div class="line">        juce::PushNotifications::Notification n;                            <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        fillRequiredParams (n);                                             <span class="comment">// [4]</span></div>
+<div class="line">        fillOptionalParamsOne (n);</div>
+<div class="line"><span class="preprocessor">      #if JUCE_ANDROID</span></div>
+<div class="line">        fillOptionalParamsTwo (n);</div>
+<div class="line">        fillOptionalParamsThree (n);</div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (! n.isValid())                                                  <span class="comment">// [2]</span></div>
+<div class="line">        {</div>
+<div class="line"><span class="preprocessor">          #if JUCE_IOS</span></div>
+<div class="line">            juce::String requiredFields = <span class="stringliteral">"identifier (from iOS 10), title, body and category"</span>;</div>
+<div class="line"><span class="preprocessor">          #elif JUCE_ANDROID</span></div>
+<div class="line">            juce::String requiredFields = <span class="stringliteral">"channel ID (from Android O), title, body and icon"</span>;</div>
+<div class="line"><span class="preprocessor">          #else</span></div>
+<div class="line">            juce::String requiredFields = <span class="stringliteral">"all required fields"</span>;</div>
+<div class="line"><span class="preprocessor">          #endif</span></div>
+<div class="line"> </div>
+<div class="line">            juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                         <span class="stringliteral">"Incorrect notifications setup"</span>,</div>
+<div class="line">                                                         <span class="stringliteral">"Please make sure that "</span></div>
+<div class="line">                                                         + requiredFields + <span class="stringliteral">" are set."</span>);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        juce::PushNotifications::getInstance()-&gt;sendLocalNotification (n);  <span class="comment">// [3]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>For now, we will focus on the required parameters that we fill in the <code class="project_code">fillRequiredParams()</code> function where we pass the previously defined <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Notification.html" title="Represents a notification that can be sent or received.">PushNotifications::Notification</a> object as an argument <span class="comment">[4]</span> .</p>
+<dl class="section note"><dt>Note</dt><dd>If interested by the optional parameters of push notifications, please refer to the last section of this tutorial <a class="el" href="https://docs.juce.com/master/tutorial_push_notifications.html#tutorial_push_notifications_customising_notifications">Customising notifications</a> where we will cover this in depth.</dd></dl>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> fillRequiredParams      (juce::PushNotifications::Notification&amp; n)</div>
+<div class="line">    {</div>
+<div class="line">        n.identifier = paramControls.identifierEditor.getText();            <span class="comment">// [5.1]</span></div>
+<div class="line">        n.title = paramControls.titleEditor.getText();                      <span class="comment">// [5.2]</span></div>
+<div class="line">        n.body = paramControls.bodyEditor.getText();                        <span class="comment">// [5.3]</span></div>
+<div class="line"><span class="preprocessor">      #if JUCE_IOS</span></div>
+<div class="line">        n.category = paramControls.categoryComboBox.getText();              <span class="comment">// [6.1]</span></div>
+<div class="line"><span class="preprocessor">      #elif JUCE_ANDROID || JUCE_MAC</span></div>
+<div class="line"><span class="preprocessor">       #if JUCE_MAC</span></div>
+<div class="line">        juce::String prefix = <span class="stringliteral">"images/"</span>;</div>
+<div class="line">        juce::String extension = <span class="stringliteral">".png"</span>;</div>
+<div class="line"><span class="preprocessor">       #else</span></div>
+<div class="line">        juce::String prefix;</div>
+<div class="line">        juce::String extension;</div>
+<div class="line"><span class="preprocessor">       #endif</span></div>
+<div class="line">        <span class="keywordflow">if</span> (paramControls.iconComboBox.getSelectedItemIndex() == 0)         <span class="comment">// [7]</span></div>
+<div class="line">            n.icon = prefix + <span class="stringliteral">"ic_stat_name"</span> + extension;</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.iconComboBox.getSelectedItemIndex() == 1)</div>
+<div class="line">            n.icon = prefix + <span class="stringliteral">"ic_stat_name2"</span> + extension;</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.iconComboBox.getSelectedItemIndex() == 2)</div>
+<div class="line">            n.icon = prefix + <span class="stringliteral">"ic_stat_name3"</span> + extension;</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.iconComboBox.getSelectedItemIndex() == 3)</div>
+<div class="line">            n.icon = prefix + <span class="stringliteral">"ic_stat_name4"</span> + extension;</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.iconComboBox.getSelectedItemIndex() == 4)</div>
+<div class="line">            n.icon = prefix + <span class="stringliteral">"ic_stat_name5"</span> + extension;</div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">      #if JUCE_ANDROID</span></div>
+<div class="line">        <span class="comment">// Note: this is not strictly speaking required param, just doing it here because it is the fastest way!</span></div>
+<div class="line">        n.publicVersion = <span class="keyword">new</span> juce::PushNotifications::Notification();      <span class="comment">// [8]</span></div>
+<div class="line">        n.publicVersion-&gt;identifier = <span class="stringliteral">"blahblahblah"</span>;</div>
+<div class="line">        n.publicVersion-&gt;title = <span class="stringliteral">"Public title!"</span>;</div>
+<div class="line">        n.publicVersion-&gt;body  = <span class="stringliteral">"Public body!"</span>;</div>
+<div class="line">        n.publicVersion-&gt;icon  = n.icon;</div>
+<div class="line"> </div>
+<div class="line">        n.channelId = <a class="code hl_class" href="https://docs.juce.com/master/classString.html">String</a> (paramControls.channelIdComboBox.getSelectedItemIndex() + 1); <span class="comment">// [6.2]</span></div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>On all platforms, a notification is defined with three main parameters that we set from user input of the required parameter tab:</p>
+<ul>
+<li>Identifier <span class="comment">[5.1]</span> : A unique ID to identify notifications internally. This is generally not shown to the user.</li>
+<li>Title <span class="comment">[5.2]</span> : The title of the notification shown at the top of the bubble.</li>
+<li>Body <span class="comment">[5.3]</span> : The content of the notification that can be expanded to show its totality if trimmed.</li>
+</ul>
+<p>On macOS/iOS, we additionally provide the notification category to choose which actions to display <span class="comment">[6.1]</span> . On Android, we specify the channel number to specify the importance of the notification <span class="comment">[6.2]</span> .</p>
+<p>On macOS and Android, we need to provide an icon to show within the notification and we make sure that the path is platform-specific <span class="comment">[7]</span> . Finally on Android, we can optionally provide a different version of a notification that gets displayed on the device lock screen if we wish <span class="comment">[8]</span> .</p>
+<p>Local notifications are fairly trivial to implement so let's dive into remote notifications now.</p>
+<h1><a class="anchor" id="tutorial_push_notifications_remote_notifications"></a>
+Remote notifications</h1>
+<dl class="section warning"><dt>Warning</dt><dd>This section will only work on a physical device. Do not attempt on a simulator as it will not function properly.</dd></dl>
+<p>In order to receive remote notifications on macOS/iOS, we first need to get a device token that we will insert in the Pusher application to send test notifications. This token may change at anytime and it is therefore recommended to fetch a new token every time the application is launched. This is performed in the button lambda function by calling the <code class="project_code">getDeviceToken()</code> function on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line">        remoteView.getDeviceTokenButton.onClick = []</div>
+<div class="line">        {</div>
+<div class="line">            juce::String token = juce::PushNotifications::getInstance()-&gt;getDeviceToken();</div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga679635952a5d2eb25f3b31398f0fcc25">DBG</a> (<span class="stringliteral">"token = "</span> + token);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (token.isEmpty())</div>
+<div class="line">                showRemoteInstructions();</div>
+<div class="line">            <span class="keywordflow">else</span></div>
+<div class="line">                juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon, <span class="stringliteral">"Device token"</span>, token);</div>
+<div class="line">        };</div>
+</div><!-- fragment --><p>As expected whenever the token is refreshed, a callback function called <code class="project_code">deviceTokenRefreshed()</code> is triggered to notify us of this change:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> deviceTokenRefreshed (<span class="keyword">const</span> juce::String&amp; token)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Device token refreshed"</span>,</div>
+<div class="line">                                                     token);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_push_notifications_remote_notifications_macos_ios"></a>
+Remote notifications on macOS/iOS</h2>
+<p>Let's jump to Pusher and see how we can send push notifications to our app on macOS/iOS. Copy the new device token from the debugger and launch the Pusher app. Paste the token in the appropriate <b class="onscreen_text">Device push token</b> field and make sure that the correct certificate is selected in the dropdown menu.</p>
+<p>In the text field below, we can create our push notifications as a payload dictionary using the <a class="el" href="https://docs.juce.com/master/classJSON.html" title="Contains static methods for converting JSON-formatted text to and from var objects.">JSON</a> format. A simple notification will look something like this:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    "aps" :</div>
+<div class="line">    {</div>
+<div class="line">        "alert" : "Test Push Notification",</div>
+<div class="line">        "badge" : 1,</div>
+<div class="line">        "sound" : "default"</div>
+<div class="line">    },</div>
+<div class="line">    "juce" : "tutorial",</div>
+<div class="line">    "foo" : "bar"</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>The first element called "aps" will contain the essential information for our notification. In the above example, it describes the alert, the badge count and the sound to play when triggered. We can also send application specific data as shown in the example with the key/value pairs following the "aps" element.</p>
+<p>In this second payload example, we customise the alert to contain more information such as a body and an action button in addition to the title field. We also decide to play a custom sound file when the notification is triggered:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    "aps" :</div>
+<div class="line">    {</div>
+<div class="line">        "alert" :</div>
+<div class="line">        {</div>
+<div class="line">            "title" : "Test Push Notification",</div>
+<div class="line">            "body" : "Hello World!",</div>
+<div class="line">            "action-loc-key" : "OK"</div>
+<div class="line">        },</div>
+<div class="line">        "badge" : 2,</div>
+<div class="line">        "sound" : "demonstrative.caf"</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>In the third example, we make use of the notification categories defined in the <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Settings.html" title="Describes settings we want to use for current device.">PushNotifications::Settings</a> to easily define actions. We also instruct the OS to deliver the notification silently in the background by setting the <code class="project_code">content-available</code> property:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    "aps" :</div>
+<div class="line">    {</div>
+<div class="line">        "category" : "okCategory",</div>
+<div class="line">        "alert" : "Test Push Notification",</div>
+<div class="line">        "badge" : 3,</div>
+<div class="line">        "content-available" : 1</div>
+<div class="line">    },</div>
+<div class="line">    "foobar" : [ "foo", "bar" ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section attention">
+<dt>Exercise</dt>
+<dd>Experiment with different payload parameters and see how they are received within the app. Can you display an image in the notification body? </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_push_notifications_remote_notifications_android"></a>
+Remote notifications on Android</h2>
+<p>Let's switch to the Android side now and make use of the Google Firebase console. In the console, navigate to the <b class="onscreen_text">Grow &gt; Notifications</b> tab and click on <b class="onscreen_text">Compose message</b> . In the following window, you will be able to fill in the information for the message and select which target we want to send the notification to.</p>
+<p>On Android, we can also send messages upstream from the app to the server to communicate important user data. This is performed by defining a dictionary of key/value pairs as a <a class="el" href="https://docs.juce.com/master/classStringPairArray.html" title="A container for holding a set of strings which are keyed by another string.">StringPairArray</a> object <span class="comment">[1]</span> and calling the <code class="project_code">sendUpstreamMessage()</code> function on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance <span class="comment">[2]</span> :</p>
+<div class="fragment"><div class="line">        remoteView.sendRemoteMessageButton.onClick = [<span class="keyword">this</span>]</div>
+<div class="line">        {</div>
+<div class="line">            juce::StringPairArray data;                                         <span class="comment">// [1]</span></div>
+<div class="line">            data.set (<span class="stringliteral">"key1"</span>, <span class="stringliteral">"value1"</span>);</div>
+<div class="line">            data.set (<span class="stringliteral">"key2"</span>, <span class="stringliteral">"value2"</span>);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">static</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 100;</div>
+<div class="line">            juce::PushNotifications::getInstance()-&gt;sendUpstreamMessage (<span class="stringliteral">"XXXXXXXXXXXX"</span>, <span class="comment">// Insert sender ID here</span></div>
+<div class="line">                                                                         <span class="stringliteral">"com.juce.pushnotificationstutorial"</span>,</div>
+<div class="line">                                                                         <a class="code hl_class" href="https://docs.juce.com/master/classString.html">String</a> (<span class="keywordtype">id</span>++),</div>
+<div class="line">                                                                         <span class="stringliteral">"standardType"</span>,</div>
+<div class="line">                                                                         3600,</div>
+<div class="line">                                                                         data); <span class="comment">// [2]</span></div>
+<div class="line">        };</div>
+</div><!-- fragment --><p>Unfortunately, we need to explicitly pass the previously set server sender ID as an argument every time to do this.</p>
+<p>When an upstream message is sent to the server we can expect a callback with the following <code class="project_code">upstreamMessageSent()</code> function if the request was successful:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> upstreamMessageSent (<span class="keyword">const</span> juce::String&amp; messageId)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Upstream message sent"</span>,</div>
+<div class="line">                                                     <span class="stringliteral">"Message id: "</span> + messageId);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>However if the request is unsuccessful, we receive the callback with the <code class="project_code">upstreamMessageSendingError()</code> function instead:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> upstreamMessageSendingError (<span class="keyword">const</span> juce::String&amp; messageId, <span class="keyword">const</span> juce::String&amp; error)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Upstream message sending error"</span>,</div>
+<div class="line">                                                     <span class="stringliteral">"Message id: "</span> + messageId</div>
+<div class="line">                                                     + <span class="stringliteral">"\nerror: "</span> + error);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>If the Google Firebase receives too many messages, it may start deleting them from the queue of pending messages. When this happens, we are notified via the <code class="project_code">remoteNotificationsDeleted()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> remoteNotificationsDeleted()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Remote notifications deleted"</span>,</div>
+<div class="line">                                                     <span class="stringliteral">"Some of the pending messages were removed!"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>On Android we can also subscribe and unsubscribe to specific topics by calling the <code class="project_code">subscribeToTopic()</code> and <code class="project_code">unsubscribeFromTopic()</code> functions respectively on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance. In this example we choose to subscribe to and unsubscribe from the "sports" topic:</p>
+<div class="fragment"><div class="line">        remoteView.subscribeToSportsButton    .onClick = [<span class="keyword">this</span>]</div>
+<div class="line">            { juce::PushNotifications::getInstance()-&gt;subscribeToTopic (<span class="stringliteral">"sports"</span>); };</div>
+<div class="line">        remoteView.unsubscribeFromSportsButton.onClick = [<span class="keyword">this</span>]</div>
+<div class="line">            { juce::PushNotifications::getInstance()-&gt;unsubscribeFromTopic (<span class="stringliteral">"sports"</span>); };</div>
+</div><!-- fragment --><h1><a class="anchor" id="tutorial_push_notifications_handling_received_notifications"></a>
+Handling received notifications</h1>
+<p>There is a number of different callbacks that can be invoked when a user acts on a notification. The exact behaviour may vary between platforms and OS versions so please refer to the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> class documentation for a detailed explanation.</p>
+<p>The <code class="project_code">handleNotification()</code> callback function will be invoked whenever a user presses on a notification. Normally you would use this function to process information from the notification based on the ID but for the purpose of this tutorial we simply show a message box with the three main parameters as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> handleNotification (<span class="keywordtype">bool</span> isLocalNotification, <span class="keyword">const</span> juce::PushNotifications::Notification&amp; n)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::ignoreUnused (isLocalNotification);</div>
+<div class="line"> </div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Received notification"</span>,</div>
+<div class="line">                                                     <span class="stringliteral">"ID: "</span> + n.identifier</div>
+<div class="line">                                                     + <span class="stringliteral">", title: "</span> + n.title</div>
+<div class="line">                                                     + <span class="stringliteral">", body: "</span> + n.body);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <code class="project_code">handleNotificationAction()</code> callback function will be invoked whenever a user performs an action from a notification (such as pressing a button or entering a text input). This callback contains additional information pertaining to the type of action and an optional response in the form of text input for example. In this scenario, we also need to manually remove the notification from the history by providing the notification identifer to the <code class="project_code">removeDeliveredNotification()</code> function as an argument and by calling it on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance <span class="comment">[9]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> handleNotificationAction (<span class="keywordtype">bool</span> isLocalNotification,</div>
+<div class="line">                                   <span class="keyword">const</span> juce::PushNotifications::Notification&amp; n,</div>
+<div class="line">                                   <span class="keyword">const</span> juce::String&amp; actionIdentifier,</div>
+<div class="line">                                   <span class="keyword">const</span> juce::String&amp; optionalResponse)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::ignoreUnused (isLocalNotification);</div>
+<div class="line"> </div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Received notification action"</span>,</div>
+<div class="line">                                                     <span class="stringliteral">"ID: "</span> + n.identifier</div>
+<div class="line">                                                     + <span class="stringliteral">", title: "</span> + n.title</div>
+<div class="line">                                                     + <span class="stringliteral">", body: "</span> + n.body</div>
+<div class="line">                                                     + <span class="stringliteral">", action: "</span> + actionIdentifier</div>
+<div class="line">                                                     + <span class="stringliteral">", optionalResponse: "</span> + optionalResponse);</div>
+<div class="line"> </div>
+<div class="line">        juce::PushNotifications::getInstance()-&gt;removeDeliveredNotification (n.identifier);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>As the name suggests, the following callback is triggered when the user dismisses a local notification before responding to it and we display the same message box as before:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> localNotificationDismissedByUser (<span class="keyword">const</span> juce::PushNotifications::Notification&amp; n)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon,</div>
+<div class="line">                                                     <span class="stringliteral">"Notification dismissed by a user"</span>,</div>
+<div class="line">                                                     <span class="stringliteral">"ID: "</span> + n.identifier</div>
+<div class="line">                                                     + <span class="stringliteral">", title: "</span> + n.title</div>
+<div class="line">                                                     + <span class="stringliteral">", body: "</span> + n.body);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>If the user ignores a notification or does not act upon it, the notification stays in the list of delivered ones in the notification area of the device. To retrieve the list of delivered notifications, we can call the <code class="project_code">getDeliveredNotifications()</code> function on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance. A callback function named <code class="project_code">deliveredNotificationsListReceived()</code> will subsequently be called and we can handle it by displaying the list in a message box as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> deliveredNotificationsListReceived (<span class="keyword">const</span> juce::Array&lt;juce::PushNotifications::Notification&gt;&amp; notifs)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::String text = <span class="stringliteral">"Received notifications: "</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; n : notifs)</div>
+<div class="line">            text &lt;&lt; <span class="stringliteral">"("</span> &lt;&lt; n.identifier &lt;&lt; <span class="stringliteral">", "</span> &lt;&lt; n.title &lt;&lt; <span class="stringliteral">", "</span> &lt;&lt; n.body &lt;&lt; <span class="stringliteral">"), "</span>;</div>
+<div class="line"> </div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon, <span class="stringliteral">"Received notification list"</span>, text);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>On macOS/iOS, the application can schedule local notifications to be triggered at a given moment in the future. This convenient callback function named <code class="project_code">pendingLocalNotificationsListReceived()</code> will receive an array of pending notifications when the <code class="project_code">getPendingLocalNotifications()</code> function is called on the <a class="el" href="https://docs.juce.com/master/classPushNotifications.html" title="Singleton class responsible for push notifications functionality.">PushNotifications</a> instance:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> pendingLocalNotificationsListReceived (<span class="keyword">const</span> juce::Array&lt;juce::PushNotifications::Notification&gt;&amp; notifs)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::String text = <span class="stringliteral">"Pending notifications: "</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; n : notifs)</div>
+<div class="line">            text &lt;&lt; <span class="stringliteral">"("</span> &lt;&lt; n.identifier &lt;&lt; <span class="stringliteral">", "</span> &lt;&lt; n.title &lt;&lt; <span class="stringliteral">", "</span> &lt;&lt; n.body &lt;&lt; <span class="stringliteral">"), "</span>;</div>
+<div class="line"> </div>
+<div class="line">        juce::NativeMessageBox::showMessageBoxAsync (juce::AlertWindow::InfoIcon, <span class="stringliteral">"Pending notification list"</span>, text);</div>
+<div class="line">    }</div>
+</div><!-- fragment --> <dl class="section attention">
+<dt>Exercise</dt>
+<dd>Experiment with different parameters and display these in the message boxes. Can you display the notification icon in the callback message box? </dd>
+</dl>
+<p>The core of this tutorial has been demonstrated and all callback functions from the <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Listener.html" title="Register a listener (ideally on application startup) to receive information about notifications recei...">PushNotifications::Listener</a> class were overriden but if you wish to learn more about optional notification parameters, please feel free to read on!</p>
+<h1><a class="anchor" id="tutorial_push_notifications_customising_notifications"></a>
+Customising notifications</h1>
+<p>Notifications have numerous optional parameters that we can set in addition to the ones we have discovered so far in this tutorial. This optional section will cover these parameters in detail.</p>
+<p>This first function called in the <code class="project_code">sendLocalNotification()</code> function fills some optional parameters supported by all platforms:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> fillOptionalParamsOne   (juce::PushNotifications::Notification&amp; n)</div>
+<div class="line">    {</div>
+<div class="line">        n.subtitle = paramControls.subtitleEditor.getText();                            <span class="comment">// [1.1]</span></div>
+<div class="line">        n.badgeNumber = paramControls.badgeNumberComboBox.getSelectedItemIndex();       <span class="comment">// [1.2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (paramControls.soundToPlayComboBox.getSelectedItemIndex() &gt; 0)</div>
+<div class="line">            n.soundToPlay = juce::URL (paramControls.soundToPlayComboBox.getItemText (paramControls.soundToPlayComboBox.getSelectedItemIndex())); <span class="comment">// [1.3]</span></div>
+<div class="line"> </div>
+<div class="line">        n.properties = juce::JSON::parse (paramControls.propertiesEditor.getText());    <span class="comment">// [1.4]</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">      #if JUCE_IOS || JUCE_MAC</span></div>
+<div class="line">        n.triggerIntervalSec = double (paramControls.fireInComboBox.getSelectedItemIndex() * 10);</div>
+<div class="line">        n.repeat = paramControls.repeatButton.getToggleState();</div>
+<div class="line"><span class="preprocessor">      #elif JUCE_ANDROID</span></div>
+<div class="line">        n.badgeIconType = (juce::PushNotifications::Notification::BadgeIconType) paramControls.badgeIconComboBox.getSelectedItemIndex(); <span class="comment">// [2.1]</span></div>
+<div class="line">        n.tickerText  = paramControls.tickerTextEditor.getText();                       <span class="comment">// [2.2]</span></div>
+<div class="line"> </div>
+<div class="line">        n.shouldAutoCancel = paramControls.autoCancelButton.getToggleState();           <span class="comment">// [2.3]</span></div>
+<div class="line">        n.alertOnlyOnce = paramControls.alertOnlyOnceButton.getToggleState();           <span class="comment">// [2.4]</span></div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">      #if JUCE_ANDROID || JUCE_MAC</span></div>
+<div class="line">        <span class="keywordflow">if</span> (paramControls.actionsComboBox.getSelectedItemIndex() == 1)</div>
+<div class="line">        {</div>
+<div class="line">            juce::PushNotifications::Notification::Action a, a2;</div>
+<div class="line">            a .style = juce::PushNotifications::Notification::Action::button;</div>
+<div class="line">            a2.style = juce::PushNotifications::Notification::Action::button;</div>
+<div class="line">            a .title = a .identifier = <span class="stringliteral">"Ok"</span>;</div>
+<div class="line">            a2.title = a2.identifier = <span class="stringliteral">"Cancel"</span>;</div>
+<div class="line">            n.actions.add (a);</div>
+<div class="line">            n.actions.add (a2);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.actionsComboBox.getSelectedItemIndex() == 2)</div>
+<div class="line">        {</div>
+<div class="line">            juce::PushNotifications::Notification::Action a, a2;</div>
+<div class="line">            a .title = a .identifier = <span class="stringliteral">"Input Text Here"</span>;</div>
+<div class="line">            a2.title = a2.identifier = <span class="stringliteral">"No"</span>;</div>
+<div class="line">            a .style = juce::PushNotifications::Notification::Action::text;</div>
+<div class="line">            a2.style = juce::PushNotifications::Notification::Action::button;</div>
+<div class="line">            a .icon = <span class="stringliteral">"ic_stat_name4"</span>;</div>
+<div class="line">            a2.icon = <span class="stringliteral">"ic_stat_name5"</span>;</div>
+<div class="line">            a.textInputPlaceholder = <span class="stringliteral">"placeholder text ..."</span>;</div>
+<div class="line">            n.actions.add (a);</div>
+<div class="line">            n.actions.add (a2);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.actionsComboBox.getSelectedItemIndex() == 3)</div>
+<div class="line">        {</div>
+<div class="line">            juce::PushNotifications::Notification::Action a, a2;</div>
+<div class="line">            a .title = a .identifier = <span class="stringliteral">"Ok"</span>;</div>
+<div class="line">            a2.title = a2.identifier = <span class="stringliteral">"Cancel"</span>;</div>
+<div class="line">            a .style = juce::PushNotifications::Notification::Action::button;</div>
+<div class="line">            a2.style = juce::PushNotifications::Notification::Action::button;</div>
+<div class="line">            a .icon = <span class="stringliteral">"ic_stat_name4"</span>;</div>
+<div class="line">            a2.icon = <span class="stringliteral">"ic_stat_name5"</span>;</div>
+<div class="line">            n.actions.add (a);</div>
+<div class="line">            n.actions.add (a2);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (paramControls.actionsComboBox.getSelectedItemIndex() == 4)</div>
+<div class="line">        {</div>
+<div class="line">            juce::PushNotifications::Notification::Action a, a2;</div>
+<div class="line">            a .title = a .identifier = <span class="stringliteral">"Input Text Here"</span>;</div>
+<div class="line">            a2.title = a2.identifier = <span class="stringliteral">"No"</span>;</div>
+<div class="line">            a .style = juce::PushNotifications::Notification::Action::text;</div>
+<div class="line">            a2.style = juce::PushNotifications::Notification::Action::button;</div>
+<div class="line">            a .icon = <span class="stringliteral">"ic_stat_name4"</span>;</div>
+<div class="line">            a2.icon = <span class="stringliteral">"ic_stat_name5"</span>;</div>
+<div class="line">            a.textInputPlaceholder = <span class="stringliteral">"placeholder text ..."</span>;</div>
+<div class="line">            a.allowedResponses.add (<span class="stringliteral">"Response 1"</span>);</div>
+<div class="line">            a.allowedResponses.add (<span class="stringliteral">"Response 2"</span>);</div>
+<div class="line">            a.allowedResponses.add (<span class="stringliteral">"Response 3"</span>);</div>
+<div class="line">            n.actions.add (a);</div>
+<div class="line">            n.actions.add (a2);</div>
+<div class="line">        }</div>
+<div class="line"><span class="preprocessor">      #endif</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li>Subtitle <span class="comment">[1.1]</span> : Additional text that can be displayed in the notification.</li>
+<li>Badge Number <span class="comment">[1.2]</span> : A number representing the count displayed in the badge icon before it is summed with other delivered notification badge numbers.</li>
+<li>Sound <span class="comment">[1.3]</span> : A custom sound to play when the notification is triggered. You can leave this field empty if you want the notification to be silent or use "default_os_sound" to trigger the default OS sound.</li>
+<li>Properties <span class="comment">[1.4]</span> : Additional properties that may be passed as a dictionary.</li>
+</ul>
+<p>On macOS and iOS, you can also delay the trigger of a notification by a specified amount in seconds and decide to repeat the notification in question. On Android, you can provide a large image to display in the content of the notification and specify these additional parameters:</p>
+<ul>
+<li>Badge Icon Type <span class="comment">[2.1]</span> : The size of the badge icon or whether we want to hide it.</li>
+<li>Ticker Text <span class="comment">[2.2]</span> : Additional text used for accessibility.</li>
+<li>Auto Cancel <span class="comment">[2.3]</span> : Whether the notification should be canceled when clicked on it.</li>
+<li>Alert Once <span class="comment">[2.4]</span> : Whether the notification should only sound and vibrate when not already showing.</li>
+</ul>
+<p>If you wish to have action buttons displayed in the notifications like on iOS, in Android and macOS we have to define them manually. This setup is essentially similar to the iOS one using the <a class="el" href="https://docs.juce.com/master/structPushNotifications_1_1Settings.html" title="Describes settings we want to use for current device.">PushNotifications::Settings</a> object so we will not go into detail.</p>
+<p>The next sets of parameters are Android only.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> fillOptionalParamsTwo   (juce::PushNotifications::Notification&amp; n)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">using </span>Notification = juce::PushNotifications::Notification;</div>
+<div class="line"> </div>
+<div class="line">        Notification::Progress progress;</div>
+<div class="line">        progress.max     = paramControls.progressMaxComboBox.getSelectedItemIndex() * 10;</div>
+<div class="line">        progress.current = paramControls.progressCurrentComboBox.getSelectedItemIndex() * 10;</div>
+<div class="line">        progress.indeterminate = paramControls.progressIndeterminateButton.getToggleState();</div>
+<div class="line"> </div>
+<div class="line">        n.progress = progress;                                  <span class="comment">// [3.1]</span></div>
+<div class="line">        n.person   = paramControls.personEditor.getText();      <span class="comment">// [3.2]</span></div>
+<div class="line">        n.type                 = Notification::Type                 (paramControls.categoryComboBox.getSelectedItemIndex());                    <span class="comment">// [3.3]</span></div>
+<div class="line">        n.priority             = Notification::Priority             (paramControls.priorityComboBox.getSelectedItemIndex() - 2);                <span class="comment">// [3.4]</span></div>
+<div class="line">        n.lockScreenAppearance = Notification::LockScreenAppearance (paramControls.lockScreenVisibilityComboBox.getSelectedItemIndex() - 1);    <span class="comment">// [3.5]</span></div>
+<div class="line">        n.groupId = paramControls.groupIdEditor.getText();      <span class="comment">// [3.6]</span></div>
+<div class="line">        n.groupSortKey = paramControls.sortKeyEditor.getText();</div>
+<div class="line">        n.groupSummary = paramControls.groupSummaryButton.getToggleState();</div>
+<div class="line">        n.groupAlertBehaviour = Notification::GroupAlertBehaviour (paramControls.groupAlertBehaviourComboBox.getSelectedItemIndex());</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li>Progress <span class="comment">[3.1]</span> : <a class="el" href="https://docs.juce.com/master/classDisplays.html" title="Manages details about connected display devices.">Displays</a> specific types of notifications that show progress.</li>
+<li>Person <span class="comment">[3.2]</span> : Relates the notification to a specific person. This can be useful for instance in messaging apps.</li>
+<li>Type <span class="comment">[3.3]</span> : Specifies the category of notification for the OS to better handle the appearance.</li>
+<li>Priority <span class="comment">[3.4]</span> : Specifies the priority of notification to the OS to better handle the appearance.</li>
+<li>Lock Screen Appearance <span class="comment">[3.5]</span> : Whether to show or hide the notification on the lock screen.</li>
+<li>Group <span class="comment">[3.6]</span> : Specifies parameters relating to groups of notifications such as sorting order, group summary and group alert behaviour.</li>
+</ul>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> fillOptionalParamsThree (juce::PushNotifications::Notification&amp; n)</div>
+<div class="line">    {</div>
+<div class="line">        n.accentColour = paramControls.accentColourButton.findColour (juce::TextButton::buttonColourId, <span class="keyword">false</span>);     <span class="comment">// [4.1]</span></div>
+<div class="line">        n.ledColour    = paramControls.ledColourButton   .findColour (juce::TextButton::buttonColourId, <span class="keyword">false</span>);     <span class="comment">// [4.2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">using </span>Notification = juce::PushNotifications::Notification;</div>
+<div class="line">        Notification::LedBlinkPattern ledBlinkPattern;</div>
+<div class="line">        ledBlinkPattern.msToBeOn  = paramControls.ledMsToBeOnComboBox .getSelectedItemIndex() * 200;</div>
+<div class="line">        ledBlinkPattern.msToBeOff = paramControls.ledMsToBeOffComboBox.getSelectedItemIndex() * 200;</div>
+<div class="line">        n.ledBlinkPattern = ledBlinkPattern;                                                                        <span class="comment">// [4.3]</span></div>
+<div class="line"> </div>
+<div class="line">        juce::Array&lt;int&gt; vibrationPattern;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (paramControls.vibratorMsToBeOnComboBox .getSelectedItemIndex() &gt; 0 &amp;&amp;</div>
+<div class="line">            paramControls.vibratorMsToBeOffComboBox.getSelectedItemIndex() &gt; 0)</div>
+<div class="line">        {</div>
+<div class="line">            vibrationPattern.add (paramControls.vibratorMsToBeOffComboBox.getSelectedItemIndex() * 500);</div>
+<div class="line">            vibrationPattern.add (paramControls.vibratorMsToBeOnComboBox .getSelectedItemIndex() * 500);</div>
+<div class="line">            vibrationPattern.add (2 * paramControls.vibratorMsToBeOffComboBox.getSelectedItemIndex() * 500);</div>
+<div class="line">            vibrationPattern.add (2 * paramControls.vibratorMsToBeOnComboBox .getSelectedItemIndex() * 500);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        n.vibrationPattern = vibrationPattern;                                                                      <span class="comment">// [4.4]</span></div>
+<div class="line"> </div>
+<div class="line">        n.localOnly = paramControls.localOnlyButton.getToggleState();                                               <span class="comment">// [4.5]</span></div>
+<div class="line">        n.ongoing = paramControls.ongoingButton.getToggleState();                                                   <span class="comment">// [4.6]</span></div>
+<div class="line">        n.timestampVisibility = Notification::TimestampVisibility (paramControls.timestampVisibilityComboBox.getSelectedItemIndex()); <span class="comment">// [4.7]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (paramControls.timeoutAfterComboBox.getSelectedItemIndex() &gt; 0)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> index = paramControls.timeoutAfterComboBox.getSelectedItemIndex();</div>
+<div class="line">            n.timeoutAfterMs = index * 1000 + 4000;                                                                 <span class="comment">// [4.8]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li>Accent Colour <span class="comment">[4.1]</span> : Changes the accent colour of the notification.</li>
+<li>LED Colour <span class="comment">[4.2]</span> : Changes the colour of the physical LED on the back of the device.</li>
+<li>LED Blink Pattern <span class="comment">[4.3]</span> : Allows customisation of the blinking pattern of the physical LED.</li>
+<li>Vibration Pattern <span class="comment">[4.4]</span> : Allows customisation of the vibration pattern of the physical device.</li>
+<li>Local <span class="comment">[4.5]</span> : Whether the notification should be broadcast to other connected user devices.</li>
+<li>Ongoing <span class="comment">[4.6]</span> : Whether the user is allowed to dismiss the notification or the system can only dismiss it manually.</li>
+<li>Timestamp <span class="comment">[4.7]</span> : Whether a timestamp or chronometer is displayed in the notification.</li>
+<li>Timeout <span class="comment">[4.8]</span> : Specifies the time after which the notification is automatically canceled if not already.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">PushNotificationsTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_push_notifications_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to handle Push Notifications on mobile and desktop. In particular, we have:</p>
+<ul>
+<li>Covered preliminary setup for different deployment platforms.</li>
+<li>Requested user permissions from the system to allow notifications.</li>
+<li>Displayed simple messages as local notifications from within the app.</li>
+<li>Handled push notifications that were sent from a remote server.</li>
+<li>Customised notifications by showing pictures and playing sounds.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_push_notifications_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_android_studio.html">Tutorial: Getting started with Android</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_android_screen_sizes.html">Tutorial: Managing Android screen sizes</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_analytics_collection.html">Tutorial: App analytics collection</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_in_app_purchases.html">Tutorial: In-App Purchases on desktop and mobile devices</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html">Tutorial: Package your app or plugin for distribution</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Push Notifications on desktop and mobile devices_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

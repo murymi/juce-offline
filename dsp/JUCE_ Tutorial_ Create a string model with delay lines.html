@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)https://docs.juce.com/master/tutorial_dsp_delay_line.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Create a string model with delay lines</title>
+<link href="./JUCE_ Tutorial_ Create a string model with delay lines_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Create a string model with delay lines_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Create a string model with delay lines_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Create a string model with delay lines_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Create a string model with delay lines_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Create a string model with delay lines_files/css">
+<script src="./JUCE_ Tutorial_ Create a string model with delay lines_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Create a string model with delay lines</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_introduction">Introduction</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_what_is_delay_line">What is a Delay Line?</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_what_is_physical_modelling">What is Physical Modelling?</a><ul><li class="level3"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_waveguide_string_model">The waveguide string model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_implement_delay_line">Implement a delay line</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_incorporate_delay_effect">Incorporate a delay effect</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_filter_delay_effect">Filter the delay effect</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_integrate_waveguide_string_model">Integrate a waveguide string model</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_dsp_delay_line.html#tutorial_dsp_delay_line_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Implement a realistic string model by means of physical modelling. Incorporate a delay line to create intricate echo patterns in the stereo sound field.</p>
+<p><span class="headerlabel">Level:</span> Advanced</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Plugin Format:</span> VST , AU , Standalone</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classdsp_1_1ProcessorChain.html" title="This variadically-templated class lets you join together any number of processor classes into a singl...">dsp::ProcessorChain</a>, <a class="el" href="https://docs.juce.com/master/classdsp_1_1Gain.html" title="Applies a gain to audio samples as single samples or AudioBlocks.">dsp::Gain</a>, <a class="el" href="https://docs.juce.com/master/classdsp_1_1Oscillator.html" title="Generates a signal based on a user-supplied function.">dsp::Oscillator</a>, <a class="el" href="https://docs.juce.com/master/classdsp_1_1Convolution.html" title="Performs stereo partitioned convolution of an input signal with an impulse response in the frequency ...">dsp::Convolution</a>, <a class="el" href="https://docs.juce.com/master/structdsp_1_1WaveShaper.html" title="Applies waveshaping to audio samples as single samples or AudioBlocks.">dsp::WaveShaper</a>, <a class="el" href="https://docs.juce.com/master/classdsp_1_1Reverb.html" title="Processor wrapper around juce::Reverb for easy integration into ProcessorChain.">dsp::Reverb</a></p>
+<dl class="section warning"><dt>Warning</dt><dd>This project requires a compiler that supports C++14 features. Recent versions of Xcode and Visual Studio include this support.</dd></dl>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_getting_started"></a>
+Getting started</h1>
+<p>This tutorial leads on from <a class="el" href="https://docs.juce.com/master/tutorial_dsp_convolution.html">Tutorial: Add distortion through waveshaping and convolution</a>. If you haven't done so already, you should read that tutorial first.</p>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/DSPDelayLineTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/DSPDelayLineTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If using the PIP version of this project, please make sure to copy the <code class="filename">Resources</code> folder into the generated Projucer project.</dd></dl>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_demo_project"></a>
+The demo project</h1>
+<p>The project is conceived as a plugin but you can run it as a standalone application by selecting the proper deployment target in your IDE. In Xcode, you can change the target in the top left corner of the main window as shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Create a string model with delay lines_files/tutorial_dsp_introduction_standalone_screenshot1.png" alt="">
+<div class="caption">
+Changing the deployment target in Xcode</div></div>
+<p>The demo project provides us with an on-screen MIDI keyboard in the top half of the plugin and a visual representation of the signal through an oscilloscope in the bottom half. Presently if a key is pressed, the plugin outputs a basic oscillator sound with some reverb and distortion added.</p>
+<dl class="section note"><dt>Note</dt><dd>Feel free to remove the effects to clearly hear the changes in each steps of the tutorial by commenting out the effects processors in the <code class="project_code">AudioEngine</code> class.</dd></dl>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Create a string model with delay lines_files/tutorial_dsp_introduction_screenshot1.png" alt="">
+<div class="caption">
+The demo project plugin window</div></div>
+<dl class="section note"><dt>Note</dt><dd>If you have a MIDI controller, you can also choose to connect it instead of using the on-screen keyboard throughout this tutorial.</dd></dl>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_introduction"></a>
+Introduction</h1>
+<p>In this tutorial we are introducing two new DSP concepts that allow for signal processing in different ways: Delay Lines and Physical Modelling.</p>
+<p>Let's start by defining this DSP terminology.</p>
+<h2><a class="anchor" id="tutorial_dsp_delay_line_what_is_delay_line"></a>
+What is a Delay Line?</h2>
+<p>A delay line is a fundamental tool in DSP that can be used in a wide array of applications including simulations of reverberation spaces, sound synthesis, filter implementation and classic time-based effects such as delays, choruses, phasers and flangers.</p>
+<p>Fundamentally, a delay line is very simple and allows us to delay a certain signal by a number of samples. By using multiple delay lines and summing the seperate signals back together at different intervals, we can create the vast majority of digital signal processing out there.</p>
+<p>In the analog domain, delay lines were implemented by introducing an actual physical extension such as a spring to delay the propagation of waves. In the digital domain, delay lines are often implemented using a data structure referred to as a circular buffer.</p>
+<p>A circular buffer can be essentially implemented as an array where the index wraps around itself in order to create a circular data structure that matches the size of the sample buffer block. This allows us to store all the samples included in the previous block to be accessed in the current block, only to be overwritten by the current sample block for the next iteration.</p>
+<p>In this tutorial, we will look into circular buffers as a way to implement delay lines.</p>
+<h2><a class="anchor" id="tutorial_dsp_delay_line_what_is_physical_modelling"></a>
+What is Physical Modelling?</h2>
+<p>Physical modelling denotes a sound synthesis method that relies on mathematical and physical models to generate sounds. Unlike other synthesis techniques, it does not make use of any samples as a starting point and focuses on how the sound is produced in the physical sense through the study of materials.</p>
+<p>One of these models is called a digital waveguide which is based on the phyical model in which acoustic waves propagate through tubes or pipes. The reflection of these waves against boundaries can be efficiently computed using delay lines and as such many sounds of instruments such as strings can be generated using this model.</p>
+<h3><a class="anchor" id="tutorial_dsp_delay_line_waveguide_string_model"></a>
+The waveguide string model</h3>
+<p>In a nutshell, the waveguide string model builds upon the notion that a vibrating string can be modelled using two waves that travel in opposite directions and bounce back at the two end points. The combination of these two waves summed together eventually simulates the ideal motion of a plucked string and these can be implemented using two delay lines: a forward and a backward delay line.</p>
+<p>However, this ideal model of a string never comes to rest in its current state as damping is not taken into account. Thus when the waves change direction at the boundaries and their polarities are inversed we can incorporate a damping factor to reduce the displacement of the waves.</p>
+<p>Other variables to consider in this model are where the plucking of the string should occur and where the sound of the vibrating string should be picked up from. We therefore have to integrate a plucking position from which the two waves will propagate and a pickup location just as you would listen to the sound from a specific location in space.</p>
+<p>Last but not least, a natural phenomenon that occurs in physical strings is the faster decay of higher frequencies than lower frequencies. This can be easily integrated into our model by simply adding a low-pass filter at one end of the boundaries to simulate this discrepancy in decay times.</p>
+<p>In this tutorial, we will implement this digital waveguide model by using delay lines to simulate plucked strings with waves that reflect at the boundaries of attached strings.</p>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_implement_delay_line"></a>
+Implement a delay line</h1>
+<p>Let's start by implementing a simple delay line as a circular buffer using a vector.</p>
+<p>In the <code class="project_code">DelayLine</code> class, there are a couple of self-explanatory helper functions already defined to facilitate the implementation such as <code class="project_code">size()</code> and <code class="project_code">resize()</code> methods, a <code class="project_code">clear()</code> function and a <code class="project_code">back()</code> function that retrieves the least recent sample in the buffer.</p>
+<p>We first implement the <code class="project_code">push()</code> function which adds a new sample by overwriting the least recently added sample <span class="comment">[1]</span> and updates the least recent index variable by wrapping the index by the size of the circular buffer <span class="comment">[2]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> push (Type valueToAdd) <span class="keyword">noexcept</span></div>
+<div class="line">    {</div>
+<div class="line">        rawData[leastRecentIndex] = valueToAdd;                                         <span class="comment">// [1]</span></div>
+<div class="line">        leastRecentIndex = leastRecentIndex == 0 ? size() - 1 : leastRecentIndex - 1;   <span class="comment">// [2]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Then we complete the <code class="project_code">get()</code> function by returning the sample located at an offset specified by the function argument while making sure that the index wraps around the vector <span class="comment">[3]</span> . Notice here that we make sure the delay does not exceed the size of the buffer.</p>
+<div class="fragment"><div class="line">    Type <a class="code hl_function" href="https://docs.juce.com/master/namespacedsp.html#ab70e205bff92b09aa297e479676b5bc8">get</a> (<span class="keywordtype">size_t</span> delayInSamples) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (delayInSamples &gt;= 0 &amp;&amp; delayInSamples &lt; size());</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> rawData[(leastRecentIndex + 1 + delayInSamples) % size()];   <span class="comment">// [3]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, we fill in the <code class="project_code">set()</code> function by assigning the sample at an offset specified by the function argument while making sure that the index wraps around the vector <span class="comment">[4]</span> . Here again, we make sure the delay does not exceed the size of the buffer.</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> set (<span class="keywordtype">size_t</span> delayInSamples, Type newValue) <span class="keyword">noexcept</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (delayInSamples &gt;= 0 &amp;&amp; delayInSamples &lt; size());</div>
+<div class="line"> </div>
+<div class="line">        rawData[(leastRecentIndex + 1 + delayInSamples) % size()] = newValue; <span class="comment">// [4]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>And that completes our implementation of a simple delay line.</p>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_incorporate_delay_effect"></a>
+Incorporate a delay effect</h1>
+<p>With our basic delay line class implemented, let's incorporate a stereo delay effect into our signal chain.</p>
+<p>In the <code class="project_code">Delay</code> class, there are multiple parameters that can be tweaked to change the behaviour of our delay effect and these include delay times for individual channels, the maximum delay time allowed, the dry/wet level of the effect and the amount of feedback.</p>
+<p>Using these parameters and the delay line implementation, we can create a wide range of delay effects as desired but let's start with the default parameters defined in the constructor:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    Delay()</div>
+<div class="line">    {</div>
+<div class="line">        setMaxDelayTime (2.0f);</div>
+<div class="line">        setDelayTime (0, 0.7f);</div>
+<div class="line">        setDelayTime (1, 0.5f);</div>
+<div class="line">        setWetLevel (0.8f);</div>
+<div class="line">        setFeedback (0.5f);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>These helper functions mainly set the corresponding member variables to store the parameters but some of them also require a resizing of data structures to accomodate the parameter changes.</p>
+<p>One such case is the <code class="project_code">setMaxDelayTime()</code> function defined below which calls the <code class="project_code">updateDelayLineSize()</code> helper function <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> setMaxDelayTime (Type newValue)</div>
+<div class="line">    {</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (newValue &gt; Type (0));</div>
+<div class="line">        maxDelayTime = newValue;</div>
+<div class="line">        updateDelayLineSize(); <span class="comment">// [1]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Complete the following function which ensures that the circular buffers of all the delay lines are large enough to accomodate any delay time up to the max delay time by resizing the vectors <span class="comment">[2]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> updateDelayLineSize()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> delayLineSizeSamples = (size_t) std::ceil (maxDelayTime * sampleRate);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; dline : delayLines)</div>
+<div class="line">            dline.resize (delayLineSizeSamples);    <span class="comment">// [2]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Another noteworthy case is in the <code class="project_code">setDelayTime()</code> function of individual channels where a parameter change causes a call to the <code class="project_code">updateDelayTime()</code> helper function <span class="comment">[3]</span> as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> setDelayTime (<span class="keywordtype">size_t</span> channel, Type newValue)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (channel &gt;= getNumChannels())</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#gadc044ce5efecbecf2f5a44cd00db67b3">jassertfalse</a>;</div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (newValue &gt;= Type (0));</div>
+<div class="line">        delayTimes[channel] = newValue;</div>
+<div class="line"> </div>
+<div class="line">        updateDelayTime();  <span class="comment">// [3]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Implement this helper function that recalculates the delay times in samples for all the channels based on the new parameter change <span class="comment">[4]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> updateDelayTime() noexcept</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> ch = 0; ch &lt; maxNumChannels; ++ch)</div>
+<div class="line">            delayTimesSample[ch] = (<span class="keywordtype">size_t</span>) juce::roundToInt (delayTimes[ch] * sampleRate);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">reset()</code> function, we reset the filters for each channel <span class="comment">[5]</span> which we will use in the next section of the tutorial and clear any old sample remaining in the delay lines <span class="comment">[6]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset() noexcept</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; f : filters)</div>
+<div class="line">            f.reset();      <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; dline : delayLines)</div>
+<div class="line">            dline.clear();  <span class="comment">// [6]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">prepare()</code> function, we make sure that the size of the delay lines <span class="comment">[7]</span> and the delay times in samples <span class="comment">[8]</span> are still correct in case the sample rate was changed between sample blocks and initialise the filters with a low-pass filter for now <span class="comment">[9]</span> :</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> prepare (<span class="keyword">const</span> juce::dsp::ProcessSpec&amp; spec)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (spec.numChannels &lt;= maxNumChannels);</div>
+<div class="line">    sampleRate = (Type) spec.sampleRate;</div>
+<div class="line">    updateDelayLineSize(); <span class="comment">// [7]</span></div>
+<div class="line">    updateDelayTime();     <span class="comment">// [8]</span></div>
+<div class="line"> </div>
+<div class="line">    filterCoefs = juce::dsp::IIR::Coefficients&lt;Type&gt;::makeFirstOrderLowPass (sampleRate, Type (1e3)); <span class="comment">// [9]</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; f : filters)</div>
+<div class="line">    {</div>
+<div class="line">        f.prepare (spec);</div>
+<div class="line">        f.coefficients = filterCoefs;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__juce__core-system_html_ga1f96ab6751237979b907a54f52a7296a"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a></div><div class="ttdeci">#define jassert(expression)</div><div class="ttdoc">Platform-independent assertion macro.</div><div class="ttdef"><b>Definition</b> juce_PlatformDefs.h:177</div></div>
+</div><!-- fragment --><p>Now let's deal with the <code class="project_code">process()</code> function to actually implement the delay effect:</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ProcessContext&gt;</div>
+<div class="line"><span class="keywordtype">void</span> process (<span class="keyword">const</span> ProcessContext&amp; context) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span>&amp; inputBlock  = context.getInputBlock();</div>
+<div class="line">    <span class="keyword">auto</span>&amp; outputBlock = context.getOutputBlock();</div>
+<div class="line">    <span class="keyword">auto</span> numSamples  = outputBlock.getNumSamples();</div>
+<div class="line">    <span class="keyword">auto</span> numChannels = outputBlock.getNumChannels();</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (inputBlock.getNumSamples() == numSamples);</div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (inputBlock.getNumChannels() == numChannels);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> ch = 0; ch &lt; numChannels; ++ch)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span>* input  = inputBlock .getChannelPointer (ch);</div>
+<div class="line">        <span class="keyword">auto</span>* output = outputBlock.getChannelPointer (ch);</div>
+<div class="line">        <span class="keyword">auto</span>&amp; dline = delayLines[ch];</div>
+<div class="line">        <span class="keyword">auto</span> delayTime = delayTimesSample[ch];</div>
+<div class="line">        <span class="keyword">auto</span>&amp; filter = filters[ch];</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; numSamples; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> delayedSample = dline.get (delayTime);                                 <span class="comment">// [10]</span></div>
+<div class="line">            <span class="keyword">auto</span> inputSample = input[i];                                                <span class="comment">// [11]</span></div>
+<div class="line">            <span class="keyword">auto</span> dlineInputSample = std::tanh (inputSample + feedback * delayedSample); <span class="comment">// [12]</span></div>
+<div class="line">            dline.push (dlineInputSample);                                              <span class="comment">// [13]</span></div>
+<div class="line">            <span class="keyword">auto</span> outputSample = inputSample + wetLevel * delayedSample;                 <span class="comment">// [14]</span></div>
+<div class="line">            output[i] = outputSample;                                                   <span class="comment">// [15]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[10]</span> : First, for each sample in the buffer block of each channel, retrieve the delayed sample from the corresponding delay line.</li>
+<li><span class="comment">[11]</span> : Then get the current sample from the input block.</li>
+<li><span class="comment">[12]</span> : Next, calculate the sample to be pushed into the delay line by mixing the input sample with the delay line output weighted with the feedback parameter using <code class="code">std::tanh()</code> . The hyperbolic tangent function allows us to smoothly combine the two signals without clipping the summed sample and provides a natural decay.</li>
+<li><span class="comment">[13]</span> : We then push the sample calculated in the previous step into the delay line.</li>
+<li><span class="comment">[14]</span> : Finally, calculate the output sample by mixing the input sample with the delay line output weighted with the dry/wet parameter.</li>
+<li><span class="comment">[15]</span> : Then assign the sample to the output block.</li>
+</ul>
+<p>If we run this code after implementing the above changes in the <code class="project_code">Delay</code> class, we should be able to hear the delay effect on the oscillator signal.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Create a string model with delay lines_files/tutorial_dsp_delay_line_screenshot1.png" alt="">
+<div class="caption">
+Delaying the oscillator signal</div></div>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Experiment with different delay parameters and notice how the delay pattern evolves within the stereo field. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_filter_delay_effect"></a>
+Filter the delay effect</h1>
+<p>Most delay effects incorporate a filtering of the signal as it repeats and decays in order to provide a more realistic sound just as it occurs in nature. So let's apply some filtering to the delayed sound.</p>
+<p>This can be achieved very easily by simply changing one line in the <code class="project_code">process()</code> function of the <code class="project_code">Delay</code> class as follows:</p>
+<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ProcessContext&gt;</div>
+<div class="line"><span class="keywordtype">void</span> process (<span class="keyword">const</span> ProcessContext&amp; context) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> ch = 0; ch &lt; numChannels; ++ch)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; numSamples; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> delayedSample = filter.processSample (dline.get (delayTime));          <span class="comment">// [1]</span></div>
+<div class="line">            <span class="keyword">auto</span> inputSample = input[i];</div>
+<div class="line">            <span class="keyword">auto</span> dlineInputSample = std::tanh (inputSample + feedback * delayedSample);</div>
+<div class="line">            dline.push (dlineInputSample);</div>
+<div class="line">            <span class="keyword">auto</span> outputSample = inputSample + wetLevel * delayedSample;</div>
+<div class="line">            output[i] = outputSample;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Here we simply call the <code class="project_code">processSample()</code> function on the filter object by passing the delayed sample from the delay line <span class="comment">[1]</span> .</p>
+<p>Change the filter type to a high-pass filter in the <code class="project_code">prepare()</code> function by swapping the coefficients and calling the <code class="project_code">makeFirstOrderHighPass()</code> function <span class="comment">[2]</span> as shown here:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> prepare (<span class="keyword">const</span> juce::dsp::ProcessSpec&amp; spec)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line">    filterCoefs = juce::dsp::IIR::Coefficients&lt;Type&gt;::makeFirstOrderHighPass (sampleRate, Type (1e3)); <span class="comment">// [2]</span></div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Running the program should give us a brighter delayed sound as the number of repeats increases.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Create a string model with delay lines_files/tutorial_dsp_delay_line_screenshot2.png" alt="">
+<div class="caption">
+Filtering the delayed signal</div></div>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Experiment with different types of filters to process the delayed sound and notice how the sound of the repeated signal changes. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_integrate_waveguide_string_model"></a>
+Integrate a waveguide string model</h1>
+<p>Since we have conveniently implemented a delay line for our delay effect, we can use the same data structure to integrate a waveguide string model using the same class.</p>
+<p>In the <code class="project_code">WaveguideString</code> class, there are multiple parameters that can be tweaked to change the behaviour of our string model and these include the trigger position, the pickup position and the decay time for the damping of the strings.</p>
+<p>Default parameters are defined in the constructor which in turn set the corresponding member variables as follows:</p>
+<div class="fragment"><div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    WaveguideString()</div>
+<div class="line">    {</div>
+<div class="line">        setTriggerPosition (Type (0.2));</div>
+<div class="line">        setPickupPosition (Type (0.8));</div>
+<div class="line">        setDecayTime (Type (0.5));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>These helper functions also call the <code class="project_code">updateParameters()</code> function which initialises various variables such as the size of the delay lines, the pickup indices relative to the delay lines, the trigger index relative to the forward delay line and the filter coefficients as well as the decay coefficient based on the decay time.</p>
+<p>Add the implementation of this helper function as described below:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> updateParameters()</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> length = (size_t) juce::roundToInt (sampleRateHz / freqHz); <span class="comment">// [1]</span></div>
+<div class="line">    forwardDelayLine .resize (length);</div>
+<div class="line">    backwardDelayLine.resize (length);</div>
+<div class="line"> </div>
+<div class="line">    forwardPickupIndex  = (size_t) juce::roundToInt (<a class="code hl_function" href="https://docs.juce.com/master/group__juce__core-maths.html#ga53851e83e8f5c5faeb5dbc64196bb329">jmap</a> (pickupPos, Type (0), Type (length / 2 - 1)));            <span class="comment">// [2]</span></div>
+<div class="line">    backwardPickupIndex = length - 1 - forwardPickupIndex;</div>
+<div class="line"> </div>
+<div class="line">    forwardTriggerIndex = (size_t) juce::roundToInt (<a class="code hl_function" href="https://docs.juce.com/master/group__juce__core-maths.html#ga53851e83e8f5c5faeb5dbc64196bb329">jmap</a> (triggerPos, Type (0), Type (length / 2 - 1)));           <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">    filter.coefficients = juce::dsp::IIR::Coefficients&lt;Type&gt;::makeFirstOrderLowPass (sampleRateHz, 4 * freqHz);     <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">    decayCoef = juce::jmap (decayTime, std::pow (Type (0.999), Type (length)), std::pow (Type (0.99999), Type (length))); <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">    reset();</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__juce__core-maths_html_ga53851e83e8f5c5faeb5dbc64196bb329"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__core-maths.html#ga53851e83e8f5c5faeb5dbc64196bb329">jmap</a></div><div class="ttdeci">constexpr Type jmap(Type value0To1, Type targetRangeMin, Type targetRangeMax)</div><div class="ttdoc">Remaps a normalised value (between 0 and 1) to a target range.</div><div class="ttdef"><b>Definition</b> juce_MathsFunctions.h:381</div></div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : First, we resize the delay lines to the sample rate over the fundamental frequency of the note played. This is taken from the fact that the fundamental frequency is equal to the sampling frequency over the number of samples needed in the loop.</li>
+<li><span class="comment">[2]</span> : Next, we retrieve the index of the pickup position on the forward delay line by mapping the variable in the range of <span style="font-family: times; font-style: italic">0.0 .. 1.0</span> to the range of 0 to half of the delay line length. This is to accomodate the full cycle which includes the two directions of the travelling wave with the polarity flipping. The index of the pickup position on the backward delay line is calculated by simply taking the inverse of the forward index.</li>
+<li><span class="comment">[3]</span> : The index of the trigger position on the forward delay line is mapped in the same way from the range of <span style="font-family: times; font-style: italic">0.0 .. 1.0</span> to the range of 0 to half of the delay line length.</li>
+<li><span class="comment">[4]</span> : Then the coefficients of the low-pass filter that simulates the decay behaviour are set at a frequency that is four times higher than its fundamental.</li>
+<li><span class="comment">[5]</span> : Finally, the decay coefficient is calculated from the decay time by mapping from the range of <span style="font-family: times; font-style: italic">0.0 .. 1.0</span> to the range of <span style="font-family: times; font-style: italic">0.999^length</span> to <span style="font-family: times; font-style: italic">0.99999^length</span> . This produces values close to 1 which depicts the very little damping that actually happens on physical vibrating strings.</li>
+</ul>
+<p>In the <code class="project_code">reset()</code> function, we reset the delay lines to clear any old sample remaining:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset() noexcept</div>
+<div class="line">    {</div>
+<div class="line">        forwardDelayLine .clear();</div>
+<div class="line">        backwardDelayLine.clear();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">prepare()</code> function, we create a temporary audio block that will be used later for processing <span class="comment">[6]</span> and make sure that the parameters are still correct in case the sample rate was changed between sample blocks by calling the <code class="project_code">updateParameters()</code> function again <span class="comment">[7]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepare (<span class="keyword">const</span> juce::dsp::ProcessSpec&amp; spec)</div>
+<div class="line">    {</div>
+<div class="line">        sampleRateHz = (Type) spec.sampleRate;</div>
+<div class="line">        tempBlock = juce::dsp::AudioBlock&lt;float&gt; (heapBlock, spec.numChannels, spec.maximumBlockSize);  <span class="comment">// [6]</span></div>
+<div class="line">        filter.prepare (spec);</div>
+<div class="line">        updateParameters();                                                                             <span class="comment">// [7]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>To trigger the excitation of the string provoked by the plucking, we have to set the initial displacement of both waves represented by the two delay lines.</p>
+<p>To do this in the <code class="project_code">trigger()</code> function, iterate first between the samples contained from the start of the delay line to the index of the trigger position, calculate the values for each sample by mapping the indices to ascending values reaching half of the note velocity and assigning these to the delay lines in opposite directions <span class="comment">[8]</span> . Do the same for the samples contained between the index of the trigger position to the end of the delay line with descending values from half of the note velocity <span class="comment">[9]</span> .</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> trigger (Type velocity) <span class="keyword">noexcept</span></div>
+<div class="line">    {</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (velocity &gt;= Type (0) &amp;&amp; velocity &lt;= Type (1));</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt;= forwardTriggerIndex; ++i)                   <span class="comment">// [8]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> value = juce::jmap (Type (i), Type (0), Type (forwardTriggerIndex), Type (0), velocity / 2);</div>
+<div class="line">            forwardDelayLine .set (i, value);</div>
+<div class="line">            backwardDelayLine.set (getDelayLineLength() - 1 - i, value);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = forwardTriggerIndex; i &lt; getDelayLineLength(); ++i) <span class="comment">// [9]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> value = juce::jmap (Type (i), Type (forwardTriggerIndex), Type (getDelayLineLength() - 1), velocity / 2, Type (0));</div>
+<div class="line">            forwardDelayLine .set (i, value);</div>
+<div class="line">            backwardDelayLine.set (getDelayLineLength() - 1 - i, value);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>To generate all the samples in a buffer block, we declare a helper function that returns only one iteration of sample generation as follows:</p>
+<div class="fragment"><div class="line">    Type processSample() noexcept</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> forwardOut  = forwardDelayLine .back();                                                    <span class="comment">// [10]</span></div>
+<div class="line">        <span class="keyword">auto</span> backwardOut = backwardDelayLine.back();                                                    <span class="comment">// [11]</span></div>
+<div class="line"> </div>
+<div class="line">        forwardDelayLine .push (-backwardOut);                                                          <span class="comment">// [12]</span></div>
+<div class="line">        backwardDelayLine.push (-decayCoef * filter.processSample (forwardOut));                        <span class="comment">// [13]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> forwardDelayLine.get (forwardPickupIndex) + backwardDelayLine.get (backwardPickupIndex); <span class="comment">// [14]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[10]</span> : First, we retrieve the least recent sample from the circular buffer of the forward delay line by calling the <code class="project_code">back()</code> function declared earlier.</li>
+<li><span class="comment">[11]</span> : We do the same for the least recent sample of the backward delay line.</li>
+<li><span class="comment">[12]</span> : Next, we have to push this last sample located at the boundary of the backward delay line into the forward delay line by inverting the polarity.</li>
+<li><span class="comment">[13]</span> : Then, we do the same for the other delay line but this time instead we filter the sample with the low-pass filter and multiply by the decay coefficient to apply dampening before inverting the polarity and pushing the sample into the circular buffer.</li>
+<li><span class="comment">[14]</span> : Finally, we return the recorded sample from the pickup location by summing the signal from both delay lines at their respective pickup indices.</li>
+</ul>
+<p>In the <code class="project_code">process()</code> function, simply process all the samples in the buffer block by calling the <code class="project_code">processSample()</code> helper function and assigning the values to the temporary block created earlier <span class="comment">[15]</span> . Then copy the samples to all channels in the audio block <span class="comment">[16]</span> and add the content of the temporary block into the output block along with the original content contained in the input block <span class="comment">[17]</span> .</p>
+<div class="fragment"><div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ProcessContext&gt;</div>
+<div class="line">    <span class="keywordtype">void</span> process (<span class="keyword">const</span> ProcessContext&amp; context) <span class="keyword">noexcept</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span>&amp;&amp; outBlock = context.getOutputBlock();</div>
+<div class="line">        <span class="keyword">auto</span> numSamples = outBlock.getNumSamples();</div>
+<div class="line">        <span class="keyword">auto</span>* dst = tempBlock.getChannelPointer (0);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; numSamples; ++i)                         <span class="comment">// [15]</span></div>
+<div class="line">            dst[i] = processSample();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> ch = 1; ch &lt; tempBlock.getNumChannels(); ++ch)      <span class="comment">// [16]</span></div>
+<div class="line">            juce::FloatVectorOperations::copy (tempBlock.getChannelPointer (ch),</div>
+<div class="line">                                               tempBlock.getChannelPointer (0),</div>
+<div class="line">                                               (<span class="keywordtype">int</span>) numSamples);</div>
+<div class="line"> </div>
+<div class="line">        outBlock.copyFrom (context.getInputBlock()).add (tempBlock.getSubBlock (0, outBlock.getNumSamples()));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the <code class="project_code">Voice</code> class, add a <code class="project_code">WaveguideString</code> processor to the processor chain <span class="comment">[18]</span> and add its corresponding index in the enum <span class="comment">[19]</span> .</p>
+<div class="fragment"><div class="line">    <span class="keyword">enum</span></div>
+<div class="line">    {</div>
+<div class="line">        oscIndex,</div>
+<div class="line">        stringIndex,        <span class="comment">// [19]</span></div>
+<div class="line">        masterGainIndex</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    juce::dsp::ProcessorChain&lt;CustomOscillator&lt;float&gt;, WaveguideString&lt;float&gt;, juce::dsp::Gain&lt;float&gt;&gt; processorChain; <span class="comment">// [18]</span></div>
+<div class="line">};</div>
+</div><!-- fragment --><p>In the <code class="project_code">noteStarted()</code> function, remove the line that sets the level of the oscillator as we will be using the waveguide string model to generate sounds. Retrieve a reference to the string model from the processor chain <span class="comment">[20]</span> , set the fundamental frequency of the string to the frequency of the note played <span class="comment">[21]</span> and trigger the plucking by calling the <code class="project_code">trigger()</code> function with the note velocity <span class="comment">[22]</span> .</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> noteStarted()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> velocity = getCurrentlyPlayingNote().noteOnVelocity.asUnsignedFloat();</div>
+<div class="line">        <span class="keyword">auto</span> freqHz = (float) getCurrentlyPlayingNote().getFrequencyInHertz();</div>
+<div class="line"> </div>
+<div class="line">        processorChain.get&lt;oscIndex&gt;().setFrequency (freqHz, <span class="keyword">true</span>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">//processorChain.get&lt;oscIndex&gt;().setLevel (velocity);</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span>&amp; stringModel = processorChain.get&lt;stringIndex&gt;();  <span class="comment">// [20]</span></div>
+<div class="line">        stringModel.setFrequency (freqHz);                      <span class="comment">// [21]</span></div>
+<div class="line">        stringModel.trigger (velocity);                         <span class="comment">// [22]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Let's run the program and see how it sounds like.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Create a string model with delay lines_files/tutorial_dsp_delay_line_screenshot3.png" alt="">
+<div class="caption">
+Delaying the waveguide string signal</div></div>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Experiment with different waveguide parameters such as pickup/trigger positions and decay time as well as filter types and notice how it affects the generated string sound. </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">DSPDelayLineTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to implement a string model and a delay line. In particular, we have:</p>
+<ul>
+<li>Learnt the basics of physical modelling and delay lines.</li>
+<li>Implemented a delay line used as the basis for simple time-based effects.</li>
+<li>Incorporated the delay line to create an interesting delay effect in stereo.</li>
+<li>Integrated a waveguide string model based on physical modelling techniques.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Return to part 1 of this tutorial to brush up on oscillators and filters here: <a class="el" href="https://docs.juce.com/master/tutorial_dsp_introduction.html">Tutorial: Introduction to DSP</a></dd>
+<dd>
+Jump back to part 2 of this tutorial to understand distortion and convolution here: <a class="el" href="https://docs.juce.com/master/tutorial_dsp_convolution.html">Tutorial: Add distortion through waveshaping and convolution</a></dd></dl>
+<h1><a class="anchor" id="tutorial_dsp_delay_line_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_simple_fft.html">Tutorial: The fast Fourier transform</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_spectrum_analyser.html">Tutorial: Visualise the frequencies of a signal in real time</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_simd_register_optimisation.html">Tutorial: Optimisation using the SIMDRegister class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_dsp_introduction.html">Tutorial: Introduction to DSP</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_dsp_convolution.html">Tutorial: Add distortion through waveshaping and convolution</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Create a string model with delay lines_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

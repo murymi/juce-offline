@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0057)https://docs.juce.com/master/tutorial_table_list_box.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: The TableListBox class</title>
+<link href="./JUCE_ Tutorial_ The TableListBox class_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The TableListBox class_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The TableListBox class_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ The TableListBox class_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The TableListBox class_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The TableListBox class_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ The TableListBox class_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The TableListBox class_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The TableListBox class_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ The TableListBox class_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ The TableListBox class_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ The TableListBox class_files/css">
+<script src="./JUCE_ Tutorial_ The TableListBox class_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ The TableListBox class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ The TableListBox class_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: The TableListBox class</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_list_box_class">The ListBox class</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_reading_data_xml">Reading Data from XML</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_custom_cell_components">Custom Cell Components</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_custom_cell_components_editable_labels">Editable Labels</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_custom_cell_components_selectable_button">Selectable Button</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_sorting_data">Sorting the Data</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_setting_model">Setting the Model</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_table_list_box.html#tutorial_table_list_box_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Incorporate tables into your JUCE user interfaces. Display data loaded from an XML file and customise the format of your table.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a>, <a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a>, <a class="el" href="https://docs.juce.com/master/classListBox.html" title="A list of items that can be scrolled vertically.">ListBox</a>, <a class="el" href="https://docs.juce.com/master/classListBoxModel.html" title="A subclass of this is used to drive a ListBox.">ListBoxModel</a>, <a class="el" href="https://docs.juce.com/master/classTableHeaderComponent.html" title="A component that displays a strip of column headings for a table, and allows these to be resized,...">TableHeaderComponent</a>, <a class="el" href="https://docs.juce.com/master/classXmlDocument.html" title="Parses a text-based XML document and creates an XmlElement object from it.">XmlDocument</a>, <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a></p>
+<h1><a class="anchor" id="tutorial_table_list_box_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/TableListBoxTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/TableListBoxTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If using the PIP version of this project, please make sure to copy the <code class="filename">Resources</code> folder into the generated Projucer project.</dd></dl>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_table_list_box_demo_project"></a>
+The demo project</h1>
+<p>The demo project displays a table loaded from an XML file containing information about JUCE modules. The table can be sorted according to the column of your choice, certain entries can be edited and columns can be hidden.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The TableListBox class_files/tutorial_table_list_box_screenshot1.png" alt="">
+<div class="caption">
+The app window</div></div>
+<h1><a class="anchor" id="tutorial_table_list_box_list_box_class"></a>
+The ListBox class</h1>
+<p>The base <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> class that allows us to display tables in JUCE is called the <a class="el" href="https://docs.juce.com/master/classListBox.html" title="A list of items that can be scrolled vertically.">ListBox</a> class. The <a class="el" href="https://docs.juce.com/master/classListBox.html" title="A list of items that can be scrolled vertically.">ListBox</a> behaviour is managed by a <a class="el" href="https://docs.juce.com/master/classListBoxModel.html" title="A subclass of this is used to drive a ListBox.">ListBoxModel</a> class which describes the data model to display. This is useful to display a list of items in a scrollable viewport but in order to turn this into a proper table with headers describing the columns, we can use respectively the <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a> and <a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a> classes. These classes encapsulate the same behaviour as their counterparts but instead incorporate the functionalities of a <a class="el" href="https://docs.juce.com/master/classTableHeaderComponent.html" title="A component that displays a strip of column headings for a table, and allows these to be resized,...">TableHeaderComponent</a> to display column headers.</p>
+<p>When implementing a <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a> and inheriting the <a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a>, there are several functions to override namely:</p>
+<ul>
+<li><code class="project_code">getNumRows()</code> : Needs to return the current number of rows in the table.</li>
+<li><code class="project_code">paintRowBackground()</code> : Using the <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> context provided, we must draw the background of the row specified by the row number.</li>
+<li><code class="project_code">paintCell()</code> : Using the <a class="el" href="https://docs.juce.com/master/classGraphics.html" title="A graphics context, used for drawing a component or image.">Graphics</a> context provided, we must draw the cell specified by the row and column number.</li>
+<li><code class="project_code">refreshComponentForCell()</code> : We can optionally override this method to create and update custom components in the table.</li>
+<li><code class="project_code">getColumnAutoSizeWidth()</code> : When using auto size for the width of the columns, this method can optionally specify how the column resizes itself.</li>
+<li><code class="project_code">sortOrderChanged()</code> : If using a custom sorting order, we can optionally specify how the column gets reordered.</li>
+</ul>
+<p>There are other functions that you can optionally override for additional functionality but in this tutorial we will implement the ones presented here.</p>
+<h1><a class="anchor" id="tutorial_table_list_box_reading_data_xml"></a>
+Reading Data from XML</h1>
+<p>Let's start by loading the data that we want to present in the table from an XML document.</p>
+<p>In the <code class="filename">Resources</code> folder of the project, you can find sample data to use with this tutorial in a file called <code class="filename">TableData.xml</code> that contains information in the following format:</p>
+<div class="fragment"><div class="line">&lt;<span class="keywordtype">TABLE_DATA</span>&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">HEADERS</span>&gt;</div>
+<div class="line">        &lt;<span class="keywordtype">COLUMN</span> <span class="keyword">columnId</span>=<span class="stringliteral">"1"</span> <span class="keyword">name</span>=<span class="stringliteral">"ID"</span> <span class="keyword">width</span>=<span class="stringliteral">"50"</span>/&gt;</div>
+<div class="line">        //...</div>
+<div class="line">    &lt;/<span class="keywordtype">HEADERS</span>&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">DATA</span>&gt;</div>
+<div class="line">        &lt;<span class="keywordtype">ITEM</span> <span class="keyword">ID</span>=<span class="stringliteral">"01"</span> <span class="keyword">Module</span>=<span class="stringliteral">"juce_module"</span> <span class="keyword">Name</span>=<span class="stringliteral">"JUCE example classes"</span> <span class="keyword">Version</span>=<span class="stringliteral">"5.2.0"</span> <span class="keyword">License</span>=<span class="stringliteral">"ISC"</span> <span class="keyword">Groups</span>=<span class="stringliteral">"2"</span> <span class="keyword">Dependencies</span>=<span class="stringliteral">"1"</span> <span class="keyword">Description</span>=<span class="stringliteral">"..."</span> <span class="keyword">Select</span>=<span class="stringliteral">"0"</span>/&gt;</div>
+<div class="line">        //...</div>
+<div class="line">    &lt;/<span class="keywordtype">DATA</span>&gt;</div>
+<div class="line">&lt;/<span class="keywordtype">TABLE_DATA</span>&gt;</div>
+</div><!-- fragment --><p>Here we encapsulate the whole file with the <code class="project_code">TABLE_DATA</code> tag and the table headers and the actual data is separated using the <code class="project_code">HEADERS</code> and <code class="project_code">DATA</code> tags respectively. The columns are defined with individual <code class="project_code">COLUMN</code> tags and the rows are defined with <code class="project_code">ITEM</code> tags using attributes for the content in each column of that entry.</p>
+<p>The implementation of the code in this project is tailored for this file structure but you can modify the XML tags as you wish.</p>
+<p>In the <code class="project_code">TableTutorialComponent</code> class, we define a pointer to temporarily store the content of the file in a single <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> member variable and also define two additional XmlElements for the column content and the row content as shown here:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>TableTutorialComponent    : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                                  <span class="keyword">public</span> juce::TableListBoxModel</div>
+<div class="line">{</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    std::unique_ptr&lt;juce::XmlElement&gt; tutorialData;</div>
+<div class="line">    juce::XmlElement* columnList = <span class="keyword">nullptr</span>;</div>
+<div class="line">    juce::XmlElement* dataList = <span class="keyword">nullptr</span>;</div>
+</div><!-- fragment --><p>In the class constructor, we launch a <code class="project_code"><a class="el" href="https://docs.juce.com/master/classFileChooser.html" title="Creates a dialog box to choose a file or directory to load or save.">FileChooser</a></code> to select the data file to display. When the <code class="project_code"><a class="el" href="https://docs.juce.com/master/classFileChooser.html" title="Creates a dialog box to choose a file or directory to load or save.">FileChooser</a></code> completes, it will call the <code class="project_code">callback</code> lambda function, to load the file content into our <code class="project_code"><a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a></code> objects <span class="comment">[1]</span> . With our data loaded from the XML file, we can iterate through the column headers using a for() loop and <code class="project_code"><a class="el" href="https://docs.juce.com/master/classXmlElement.html#ac620244d67b05fb572a37bc5f01f6d0d" title="Allows iterating the children of an XmlElement using range-for syntax.">XmlElement::getChildIterator</a></code> to assign the table headers using the <code class="project_code">addColumn()</code> function <span class="comment">[2]</span> like so:</p>
+<div class="fragment"><div class="line">    TableTutorialComponent()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> callback = [<span class="keyword">this</span>] (<span class="keyword">const</span> juce::FileChooser&amp; chooser)</div>
+<div class="line">        {</div>
+<div class="line">            loadData (chooser.getResult());                                             <span class="comment">// [1]</span></div>
+</div><!-- fragment --> <div class="fragment"><div class="line">            <span class="keywordflow">if</span> (columnList != <span class="keyword">nullptr</span>)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keyword">auto</span>* columnXml : columnList-&gt;getChildIterator())</div>
+<div class="line">                {</div>
+<div class="line">                    <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.getHeader().addColumn (columnXml-&gt;getStringAttribute (<span class="stringliteral">"name"</span>), <span class="comment">// [2]</span></div>
+<div class="line">                                                 columnXml-&gt;getIntAttribute (<span class="stringliteral">"columnId"</span>),</div>
+<div class="line">                                                 columnXml-&gt;getIntAttribute (<span class="stringliteral">"width"</span>),</div>
+<div class="line">                                                 50,</div>
+<div class="line">                                                 400,</div>
+<div class="line">                                                 juce::TableHeaderComponent::defaultFlags);</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+</div><!-- fragment --><p>This function specifies the name, width and ID of the column along with property flags that define sortability and resizability of columns.</p>
+<p>In the <code class="project_code">loadData()</code> helper function called in the constructor, we first find the <code class="filename">Resources</code> directory and the XML file to load and parse this <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> object using the <code class="project_code">parse()</code> function <span class="comment">[3]</span> . We can then retrieve the rows and columns from the temporary <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> by traversing the XML structure and finding the corresponding tags with the <code class="project_code">getChildByName()</code> functions <span class="comment">[4]</span> . This is a good place to set the number of rows from the data <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> by calling <code class="project_code">getNumChildElements()</code> on it <span class="comment">[5]</span> as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> loadData (juce::File tableFile)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (tableFile == juce::File() || ! tableFile.exists())</div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
+<div class="line">        tutorialData = juce::XmlDocument::parse (tableFile);            <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">        dataList   = tutorialData-&gt;getChildByName (<span class="stringliteral">"DATA"</span>);</div>
+<div class="line">        columnList = tutorialData-&gt;getChildByName (<span class="stringliteral">"HEADERS"</span>);          <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        numRows = dataList-&gt;getNumChildElements();                      <span class="comment">// [5]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>Make sure to select the "TableData.xml" file provided in the resources for this tutorial.</dd></dl>
+<p>Let's also define a helper function called <code class="project_code">getAttributeNameForColumnId()</code> that returns the name of the column based on its ID which will become handy later on:</p>
+<div class="fragment"><div class="line">    juce::String getAttributeNameForColumnId (<span class="keyword">const</span> <span class="keywordtype">int</span> columnId)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>* columnXml : columnList-&gt;getChildIterator())</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span> (columnXml-&gt;getIntAttribute (<span class="stringliteral">"columnId"</span>) == columnId)</div>
+<div class="line">                <span class="keywordflow">return</span> columnXml-&gt;getStringAttribute (<span class="stringliteral">"name"</span>);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> {};</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we iterate through the child XML elements and find the matching column ID in order to return its name attribute.</p>
+<h1><a class="anchor" id="tutorial_table_list_box_custom_cell_components"></a>
+Custom Cell Components</h1>
+<p>A <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a> can hold custom components in its cells other than just text. In the following sections we explore how to incorporate a <a class="el" href="https://docs.juce.com/master/classToggleButton.html" title="A button that can be toggled on/off.">ToggleButton</a> into one of the columns and an editable <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> that listens to user input.</p>
+<h2><a class="anchor" id="tutorial_table_list_box_custom_cell_components_editable_labels"></a>
+Editable Labels</h2>
+<p>In the <code class="project_code">EditableTextCustomComponent</code> class, we first inherit from the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a> class in order to set it as editable when the user double-clicks on it:</p>
+<div class="fragment"><div class="line">    <span class="keyword">class </span>EditableTextCustomComponent  : <span class="keyword">public</span> juce::Label</div>
+<div class="line">    {</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        EditableTextCustomComponent (TableTutorialComponent&amp; td)</div>
+<div class="line">            : owner (td)</div>
+<div class="line">        {</div>
+<div class="line">            setEditable (<span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">false</span>);</div>
+<div class="line">        }</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        TableTutorialComponent&amp; owner;</div>
+<div class="line">        <span class="keywordtype">int</span> <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>, columnId;</div>
+<div class="line">        juce::Colour textColour;</div>
+<div class="line">    };</div>
+</div><!-- fragment --><p>Here we also keep track in which row and column this object is displayed and a reference to the actual table.</p>
+<p>When the user interacts with the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a>, we have to extend the usual <code class="project_code">mouseDown()</code> functionalities to account for multiple selections in the table. This is achieved by calling <code class="project_code">selectRowsBasedOnModifierKeys()</code> on the table and passing the modifier keys as an argument. Notice here that we still need to call the base class function to keep the original behaviour as well:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> mouseDown (<span class="keyword">const</span> juce::MouseEvent&amp; event)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">        </span>{</div>
+<div class="line">            owner.table.selectRowsBasedOnModifierKeys (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>, event.mods, <span class="keyword">false</span>);</div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_function" href="https://docs.juce.com/master/classComponent.html#a2a908e064b0bfed1ea0a75b0a0fee6dd">Label::mouseDown</a> (event);</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>When the user edits the text in the <a class="el" href="https://docs.juce.com/master/classLabel.html" title="A component that displays a text string, and can optionally become a text editor when clicked.">Label</a>, we receive a callback from the <code class="project_code">textWasEdited()</code> function and we call the helper function <code class="project_code">setText()</code> defined later in the <code class="project_code">TableTutorialComponent</code> class to save the changes in the corresponding <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> object like so:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> textWasEdited()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">        </span>{</div>
+<div class="line">            owner.setText (columnId, <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>, getText());</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The following function is called by the <code class="project_code"><a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a></code> when creating or updating an <code class="project_code">EditableTextCustomComponent</code> object and sets the row, column and the displayed text from the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> using the <code class="project_code">getText()</code> helper function defined after:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> setRowAndColumn (<span class="keyword">const</span> <span class="keywordtype">int</span> newRow, <span class="keyword">const</span> <span class="keywordtype">int</span> newColumn)</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a> = newRow;</div>
+<div class="line">            columnId = newColumn;</div>
+<div class="line">            setText (owner.getText(columnId, <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>), juce::dontSendNotification);</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The <code class="project_code">getText()</code> and <code class="project_code">setText()</code> helper functions are defined as follows:</p>
+<div class="fragment"><div class="line">    juce::String getText (<span class="keyword">const</span> <span class="keywordtype">int</span> columnNumber, <span class="keyword">const</span> <span class="keywordtype">int</span> rowNumber)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> dataList-&gt;getChildElement (rowNumber)-&gt;getStringAttribute (getAttributeNameForColumnId (columnNumber));</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we find the text from the row and column number in the child element contained within the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a>.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> setText (<span class="keyword">const</span> <span class="keywordtype">int</span> columnNumber, <span class="keyword">const</span> <span class="keywordtype">int</span> rowNumber, <span class="keyword">const</span> juce::String&amp; newText)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; columnName = <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.getHeader().getColumnName (columnNumber);</div>
+<div class="line">        dataList-&gt;getChildElement (rowNumber)-&gt;setAttribute (columnName, newText);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we store the text in the child element contained within the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> from the row and column number.</p>
+<h2><a class="anchor" id="tutorial_table_list_box_custom_cell_components_selectable_button"></a>
+Selectable Button</h2>
+<p>In the <code class="project_code">SelectionColumnCustomComponent</code> class, we first inherit from the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> class in order to set a <a class="el" href="https://docs.juce.com/master/classToggleButton.html" title="A button that can be toggled on/off.">ToggleButton</a> as a child <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> to it and assign the callback function to be called when the user interacts with it:</p>
+<div class="fragment"><div class="line">    <span class="keyword">class </span>SelectionColumnCustomComponent    : <span class="keyword">public</span> <a class="code hl_class" href="https://docs.juce.com/master/classComponent.html">Component</a></div>
+<div class="line">    {</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        SelectionColumnCustomComponent (TableTutorialComponent&amp; td)</div>
+<div class="line">            : owner (td)</div>
+<div class="line">        {</div>
+<div class="line">            addAndMakeVisible (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194">toggleButton</a>);</div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194">toggleButton</a>.onClick = [<span class="keyword">this</span>] { owner.setSelection (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>, (<span class="keywordtype">int</span>) <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194">toggleButton</a>.getToggleState()); };</div>
+<div class="line">        }</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        TableTutorialComponent&amp; owner;</div>
+<div class="line">        juce::ToggleButton <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194">toggleButton</a>;</div>
+<div class="line">        <span class="keywordtype">int</span> <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>, columnId;</div>
+<div class="line">    };</div>
+</div><!-- fragment --><p>Here we also keep track in which row and column this object is displayed and a reference to the actual table. The lambda function calls the <code class="project_code">setSelection()</code> helper function defined later in the <code class="project_code">TableTutorialComponent</code> that sets the toggle state of the button.</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> resized()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">        </span>{</div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194">toggleButton</a>.setBoundsInset (juce::BorderSize&lt;int&gt; (2));</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The <code class="project_code">resized()</code> function sets the bounds of the <a class="el" href="https://docs.juce.com/master/classToggleButton.html" title="A button that can be toggled on/off.">ToggleButton</a> object.</p>
+<p>The following function is called by the <code class="project_code"><a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a></code> when creating or updating a <code class="project_code">SelectionColumnCustomComponent</code> object and sets the row, column and the toggle state from the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> using the <code class="project_code">getSelection()</code> helper function defined after:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> setRowAndColumn (<span class="keywordtype">int</span> newRow, <span class="keywordtype">int</span> newColumn)</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a> = newRow;</div>
+<div class="line">            columnId = newColumn;</div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca23288070d70bf4cab9c872a69122d194">toggleButton</a>.setToggleState ((<span class="keywordtype">bool</span>) owner.getSelection (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caf1965a857bc285d26fe22023aa5ab50d">row</a>), juce::dontSendNotification);</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The <code class="project_code">getSelection()</code> and <code class="project_code">setSelection()</code> helper functions are defined as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">int</span> getSelection (<span class="keyword">const</span> <span class="keywordtype">int</span> rowNumber)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> dataList-&gt;getChildElement (rowNumber)-&gt;getIntAttribute (<span class="stringliteral">"Select"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we find the toggle state from the row and column number in the child element contained within the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a>.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> setSelection (<span class="keyword">const</span> <span class="keywordtype">int</span> rowNumber, <span class="keyword">const</span> <span class="keywordtype">int</span> newSelection)</div>
+<div class="line">    {</div>
+<div class="line">        dataList-&gt;getChildElement (rowNumber)-&gt;setAttribute (<span class="stringliteral">"Select"</span>, newSelection);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we store the toggle state in the child element contained within the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> from the row and column number.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Create additional custom cell components that incorporate <a class="el" href="https://docs.juce.com/master/classComboBox.html" title="A component that lets the user choose from a drop-down list of choices.">ComboBox</a>, <a class="el" href="https://docs.juce.com/master/classTextButton.html" title="A button that uses the standard lozenge-shaped background with a line of text on it.">TextButton</a> or even <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> components. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_table_list_box_sorting_data"></a>
+Sorting the Data</h1>
+<p>In order for the table to sort elements based on a chosen column, we have to define a comparator class that can be passed as a template class to be used by the <code class="project_code">sortChildElements()</code> function of the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> object.</p>
+<p>We name this class <code class="project_code">TutorialDataSorter</code> that keeps track of the name of the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> attribute to sort and the ascending or descending direction of the sorting algorithm as follows:</p>
+<div class="fragment"><div class="line">    <span class="keyword">class </span>TutorialDataSorter</div>
+<div class="line">    {</div>
+<div class="line">    <span class="keyword">public</span>:</div>
+<div class="line">        TutorialDataSorter (<span class="keyword">const</span> juce::String&amp; attributeToSortBy, <span class="keywordtype">bool</span> forwards)</div>
+<div class="line">            : attributeToSort (attributeToSortBy),</div>
+<div class="line">              direction (forwards ? 1 : -1)</div>
+<div class="line">        {}</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        juce::String attributeToSort;</div>
+<div class="line">        <span class="keywordtype">int</span> direction;</div>
+<div class="line">    };</div>
+</div><!-- fragment --><p>For the <code class="project_code">sortChildElements()</code> function to recognise the <code class="project_code">TutorialDataSorter</code> as a valid comparator, we have to declare a function named <code class="project_code">compareElements()</code> that takes two <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> objects and returns the order as an int.</p>
+<p>The function is required to return:</p>
+<ul>
+<li>a negative value if the first comes before the second.</li>
+<li>a value of 0 if the two objects are equivalent.</li>
+<li>a positive value if the second comes before the first.</li>
+</ul>
+<div class="fragment"><div class="line">        <span class="keywordtype">int</span> compareElements (juce::XmlElement* first, juce::XmlElement* second)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">        </span>{</div>
+<div class="line">            <span class="keyword">auto</span> result = first-&gt;getStringAttribute (attributeToSort)</div>
+<div class="line">                                .compareNatural (second-&gt;getStringAttribute (attributeToSort)); <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (result == 0)</div>
+<div class="line">                result = first-&gt;getStringAttribute (<span class="stringliteral">"ID"</span>)</div>
+<div class="line">                               .compareNatural (second-&gt;getStringAttribute (<span class="stringliteral">"ID"</span>));             <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">return</span> direction * result;                                                          <span class="comment">// [3]</span></div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>Therefore, in the above function we compare the string attributes of both XmlElements by using the <code class="project_code">compareNatural()</code> method of the <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> class which returns an int with the same set of rules <span class="comment">[1]</span> . If the two strings are equivalent for the attribute in question then we compare the ID column of these two elements <span class="comment">[2]</span> . Finally we need to invert the result if the direction of sorting is reversed <span class="comment">[3]</span> .</p>
+<h1><a class="anchor" id="tutorial_table_list_box_setting_model"></a>
+Setting the Model</h1>
+<p>Let's assemble all the pieces together by implementing the <a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a>.</p>
+<p>We first start by inheriting from the <a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a> class in the <code class="project_code">TableTutorialComponent</code> class as shown here:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>TableTutorialComponent    : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                                  <span class="keyword">public</span> juce::TableListBoxModel</div>
+<div class="line">{</div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::TableListBox <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>  { {}, <span class="keyword">this</span> };</div>
+<div class="line">    juce::Font font           { 14.0f };</div>
+<div class="line"> </div>
+<div class="line">    std::unique_ptr&lt;juce::XmlElement&gt; tutorialData;</div>
+<div class="line">    juce::XmlElement* columnList = <span class="keyword">nullptr</span>;</div>
+<div class="line">    juce::XmlElement* dataList = <span class="keyword">nullptr</span>;</div>
+<div class="line">    <span class="keywordtype">int</span> numRows = 0;</div>
+</div><!-- fragment --><p>Here we define a <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a> member variable and set this class as its <a class="el" href="https://docs.juce.com/master/classTableListBoxModel.html" title="One of these is used by a TableListBox as the data model for the table&#39;s contents.">TableListBoxModel</a> which means that our model class actually holds the table itself in this scenario. We also keep track of the number of rows in the table as required by the model.</p>
+<p>In the class constructor we add the <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a> as a child <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> <span class="comment">[1]</span> . We can also specify properties for the appearance of the table such as the outline colour and its thickness <span class="comment">[2]</span> .</p>
+<div class="fragment"><div class="line">            addAndMakeVisible (<a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>);                                                  <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.setColour (juce::ListBox::outlineColourId, juce::Colours::grey);      <span class="comment">// [2]</span></div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.setOutlineThickness (1);</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.getHeader().setSortColumnId (1, <span class="keyword">true</span>);                                <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.setMultipleSelectionEnabled (<span class="keyword">true</span>);                                   <span class="comment">// [4]</span></div>
+</div><!-- fragment --><p>The sorting column and the column visibility is set by calling corresponding functions on the <a class="el" href="https://docs.juce.com/master/classTableHeaderComponent.html" title="A component that displays a strip of column headings for a table, and allows these to be resized,...">TableHeaderComponent</a> of the table <span class="comment">[3]</span> and we also allow multiple selections on the table <span class="comment">[4]</span> .</p>
+<p>The first function to override is the <code class="project_code">getNumRows()</code> function that returns the member variable holding the number of rows. This function is necessary for the model to update the table properly:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">int</span> getNumRows()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">return</span> numRows;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <code class="project_code">paintRowBackground()</code> function is implemented by first finding an alternate colour that complements the default background colour for the table:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paintRowBackground (juce::Graphics&amp; g, <span class="keywordtype">int</span> rowNumber, <span class="keywordtype">int</span> <span class="comment">/*width*/</span>, <span class="keywordtype">int</span> <span class="comment">/*height*/</span>, <span class="keywordtype">bool</span> rowIsSelected)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> alternateColour = getLookAndFeel().findColour (juce::ListBox::backgroundColourId)</div>
+<div class="line">                                               .interpolatedWith (getLookAndFeel().findColour (juce::ListBox::textColourId), 0.03f);</div>
+<div class="line">        <span class="keywordflow">if</span> (rowIsSelected)</div>
+<div class="line">            g.fillAll (juce::Colours::lightblue);</div>
+<div class="line">        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (rowNumber % 2)</div>
+<div class="line">            g.fillAll (alternateColour);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The row is then filled in light blue if the row is selected, otherwise we paint every other row with this alternate colour.</p>
+<p>In order to fill the cells with content we override the <code class="project_code">paintCell()</code> function as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> paintCell (juce::Graphics&amp; g, <span class="keywordtype">int</span> rowNumber, <span class="keywordtype">int</span> columnId,</div>
+<div class="line">                    <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">bool</span> rowIsSelected)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        g.setColour (rowIsSelected ? juce::Colours::darkblue : getLookAndFeel().findColour (<a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classListBox.html">ListBox</a>::textColourId));  <span class="comment">// [5]</span></div>
+<div class="line">        g.setFont (font);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (<span class="keyword">auto</span>* rowElement = dataList-&gt;getChildElement (rowNumber))</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> text = rowElement-&gt;getStringAttribute (getAttributeNameForColumnId (columnId));</div>
+<div class="line"> </div>
+<div class="line">            g.drawText (text, 2, 0, width - 4, height, juce::Justification::centredLeft, <span class="keyword">true</span>);                             <span class="comment">// [6]</span></div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        g.setColour (getLookAndFeel().findColour (juce::ListBox::backgroundColourId));</div>
+<div class="line">        g.fillRect (width - 1, 0, 1, height);                                                                               <span class="comment">// [7]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[5]</span> : First we select an appropriate colour for the text depending on whether the row is selected or not and set the font size.</li>
+<li><span class="comment">[6]</span> : If the child row element exists in the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> object, we retrieve the right column from the row and fill the cell with corresponding text from the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a>.</li>
+<li><span class="comment">[7]</span> : Finally, we draw the separation line on the right side of the cell with the default background colour.</li>
+</ul>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> sortOrderChanged (<span class="keywordtype">int</span> newSortColumnId, <span class="keywordtype">bool</span> isForwards)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (newSortColumnId != 0)</div>
+<div class="line">        {</div>
+<div class="line">            TutorialDataSorter sorter (getAttributeNameForColumnId (newSortColumnId), isForwards);</div>
+<div class="line">            dataList-&gt;sortChildElements (sorter);</div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682caaab9e1de16f38176f86d7a92ba337a8d">table</a>.updateContent();</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>When a sort order change is requested by the user, the <code class="project_code">sortOrderChanged()</code> callback function is called and if the sort column is valid, we instantiate a <code class="project_code">TutorialDataSorter</code> object with the correct attribute and direction. We can then pass that object to the <code class="project_code">sortChildElements()</code> function of the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> and force a table refresh by calling <code class="project_code">updateContent()</code> on the table.</p>
+<p>The <code class="project_code">refreshComponentForCell()</code> function is where the custom cell components can be instantiated and updated as follows:</p>
+<div class="fragment"><div class="line">    <a class="code hl_class" href="https://docs.juce.com/master/classComponent.html">Component</a>* refreshComponentForCell (<span class="keywordtype">int</span> rowNumber, <span class="keywordtype">int</span> columnId, <span class="keywordtype">bool</span> <span class="comment">/*isRowSelected*/</span>,</div>
+<div class="line">                                        <a class="code hl_class" href="https://docs.juce.com/master/classComponent.html">Component</a>* existingComponentToUpdate)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (columnId == 9)  <span class="comment">// [8]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>* selectionBox = <span class="keyword">static_cast&lt;</span>SelectionColumnCustomComponent*<span class="keyword">&gt;</span> (existingComponentToUpdate);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (selectionBox == <span class="keyword">nullptr</span>)</div>
+<div class="line">                selectionBox = <span class="keyword">new</span> SelectionColumnCustomComponent (*<span class="keyword">this</span>);</div>
+<div class="line"> </div>
+<div class="line">            selectionBox-&gt;setRowAndColumn (rowNumber, columnId);</div>
+<div class="line">            <span class="keywordflow">return</span> selectionBox;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (columnId == 8)  <span class="comment">// [9]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>* textLabel = <span class="keyword">static_cast&lt;</span>EditableTextCustomComponent*<span class="keyword">&gt;</span> (existingComponentToUpdate);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (textLabel == <span class="keyword">nullptr</span>)</div>
+<div class="line">                textLabel = <span class="keyword">new</span> EditableTextCustomComponent (*<span class="keyword">this</span>);</div>
+<div class="line"> </div>
+<div class="line">            textLabel-&gt;setRowAndColumn (rowNumber, columnId);</div>
+<div class="line">            <span class="keywordflow">return</span> textLabel;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (existingComponentToUpdate == <span class="keyword">nullptr</span>);</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;     <span class="comment">// [10]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[8]</span> : If the function is called on the correct "Select" column for the selection cell, then we check whether the <code class="project_code">SelectionColumnCustomComponent</code> already exists in the cell. If not we instantiate a new instance and update its content by calling the <code class="project_code">setRowAndColumn()</code> function on it and return the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a>.</li>
+<li><span class="comment">[9]</span> : If the function is called on the correct "Description" column for the text editor cell, then we check whether the <code class="project_code">EditableTextCustomComponent</code> already exists in the cell. If not we instantiate a new instance and update its content by calling the <code class="project_code">setRowAndColumn()</code> function on it and return the <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a>.</li>
+<li><span class="comment">[10]</span> : Otherwise, it means that the function was called on a regular column and the custom <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> object for that cell should be non-existant.</li>
+</ul>
+<p>Finally, the <a class="el" href="https://docs.juce.com/master/classTableListBox.html" title="A table of cells, using a TableHeaderComponent as its header.">TableListBox</a> offers a nice feature where the columns can be resized according to an automatic behaviour defined hereafter in the <code class="project_code">getColumnAutoSizeWidth()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">int</span> getColumnAutoSizeWidth (<span class="keywordtype">int</span> columnId)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (columnId == 9)</div>
+<div class="line">            <span class="keywordflow">return</span> 50;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordtype">int</span> widest = 32;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = getNumRows(); --i &gt;= 0;)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span> (<span class="keyword">auto</span>* rowElement = dataList-&gt;getChildElement (i))</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span> text = rowElement-&gt;getStringAttribute (getAttributeNameForColumnId (columnId));</div>
+<div class="line"> </div>
+<div class="line">                widest = juce::jmax (widest, font.getStringWidth (text));</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> widest + 8;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we decide to inspect all the elements in a certain column and retrieve the widest text in a cell. We then return the width with some added padding or a fixed width if the column happens to be the "Select" column with a custom <a class="el" href="https://docs.juce.com/master/classToggleButton.html" title="A button that can be toggled on/off.">ToggleButton</a>.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the content of the XML document by adding additional columns and/or data and changing the implementation accordingly. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_table_list_box_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to display information in a table. In particular, we have:</p>
+<ul>
+<li>Loaded data into a table using XML.</li>
+<li>Incorporated custom components into our table cells.</li>
+<li>Sorted the table data according to a custom sorting behaviour.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_table_list_box_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_label.html">Tutorial: The Label class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_combo_box.html">Tutorial: The ComboBox class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_slider_values.html">Tutorial: The Slider class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_radio_buttons_checkboxes.html">Tutorial: Radio buttons and checkboxes</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ The TableListBox class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

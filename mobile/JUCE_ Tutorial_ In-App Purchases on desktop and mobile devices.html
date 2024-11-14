@@ -1,0 +1,777 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://docs.juce.com/master/tutorial_in_app_purchases.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: In-App Purchases on desktop and mobile devices</title>
+<link href="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/css">
+<script src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: In-App Purchases on desktop and mobile devices</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup">Initial Setup</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup_apple_developer">Apple Developer</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup_itunes_connect">iTunes Connect</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup_google_play_developer">Google Play Developer</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup_generate_android_apk">Generate Android APK</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_purchase_types">Purchase Types</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_project_structure">Project structure</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_displaying_products">Displaying products</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_retrieving_purchases">Retrieving purchases</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_purchasing_products">Purchasing products</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_handling_async_updates">Handling async updates</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_playing_sounds">Playing sounds</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Sell consumable and non-consumable In-App Purchases in your desktop and mobile applications. Learn how to setup and process payments for IAP products on both macOS/iOS and Android devices.</p>
+<p><span class="headerlabel">Level:</span> Advanced</p>
+<p><span class="headerlabel">Platforms:</span> macOS , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/structInAppPurchases_1_1Listener.html" title="Represents an object that gets notified about events such as product info returned or product purchas...">InAppPurchases::Listener</a>, <a class="el" href="https://docs.juce.com/master/classSoundPlayer.html" title="A simple sound player that you can add to the AudioDeviceManager to play simple sounds.">SoundPlayer</a>, <a class="el" href="https://docs.juce.com/master/classAsyncUpdater.html" title="Has a callback method that is triggered asynchronously.">AsyncUpdater</a>, <a class="el" href="https://docs.juce.com/master/classListBoxModel.html" title="A subclass of this is used to drive a ListBox.">ListBoxModel</a></p>
+<dl class="section warning"><dt>Warning</dt><dd>This project requires Apple Developer and iTunes Connect accounts on macOS/iOS and a Google Play Developer account on Android. If you need help with this, follow the instructions on the <a href="https://developer.apple.com/account/">Apple Developer</a>, <a href="https://itunesconnect.apple.com/">iTunes Connect</a> and <a href="https://play.google.com/apps/publish/">Google Play Developer</a> websites to open up these accounts.</dd>
+<dd>
+This project also requires a physical device to test in-app purchases as simulators do not support IAP testing. Please make sure you have a device ready for this.</dd></dl>
+<h1><a class="anchor" id="tutorial_in_app_purchases_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/InAppPurchaseTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/InAppPurchaseTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If using the PIP version of this project, please make sure to copy the <code class="filename">Resources</code> folder into the generated Projucer project.</dd></dl>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_in_app_purchases_demo_project"></a>
+The demo project</h1>
+<p>The project offers different voices that can be acquired through in-app purchases to provide several auditive flavours when phrases are played using speech dictation. By default, the user has access to a generic robotic voice but will inevitably want to try JUCE developer voices instead. If we run the mobile application in the iOS simulator, the window should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot1.png" alt="">
+<div class="caption">
+The demo project app window on iOS</div></div>
+<dl class="section note"><dt>Note</dt><dd>Since the application is running in the simulator, it is expected behaviour to see our products greyed out and the prices being fetched indefinitely.</dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Although this is a tutorial project, unless you are in sandbox mode or logged in as a test user, if you try to purchase an item your credit card will be charged!</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The code presented here is broadly similar to the <b class="onscreen_text">InAppPurchase</b> from the JUCE Examples.</dd></dl>
+<h1><a class="anchor" id="tutorial_in_app_purchases_initial_setup"></a>
+Initial Setup</h1>
+<p>In order for this project to function properly, we have to perform some initial setup procedures with appropriate developer consoles for specific deployment platform. Let's first allow appropriate permissions for in-app purchases in the Projucer. Under macOS/iOS, make sure that the <b class="onscreen_text">In-App purchases capability</b> checkbox is ticked. Under Android, make sure that the <b class="onscreen_text">In-App Billing</b> checkbox is ticked.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot2_ios.png" alt="">
+<div class="caption">
+Project settings window on iOS</div></div>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot2_android.png" alt="">
+<div class="caption">
+Project settings window on Android</div></div>
+<p>The Projucer will automatically add the required entitlements to your deployment targets when saving the project and opening in your favourite IDE.</p>
+<h2><a class="anchor" id="tutorial_in_app_purchases_initial_setup_apple_developer"></a>
+Apple Developer</h2>
+<dl class="section note"><dt>Note</dt><dd>If developing for Android, please skip to the next section <a class="el" href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup_google_play_developer">Google Play Developer</a> for instructions.</dd></dl>
+<p>On macOS and iOS, you will need to sign in with your Apple Developer account within Xcode and choose a development team in order to sign the application. Choose a unique bundle ID for your project. Xcode should automatically provide you with a Signing Certificate and Provisioning Profile as shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot3.png" alt="">
+<div class="caption">
+General settings window in Xcode</div></div>
+<p>Also make sure that the correct app capabilities have been ticked and approved in the <b class="onscreen_text">Capabilities</b> settings window. You should see the same information as follows:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot4.png" alt="">
+<div class="caption">
+Capabilities settings window in Xcode</div></div>
+<h2><a class="anchor" id="tutorial_in_app_purchases_initial_setup_itunes_connect"></a>
+iTunes Connect</h2>
+<p>For the in-app purchases to display properly on iOS, we need to create IAP products in iTunes Connect. First, create a new app in your dashboard under <b class="onscreen_text">My Apps</b> . If you navigate to the <b class="onscreen_text">Features</b> tab of your app, you can access the <b class="onscreen_text">In-App Purchases</b> feature on the following screen:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot5.png" alt="">
+<div class="caption">
+Create IAP products in iTunes Connect</div></div>
+<p>Click on the <b class="onscreen_text">+</b> sign to create six products that correspond with the options in the app with appropriate names and prices.</p>
+<h2><a class="anchor" id="tutorial_in_app_purchases_initial_setup_google_play_developer"></a>
+Google Play Developer</h2>
+<dl class="section note"><dt>Note</dt><dd>If developing for macOS/iOS, please jump to the previous section <a class="el" href="https://docs.juce.com/master/tutorial_in_app_purchases.html#tutorial_in_app_purchases_initial_setup_apple_developer">Apple Developer</a> for instructions.</dd></dl>
+<p>For the in-app purchases to display properly on Android, we need to create in-app billing products in the Google Play Console. First, navigate to your app page from the <b class="onscreen_text">All applications</b> panel and open up the <b class="onscreen_text">In-app Products</b> page under <b class="onscreen_text">Store presence</b> . You can access the items under the <b class="onscreen_text">Managed products</b> tab as shown on the following screen:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot6.png" alt="">
+<div class="caption">
+Create IAB products in the Google Play Console</div></div>
+<p>Click on <b class="onscreen_text">Create managed product</b> to create six products that correspond with the options in the app with appropriate names and prices.</p>
+<dl class="section note"><dt>Note</dt><dd>Due to Google Play restrictions on product IDs, it is recommended to use only numbers (0-9), lower case letters (a-z), underscores (_) or full stops (.) in product IDs. This way you can have the same product ID used both in the AppStore and the PlayStore. Otherwise your app would have to handle different product IDs for the same product.</dd></dl>
+<h2><a class="anchor" id="tutorial_in_app_purchases_initial_setup_generate_android_apk"></a>
+Generate Android APK</h2>
+<p>In order for in-app purchases to function properly on Android, we have to sign the Android version of the app and authenticate the requests to the Google Play store API. First launch Android Studio and navigate to the menu bar under <b class="onscreen_text">Build &gt; Generate Signed APK...</b> :</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot7.png" alt="">
+<div class="caption">
+Generate signed APK from menu bar</div></div>
+<p>You will then be prompted to enter the location, alias and passwords for the keystore file like so:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot8.png" alt="">
+<div class="caption">
+Enter aliases and passwords for keystore file</div></div>
+<p>Next, select release build type, "release_" flavour and ensure that both V1 and V2 signatures are checked.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot9.png" alt="">
+<div class="caption">
+Build type, flavours and signature versions</div></div>
+<p>This will generate the keystore file that you can now refer to in the Projucer. Under the Android release settings, enter the relative path, alias and passwords to the keystore file in the <b class="onscreen_text">Key Signing</b> fields:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/tutorial_in_app_purchases_screenshot10.png" alt="">
+<div class="caption">
+Path for keystore file in release settings</div></div>
+<p>Setup for in-app purchases should be complete by now and we can finally start implementing these features into the app.</p>
+<h1><a class="anchor" id="tutorial_in_app_purchases_purchase_types"></a>
+Purchase Types</h1>
+<p>In-App Purchases are useful to offer customers extra content and features directly within the app. They can be premium functionalities, exclusive items or even subscriptions. In general, there are four main types of puchases on all relevant platforms:</p>
+<ul>
+<li>Consumables: Countable items that can be used and purchased multiple times.</li>
+<li>Non-Consumables: One-time purchases that unlock features of the app perpetually.</li>
+<li>Auto-Renewable Subscriptions: Periodically updated content on a recurring basis until cancellation.</li>
+<li>Non-Renewing Subscriptions: Time-limited content that needs to be manually renewed.</li>
+</ul>
+<p>In this tutorial, we will implement non-consumable in-app purchases.</p>
+<h1><a class="anchor" id="tutorial_in_app_purchases_project_structure"></a>
+Project structure</h1>
+<p>The project is structured using the following classes to handle different parts of the application:</p>
+<ul>
+<li>MainContentComponent: Lays out the GUI components on the screen and handles playing of sound files on play/stop button click.</li>
+<li>PhraseModel: <a class="el" href="https://docs.juce.com/master/classListBoxModel.html" title="A subclass of this is used to drive a ListBox.">ListBoxModel</a> to describe available phrases to play using purchased voices.</li>
+<li>VoiceModel: <a class="el" href="https://docs.juce.com/master/classListBoxModel.html" title="A subclass of this is used to drive a ListBox.">ListBoxModel</a> to describe available voices that can be purchased to play phrases with.</li>
+<li>VoiceRow: Custom row <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> for the VoiceModel class to display pictures and information for specific voice entries.</li>
+<li>VoicePurchases: Class to manage VoiceProduct purchases that handles purchases and encapsulates the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> instance.</li>
+<li>VoiceProduct: Struct to describe a single purchasable product with information such as price, name and whether purchased before.</li>
+</ul>
+<p>As we can see, it roughly follows an <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">MVC</a> design pattern to separate application functionalities into separate classes.</p>
+<p>The VoiceProduct struct contains useful information for non-consumable products namely the following variables:</p>
+<ul>
+<li>const char* identifier: A unique identifier referred to by iTunes Connect and Google Play.</li>
+<li>const char* humanReadable: A human-readable version of the identifier to display in the app.</li>
+<li>bool isPurchased: Whether the item has been purchased before by the logged in user.</li>
+<li>bool priceIsKnown: Whether the price has been loaded and retrieved to be displayed.</li>
+<li>bool purchaseInProgress: Whether the user has initiated a purchase that is currently in progress.</li>
+<li><a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> purchasePrice: A localised string that displays the product price in the local currency.</li>
+</ul>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>What kind of information would we need for consumable purchases? What about subscriptions? Think about what should be added or removed. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_in_app_purchases_displaying_products"></a>
+Displaying products</h1>
+<p>Let's start by displaying the IAP products that we want to sell in the user interface. In the VoicePurchases constructor of the <code class="project_code">VoicePurchases</code> class, we have initialised the VoiceProduct objects using the structure described above like so:</p>
+<div class="fragment"><div class="line">    VoicePurchases()</div>
+<div class="line">    {</div>
+<div class="line">        voiceProducts = juce::Array&lt;VoiceProduct&gt;(</div>
+<div class="line">                        { VoiceProduct {<span class="stringliteral">"robot"</span>,  <span class="stringliteral">"Robot"</span>,  <span class="keyword">true</span>,   <span class="keyword">true</span>,  <span class="keyword">false</span>, <span class="stringliteral">"Free"</span> },</div>
+<div class="line">                          VoiceProduct {<span class="stringliteral">"jules"</span>,  <span class="stringliteral">"Jules"</span>,  <span class="keyword">false</span>,  <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="stringliteral">"Retrieving price..."</span> },</div>
+<div class="line">                          VoiceProduct {<span class="stringliteral">"fabian"</span>, <span class="stringliteral">"Fabian"</span>, <span class="keyword">false</span>,  <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="stringliteral">"Retrieving price..."</span> },</div>
+<div class="line">                          VoiceProduct {<span class="stringliteral">"ed"</span>,     <span class="stringliteral">"Ed"</span>,     <span class="keyword">false</span>,  <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="stringliteral">"Retrieving price..."</span> },</div>
+<div class="line">                          VoiceProduct {<span class="stringliteral">"lukasz"</span>, <span class="stringliteral">"Lukasz"</span>, <span class="keyword">false</span>,  <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="stringliteral">"Retrieving price..."</span> },</div>
+<div class="line">                          VoiceProduct {<span class="stringliteral">"jb"</span>,     <span class="stringliteral">"JB"</span>,     <span class="keyword">false</span>,  <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="stringliteral">"Retrieving price..."</span> } });</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>These product IDs need to match exactly with the values on iTunes Connect and Google Play Console in order to work properly.</dd></dl>
+<p>In order to easily retrieve human-readable versions of all our products, we have implemented a helper function that returns a <a class="el" href="https://docs.juce.com/master/classStringArray.html" title="A special array for holding a list of strings.">StringArray</a> of all capitalised names:</p>
+<div class="fragment"><div class="line">    juce::StringArray getVoiceNames()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::StringArray names;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; voiceProduct : voiceProducts)</div>
+<div class="line">            names.add (voiceProduct.humanReadable);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> names;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Let's create another helper function in the same class called <code class="project_code">findVoiceIndexFromIdentifier()</code> to get the index of a VoiceProduct when passed an identifier. This private function will be helpful later on when dealing with callbacks from the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> object:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">int</span> findVoiceIndexFromIdentifier (juce::String identifier)<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        identifier = identifier.toLowerCase();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; voiceProducts.size(); ++i)</div>
+<div class="line">            <span class="keywordflow">if</span> (juce::String (voiceProducts.getReference (i).identifier) == identifier)</div>
+<div class="line">                <span class="keywordflow">return</span> i;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> -1;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> class works as a broadcaster so let's inherit from <a class="el" href="https://docs.juce.com/master/structInAppPurchases_1_1Listener.html" title="Represents an object that gets notified about events such as product info returned or product purchas...">InAppPurchases::Listener</a> to become a listener for this class and receive callbacks from the IAP server <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>VoicePurchases      : <span class="keyword">private</span> juce::InAppPurchases::Listener <span class="comment">// [1]</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>We can now start overriding the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> callback functions in our VoicePurchases class. First, implement the <code class="project_code">productsInfoReturned()</code> function. This function gets called to return product information after a call to <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html#aad53d0d034c19ad6cce54ec9e39e69b8" title="Asynchronously requests information for products with given ids.">InAppPurchases::getProductsInformation()</a>.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> productsInfoReturned (<span class="keyword">const</span> juce::Array&lt;juce::InAppPurchases::Product&gt;&amp; products)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (! juce::InAppPurchases::getInstance()-&gt;isInAppPurchasesSupported())         <span class="comment">// [2]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> idx = 1; idx &lt; voiceProducts.size(); ++idx)                       <span class="comment">// [3]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span>&amp; voiceProduct = voiceProducts.getReference (idx);</div>
+<div class="line"> </div>
+<div class="line">                voiceProduct.isPurchased  = <span class="keyword">false</span>;</div>
+<div class="line">                voiceProduct.priceIsKnown = <span class="keyword">false</span>;</div>
+<div class="line">                voiceProduct.purchasePrice = <span class="stringliteral">"In-App purchases unavailable"</span>;</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,     <span class="comment">// [4]</span></div>
+<div class="line">                                                    <span class="stringliteral">"In-app purchase is unavailable!"</span>,</div>
+<div class="line">                                                    <span class="stringliteral">"In-App purchases are not available. This either means you are trying "</span></div>
+<div class="line">                                                    <span class="stringliteral">"to use IAP on a platform that does not support IAP or you haven't setup "</span></div>
+<div class="line">                                                    <span class="stringliteral">"your app correctly to work with IAP."</span>,</div>
+<div class="line">                                                    <span class="stringliteral">"OK"</span>);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> product : products)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span> idx = findVoiceIndexFromIdentifier (product.identifier);           <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">if</span> (juce::isPositiveAndBelow (idx, voiceProducts.size()))               <span class="comment">// [6]</span></div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">auto</span>&amp; voiceProduct = voiceProducts.getReference (idx);</div>
+<div class="line"> </div>
+<div class="line">                    voiceProduct.priceIsKnown = <span class="keyword">true</span>;</div>
+<div class="line">                    voiceProduct.purchasePrice = product.price;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            juce::AlertWindow::showMessageBoxAsync (juce::AlertWindow::WarningIcon,     <span class="comment">// [7]</span></div>
+<div class="line">                                                    <span class="stringliteral">"Your credit card will be charged!"</span>,</div>
+<div class="line">                                                    <span class="stringliteral">"You are running the sample code for JUCE In-App purchases. "</span></div>
+<div class="line">                                                    <span class="stringliteral">"Although this is only sample code, it will still CHARGE YOUR CREDIT CARD!"</span>,</div>
+<div class="line">                                                    <span class="stringliteral">"Understood!"</span>);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        guiUpdater.triggerAsyncUpdate();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[2]</span> : First, check whether in-app purchases are supported on your platform and that setup was correctly performed.</li>
+<li><span class="comment">[3]</span> : For all VoiceProduct objects except the first free one, set their variables to reflect unavailability of products.</li>
+<li><span class="comment">[4]</span> : Optionally show a message box asynchronously to explain the issue to the user.</li>
+<li><span class="comment">[5]</span> : For all VoiceProduct objects if in-app purchases are available, retrieve the index from the identifier with the previously implemented helper function.</li>
+<li><span class="comment">[6]</span> : If the index is valid, set the product variables to reflect availability of the product.</li>
+<li><span class="comment">[7]</span> : Optionally show a message box asynchronously explaining that users will be charged.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_in_app_purchases_retrieving_purchases"></a>
+Retrieving purchases</h1>
+<dl class="section warning"><dt>Warning</dt><dd>This section will only work on a physical device. Do not attempt on a simulator as it will not function properly.</dd></dl>
+<p>When dealing with in-app purchases, the very first thing your application should check is for past purchases when the user signs in. As a customer, one of the most frustrating things that can happen is to lose previous purchases made on another device or on a previous version of the same app. So let's make sure that the user gets an updated view of the products page as soon as possible on app startup.</p>
+<p>First, create additional private variables in the <code class="project_code">VoicePurchases</code> class to store temporary states of the app <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> havePurchasesBeenRestored = <span class="keyword">false</span>, havePricesBeenFetched = <span class="keyword">false</span>, purchaseInProgress = <span class="keyword">false</span>; <span class="comment">// [1]</span></div>
+<div class="line">    juce::Array&lt;VoiceProduct&gt; voiceProducts;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (VoicePurchases)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>We also need a new helper function called <code class="project_code">getPurchase()</code> to retrieve a VoiceProduct from an index. In this function, we also insert initialisation code for when this function is first called:</p>
+<div class="fragment"><div class="line">    VoiceProduct getPurchase (<span class="keywordtype">int</span> voiceIndex)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (! havePurchasesBeenRestored)</div>
+<div class="line">        {</div>
+<div class="line">            havePurchasesBeenRestored = <span class="keyword">true</span>;                                       <span class="comment">// [2]</span></div>
+<div class="line">            juce::InAppPurchases::getInstance()-&gt;addListener (<span class="keyword">this</span>);                <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">            juce::InAppPurchases::getInstance()-&gt;restoreProductsBoughtList (<span class="keyword">true</span>);  <span class="comment">// [4]</span></div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> voiceProducts[voiceIndex];                                           <span class="comment">// [5]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[2]</span> : If this is the first time this function is called, make sure this code segment does not get called again.</li>
+<li><span class="comment">[3]</span> : Add this class as a listener to the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> instance to receive callbacks.</li>
+<li><span class="comment">[4]</span> : We can then call the <code class="project_code">restoreProductsBoughtList()</code> function to trigger the restoration process and wait for the subsequent callback.</li>
+<li><span class="comment">[5]</span> : Finally, return the VoiceProduct at the specified index. This will get called every time as normal behaviour for this function.</li>
+</ul>
+<p>Since the VoicePurchases class gets registered as a listener when the above function gets initially called, we need to make sure we unregister when this class gets destroyed. Remove the class as an <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> listener in the class destructor:</p>
+<div class="fragment"><div class="line">    ~VoicePurchases()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::InAppPurchases::getInstance()-&gt;removeListener (<span class="keyword">this</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the previously defined <code class="project_code">getPurchase()</code> function, we called the <code class="project_code">restoreProductsBoughtList()</code> function to trigger a callback to restore our purchases. Now let's implement that callback function called <code class="project_code">purchasesListRestored()</code> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> purchasesListRestored (<span class="keyword">const</span> juce::Array&lt;PurchaseInfo&gt;&amp; infos, <span class="keywordtype">bool</span> success, <span class="keyword">const</span> juce::String&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (success)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; info : infos)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; productId : info.purchase.productIds)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">auto</span> idx = findVoiceIndexFromIdentifier (productId);                <span class="comment">// [6]</span></div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">if</span> (juce::isPositiveAndBelow (idx, voiceProducts.size()))</div>
+<div class="line">                    {</div>
+<div class="line">                        <span class="keyword">auto</span>&amp; voiceProduct = voiceProducts.getReference (idx);          <span class="comment">// [7]</span></div>
+<div class="line"> </div>
+<div class="line">                        voiceProduct.isPurchased = <span class="keyword">true</span>;</div>
+<div class="line">                    }</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            guiUpdater.triggerAsyncUpdate();</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (! havePricesBeenFetched)</div>
+<div class="line">        {</div>
+<div class="line">            havePricesBeenFetched = <span class="keyword">true</span>;                                               <span class="comment">// [8]</span></div>
+<div class="line">            juce::StringArray identifiers;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; voiceProduct : voiceProducts)</div>
+<div class="line">                identifiers.add (voiceProduct.identifier);</div>
+<div class="line"> </div>
+<div class="line">            juce::InAppPurchases::getInstance()-&gt;getProductsInformation (identifiers);  <span class="comment">// [9]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[6]</span> : If the response from the server is successful, we can update our purchase list. Using the helper function, find the index of the voice from the identifier.</li>
+<li><span class="comment">[7]</span> : If the index is valid, set the appropriate variables of the VoiceProduct object to reflect its purchase state.</li>
+<li><span class="comment">[8]</span> : When this callback function gets called the first time around, we need to initialise the purchase prices. Make sure this code segment does not get called a second time.</li>
+<li><span class="comment">[9]</span> : Initiate the request to retrieve product prices on the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> instance by calling the <code class="project_code">getProductsInformation()</code> function.</li>
+</ul>
+<p>In order to update the GUI for these in-app purchases products, it would be useful to have temporary variables to store purchase states. Let's declare these as private member variables in the VoiceRow subclass of the <code class="project_code">VoiceModel</code> class:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">bool</span> isSelected = <span class="keyword">false</span>, hasBeenPurchased = <span class="keyword">false</span>, purchaseInProgress = <span class="keyword">false</span>;</div>
+<div class="line">        <span class="keywordtype">int</span> rowSelected = -1;</div>
+<div class="line">        juce::Image avatar;</div>
+</div><!-- fragment --><p>At the moment, all the in-app purchases products look visually the same and do not clearly indicate their availability in a visually-striking manner. Let's apply a different look and feel to purchasable products. In the <code class="project_code">paint()</code> function, modify the code to apply a white background to the product image when available <span class="comment">[10]</span> and a white semi-transparent overlay when unavailable <span class="comment">[11]</span> :</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">        </span>{</div>
+<div class="line">            <span class="keyword">auto</span> r = getLocalBounds().reduced (4);</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span> voiceIconBounds = r.removeFromLeft (r.getHeight());</div>
+<div class="line">                g.setColour (juce::Colours::black);</div>
+<div class="line">                g.drawRect (voiceIconBounds);</div>
+<div class="line"> </div>
+<div class="line">                voiceIconBounds.reduce (1, 1);</div>
+<div class="line">                g.setColour (hasBeenPurchased ? juce::Colours::white : <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_namespace" href="https://docs.juce.com/master/namespaceColours.html">Colours</a>::<a class="code hl_variable" href="https://docs.juce.com/master/namespaceColours.html#a72a39d8569dc2b3efade536e59de6236">grey</a>); <span class="comment">// [10]</span></div>
+<div class="line">                g.fillRect (voiceIconBounds);</div>
+<div class="line"> </div>
+<div class="line">                g.drawImage (avatar, voiceIconBounds.toFloat());</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">if</span> (! hasBeenPurchased)</div>
+<div class="line">                {</div>
+<div class="line">                    g.setColour (juce::Colours::white.withAlpha (0.8f));                     <span class="comment">// [11]</span></div>
+<div class="line">                    g.fillRect (voiceIconBounds);</div>
+</div><!-- fragment --><p>Also modify the code in the <code class="project_code">update()</code> function to reflect purchase status on the name and price labels. Use the previously defined helper function to retrieve the VoiceProduct from the row index first <span class="comment">[12]</span> and set the temporary variable to indicate whether the item was purchased <span class="comment">[13]</span> . Then update the GUI accordingly as follows:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> update (<span class="keywordtype">int</span> rowNumber, <span class="keywordtype">bool</span> rowIsSelected)</div>
+<div class="line">        {</div>
+<div class="line">            isSelected  = rowIsSelected;</div>
+<div class="line">            rowSelected = rowNumber;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (juce::isPositiveAndBelow (rowNumber, voices.size()))</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span> imageResourceName = voices[rowNumber] + <span class="stringliteral">".png"</span>;</div>
+<div class="line"> </div>
+<div class="line">                nameLabel.setText (voices[rowNumber], juce::NotificationType::dontSendNotification);</div>
+<div class="line"> </div>
+<div class="line">                <span class="keyword">auto</span> purchase = purchases.getPurchase (rowNumber);                  <span class="comment">// [12]</span></div>
+<div class="line">                hasBeenPurchased = purchase.isPurchased;                            <span class="comment">// [13]</span></div>
+</div><!-- fragment --> <div class="fragment"><div class="line">                <span class="keywordflow">if</span> (rowNumber == 0)</div>
+<div class="line">                {</div>
+<div class="line">                    purchaseButton.setButtonText (<span class="stringliteral">"Internal"</span>);</div>
+<div class="line">                    purchaseButton.setEnabled (<span class="keyword">false</span>);</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">else</span></div>
+<div class="line">                {</div>
+<div class="line">                    purchaseButton.setButtonText (hasBeenPurchased ? <span class="stringliteral">"Purchased"</span> : <span class="stringliteral">"Purchase"</span>);</div>
+<div class="line">                    purchaseButton.setEnabled (! hasBeenPurchased &amp;&amp; purchase.priceIsKnown);</div>
+<div class="line">                }</div>
+<div class="line"> </div>
+<div class="line">                setInterceptsMouseClicks (! hasBeenPurchased, ! hasBeenPurchased);  <span class="comment">// [14]</span></div>
+</div><!-- fragment --><p>In this piece of code, we mainly update the font styles of the name and price labels to remain as default when the item is purchased and change its colour to white. In addition, we enable the purchase buttons if the corresponding product is available for purchase. We also need to disable mouse clicks on these buttons after purchase to avoid errors when charging the customer <span class="comment">[14]</span> .</p>
+<h1><a class="anchor" id="tutorial_in_app_purchases_purchasing_products"></a>
+Purchasing products</h1>
+<dl class="section warning"><dt>Warning</dt><dd>This section will only work on a physical device. Do not attempt on a simulator as it will not function properly.</dd></dl>
+<p>We have yet to implement purchasing behaviour in our app so let's do that. Implement a <code class="project_code">purchaseVoice()</code> public function in the <code class="project_code">VoicePurchases</code> class that transfers the request to the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> instance:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> purchaseVoice (<span class="keywordtype">int</span> voiceIndex)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (havePricesBeenFetched &amp;&amp; juce::isPositiveAndBelow (voiceIndex, voiceProducts.size()))</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>&amp; product = voiceProducts.getReference (voiceIndex);                       <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (! product.isPurchased)</div>
+<div class="line">            {</div>
+<div class="line">                purchaseInProgress = <span class="keyword">true</span>;</div>
+<div class="line"> </div>
+<div class="line">                product.purchaseInProgress = <span class="keyword">true</span>;                                         <span class="comment">// [2]</span></div>
+<div class="line">                juce::InAppPurchases::getInstance()-&gt;purchaseProduct (product.identifier); <span class="comment">// [3]</span></div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : First check whether the prices were fetched before retrieving the VoiceProduct using the index.</li>
+<li><span class="comment">[2]</span> : If the product was not previously purchased, enter purchasing state by setting the appropriate variable.</li>
+<li><span class="comment">[3]</span> : We can now safely request the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> instance to purchase the product by specifying the correct identifier.</li>
+</ul>
+<p>This will trigger a callback from the server when the purchasing has ended and a response was received. We implement this <code class="project_code">productPurchaseFinished()</code> callback here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> productPurchaseFinished (<span class="keyword">const</span> PurchaseInfo&amp; info, <span class="keywordtype">bool</span> success, <span class="keyword">const</span> juce::String&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        purchaseInProgress = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; productId : info.purchase.productIds)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> idx = findVoiceIndexFromIdentifier (productId);                <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (juce::isPositiveAndBelow (idx, voiceProducts.size()))</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span>&amp; voiceProduct = voiceProducts.getReference (idx);          <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">                voiceProduct.isPurchased = success;</div>
+<div class="line">                voiceProduct.purchaseInProgress = <span class="keyword">false</span>;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="comment">// On failure Play Store will not tell us which purchase failed</span></div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; voiceProduct : voiceProducts)</div>
+<div class="line">                    voiceProduct.purchaseInProgress = false;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        guiUpdater.triggerAsyncUpdate();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Using the same helper function as before, retrieve the VoiceProduct index from its identifier <span class="comment">[4]</span> and set appropriate variables on the object in question depending on whether the purchase was successful and exit purchasing state <span class="comment">[5]</span> .</p>
+<p>To indicate the purchasing state to the user while waiting for the response from the server, display a spinning animation in the <code class="project_code">paint()</code> function of the <code class="project_code">VoiceModel</code> class <span class="comment">[6]</span> :</p>
+<div class="fragment"><div class="line">                <span class="keywordflow">if</span> (! hasBeenPurchased)</div>
+<div class="line">                {</div>
+<div class="line">                    g.setColour (juce::Colours::white.withAlpha (0.8f));                     <span class="comment">// [11]</span></div>
+<div class="line">                    g.fillRect (voiceIconBounds);</div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">if</span> (purchaseInProgress) <span class="comment">// [6]</span></div>
+<div class="line">                        getLookAndFeel().drawSpinningWaitAnimation (g, juce::Colours::darkgrey,</div>
+<div class="line">                                                                    voiceIconBounds.getX(),</div>
+<div class="line">                                                                    voiceIconBounds.getY(),</div>
+<div class="line">                                                                    voiceIconBounds.getWidth(),</div>
+<div class="line">                                                                    voiceIconBounds.getHeight());</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>Let's implement the clickPurchase() function to initiate the purchasing process when the user interacts with the UI:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> clickPurchase()</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span> (rowSelected &gt;= 0)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (! hasBeenPurchased)</div>
+<div class="line">                {</div>
+<div class="line">                    purchases.purchaseVoice (rowSelected);      <span class="comment">// [7]</span></div>
+<div class="line">                    purchaseInProgress = <span class="keyword">true</span>;</div>
+<div class="line">                    startTimer (1000 / 50);                     <span class="comment">// [8]</span></div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordtype">void</span> timerCallback()<span class="keyword"> override   </span>{ repaint(); }          <span class="comment">// [9]</span></div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[7]</span> : If the row index is valid and the item was not purchased before, call the <code class="project_code">purchaseVoice()</code> function and enter purchasing state.</li>
+<li><span class="comment">[8]</span> : Start a timer to update the spinning wheel animation while the purchase is in progress.</li>
+<li><span class="comment">[9]</span> : Implement the timer callback to repaint the screen for the animation.</li>
+</ul>
+<p>Lastly in the <code class="project_code">update()</code> function, retrieve the purchasing state for the row-specific product <span class="comment">[10]</span> and stop the spinning animation if the purchase is finished by calling the <code class="project_code">stopTimer()</code> function <span class="comment">[11]</span> :</p>
+<div class="fragment"><div class="line">                purchaseInProgress = purchase.purchaseInProgress;                   <span class="comment">// [10]</span></div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">if</span> (purchaseInProgress)</div>
+<div class="line">                    startTimer (1000 / 50);</div>
+<div class="line">                <span class="keywordflow">else</span></div>
+<div class="line">                    stopTimer();                                                    <span class="comment">// [11]</span></div>
+</div><!-- fragment --><p>The mechanics to handle product purchasing and retrieval of product information have all been implemented at this point in the tutorial but we still need to tell the GUI when to update itself.</p>
+<h1><a class="anchor" id="tutorial_in_app_purchases_handling_async_updates"></a>
+Handling async updates</h1>
+<p>Since purchases and synchronisation with the IAP server are performed on a separate thread, we need to handle responses in an asynchronous manner. In the <code class="project_code">MainContentComponent</code> class, let's inherit from the <a class="el" href="https://docs.juce.com/master/classAsyncUpdater.html" title="Has a callback method that is triggered asynchronously.">AsyncUpdater</a> class <span class="comment">[1]</span> and pass a reference of this class to the VoicePurchases instance <span class="comment">[2]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                             <span class="keyword">private</span> juce::AsyncUpdater         <span class="comment">// [1]</span></div>
+<div class="line">{</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    juce::SoundPlayer player;</div>
+<div class="line">    VoicePurchases purchases                         { *<span class="keyword">this</span> }; <span class="comment">// [2]</span></div>
+<div class="line">    juce::AudioDeviceManager dm;</div>
+</div><!-- fragment --><p>In the VoicePurchases constructor and member initialisation list, assign a reference to the <a class="el" href="https://docs.juce.com/master/classAsyncUpdater.html" title="Has a callback method that is triggered asynchronously.">AsyncUpdater</a> instance in a private variable <span class="comment">[3]</span> :</p>
+<div class="fragment"><div class="line">    VoicePurchases (juce::AsyncUpdater&amp; asyncUpdater)   <span class="comment">// [3]</span></div>
+<div class="line">         : guiUpdater (asyncUpdater)</div>
+<div class="line">    {</div>
+</div><!-- fragment --><p>Declare that variable as a private member to be able to refer to the <a class="el" href="https://docs.juce.com/master/classAsyncUpdater.html" title="Has a callback method that is triggered asynchronously.">AsyncUpdater</a> later on <span class="comment">[4]</span> :</p>
+<div class="fragment"><div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AsyncUpdater&amp; guiUpdater;     <span class="comment">// [4]</span></div>
+</div><!-- fragment --><p>Now in the <code class="project_code">purchaseVoice()</code> function and all the callback functions of the <a class="el" href="https://docs.juce.com/master/classInAppPurchases.html" title="Provides in-app purchase functionality.">InAppPurchases</a> instance namely <code class="project_code">productsInfoReturned()</code> , <code class="project_code">purchasesListRestored()</code> and <code class="project_code">productPurchaseFinished()</code> , trigger an asynchronous update to the GUI as a last step to the corresponding code segments <span class="comment">[5]</span> :</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> purchaseVoice (<span class="keywordtype">int</span> voiceIndex)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span> (havePricesBeenFetched &amp;&amp; juce::isPositiveAndBelow (voiceIndex, voiceProducts.size()))</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (! product.isPurchased)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">            guiUpdater.triggerAsyncUpdate();   <span class="comment">// [5.1]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> productsInfoReturned (<span class="keyword">const</span> juce::Array&lt;InAppPurchases::Product&gt;&amp; products)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">    guiUpdater.triggerAsyncUpdate();           <span class="comment">// [5.2]</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> productPurchaseFinished (<span class="keyword">const</span> PurchaseInfo&amp; info, <span class="keywordtype">bool</span> success, <span class="keyword">const</span> juce::String&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">    guiUpdater.triggerAsyncUpdate();           <span class="comment">// [5.3]</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> purchasesListRestored (<span class="keyword">const</span> juce::Array&lt;PurchaseInfo&gt;&amp; infos, <span class="keywordtype">bool</span> success, <span class="keyword">const</span> juce::String&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    <span class="keywordflow">if</span> (success)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">//...</span></div>
+<div class="line"> </div>
+<div class="line">        guiUpdater.triggerAsyncUpdate();       <span class="comment">// [5.4]</span></div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Now whenever the <code class="project_code">triggerAsyncUpdate()</code> function is called on the <a class="el" href="https://docs.juce.com/master/classAsyncUpdater.html" title="Has a callback method that is triggered asynchronously.">AsyncUpdater</a> instance in the VoicePurchases class, we can handle the callback in the <code class="project_code">handleAsyncUpdate()</code> function to update any outdated GUI components <span class="comment">[6]</span> :</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> handleAsyncUpdate()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        voiceListBox.updateContent();</div>
+<div class="line">        voiceListBox.setEnabled (! purchases.isPurchaseInProgress());</div>
+<div class="line">        voiceListBox.repaint();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Add the following getter in the <code class="project_code">VoicePurchases</code> class as a public helper function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isPurchaseInProgress() const noexcept { <span class="keywordflow">return</span> purchaseInProgress; }</div>
+</div><!-- fragment --><p>This ensures that the GUI is updated whenever purchases are made or retrieved. You should now see previously-made in-app purchases when the app is launched again.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Implement consumable versions of these IAP products by consuming tokens every time the user plays a phrase with a particular voice. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_in_app_purchases_playing_sounds"></a>
+Playing sounds</h1>
+<p>When the user clicks on the play button, we need to trigger the correct audio file to play using the right voice and phrase. The audio files are stored as binary resources using the name of the voice and an index relating to the phrase number as a naming convention. In the <code class="project_code">MainContentComponent</code> class, we handle the behaviour as follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> playStopPhrase()</div>
+<div class="line">    {</div>
+<div class="line">        juce::MemoryOutputStream resourceName;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> idx = voiceListBox.getSelectedRow();                                           <span class="comment">// [1]</span></div>
+<div class="line">        <span class="keywordflow">if</span> (juce::isPositiveAndBelow (idx, soundNames.size()))</div>
+<div class="line">        {</div>
+<div class="line">            resourceName &lt;&lt; soundNames[idx] &lt;&lt; phraseListBox.getSelectedRow() &lt;&lt; <span class="stringliteral">".ogg"</span>;    <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">auto</span> dir = juce::File::getCurrentWorkingDirectory();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordtype">int</span> numTries = 0;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">while</span> (! dir.getChildFile (<span class="stringliteral">"Resources"</span>).exists() &amp;&amp; numTries++ &lt; 15)</div>
+<div class="line">                dir = dir.getParentDirectory();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">auto</span> file = dir.getChildFile (<span class="stringliteral">"Resources"</span>).getChildFile (<span class="stringliteral">"Sounds"</span>).getChildFile (resourceName.toString().toRawUTF8());</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (file.exists())</div>
+<div class="line">                player.play (file);                                                         <span class="comment">// [3]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : First, retrieve the index for the selected row in the voice table and check if the index is valid against the array of audio files.</li>
+<li><span class="comment">[2]</span> : Next, construct the correct file name using a <a class="el" href="https://docs.juce.com/master/classMemoryOutputStream.html" title="Writes data to an internal memory buffer, which grows as required.">MemoryOutputStream</a> object and the naming convention as described above.</li>
+<li><span class="comment">[3]</span> : Finally, check whether the audio file can be loaded based on the file name constructed previously and call the <code class="project_code">play()</code> function of the <a class="el" href="https://docs.juce.com/master/classSoundPlayer.html" title="A simple sound player that you can add to the AudioDeviceManager to play simple sounds.">SoundPlayer</a> with the corresponding file.</li>
+</ul>
+<p>You should now be able to hear the spoken phrase with the corresponding voice when the play button is pressed.</p>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the code can be found in the <code class="filename">InAppPurchaseTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_in_app_purchases_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to handle In-App Purchases on mobile and desktop. In particular, we have:</p>
+<ul>
+<li>Covered preliminary setup for different deployment platforms.</li>
+<li>Displayed various IAP product information on the user interface.</li>
+<li>Retrieved past user purchases and asynchronously updated the GUI accordingly.</li>
+<li>Handled purchasing of non-consumable products within the app.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_in_app_purchases_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_android_studio.html">Tutorial: Getting started with Android</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_android_screen_sizes.html">Tutorial: Managing Android screen sizes</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_analytics_collection.html">Tutorial: App analytics collection</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_push_notifications.html">Tutorial: Push Notifications on desktop and mobile devices</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html">Tutorial: Package your app or plugin for distribution</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ In-App Purchases on desktop and mobile devices_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

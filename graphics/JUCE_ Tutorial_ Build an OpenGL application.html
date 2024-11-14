@@ -1,0 +1,743 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0062)https://docs.juce.com/master/tutorial_open_gl_application.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Build an OpenGL application</title>
+<link href="./JUCE_ Tutorial_ Build an OpenGL application_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build an OpenGL application_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build an OpenGL application_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Build an OpenGL application_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build an OpenGL application_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build an OpenGL application_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Build an OpenGL application_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build an OpenGL application_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build an OpenGL application_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Build an OpenGL application_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Build an OpenGL application_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Build an OpenGL application_files/css">
+<script src="./JUCE_ Tutorial_ Build an OpenGL application_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Build an OpenGL application_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Build an OpenGL application_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Build an OpenGL application</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_open_gl_app_anatomy">Anatomy of an OpenGL app</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_open_gl_shading_language">The OpenGL Shading Language</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_open_gl_app_component">The OpenGLAppComponent class</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_calculating_projection_view_matrices">Calculating the Projection and View matrices</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_writing_open_gl_shaders">Writing the OpenGL shaders</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_writing_open_gl_shaders_vertex_struct">The Vertex struct</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_writing_open_gl_shaders_attributes_struct">The Attributes struct</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_writing_open_gl_shaders_uniforms_struct">The Uniforms struct</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_writing_open_gl_shaders_shape_struct">The Shape struct</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_putting_together">Putting it all together</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_open_gl_application.html#tutorial_open_gl_application_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Learn how to get started with OpenGL as a high performance rendering library within your JUCE applications. Render beautiful 2D and 3D graphics in your audio apps and plugins.</p>
+<p><span class="headerlabel">Level:</span> Advanced</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a>, <a class="el" href="https://docs.juce.com/master/classOpenGLContext.html" title="Creates an OpenGL context, which can be attached to a component.">OpenGLContext</a>, <a class="el" href="https://docs.juce.com/master/classOpenGLShaderProgram.html" title="Manages an OpenGL shader program.">OpenGLShaderProgram</a>, <a class="el" href="https://docs.juce.com/master/classOpenGLHelpers.html" title="A set of miscellaneous openGL helper functions.">OpenGLHelpers</a>, <a class="el" href="https://docs.juce.com/master/classMatrix3D.html" title="A 4x4 3D transformation matrix.">Matrix3D</a>, <a class="el" href="https://docs.juce.com/master/classVector3D.html" title="A three-coordinate vector.">Vector3D</a></p>
+<h1><a class="anchor" id="tutorial_open_gl_application_getting_started"></a>
+Getting started</h1>
+<p>This tutorial assumes basic understanding of the OpenGL graphics library. If you are not familiar with <a href="https://en.wikipedia.org/wiki/OpenGL">OpenGL</a> , you should read about it first <a href="https://www.opengl.org/">here</a>.</p>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/OpenGLAppTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/OpenGLAppTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<dl class="section warning"><dt>Warning</dt><dd>If using the PIP version of this project, please make sure to copy the <code class="filename">Resources</code> folder into the generated Projucer project.</dd></dl>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_open_gl_application_demo_project"></a>
+The demo project</h1>
+<p>The demo project displays the standard OpenGL teapot object in 3D graphics by parsing a Wavefront ".obj" file as shown in the screenshot below:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Build an OpenGL application_files/tutorial_open_gl_application_screenshot1.png" alt="">
+<div class="caption">
+The demo project app window</div></div>
+<dl class="section note"><dt>Note</dt><dd>The code presented here is broadly similar to the <b class="onscreen_text">OpenGLAppExample</b> from the JUCE Examples.</dd></dl>
+<h1><a class="anchor" id="tutorial_open_gl_application_open_gl_app_anatomy"></a>
+Anatomy of an OpenGL app</h1>
+<p>Although the OpenGL API is a powerful and versatile library that works within many different platforms and build environments, the principles around 3D rendering remain similar across all applications. Some of the terms we are exploring here are fundamental to understanding how OpenGL performs its rendering routines:</p>
+<ul>
+<li>GL Context: The context is set once at the initialisation stage to describe GL settings for the graphics renderer in a platform-specific manner and necessary OpenGL functions are loaded to be used within the application.</li>
+<li>Projection Matrix: The projection matrix allows us to convert the 3D objects into a 2D plane for the scene to be rendered on the screen.</li>
+<li>View Matrix: The view matrix allows us to perform geometric transformations in the 3D environment to place our objects within the scene.</li>
+<li>Shaders: In order to customise the appearance of objects, shaders are used to describe the properties of the materials such as how shiny or reflective our surfaces are and how lights and shadows appear on our 3D objects.</li>
+<li>Vertices: They represent the 3D points that define the 3D objects we are trying to render within the scene. These are used within vertex shaders.</li>
+<li>Fragments: They represent pixels that are present between vertices by interpolation. These are used within fragment or pixel shaders.</li>
+<li>Attributes: They describe vertex parameters such as colour and texture coordinates used in the shader language.</li>
+<li>Uniforms: They describe global parameters that are used in the shader language but remain constant between shader programs.</li>
+<li>Varyings: They describe parameters that are shared between the vertex and fragment shader programs.</li>
+<li>Shapes: They encapsulate the polygons we ultimately want to render in our application. In this case, it's the teapot.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_open_gl_application_open_gl_shading_language"></a>
+The OpenGL Shading Language</h1>
+<p>The OpenGL shading language or GLSL is a C-type language that gives direct control over graphics rendering pipelines on multiple operating systems and hardware graphics cards. Using GLSL, we can write small programs called shaders that describe appearances of objects. Depending on whether we are using OpenGL or the subset library OpenGL ES designed specifically for embedded systems like smartphones and tablets, the language syntax remains the same but performance considerations need to be taken into account.</p>
+<p>As an example, the vertex shader used in this tutorial looks like this:</p>
+<div class="fragment"><div class="line"><span class="comment">// OpenGL and OpenGL ES</span></div>
+<div class="line">attribute vec4 position;</div>
+<div class="line">attribute vec4 sourceColour;</div>
+<div class="line">attribute vec2 textureCoordIn;</div>
+<div class="line"> </div>
+<div class="line">uniform mat4 projectionMatrix;</div>
+<div class="line">uniform mat4 viewMatrix;</div>
+<div class="line"> </div>
+<div class="line">varying vec4 destinationColour;</div>
+<div class="line">varying vec2 textureCoordOut;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> main()</div>
+<div class="line">{</div>
+<div class="line">    destinationColour = sourceColour;</div>
+<div class="line">    textureCoordOut = textureCoordIn;</div>
+<div class="line">    gl_Position = projectionMatrix * viewMatrix * position;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>And the fragment shader used in this tutorial looks like this:</p>
+<div class="fragment"><div class="line"><span class="comment">// OpenGL</span></div>
+<div class="line">varying vec4 destinationColour;</div>
+<div class="line">varying vec2 textureCoordOut;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> main()</div>
+<div class="line">{</div>
+<div class="line">    vec4 colour = vec4(0.95, 0.57, 0.03, 0.7);</div>
+<div class="line">    gl_FragColor = colour;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// OpenGL ES</span></div>
+<div class="line">varying lowp vec4 destinationColour;</div>
+<div class="line">varying lowp vec2 textureCoordOut;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> main()</div>
+<div class="line">{</div>
+<div class="line">    lowp vec4 colour = vec4(0.95, 0.57, 0.03, 0.7);</div>
+<div class="line">    gl_FragColor = colour;</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>As you can see the shaders are quite trivial and the differences between the OpenGL and OpenGL ES shaders are minimal. The GLSL types, variables and functions used here are the following:</p>
+<ul>
+<li><code class="project_code">vec2/vec4</code> : Represents a floating point vector with 2 or 4 components.</li>
+<li><code class="project_code">mat4</code> : Represents a 4-by-4 floating point matrix.</li>
+<li><code class="project_code">lowp</code> : Specifies a lower precision data type for OpenGL ES.</li>
+<li><code class="project_code">attribute</code> : Represents a vertex-specific parameter.</li>
+<li><code class="project_code">uniform</code> : Represents a global parameter describing the GL environment.</li>
+<li><code class="project_code">varying</code> : Represents a shared parameter between the vertex and fragment shaders.</li>
+<li><code class="project_code">gl_Position</code> : The transformed vertex position for the vertex shader to execute vertex manipulations.</li>
+<li><code class="project_code">gl_FragColor</code> : The colour for the fragment shader to execute fragment manipulations.</li>
+<li><code class="project_code">main()</code> : The main function is where the vertex or fragment shader computation is performed.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_open_gl_application_open_gl_app_component"></a>
+The OpenGLAppComponent class</h1>
+<p>In JUCE, the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a> class is very similar to the <a class="el" href="https://docs.juce.com/master/classAudioAppComponent.html" title="A base class for writing audio apps that stream from the audio i/o devices.">AudioAppComponent</a> class but instead it is used for graphical apps. When inheriting from the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a> class, there are several functions that we have to override namely:</p>
+<ul>
+<li>initialise(): This function prepares any GL objects needed for rendering such as shaders.</li>
+<li>render(): The render function is called by the OpenGL renderer and this is where the projection and view matrices are calculated to draw the OpenGL context.</li>
+<li>shutdown(): This function clears any GL objects that were used for rendering such as shaders.</li>
+<li>shutdownOpenGL(): In the destructor of our subclass, we have to call this function in order to shut down the GL system before the class is destroyed.</li>
+</ul>
+<p>Now that we have explored the basics of OpenGL, let's start implementing the teapot rendering!</p>
+<h1><a class="anchor" id="tutorial_open_gl_application_calculating_projection_view_matrices"></a>
+Calculating the Projection and View matrices</h1>
+<p>In order to decouple the calculation of projection and view matrices, we create two helper functions that returns these matrices for later use.</p>
+<p>First we calculate the projection matrix using a frustum and the screen bounds as shown below:</p>
+<div class="fragment"><div class="line">    juce::Matrix3D&lt;float&gt; getProjectionMatrix()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga9c08bc30636cc52269cf06d61cf5d4e8">w</a> = 1.0f / (0.5f + 0.1f);                                          <span class="comment">// [1]</span></div>
+<div class="line">        <span class="keyword">auto</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga2ee4d4f298ba1bf1bc2f45c681c40ca3">h</a> = <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga9c08bc30636cc52269cf06d61cf5d4e8">w</a> * getLocalBounds().toFloat().getAspectRatio (<span class="keyword">false</span>);         <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> juce::Matrix3D&lt;float&gt;::fromFrustum (-<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga9c08bc30636cc52269cf06d61cf5d4e8">w</a>, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga9c08bc30636cc52269cf06d61cf5d4e8">w</a>, -<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga2ee4d4f298ba1bf1bc2f45c681c40ca3">h</a>, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#ga2ee4d4f298ba1bf1bc2f45c681c40ca3">h</a>, 4.0f, 30.0f);  <span class="comment">// [3]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>A frustum is a shape cutout from a polygon by slicing it with two parallel planes and the <a class="el" href="https://docs.juce.com/master/classMatrix3D.html" title="A 4x4 3D transformation matrix.">Matrix3D</a> class provides a handy function called <code class="project_code">fromFrustum()</code> that returns a matrix from one. In the function above:</p>
+<ul>
+<li><span class="comment">[1]</span> : We first declare a width variable to define half the width of the frustum on the near plane with an arbitrary number that works well for our scenario.</li>
+<li><span class="comment">[2]</span> : Then we declare a height variable to define half the height of the frustum on the near plane based on the screen ratio and the width variable.</li>
+<li><span class="comment">[3]</span> : We finally use the <code class="project_code">fromFrustum()</code> function with width, height, near plane and far plane distances as arguments to retrieve the projection matrix. This gives us a perspective projection as opposed to an orthographic projection.</li>
+</ul>
+<p>Next, we calculate the view matrix using a rotation matrix to animate our teapot as shown below:</p>
+<div class="fragment"><div class="line">    juce::Matrix3D&lt;float&gt; getViewMatrix()<span class="keyword"> const</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> viewMatrix = juce::Matrix3D&lt;float&gt;::fromTranslation ({ 0.0f, 0.0f, -10.0f });  <span class="comment">// [4]</span></div>
+<div class="line">        <span class="keyword">auto</span> rotationMatrix = viewMatrix.rotation ({ -0.3f,</div>
+<div class="line">                                                      5.0f * std::sin ((<span class="keywordtype">float</span>) getFrameCounter() * 0.01f),</div>
+<div class="line">                                                      0.0f });                        <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> viewMatrix * rotationMatrix;                                           <span class="comment">// [6]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[4]</span> : First we create an identity matrix translated by a vector to push the matrix 10 units back into the scene. This puts our teapot right at the center of the screen but a little bit far off.</li>
+<li><span class="comment">[5]</span> : We then create a rotation matrix from the previously defined matrix that rotates the teapot around the y-axis depending on the rendering frame counter. This will also make the rotation change direction back and forth at the rate of the sin function.</li>
+<li><span class="comment">[6]</span> : Finally we apply the rotation by multiplaying the matrices and return the view matrix.</li>
+</ul>
+<p>The mathematical computation part is complete and we can start writing the shader program next.</p>
+<h1><a class="anchor" id="tutorial_open_gl_application_writing_open_gl_shaders"></a>
+Writing the OpenGL shaders</h1>
+<p>Let's start by defining some useful member variables that we will use throughout the tutorial code base:</p>
+<div class="fragment"><div class="line">    juce::String vertexShader;</div>
+<div class="line">    juce::String fragmentShader;</div>
+<div class="line"> </div>
+<div class="line">    std::unique_ptr&lt;juce::OpenGLShaderProgram&gt; shader;</div>
+<div class="line">    std::unique_ptr&lt;Shape&gt; shape;</div>
+<div class="line">    std::unique_ptr&lt;Attributes&gt; attributes;</div>
+<div class="line">    std::unique_ptr&lt;Uniforms&gt; uniforms;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Here we have defined several pointers to the shape, attributes and uniforms we will be using in this GL context as well as an <a class="el" href="https://docs.juce.com/master/classOpenGLShaderProgram.html" title="Manages an OpenGL shader program.">OpenGLShaderProgram</a> object that manages the shader program. We also have two char pointers to define the vertex shader and fragment shader as shown in the next step:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> createShaders()</div>
+<div class="line">    {</div>
+<div class="line">        vertexShader = R<span class="stringliteral">"(</span></div>
+<div class="line"><span class="stringliteral">            attribute vec4 position;</span></div>
+<div class="line"><span class="stringliteral">            attribute vec4 sourceColour;</span></div>
+<div class="line"><span class="stringliteral">            attribute vec2 textureCoordIn;</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">            uniform mat4 projectionMatrix;</span></div>
+<div class="line"><span class="stringliteral">            uniform mat4 viewMatrix;</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">            varying vec4 destinationColour;</span></div>
+<div class="line"><span class="stringliteral">            varying vec2 textureCoordOut;</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">            void main()</span></div>
+<div class="line"><span class="stringliteral">            {</span></div>
+<div class="line"><span class="stringliteral">                destinationColour = sourceColour;</span></div>
+<div class="line"><span class="stringliteral">                textureCoordOut = textureCoordIn;</span></div>
+<div class="line"><span class="stringliteral">                gl_Position = projectionMatrix * viewMatrix * position;</span></div>
+<div class="line"><span class="stringliteral">            })";</span></div>
+<div class="line"><span class="stringliteral"></span> </div>
+<div class="line"><span class="stringliteral">        fragmentShader =</span></div>
+<div class="line"><span class="stringliteral"></span><span class="preprocessor">           #if JUCE_OPENGL_ES</span></div>
+<div class="line">            R<span class="stringliteral">"(varying lowp vec4 destinationColour;</span></div>
+<div class="line"><span class="stringliteral">               varying lowp vec2 textureCoordOut;)"</span></div>
+<div class="line"><span class="stringliteral"></span><span class="preprocessor">           #else</span></div>
+<div class="line">            R<span class="stringliteral">"(varying vec4 destinationColour;</span></div>
+<div class="line"><span class="stringliteral">               varying vec2 textureCoordOut;)"</span></div>
+<div class="line"><span class="stringliteral"></span><span class="preprocessor">           #endif</span></div>
+<div class="line">            R<span class="stringliteral">"(</span></div>
+<div class="line"><span class="stringliteral">               void main()</span></div>
+<div class="line"><span class="stringliteral">               {)"</span></div>
+<div class="line"><span class="stringliteral"></span><span class="preprocessor">           #if JUCE_OPENGL_ES</span></div>
+<div class="line">            R<span class="stringliteral">"(    lowp vec4 colour = vec4(0.95, 0.57, 0.03, 0.7);)"</span></div>
+<div class="line"><span class="stringliteral"></span><span class="preprocessor">           #else</span></div>
+<div class="line">            R<span class="stringliteral">"(    vec4 colour = vec4(0.95, 0.57, 0.03, 0.7);)"</span></div>
+<div class="line"><span class="stringliteral"></span><span class="preprocessor">           #endif</span></div>
+<div class="line">            R<span class="stringliteral">"(    gl_FragColor = colour;</span></div>
+<div class="line"><span class="stringliteral">               })";</span></div>
+</div><!-- fragment --><p>In the <code class="project_code">createShaders()</code> function, we first copy the previously shown shaders into the char pointers by inserting line breaks. This function will be later called in the <code class="project_code">initialise()</code> function of the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a>. The vertex shader essentially sets the position of every vertex in the shape by setting the "gl_Position" variable to the product of the transformation matrices namely the projection matrix followed by the view matrix. As for the fragment shader, the colour of the pixel is specified by setting the "gl_FragColor" variable to the specified colour.</p>
+<p>In the second half of the <code class="project_code">createShaders()</code> function, we create a new shader program within the current GL context <span class="comment">[1]</span> and perform some initialisation as follows:</p>
+<div class="fragment"><div class="line">        std::unique_ptr&lt;juce::OpenGLShaderProgram&gt; newShader (<span class="keyword">new</span> juce::OpenGLShaderProgram (openGLContext));   <span class="comment">// [1]</span></div>
+<div class="line">        juce::String statusText;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (newShader-&gt;addVertexShader (juce::OpenGLHelpers::translateVertexShaderToV3 (vertexShader))          <span class="comment">// [2]</span></div>
+<div class="line">              &amp;&amp; newShader-&gt;addFragmentShader (juce::OpenGLHelpers::translateFragmentShaderToV3 (fragmentShader))</div>
+<div class="line">              &amp;&amp; newShader-&gt;link())</div>
+<div class="line">        {</div>
+<div class="line">            shape     .reset();</div>
+<div class="line">            attributes.reset();</div>
+<div class="line">            uniforms  .reset();</div>
+<div class="line"> </div>
+<div class="line">            shader.reset (newShader.release());                                                                 <span class="comment">// [3]</span></div>
+<div class="line">            shader-&gt;use();</div>
+<div class="line"> </div>
+<div class="line">            shape     .reset (<span class="keyword">new</span> Shape());</div>
+<div class="line">            attributes.reset (<span class="keyword">new</span> Attributes (*shader));</div>
+<div class="line">            uniforms  .reset (<span class="keyword">new</span> Uniforms (*shader));</div>
+<div class="line"> </div>
+<div class="line">            statusText = <span class="stringliteral">"GLSL: v"</span> + juce::String (juce::OpenGLShaderProgram::getLanguageVersion(), 2);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">            statusText = newShader-&gt;getLastError();                                                             <span class="comment">// [4]</span></div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[2]</span> : We first add the vertex shader followed by the fragment shader and attempt to link the compiled shaders into a single program.</li>
+<li><span class="comment">[3]</span> : If the compilation and linking of the shaders are successful, we can clear the shape, attributes and uniforms pointers, assign the newly created shader to the shader program pointer and instantiate new objects for the shape, attributes and uniforms pointers.</li>
+<li><span class="comment">[4]</span> : We can optionally keep track of the initialisation status in case the compilation of shaders fails.</li>
+</ul>
+<p>Now let's define useful structures to represent vertices, attributes, uniforms and shapes.</p>
+<h2><a class="anchor" id="tutorial_open_gl_application_writing_open_gl_shaders_vertex_struct"></a>
+The Vertex struct</h2>
+<p>In order to represent a vertex we require four important variables as shown below:</p>
+<div class="fragment"><div class="line">    <span class="keyword">struct </span>Vertex</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordtype">float</span> position[3];</div>
+<div class="line">        <span class="keywordtype">float</span> normal[3];</div>
+<div class="line">        <span class="keywordtype">float</span> colour[4];</div>
+<div class="line">        <span class="keywordtype">float</span> texCoord[2];</div>
+<div class="line">    };</div>
+</div><!-- fragment --><ul>
+<li>Positions: The position array represents the vertex position in the 3D local space.</li>
+<li>Normals: The normal array represents the direction of the normal vector of the vertex in question computed from the normals of the adjacent faces.</li>
+<li>Colours: The colour array represents the colour of the vertex in RGBA format.</li>
+<li>Texture Coordinates: If a texture is used, this represents the 2D coordinates of the texture to use on the vertex in question.</li>
+</ul>
+<h2><a class="anchor" id="tutorial_open_gl_application_writing_open_gl_shaders_attributes_struct"></a>
+The Attributes struct</h2>
+<p>The attributes structure is essentially a container class to hold several <a class="el" href="https://docs.juce.com/master/structOpenGLShaderProgram_1_1Attribute.html" title="Represents an openGL vertex attribute value.">OpenGLShaderProgram::Attribute</a> objects together and the attributes we store are defined here:</p>
+<div class="fragment"><div class="line">        std::unique_ptr&lt;juce::OpenGLShaderProgram::Attribute&gt; position, normal, sourceColour, textureCoordIn;</div>
+</div><!-- fragment --><p>They correspond exactly to the variables in the Vertex struct defined earlier since attributes are meant to describe vertex parameters in the vertex shader program.</p>
+<p>As expected, we create these attributes in the constructor by calling the private helper function defined in the next step by passing the shader program as an argument:</p>
+<div class="fragment"><div class="line">        <span class="keyword">explicit</span> Attributes (juce::OpenGLShaderProgram&amp; shaderProgram)</div>
+<div class="line">        {</div>
+<div class="line">            position      .reset (createAttribute (shaderProgram, <span class="stringliteral">"position"</span>));</div>
+<div class="line">            normal        .reset (createAttribute (shaderProgram, <span class="stringliteral">"normal"</span>));</div>
+<div class="line">            sourceColour  .reset (createAttribute (shaderProgram, <span class="stringliteral">"sourceColour"</span>));</div>
+<div class="line">            textureCoordIn.reset (createAttribute (shaderProgram, <span class="stringliteral">"textureCoordIn"</span>));</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The helper function in turn will call the <a class="el" href="https://docs.juce.com/master/structOpenGLShaderProgram_1_1Attribute.html" title="Represents an openGL vertex attribute value.">OpenGLShaderProgram::Attribute</a> constructor to instantiate new objects:</p>
+<div class="fragment"><div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        <span class="keyword">static</span> juce::OpenGLShaderProgram::Attribute* createAttribute (juce::OpenGLShaderProgram&amp; shader,</div>
+<div class="line">                                                                      <span class="keyword">const</span> juce::String&amp; attributeName)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (glGetAttribLocation (shader.getProgramID(), attributeName.toRawUTF8()) &lt; 0)</div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">new</span> juce::OpenGLShaderProgram::Attribute (shader, attributeName.toRawUTF8());</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>However, in the above we first check whether the attribute exists in the shader program by using the <code class="code">glGetAttribLocation()</code> function. If the number returned is -1 then we abort the attribute instantiation.</p>
+<p>In the <code class="project_code">enable()</code> function, all the attributes are activated (after checking if they exist) by calling the <code class="code">glVertexAttribPointer()</code> and <code class="code">glEnableVertexAttribArray()</code> functions as shown below:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> enable()</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (position.get() != <span class="keyword">nullptr</span>)</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a813aaa5886d31746e1595478348764c2">glVertexAttribPointer</a> (position-&gt;attributeID, 3, GL_FLOAT, GL_FALSE, sizeof (Vertex), <span class="keyword">nullptr</span>);</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a3b9440ee18571faf4a691d424c8cc0bf">glEnableVertexAttribArray</a> (position-&gt;attributeID);</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (normal.get() != <span class="keyword">nullptr</span>)</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a813aaa5886d31746e1595478348764c2">glVertexAttribPointer</a> (normal-&gt;attributeID, 3, GL_FLOAT, GL_FALSE, sizeof (Vertex), (<a class="code hl_typedef" href="https://docs.juce.com/master/group__juce__opengl-opengl.html#ga1e5eb1ac5e47603cc80ab58338b92393">GLvoid</a>*) (<span class="keyword">sizeof</span> (<span class="keywordtype">float</span>) * 3));</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a3b9440ee18571faf4a691d424c8cc0bf">glEnableVertexAttribArray</a> (normal-&gt;attributeID);</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (sourceColour.get() != <span class="keyword">nullptr</span>)</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a813aaa5886d31746e1595478348764c2">glVertexAttribPointer</a> (sourceColour-&gt;attributeID, 4, GL_FLOAT, GL_FALSE, sizeof (Vertex), (<a class="code hl_typedef" href="https://docs.juce.com/master/group__juce__opengl-opengl.html#ga1e5eb1ac5e47603cc80ab58338b92393">GLvoid</a>*) (<span class="keyword">sizeof</span> (<span class="keywordtype">float</span>) * 6));</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a3b9440ee18571faf4a691d424c8cc0bf">glEnableVertexAttribArray</a> (sourceColour-&gt;attributeID);</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (textureCoordIn.get() != <span class="keyword">nullptr</span>)</div>
+<div class="line">            {</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a813aaa5886d31746e1595478348764c2">glVertexAttribPointer</a> (textureCoordIn-&gt;attributeID, 2, GL_FLOAT, GL_FALSE, sizeof (Vertex), (<a class="code hl_typedef" href="https://docs.juce.com/master/group__juce__opengl-opengl.html#ga1e5eb1ac5e47603cc80ab58338b92393">GLvoid</a>*) (<span class="keyword">sizeof</span> (<span class="keywordtype">float</span>) * 10));</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a3b9440ee18571faf4a691d424c8cc0bf">glEnableVertexAttribArray</a> (textureCoordIn-&gt;attributeID);</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The <code class="code">glVertexAttribPointer()</code> function defines the array of vertex attribute data with information such as the index, size and type of data to hold. Notice that the last argument specifies the offset of the data cumulatively with regards to the other attributes defined previously in the structure. Then the <code class="code">glEnableVertexAttribArray()</code> function enables the actual array to be used within the context.</p>
+<p>In the <code class="project_code">disable()</code> function, we do the exact opposite by calling the <code class="code">glDisableVertexAttribArray()</code> function on all attributes:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> disable()</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (position.get() != <span class="keyword">nullptr</span>)       <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a2c616af20b647dd1471449614cfe84e3">glDisableVertexAttribArray</a> (position-&gt;attributeID);</div>
+<div class="line">            <span class="keywordflow">if</span> (normal.get() != <span class="keyword">nullptr</span>)         <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a2c616af20b647dd1471449614cfe84e3">glDisableVertexAttribArray</a> (normal-&gt;attributeID);</div>
+<div class="line">            <span class="keywordflow">if</span> (sourceColour.get() != <span class="keyword">nullptr</span>)   <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a2c616af20b647dd1471449614cfe84e3">glDisableVertexAttribArray</a> (sourceColour-&gt;attributeID);</div>
+<div class="line">            <span class="keywordflow">if</span> (textureCoordIn.get() != <span class="keyword">nullptr</span>) <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a2c616af20b647dd1471449614cfe84e3">glDisableVertexAttribArray</a> (textureCoordIn-&gt;attributeID);</div>
+<div class="line">        }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_open_gl_application_writing_open_gl_shaders_uniforms_struct"></a>
+The Uniforms struct</h2>
+<p>The uniforms structure similarly contains several <a class="el" href="https://docs.juce.com/master/structOpenGLShaderProgram_1_1Uniform.html" title="Represents an openGL uniform value.">OpenGLShaderProgram::Uniform</a> objects in the same manner as defined here:</p>
+<div class="fragment"><div class="line">        std::unique_ptr&lt;juce::OpenGLShaderProgram::Uniform&gt; projectionMatrix, viewMatrix;</div>
+</div><!-- fragment --><p>They correspond exactly to the matrix variables defined earlier in the vertex shader program.</p>
+<p>As expected, we create these attributes in the constructor by calling the private helper function defined in the next step by passing the shader program as an argument:</p>
+<div class="fragment"><div class="line">        <span class="keyword">explicit</span> Uniforms (juce::OpenGLShaderProgram&amp; shaderProgram)</div>
+<div class="line">        {</div>
+<div class="line">            projectionMatrix.reset (createUniform (shaderProgram, <span class="stringliteral">"projectionMatrix"</span>));</div>
+<div class="line">            viewMatrix      .reset (createUniform (shaderProgram, <span class="stringliteral">"viewMatrix"</span>));</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>The helper function in turn will call the <a class="el" href="https://docs.juce.com/master/structOpenGLShaderProgram_1_1Uniform.html" title="Represents an openGL uniform value.">OpenGLShaderProgram::Uniform</a> constructor to instantiate new objects:</p>
+<div class="fragment"><div class="line">    <span class="keyword">private</span>:</div>
+<div class="line">        <span class="keyword">static</span> juce::OpenGLShaderProgram::Uniform* createUniform (juce::OpenGLShaderProgram&amp; shaderProgram,</div>
+<div class="line">                                                                  <span class="keyword">const</span> juce::String&amp; uniformName)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (glGetUniformLocation (shaderProgram.getProgramID(), uniformName.toRawUTF8()) &lt; 0)</div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">new</span> juce::OpenGLShaderProgram::Uniform (shaderProgram, uniformName.toRawUTF8());</div>
+<div class="line">        }</div>
+<div class="line">    };</div>
+</div><!-- fragment --><p>However, in the above we first check whether the uniform exists in the shader program by using the <code class="code">glGetUniformLocation()</code> function. If the number returned is -1 then we abort the uniform instantiation.</p>
+<h2><a class="anchor" id="tutorial_open_gl_application_writing_open_gl_shaders_shape_struct"></a>
+The Shape struct</h2>
+<p>The shape structure is where we define the teapot object in OpenGL terms. The member variables are used to store the Wavefront Obj file for the teapot model and an array of vertex buffers defined as a sub-structure just below:</p>
+<div class="fragment"><div class="line">        WavefrontObjFile shapeFile;</div>
+<div class="line">        juce::OwnedArray&lt;VertexBuffer&gt; vertexBuffers;</div>
+</div><!-- fragment --><p>Let's first examine how a vertex buffer is defined. It essentially contains the total number of indices in the mesh as well as a vertex buffer and an index buffer in order to prepare for later rendering:</p>
+<div class="fragment"><div class="line">            <a class="code hl_typedef" href="https://docs.juce.com/master/group__juce__opengl-opengl.html#gaa311c7f0d6ec4f1a33f9235c3651b86b">GLuint</a> vertexBuffer, indexBuffer;</div>
+<div class="line">            <span class="keywordtype">int</span> numIndices;</div>
+<div class="line"> </div>
+<div class="line">            <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (VertexBuffer)</div>
+<div class="line">        };</div>
+</div><!-- fragment --><p>The class constructor initialises a vertex buffer in the following way:</p>
+<div class="fragment"><div class="line">            <span class="keyword">explicit</span> VertexBuffer (WavefrontObjFile::Shape&amp; aShape)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">                numIndices = aShape.mesh.indices.size();                                    <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#ab867a1f2cb140650e06a06328b5fcfe0">glGenBuffers</a> (1, &amp;vertexBuffer);                                            <span class="comment">// [2]</span></div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a99aec4ca7d37fb3addd2df2324321266">glBindBuffer</a> (GL_ARRAY_BUFFER, vertexBuffer);</div>
+<div class="line"> </div>
+<div class="line">                juce::Array&lt;Vertex&gt; vertices;</div>
+<div class="line">                createVertexListFromMesh (aShape.mesh, vertices, juce::Colours::green);     <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a2a6b5244aa17f99ad4b240e80ec0f37e">glBufferData</a> (GL_ARRAY_BUFFER,                                              <span class="comment">// [4]</span></div>
+<div class="line">                              <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="https://docs.juce.com/master/group__juce__opengl-opengl.html#ga45f630b0dfee935f0aed0010167cddb5">GLsizeiptr</a><span class="keyword">&gt;</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span> (vertices.size()) * sizeof (Vertex)),</div>
+<div class="line">                              vertices.getRawDataPointer(), GL_STATIC_DRAW);</div>
+<div class="line"> </div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#ab867a1f2cb140650e06a06328b5fcfe0">glGenBuffers</a> (1, &amp;indexBuffer);                                             <span class="comment">// [5]</span></div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a99aec4ca7d37fb3addd2df2324321266">glBindBuffer</a> (GL_ELEMENT_ARRAY_BUFFER, indexBuffer);</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a2a6b5244aa17f99ad4b240e80ec0f37e">glBufferData</a> (GL_ELEMENT_ARRAY_BUFFER,</div>
+<div class="line">                              <span class="keyword">static_cast&lt;</span><a class="code hl_typedef" href="https://docs.juce.com/master/group__juce__opengl-opengl.html#ga45f630b0dfee935f0aed0010167cddb5">GLsizeiptr</a><span class="keyword">&gt;</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span> (numIndices) * <span class="keyword">sizeof</span> (juce::uint32)),</div>
+<div class="line">                              aShape.mesh.indices.getRawDataPointer(), GL_STATIC_DRAW);</div>
+<div class="line">            }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : We first retrieve the number of indices in the mesh we want to draw.</li>
+<li><span class="comment">[2]</span> : Then we generate the buffer object name for our single vertex buffer with the <code class="code">glGenBuffers()</code> function and bind the vertex attributes to it with the <code class="code">glBindBuffer()</code> function.</li>
+<li><span class="comment">[3]</span> : Using the helper function defined below, we create a vertex list from the teapot mesh.</li>
+<li><span class="comment">[4]</span> : We can then copy the vertex list into the vertex buffer by calling the <code class="code">glBufferData()</code> function.</li>
+<li><span class="comment">[5]</span> : Finally we do the same for the index buffer by generating the buffer object name, binding the vertex array indices to it and copying the indices into the index buffer.</li>
+</ul>
+<p>The helper function that creates a mesh from a vertex list is defined as follows:</p>
+<div class="fragment"><div class="line">        <span class="keyword">static</span> <span class="keywordtype">void</span> createVertexListFromMesh (<span class="keyword">const</span> WavefrontObjFile::Mesh&amp; mesh, juce::Array&lt;Vertex&gt;&amp; <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10ae9fc7d453b0dd525d0edf2ede7961">list</a>, juce::Colour colour)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> scale = 0.2f;                                                  <span class="comment">// [6]</span></div>
+<div class="line">            WavefrontObjFile::TextureCoord defaultTexCoord { 0.5f, 0.5f };</div>
+<div class="line">            WavefrontObjFile::Vertex defaultNormal { 0.5f, 0.5f, 0.5f };</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; mesh.vertices.size(); ++i)                     <span class="comment">// [7]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">const</span> <span class="keyword">auto</span>&amp; v = mesh.vertices.getReference (i);</div>
+<div class="line">                <span class="keyword">const</span> <span class="keyword">auto</span>&amp; n = i &lt; mesh.normals.size() ? mesh.normals.getReference (i) : defaultNormal;</div>
+<div class="line">                <span class="keyword">const</span> <span class="keyword">auto</span>&amp; tc = i &lt; mesh.textureCoords.size() ? mesh.textureCoords.getReference (i) : defaultTexCoord;</div>
+<div class="line"> </div>
+<div class="line">                <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10ae9fc7d453b0dd525d0edf2ede7961">list</a>.add ({ { scale * v.x, scale * v.y, scale * v.z, },</div>
+<div class="line">                            { scale * n.x, scale * n.y, scale * n.z, },</div>
+<div class="line">                            { colour.getFloatRed(), colour.getFloatGreen(), colour.getFloatBlue(), colour.getFloatAlpha() },</div>
+<div class="line">                            { tc.x, tc.y } });                                  <span class="comment">// [8]</span></div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[6]</span> : We first define several local variables for the mesh scale, the default texture coordinates and the default normal vector.</li>
+<li><span class="comment">[7]</span> : Then for every vertex in the mesh, we get a reference to the vertex position, normal vector and texture coordinates to create a new Vertex object that we defined earlier.</li>
+<li><span class="comment">[8]</span> : On the Vertex object that was created, we scale the position and normal vectors, assign a dummy green colour and finally we add it to the vertex list.</li>
+</ul>
+<p>In the destructor, we delete the vertex and index buffers by calling the <code class="code">glDeleteBuffers()</code> function on each variable:</p>
+<div class="fragment"><div class="line">            ~VertexBuffer()</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#acb98e939927a22af3f410f5ac07b9f39">glDeleteBuffers</a> (1, &amp;vertexBuffer);</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#acb98e939927a22af3f410f5ac07b9f39">glDeleteBuffers</a> (1, &amp;indexBuffer);</div>
+<div class="line">            }</div>
+</div><!-- fragment --><p>The <code class="project_code">bind()</code> function defined below is called when the shape is drawn and binds the vertex and index buffers using the <code class="code">glBindBuffer()</code> function:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> bind()</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">    glBindBuffer (GL_ARRAY_BUFFER, vertexBuffer);</div>
+<div class="line">    glBindBuffer (GL_ELEMENT_ARRAY_BUFFER, indexBuffer);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Now let's go back to the shape constructor where the teapot binary data is loaded into the WavefrontObjFile variable:</p>
+<div class="fragment"><div class="line">        Shape()</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> dir = juce::File::getCurrentWorkingDirectory();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordtype">int</span> numTries = 0;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">while</span> (! dir.getChildFile (<span class="stringliteral">"Resources"</span>).exists() &amp;&amp; numTries++ &lt; 15)</div>
+<div class="line">                dir = dir.getParentDirectory();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (shapeFile.load (dir.getChildFile (<span class="stringliteral">"Resources"</span>).getChildFile (<span class="stringliteral">"teapot.obj"</span>)).wasOk())</div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keyword">auto</span>* s : shapeFile.shapes)</div>
+<div class="line">                    vertexBuffers.add (new VertexBuffer (*s));</div>
+<div class="line">        }</div>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>Make sure that the "teapot.obj" file exists in the <code class="filename">Resources</code> folder of your project.</dd></dl>
+<p>If the loading is successful, we can iterate over every shape contained in the WavefrontObjFile object and we can create a new VertexBuffer object and add it to the vertex buffer array.</p>
+<p>Finally, we implement a <code class="project_code">draw()</code> function that will be called in the <code class="project_code">render()</code> function of the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a> later on as defined below:</p>
+<div class="fragment"><div class="line">        <span class="keywordtype">void</span> draw (Attributes&amp; glAttributes)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span>* vertexBuffer : vertexBuffers)</div>
+<div class="line">            {</div>
+<div class="line">                vertexBuffer-&gt;bind();</div>
+<div class="line"> </div>
+<div class="line">                glAttributes.enable();</div>
+<div class="line">                <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#abf85b8b01c8533d5359fb441967b266c">glDrawElements</a> (GL_TRIANGLES, vertexBuffer-&gt;numIndices, GL_UNSIGNED_INT, <span class="keyword">nullptr</span>);</div>
+<div class="line">                glAttributes.disable();</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+</div><!-- fragment --><p>For every vertex buffer in the member variable array, we first call the <code class="project_code">bind()</code> function to bind the vertex and index buffers to the GL context. We then call the <code class="project_code">enable()</code> function defined earlier on every attribute to fill the arrays with data. Finally, the <code class="code">glDrawElements</code> function draws every set of three vertices contained in the vertex buffer as triangles before the attributes are disabled and emptied.</p>
+<h1><a class="anchor" id="tutorial_open_gl_application_putting_together"></a>
+Putting it all together</h1>
+<p>We now have all the components to render our teapot so let's put it all together.</p>
+<p>As mentioned before our app inherits from the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a> class as shown here in the <code class="project_code">MainContentComponent</code> class:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::OpenGLAppComponent</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>In the class constructor, we set the size of our window as usual using the <code class="project_code">setSize()</code> function:</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        setSize (800, 600);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the class destructor, we make sure that the OpenGL system is shutdown before our class is destroyed by calling the <code class="project_code">shutdownOpenGL()</code> function:</p>
+<div class="fragment"><div class="line">    ~MainContentComponent()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        shutdownOpenGL();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>As described before the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a> class provides startup and shutdown functions to facilitate implementation of our graphics application. In the <code class="project_code">initialise()</code> function we call the helper function <code class="project_code">createShaders()</code> defined earlier to prepare the vertex and fragment shaders as shown here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> initialise()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        createShaders();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>As for the <code class="project_code">shutdown()</code> function, we ensure there is no leakage by setting all the member variable pointers to null as done here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> shutdown()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        shader    .reset();</div>
+<div class="line">        shape     .reset();</div>
+<div class="line">        attributes.reset();</div>
+<div class="line">        uniforms  .reset();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, we perform the actual rendering by overriding the <code class="project_code"><a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html#af4e76e80318343d5302be7af6bf4cdbc" title="Called to render your openGL.">OpenGLAppComponent::render()</a></code> function as explained below:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> render()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">using namespace </span>::juce::gl;</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (juce::OpenGLHelpers::isContextActive());</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> desktopScale = (float) openGLContext.getRenderingScale();          <span class="comment">// [1]</span></div>
+<div class="line">        juce::OpenGLHelpers::clear (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId)); <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a565352af1ccdc845738a6868cd3e9942">glEnable</a> (GL_BLEND);                                                    <span class="comment">// [3]</span></div>
+<div class="line">        <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a7a7c04649005d741123fe519ef314a77">glBlendFunc</a> (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</div>
+<div class="line"> </div>
+<div class="line">        <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a204d01379293e8cf8c67de898e8e4dc8">glViewport</a> (0,</div>
+<div class="line">                    0,</div>
+<div class="line">                    juce::roundToInt (desktopScale * (<span class="keywordtype">float</span>) getWidth()),</div>
+<div class="line">                    juce::roundToInt (desktopScale * (<span class="keywordtype">float</span>) getHeight()));     <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        shader-&gt;use();                                                          <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (uniforms-&gt;projectionMatrix.get() != <span class="keyword">nullptr</span>)                        <span class="comment">// [6]</span></div>
+<div class="line">            uniforms-&gt;projectionMatrix-&gt;setMatrix4 (getProjectionMatrix().mat, 1, <span class="keyword">false</span>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (uniforms-&gt;viewMatrix.get() != <span class="keyword">nullptr</span>)                              <span class="comment">// [7]</span></div>
+<div class="line">            uniforms-&gt;viewMatrix-&gt;setMatrix4 (getViewMatrix().mat, 1, <span class="keyword">false</span>);</div>
+<div class="line"> </div>
+<div class="line">        shape-&gt;draw (*attributes);                                              <span class="comment">// [8]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Reset the element buffers so child Components draw correctly</span></div>
+<div class="line">        <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a99aec4ca7d37fb3addd2df2324321266">glBindBuffer</a> (GL_ARRAY_BUFFER, 0);                                      <span class="comment">// [9]</span></div>
+<div class="line">        <a class="code hl_variable" href="https://docs.juce.com/master/namespacegl.html#a99aec4ca7d37fb3addd2df2324321266">glBindBuffer</a> (GL_ELEMENT_ARRAY_BUFFER, 0);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : First check that the GL context is active using the <code class="project_code"><a class="el" href="https://docs.juce.com/master/classOpenGLHelpers.html#aeb9c20e316e3aa59046a4fe4cb2562f8" title="Returns true if the current thread has an active OpenGL context.">OpenGLHelpers::isContextActive()</a></code> function so that we can retrieve the scale factor of the rendering display.</li>
+<li><span class="comment">[2]</span> : We can then clear the display by painting the background with the appropriate look and feel colour.</li>
+<li><span class="comment">[3]</span> : This goes beyond the scope of the tutorial but the <code class="code">glEnable()</code> function activates the "GL_BLEND" option which blends the colour of the computed fragment colour with the colour buffer values. The blending method is specified in the <code class="code">glBlendFunc()</code> function by specifying the transparency calculation.</li>
+<li><span class="comment">[4]</span> : The <code class="code">glViewport()</code> function sets the viewport of the GL window relative to the device screen by multiplying the width and height by the rendering display scale factor.</li>
+<li><span class="comment">[5]</span> : By calling the <code class="project_code">use()</code> function on the shader pointer, we specify which shader we want to use in this GL context.</li>
+<li><span class="comment">[6]</span> : We set the projection matrix as a uniform variable from our helper function to compute the shader.</li>
+<li><span class="comment">[7]</span> : We also set the view matrix as a uniform variable from our helper function to compute the shader.</li>
+<li><span class="comment">[8]</span> : Finally, we call the <code class="project_code">draw()</code> function defined earlier on the shape pointer to render the teapot within the GL context and attributes specified as arguments.</li>
+<li><span class="comment">[9]</span> : We also make sure to empty the vertex attributes and vertex array indices using the <code class="code">glBindBuffer()</code> function on the GL context.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>All functions with the "gl" prefix are contained in the OpenGL library of your development machine as opposed to the JUCE library.</dd></dl>
+<h1><a class="anchor" id="tutorial_open_gl_application_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to set up an OpenGL JUCE application. In particular, we have:</p>
+<ul>
+<li>Learnt the functionalities of the <a class="el" href="https://docs.juce.com/master/classOpenGLAppComponent.html" title="A base class for writing simple one-page graphical apps.">OpenGLAppComponent</a> class.</li>
+<li>Loaded a Wavefront Obj file into the OpenGL renderer.</li>
+<li>Calculated projection and view matrices.</li>
+<li>Configured the <a class="el" href="https://docs.juce.com/master/classOpenGLContext.html" title="Creates an OpenGL context, which can be attached to a component.">OpenGLContext</a> and render appearance using shaders.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_open_gl_application_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_main_window.html">Tutorial: The application window</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_main_component.html">Tutorial: The main component</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_animation.html">Tutorial: Animating geometry</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Build an OpenGL application_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

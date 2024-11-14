@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0059)https://docs.juce.com/master/tutorial_mpe_introduction.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Build a multi-polyphonic synthesiser</title>
+<link href="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/css">
+<script src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Build a multi-polyphonic synthesiser</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_demo_project">The demo project</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_visualiser">The visualiser</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_other">Other setting up</a><ul><li class="level3"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_midicallback">The MIDI input callback</a></li>
+<li class="level3"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_audiocallback">The audio callback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_classes">Core MPE classes</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_instrument">The MPEInstrument class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_synth">The MPESynthesiser class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_voice">The MPESynthesiserVoice class</a><ul><li class="level3"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_voice_starting_stopping">Starting and stopping voices</a></li>
+<li class="level3"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_voice_changes">Parameter changes</a></li>
+<li class="level3"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_mpe_voice_generating">Generating the audio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_mpe_introduction.html#tutorial_mpe_introduction_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Learn the basics of the MPE standard and how to implement a synthesiser that supports MPE. Hook your application up to a ROLI Seaboard Rise! <br>
+</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a>, <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a>, <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a>, <a class="el" href="https://docs.juce.com/master/classMPEValue.html" title="This class represents a single value for any of the MPE dimensions of control.">MPEValue</a>, <a class="el" href="https://docs.juce.com/master/classSmoothedValue.html" title="A utility class for values that need smoothing to avoid audio glitches.">SmoothedValue</a></p>
+<h1><a class="anchor" id="tutorial_mpe_introduction_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/MPEIntroductionTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/MPEIntroductionTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<dl class="section note"><dt>Note</dt><dd>It would be helpful to read <a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a> first, as this is used as a reference point in a number of places.</dd></dl>
+<h1><a class="anchor" id="tutorial_mpe_introduction_demo_project"></a>
+The demo project</h1>
+<p>The demo project is a simplified version of the <code class="filename">MPEDemo</code> project in the <code class="filename">JUCE/examples</code> directory. In order to get the most out of this tutorial you will need an <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> compatible controller. <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> stands for <em>MIDI Polyphonic Expression</em>, which is a new specification to allow multidimensional data to be communicated between audio products.</p>
+<p>Some examples of such <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> compatible devices are ROLI's own Seaboard range (such as the <a href="https://roli.com/products/seaboard-rise">Seaboard RISE</a> ).</p>
+<dl class="section warning"><dt>Warning</dt><dd>The synthesiser may appear very quiet unless your controller transmits MIDI channel pressure and continuous controller 74 (<em>timbre</em>) in the way that the <a href="https://roli.com/products/seaboard-rise">Seaboard RISE</a> does.</dd></dl>
+<p>With a <a href="https://roli.com/products/seaboard-rise">Seaboard RISE</a> connected to your computer the window of the demo application should look something like the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/tutorial_mpe_introduction_screenshot1.png" alt="">
+<div class="caption">
+The demo application</div></div>
+<p>You will need to enable one of the MIDI inputs (here you can see a <a href="https://roli.com/products/seaboard-rise">Seaboard RISE</a> is shown as an option).</p>
+<h2><a class="anchor" id="tutorial_mpe_introduction_visualiser"></a>
+The visualiser</h2>
+<p>Any notes played on your <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> compatible device will be visualised in the lower portion of the window. This is shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/tutorial_mpe_introduction_screenshot2.png" alt="">
+<div class="caption">
+The visualiser</div></div>
+<p>One key feature of <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> is that each new MIDI note event is assigned its own MIDI channel, rather than all notes from a particular controller keyboard being assigned to the same MIDI channel. This allows each individual note to be controlled independently by control change messages, pitch bend message, and so on. In the JUCE implementation of <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> , a playing note is represented by an <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a> object. An <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a> object encapsulates the following data:</p>
+<ul>
+<li>The MIDI channel of the note.</li>
+<li>The initial MIDI note value of the note.</li>
+<li>The note-on velocity (or <em>strike</em>).</li>
+<li>The pitch-bend value for the note: derived from any MIDI pitch-bend messages received on this note's MIDI channel.</li>
+<li>The pressure for the note: derived from any MIDI channel pressure messages received on this note's MIDI channel.</li>
+<li>The <em>timbre</em> for the note: typically derived from any controller messages on this note's MIDI channel for controller 74.</li>
+<li>The note-off velocity (or <em>lift</em>): this is only valid after the note-off event has been received and until the playing sound has stopped.</li>
+</ul>
+<p>With no notes playing you can see that the visualiser represents a conventional MIDI keyboard layout. Each note is represented in the visualiser in the demo application as follows:</p><ul>
+<li>A grey filled circle represents the note-on velocity (a larger circle for higher velocity).</li>
+<li>The MIDI channel for the note is displayed above the "+" symbol within this circle;</li>
+<li>The initial MIDI note name is displayed below the "+" symbol.</li>
+<li>An overlaid white circle represents the current pressure for this note (again, a larger circle for higher pressure).</li>
+<li>The horizontal position of the note is derived from the original note and any pitch bend that has been applied to this note.</li>
+<li>The vertical position of the note is derived from the <em>timbre</em> parameter for the note (from MIDI controller 74 on this note's MIDI channel).</li>
+</ul>
+<h2><a class="anchor" id="tutorial_mpe_introduction_mpe_other"></a>
+Other setting up</h2>
+<p>Before delving further into other aspects of the <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> specification, which are demonstrated by this application, let's look at some of the other things our application uses.</p>
+<p>First of all, our <code class="project_code">MainComponent</code> class inherits from the <a class="el" href="https://docs.juce.com/master/classAudioIODeviceCallback.html" title="One of these is passed to an AudioIODevice object to stream the audio data in and out.">AudioIODeviceCallback</a> <span class="comment">[1]</span> and <a class="el" href="https://docs.juce.com/master/classMidiInputCallback.html" title="Receives incoming messages from a physical MIDI input device.">MidiInputCallback</a> <span class="comment">[2]</span> classes:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainComponent : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                      <span class="keyword">private</span> juce::AudioIODeviceCallback,  <span class="comment">// [1]</span></div>
+<div class="line">                      <span class="keyword">private</span> juce::MidiInputCallback       <span class="comment">// [2]</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><p>We also have some important class members in our <code class="project_code">MainComponent</code> class:</p>
+<div class="fragment"><div class="line">    juce::AudioDeviceManager audioDeviceManager;         <span class="comment">// [3]</span></div>
+<div class="line">    juce::AudioDeviceSelectorComponent audioSetupComp;   <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">    Visualiser visualiserComp;</div>
+<div class="line">    juce::Viewport visualiserViewport;</div>
+<div class="line"> </div>
+<div class="line">    juce::MPEInstrument visualiserInstrument;</div>
+<div class="line">    juce::MPESynthesiser synth;</div>
+<div class="line">    juce::MidiMessageCollector midiCollector;            <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>The <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a> <span class="comment">[3]</span> class handles the audio and MIDI configuration on our computer, while the <a class="el" href="https://docs.juce.com/master/classAudioDeviceSelectorComponent.html" title="A component containing controls to let the user change the audio settings of an AudioDeviceManager ob...">AudioDeviceSelectorComponent</a> <span class="comment">[4]</span> class gives us a means of configuring this from the graphical user interface (see <a class="el" href="https://docs.juce.com/master/tutorial_audio_device_manager.html">Tutorial: The AudioDeviceManager class</a>). The <a class="el" href="https://docs.juce.com/master/classMidiMessageCollector.html" title="Collects incoming realtime MIDI messages and turns them into blocks suitable for processing by a bloc...">MidiMessageCollector</a> <span class="comment">[5]</span> class allow us to easily collect messages into blocks of timestamped MIDI messages in our audio callback (see <a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a>).</p>
+<p>It is important that the <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a> object is listed first since we pass this to the constructor of the <a class="el" href="https://docs.juce.com/master/classAudioDeviceSelectorComponent.html" title="A component containing controls to let the user change the audio settings of an AudioDeviceManager ob...">AudioDeviceSelectorComponent</a> object:</p>
+<div class="fragment"><div class="line">    MainComponent()</div>
+<div class="line">        : audioSetupComp (audioDeviceManager, 0, 0, 0, 256,</div>
+<div class="line">                          true, <span class="comment">// showMidiInputOptions must be true</span></div>
+<div class="line">                          true, true, false)</div>
+</div><!-- fragment --><p>Notice another important argument that is passed to the <a class="el" href="https://docs.juce.com/master/classAudioDeviceSelectorComponent.html" title="A component containing controls to let the user change the audio settings of an AudioDeviceManager ob...">AudioDeviceSelectorComponent</a> constructor: the <code class="code">showMidiInputOptions</code> must be <code class="code">true</code> to show our available MIDI inputs.</p>
+<p>We set up our <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a> object in a similar way to <a class="el" href="https://docs.juce.com/master/tutorial_audio_device_manager.html">Tutorial: The AudioDeviceManager class</a>, but we need also to add a MIDI input callback <span class="comment">[6]</span> :</p>
+<div class="fragment"><div class="line">        audioDeviceManager.initialise (0, 2, <span class="keyword">nullptr</span>, <span class="keyword">true</span>, {}, <span class="keyword">nullptr</span>);</div>
+<div class="line">        audioDeviceManager.addMidiInputDeviceCallback ({}, <span class="keyword">this</span>); <span class="comment">// [6]</span></div>
+<div class="line">        audioDeviceManager.addAudioCallback (<span class="keyword">this</span>);</div>
+</div><!-- fragment --><h3><a class="anchor" id="tutorial_mpe_introduction_midicallback"></a>
+The MIDI input callback</h3>
+<p>The <code class="project_code">handleIncomingMidiMessage()</code> is called when each MIDI message is received from any of the active MIDI inputs in the user interface:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> handleIncomingMidiMessage (juce::MidiInput* <span class="comment">/*source*/</span>,</div>
+<div class="line">                                    <span class="keyword">const</span> juce::MidiMessage&amp; message)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        visualiserInstrument.processNextMidiEvent (message);</div>
+<div class="line">        midiCollector.addMessageToQueue (message);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we pass each MIDI message to both:</p><ul>
+<li>our <code class="project_code">visualiserInstrument</code> member — which is used to drive the visualiser display; and</li>
+<li>the <code class="project_code">midiCollector</code> member — which in turn passes the messages to the synthesiser in the audio callback.</li>
+</ul>
+<h3><a class="anchor" id="tutorial_mpe_introduction_audiocallback"></a>
+The audio callback</h3>
+<p>Before any audio callbacks are made, we need to inform the <code class="project_code">synth</code> and <code class="project_code">midiCollector</code> members of the device sample rate, in the <code class="project_code">audioDeviceAboutToStart()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> audioDeviceAboutToStart (juce::AudioIODevice* device)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> sampleRate = device-&gt;getCurrentSampleRate();</div>
+<div class="line">        midiCollector.reset (sampleRate);</div>
+<div class="line">        synth.setCurrentPlaybackSampleRate (sampleRate);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <code class="project_code">audioDeviceIOCallbackWithContext()</code> function appears to do nothing MPE-specific:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> audioDeviceIOCallbackWithContext (<span class="keyword">const</span> <span class="keywordtype">float</span>* <span class="keyword">const</span>* <span class="comment">/*inputChannelData*/</span>,</div>
+<div class="line">                                           <span class="keywordtype">int</span> <span class="comment">/*numInputChannels*/</span>,</div>
+<div class="line">                                           <span class="keywordtype">float</span>* <span class="keyword">const</span>* outputChannelData,</div>
+<div class="line">                                           <span class="keywordtype">int</span> numOutputChannels,</div>
+<div class="line">                                           <span class="keywordtype">int</span> numSamples,</div>
+<div class="line">                                           <span class="keyword">const</span> juce::AudioIODeviceCallbackContext&amp; <span class="comment">/*context*/</span>)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// make buffer</span></div>
+<div class="line">        juce::AudioBuffer&lt;float&gt; buffer (outputChannelData, numOutputChannels, numSamples);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// clear it to silence</span></div>
+<div class="line">        buffer.clear();</div>
+<div class="line"> </div>
+<div class="line">        juce::MidiBuffer incomingMidi;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get the MIDI messages for this audio block</span></div>
+<div class="line">        midiCollector.removeNextBlockOfMessages (incomingMidi, numSamples);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// synthesise the block</span></div>
+<div class="line">        synth.renderNextBlock (buffer, incomingMidi, 0, numSamples);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>In fact, this is rather similar to the <code class="project_code">SynthAudioSource::getNextAudioBlock()</code> function in <a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a>.</dd></dl>
+<h1><a class="anchor" id="tutorial_mpe_introduction_mpe_classes"></a>
+Core MPE classes</h1>
+<p>All of the <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> specific processing is handled by the <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> classes: <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a>, <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a>, <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html" title="Represents an MPE voice that an MPESynthesiser can use to play a sound.">MPESynthesiserVoice</a>, <a class="el" href="https://docs.juce.com/master/classMPEValue.html" title="This class represents a single value for any of the MPE dimensions of control.">MPEValue</a>, and <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a> (which we mentioned earlier).</p>
+<h2><a class="anchor" id="tutorial_mpe_introduction_mpe_instrument"></a>
+The MPEInstrument class</h2>
+<p>The <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> class maintains the state of the currently playing notes according to the MPE specification. An <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> object can have one or more listeners attached and it can broadcast changes to notes as they occur. All you need to do is feed the <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> object the MIDI data and it handles the rest.</p>
+<p>In the <code class="project_code">MainComponent</code> constructor we configure the <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> in <em>legacy mode</em> and set the default pitch bend range to 24 semitones:</p>
+<div class="fragment"><div class="line">        visualiserInstrument.enableLegacyMode (24);</div>
+</div><!-- fragment --><p>This special mode is for backwards compatibility with non-MPE MIDI devices and the instrument will ignore the current MPE zone layout.</p>
+<dl class="section note"><dt>Note</dt><dd>See <a class="el" href="https://docs.juce.com/master/tutorial_mpe_zones.html">Tutorial: Understanding MPE zones</a> for an introduction to more flexible approaches using <em>zones</em> and <em>zone layouts</em>.</dd></dl>
+<p>In the <code class="project_code">MainComponent::handleIncomingMidiMessage()</code> function we pass the MIDI messages on to our <code class="project_code">visualiserInstrument</code> object:</p>
+<div class="fragment"><div class="line">        visualiserInstrument.processNextMidiEvent (message);</div>
+</div><!-- fragment --><p>In this example we are using an <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> object directly as we need it to update our visualiser display. For the purposes of audio synthesis we don't need to create a separate <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> object. The <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> object contains an <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> object that it uses to drive the synthesiser.</p>
+<h2><a class="anchor" id="tutorial_mpe_introduction_mpe_synth"></a>
+The MPESynthesiser class</h2>
+<p>We set our <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> with the same configuration as our <code class="project_code">visualiserInstrument</code> object (in legacy mode with a pitch bend range of 24 semitones):</p>
+<div class="fragment"><div class="line">        synth.enableLegacyMode (24);</div>
+<div class="line">        synth.setVoiceStealingEnabled (<span class="keyword">false</span>);</div>
+</div><!-- fragment --><p>The <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> class can also handle voice stealing for us, but as you can see here, we turn this off. When voice stealing is enabled, the synth will try to take over an existing voice if it runs out of voices and needs to play another note.</p>
+<p>As we have already seen in the <code class="project_code">MainComponent::audioDeviceAboutToStart()</code> function we need to set the <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> object's sample rate to work correctly:</p>
+<div class="fragment"><div class="line">        synth.setCurrentPlaybackSampleRate (sampleRate);</div>
+</div><!-- fragment --><p>And as we have also already seen in the <code class="project_code">MainComponent::audioDeviceIOCallback()</code> function, we simply pass it a <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a> object containing messages that we want it to use to perform its synthesis operation:</p>
+<div class="fragment"><div class="line">        synth.renderNextBlock (buffer, incomingMidi, 0, numSamples);</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_mpe_introduction_mpe_voice"></a>
+The MPESynthesiserVoice class</h2>
+<p>You can generally use the <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> and <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> classes as they are (although both classes can be used as base classes if you need to override some behaviours). The most important class you <em>must</em> override in order to use the <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> class is the <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html" title="Represents an MPE voice that an MPESynthesiser can use to play a sound.">MPESynthesiserVoice</a> class. This actually generates the audio signals from your synthesiser's voices.</p>
+<dl class="section note"><dt>Note</dt><dd>This is similar to the <a class="el" href="https://docs.juce.com/master/classSynthesiserVoice.html" title="Represents a voice that a Synthesiser can use to play a SynthesiserSound.">SynthesiserVoice</a> class that is used with the <a class="el" href="https://docs.juce.com/master/classSynthesiser.html" title="Base class for a musical device that can play sounds.">Synthesiser</a> class, but it is customised to implement the <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> specification. See <a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a>.</dd></dl>
+<p>The code for our voice class is in the <code class="project_code">MPEDemoSynthVoice</code> class of the demo project. Here we implement the <code class="project_code">MPEDemoSynthVoice</code> class to inherit from the <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html" title="Represents an MPE voice that an MPESynthesiser can use to play a sound.">MPESynthesiserVoice</a> class:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MPEDemoSynthVoice : <span class="keyword">public</span> juce::MPESynthesiserVoice</div>
+<div class="line">{</div>
+</div><!-- fragment --><p>We have some member variables to keep track of values to control the level, timbre, and frequency of the tone that we generate. In particular, we use the <a class="el" href="https://docs.juce.com/master/classSmoothedValue.html" title="A utility class for values that need smoothing to avoid audio glitches.">SmoothedValue</a> class, which is really useful for smoothing out discontinuities in the signal that would be otherwise caused by value changes (see <a class="el" href="https://docs.juce.com/master/tutorial_sine_synth.html">Tutorial: Build a sine wave synthesiser</a>).</p>
+<div class="fragment"><div class="line">    juce::SmoothedValue&lt;double&gt; level, timbre, frequency;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">double</span> phase      = 0.0;</div>
+<div class="line">    <span class="keywordtype">double</span> phaseDelta = 0.0;</div>
+<div class="line">    <span class="keywordtype">double</span> tailOff    = 0.0;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// some useful constants</span></div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> maxLevel = 0.05;</div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> maxLevelDb = 31.0;</div>
+<div class="line">    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> smoothingLengthInSeconds = 0.01;</div>
+<div class="line">};</div>
+</div><!-- fragment --><h3><a class="anchor" id="tutorial_mpe_introduction_mpe_voice_starting_stopping"></a>
+Starting and stopping voices</h3>
+<p>The key to using the <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html" title="Represents an MPE voice that an MPESynthesiser can use to play a sound.">MPESynthesiserVoice</a> class is to access its <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html#aea34fcbdb3fa0961f73d5f9a1f34e255">MPESynthesiserVoice::currentlyPlayingNote</a> (protected) <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a> member to access the control information about the note during the various callbacks. For example, we override the <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html#ae10c1cdfb37208b96b56863d47a3a193" title="Called by the MPESynthesiser to let the voice know that a new note has started on it.">MPESynthesiserVoice::noteStarted()</a> function like this:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> noteStarted()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (currentlyPlayingNote.isValid());</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (currentlyPlayingNote.keyState == juce::MPENote::keyDown</div>
+<div class="line">                 || currentlyPlayingNote.keyState == juce::MPENote::keyDownAndSustained);</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get data from the current MPENote</span></div>
+<div class="line">        level    .setTargetValue (currentlyPlayingNote.pressure.asUnsignedFloat());</div>
+<div class="line">        frequency.setTargetValue (currentlyPlayingNote.getFrequencyInHertz());</div>
+<div class="line">        timbre   .setTargetValue (currentlyPlayingNote.timbre.asUnsignedFloat());</div>
+<div class="line"> </div>
+<div class="line">        phase = 0.0;</div>
+<div class="line">        <span class="keyword">auto</span> cyclesPerSample = frequency.getNextValue() / currentSampleRate;</div>
+<div class="line">        phaseDelta = 2.0 * juce::MathConstants&lt;double&gt;::pi * cyclesPerSample;</div>
+<div class="line"> </div>
+<div class="line">        tailOff = 0.0;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The following "five dimensions" are stored in the <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a> object as <a class="el" href="https://docs.juce.com/master/classMPEValue.html" title="This class represents a single value for any of the MPE dimensions of control.">MPEValue</a> objects:</p><ul>
+<li><em>note-on velocity</em>: in the <a class="el" href="https://docs.juce.com/master/structMPENote.html#a9322650db7f2e76cec724746d1a75c1a" title="The velocity (&quot;strike&quot;) of the note-on.">MPENote::noteOnVelocity</a> member</li>
+<li><em>pitch bend</em>: in the <a class="el" href="https://docs.juce.com/master/structMPENote.html#aebfdbfc173bc19cc97b97659c412078f" title="Current per-note pitchbend of the note (in units of MIDI pitchwheel position).">MPENote::pitchbend</a> member</li>
+<li><em>pressure</em>: in the <a class="el" href="https://docs.juce.com/master/structMPENote.html#af04939884198c48da9927e76e4f3ff90" title="Current pressure with which the note is held down.">MPENote::pressure</a> member</li>
+<li><em>timbre</em>: in the <a class="el" href="https://docs.juce.com/master/structMPENote.html#aea15b7b7d5b9c55cbf7d479aa8e46a90" title="Current value of the note&#39;s third expressive dimension, typically encoding some kind of timbre parame...">MPENote::timbre</a> member</li>
+<li><em>note-off velocity</em>: in the <a class="el" href="https://docs.juce.com/master/structMPENote.html#a9e46888c40a2d3eaf4b8c5129b21de6e" title="The release velocity (&quot;lift&quot;) of the note after a note-off has been received.">MPENote::noteOffVelocity</a> member</li>
+</ul>
+<p><a class="el" href="https://docs.juce.com/master/classMPEValue.html" title="This class represents a single value for any of the MPE dimensions of control.">MPEValue</a> objects make it easy to create values from 7-bit or 14-bit MIDI value sources, and to obtain these values as floating-point values in the range 0..1 or -1..+1.</p>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="https://docs.juce.com/master/classMPEValue.html" title="This class represents a single value for any of the MPE dimensions of control.">MPEValue</a> class stores the value internally using the 14-bit range.</dd></dl>
+<p>The <code class="project_code">MainComponent::noteStopped()</code> function triggers the "release" of the note envelope (or stops it immediately, if requested):</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> noteStopped (<span class="keywordtype">bool</span> allowTailOff)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga1f96ab6751237979b907a54f52a7296a">jassert</a> (currentlyPlayingNote.keyState == juce::MPENote::off);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (allowTailOff)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// start a tail-off by setting this flag. The render callback will pick up on</span></div>
+<div class="line">            <span class="comment">// this and do a fade out, calling clearCurrentNote() when it's finished.</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (tailOff == 0.0) <span class="comment">// we only need to begin a tail-off if it's not already doing so - the</span></div>
+<div class="line">                                <span class="comment">// stopNote method could be called more than once.</span></div>
+<div class="line">                tailOff = 1.0;</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// we're being told to stop playing immediately, so reset everything..</span></div>
+<div class="line">            clearCurrentNote();</div>
+<div class="line">            phaseDelta = 0.0;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>This is very similar to <code class="project_code">SineWaveVoice::stopNote()</code> function in <a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a>. There isn't anything MPE-specific here.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the <code class="project_code">MainComponent::noteStopped()</code> function to allow the note-off velocity (<em>lift</em>) to modify the rate of release of the note. Faster lifts should result in a shorter release time. </dd>
+</dl>
+<h3><a class="anchor" id="tutorial_mpe_introduction_mpe_voice_changes"></a>
+Parameter changes</h3>
+<p>There are callbacks that tell us when either the pressure, pitch bend, or timbre have changed for this note:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> notePressureChanged()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        level.setTargetValue (currentlyPlayingNote.pressure.asUnsignedFloat());</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> notePitchbendChanged()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        frequency.setTargetValue (currentlyPlayingNote.getFrequencyInHertz());</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> noteTimbreChanged()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        timbre.setTargetValue (currentlyPlayingNote.timbre.asUnsignedFloat());</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Again, we access the <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html#aea34fcbdb3fa0961f73d5f9a1f34e255">MPESynthesiserVoice::currentlyPlayingNote</a> member to obtain the current value for each of these parameters.</p>
+<h3><a class="anchor" id="tutorial_mpe_introduction_mpe_voice_generating"></a>
+Generating the audio</h3>
+<p>The <code class="project_code">MainComponent::renderNextBlock()</code> actually generates the audio signal, mixing this voice's signal into the buffer that is passed in:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> renderNextBlock (juce::AudioBuffer&lt;float&gt;&amp; outputBuffer,</div>
+<div class="line">                          <span class="keywordtype">int</span> startSample,</div>
+<div class="line">                          <span class="keywordtype">int</span> numSamples)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (phaseDelta != 0.0)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">if</span> (tailOff &gt; 0.0)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">while</span> (--numSamples &gt;= 0)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">auto</span> currentSample = getNextSample() * (float) tailOff;</div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = outputBuffer.getNumChannels(); --i &gt;= 0;)</div>
+<div class="line">                        outputBuffer.addSample (i, startSample, currentSample);</div>
+<div class="line"> </div>
+<div class="line">                    ++startSample;</div>
+<div class="line"> </div>
+<div class="line">                    tailOff *= 0.99;</div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">if</span> (tailOff &lt;= 0.005)</div>
+<div class="line">                    {</div>
+<div class="line">                        clearCurrentNote();</div>
+<div class="line"> </div>
+<div class="line">                        phaseDelta = 0.0;</div>
+<div class="line">                        <span class="keywordflow">break</span>;</div>
+<div class="line">                    }</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">while</span> (--numSamples &gt;= 0)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keyword">auto</span> currentSample = getNextSample();</div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = outputBuffer.getNumChannels(); --i &gt;= 0;)</div>
+<div class="line">                        outputBuffer.addSample (i, startSample, currentSample);</div>
+<div class="line"> </div>
+<div class="line">                    ++startSample;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>It calls <code class="project_code">MainComponent::getNextSample()</code> to generate the waveform:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">float</span> getNextSample() noexcept</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> levelDb = (level.getNextValue() - 1.0) * maxLevelDb;</div>
+<div class="line">        <span class="keyword">auto</span> amplitude = std::pow (10.0f, 0.05f * levelDb) * maxLevel;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// timbre is used to blend between a sine and a square.</span></div>
+<div class="line">        <span class="keyword">auto</span> f1 = std::sin (phase);</div>
+<div class="line">        <span class="keyword">auto</span> f2 = std::copysign (1.0, f1);</div>
+<div class="line">        <span class="keyword">auto</span> a2 = timbre.getNextValue();</div>
+<div class="line">        <span class="keyword">auto</span> a1 = 1.0 - a2;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> nextSample = float (amplitude * ((a1 * f1) + (a2 * f2)));</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> cyclesPerSample = frequency.getNextValue() / currentSampleRate;</div>
+<div class="line">        phaseDelta = 2.0 * juce::MathConstants&lt;double&gt;::pi * cyclesPerSample;</div>
+<div class="line">        phase = std::fmod (phase + phaseDelta, 2.0 * juce::MathConstants&lt;double&gt;::pi);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> nextSample;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p> endcode</p>
+<p>This simply cross fades between a sine wave and a (non-bandlimited) square wave, based on the value of the <em>timbre</em> parameter.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the <code class="project_code">MPEDemoSynthVoice</code> class to crossfade between two sine waves, one octave appart, in response to the <em>timbre</em> parameter. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_mpe_introduction_summary"></a>
+Summary</h1>
+<p>In this tutorial we have introduced some of the <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> based classes in JUCE. You should now know:</p>
+<ul>
+<li>What <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> is.</li>
+<li>That <a href="https://support.roli.com/article/what-is-mpe/">MPE</a> compatible devices will allocate each note to their own MIDI channels.</li>
+<li>How the <a class="el" href="https://docs.juce.com/master/structMPENote.html" title="This struct represents a playing MPE note.">MPENote</a> class stores information about a note including its MIDI channel, the original note number, velocity, pitch bend, and so on.</li>
+<li>That the <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> class maintains the state of the currently playing notes.</li>
+<li>That the <a class="el" href="https://docs.juce.com/master/classMPESynthesiser.html" title="Base class for an MPE-compatible musical device that can play sounds.">MPESynthesiser</a> class contains an <a class="el" href="https://docs.juce.com/master/classMPEInstrument.html" title="This class represents an instrument handling MPE.">MPEInstrument</a> object that it uses to drive the synthesiser.</li>
+<li>That you must implement a class that inherits from the <a class="el" href="https://docs.juce.com/master/classMPESynthesiserVoice.html" title="Represents an MPE voice that an MPESynthesiser can use to play a sound.">MPESynthesiserVoice</a> class to implement your synthesiser's audio code.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_mpe_introduction_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_mpe_zones.html">Tutorial: Understanding MPE zones</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_handling_midi_events.html">Tutorial: Handling MIDI events</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_midi_message.html">Tutorial: Create MIDI data</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Build a multi-polyphonic synthesiser_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

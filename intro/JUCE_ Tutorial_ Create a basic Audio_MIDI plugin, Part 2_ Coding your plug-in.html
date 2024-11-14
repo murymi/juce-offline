@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0060)https://docs.juce.com/master/tutorial_code_basic_plugin.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Create a basic Audio/MIDI plugin, Part 2: Coding your plug-in</title>
+<link href="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/css">
+<script src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Create a basic Audio/MIDI plugin, Part 2: Coding your plug-in</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_orientation">Orientation</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_gui_control">Create a simple GUI control</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_processor">Pass control information to the processor class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_midi">Modify MIDI notes</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_code_basic_plugin.html#tutorial_code_basic_plugin_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>This tutorial follows on from <a class="el" href="https://docs.juce.com/master/tutorial_create_projucer_basic_plugin.html">Tutorial: Create a basic Audio/MIDI plugin, Part 1: Setting up</a>, and will talk through starting from a clean project and ending up with a fully functioning, if somewhat simple, plug-in that can react to incoming MIDI notes.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Plugin Format:</span> VST , VST3 , AU , Standalone</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classAudioProcessorEditor.html" title="Base class for the component that acts as the GUI for an AudioProcessor.">AudioProcessorEditor</a>, <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a>, <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a>, <a class="el" href="https://docs.juce.com/master/classMidiMessage.html" title="Encapsulates a MIDI message.">MidiMessage</a>, <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a></p>
+<h1><a class="anchor" id="tutorial_code_basic_plugin_getting_started"></a>
+Getting started</h1>
+<p>Launch the Projucer and create a new audio plug-in project with the name <b class="onscreen_text">TutorialPlugin</b> . If you don't remember how to do that, please refer to <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_code_basic_plugin_orientation"></a>
+Orientation</h1>
+<p>A newly-created audio plug-in project contains two main classes: <code class="project_code">PluginProcessor</code> handles the audio and MIDI IO and processing logic, and <code class="project_code">PluginEditor</code> handles any on screen GUI controls or visualisations.</p>
+<p>When passing information between these two it is best to consider the processor as the parent of the editor. There is only one plug-in processor whereas you can create multiple editors. Each editor has a reference to the processor such that it can edit or access information and parameters from the audio thread. It is the editor’s job to set and get information on this processor thread and not the other way around.</p>
+<p>The main function we will be editing in the <code class="filename">PluginProcessor.cpp</code> file is the <code class="project_code">processBlock()</code> method. This receives and produces both audio and MIDI data to the plug-in output. The main function we will change in the <code class="filename">PluginEditor.cpp</code> file is the constructor, where we initialise and set up our window and GUI objects, and also the <code class="project_code">paint()</code> method where we can draw extra controls and custom GUI components.</p>
+<p>The editor constructor currently has one method call — <code class="project_code">setSize (400, 300)</code> — which sets the size of our plug-in window. Let's make a smaller window of <code class="project_code">(200, 200)</code> for this simple application.</p>
+<div class="fragment"><div class="line">TutorialPluginAudioProcessorEditor::TutorialPluginAudioProcessorEditor (TutorialPluginAudioProcessor&amp; p)</div>
+<div class="line">    : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorEditor.html">AudioProcessorEditor</a> (&amp;p), audioProcessor (p)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// This is where our plugin’s editor size is set.</span></div>
+<div class="line">    setSize (200, 200);</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassAudioProcessorEditor_html"><div class="ttname"><a href="https://docs.juce.com/master/classAudioProcessorEditor.html">AudioProcessorEditor</a></div><div class="ttdoc">Base class for the component that acts as the GUI for an AudioProcessor.</div><div class="ttdef"><b>Definition</b> juce_AudioProcessorEditor.h:55</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_code_basic_plugin_gui_control"></a>
+Create a simple GUI control</h2>
+<p>We will create a slider object to change the volume of MIDI messages as they come in.</p>
+<p>Create a new <a class="el" href="https://docs.juce.com/master/classSlider.html" title="A slider control for changing a value.">Slider</a> object in the Editor header file called <code class="project_code">midiVolume</code> <span class="comment">[1]</span> :</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>TutorialPluginAudioProcessorEditor : <span class="keyword">public</span> juce::AudioProcessorEditor</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    TutorialPluginAudioProcessorEditor (TutorialPluginAudioProcessor&amp;);</div>
+<div class="line">    ~TutorialPluginAudioProcessorEditor();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//===================================================================</span></div>
+<div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp;) <span class="keyword">override</span>;</div>
+<div class="line">    <span class="keywordtype">void</span> resized() <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">// This reference is provided as a quick way for your editor to</span></div>
+<div class="line">    <span class="comment">// access the processor object that created it.</span></div>
+<div class="line">    TutorialPluginAudioProcessor&amp; audioProcessor;</div>
+<div class="line"> </div>
+<div class="line">    juce::Slider midiVolume; <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (TutorialPluginAudioProcessorEditor)</div>
+<div class="line">};</div>
+<div class="ttc" id="agroup__juce__core-system_html_ga851b02724a8158a7f746c66b5758b3dd"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a></div><div class="ttdeci">#define JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(className)</div><div class="ttdoc">This is a shorthand way of writing both a JUCE_DECLARE_NON_COPYABLE and JUCE_LEAK_DETECTOR macro for ...</div><div class="ttdef"><b>Definition</b> juce_PlatformDefs.h:262</div></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The <a class="el" href="https://docs.juce.com/master/classAudioProcessorEditor.html" title="Base class for the component that acts as the GUI for an AudioProcessor.">AudioProcessorEditor</a> plays the same role in an Audio Plug-in that the <em>main content component</em> has in a standalone app. See <a class="el" href="https://docs.juce.com/master/tutorial_main_component.html">Tutorial: The main component</a>.</dd></dl>
+<p>We can set the properties of this slider with various functions in the editor constructor. We must also call <code class="project_code">addAndMakeVisible (&amp;midiVolume)</code> to attach our slider to the editor. There are many different slider styles and parameters to use and experiment with in your own project. For this tutorial adjust the slider parameters such that your editor constructor looks like this:</p>
+<div class="fragment"><div class="line">TutorialPluginAudioProcessorEditor::TutorialPluginAudioProcessorEditor (TutorialPluginAudioProcessor&amp; p)</div>
+<div class="line">    : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorEditor.html">AudioProcessorEditor</a> (&amp;p), audioProcessor (p)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// This is where our plugin’s editor size is set.</span></div>
+<div class="line">    setSize (200, 200);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// these define the parameters of our slider object</span></div>
+<div class="line">    midiVolume.setSliderStyle (juce::Slider::LinearBarVertical);</div>
+<div class="line">    midiVolume.setRange (0.0, 127.0, 1.0);</div>
+<div class="line">    midiVolume.setTextBoxStyle (juce::Slider::NoTextBox, <span class="keyword">false</span>, 90, 0);</div>
+<div class="line">    midiVolume.setPopupDisplayEnabled (<span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">this</span>);</div>
+<div class="line">    midiVolume.setTextValueSuffix (<span class="stringliteral">" Volume"</span>);</div>
+<div class="line">    midiVolume.setValue(1.0);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// this function adds the slider to the editor</span></div>
+<div class="line">    addAndMakeVisible (&amp;midiVolume);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>JUCE windows have a method called <code class="project_code">resized()</code> that is called once at the initialisation of the window and every time the window is resized by the user (if resizing is enabled). This is a good place to set the size and position of our sliders (and other GUI components) so they can be positioned relative to the window bounds.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> TutorialPluginAudioProcessorEditor::resized()</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// sets the position and size of the slider with arguments (x, y, width, height)</span></div>
+<div class="line">    midiVolume.setBounds (40, 30, 20, getHeight() - 60);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Lets also change the <code class="project_code">"Hello World"</code> text to <code class="project_code">"Midi Volume"</code> in the <code class="project_code">paint()</code> function and move it to the top. This function is where all custom shapes and GUI elements are drawn to the window.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> TutorialPluginAudioProcessorEditor::paint (juce::Graphics&amp; g)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// fill the whole window white</span></div>
+<div class="line">    g.fillAll (juce::Colours::white);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// set the current drawing colour to black</span></div>
+<div class="line">    g.setColour (juce::Colours::black);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// set the font size and draw text to the screen</span></div>
+<div class="line">    g.setFont (15.0f);</div>
+<div class="line"> </div>
+<div class="line">    g.drawFittedText (<span class="stringliteral">"Midi Volume"</span>, 0, 0, getWidth(), 30, juce::Justification::centred, 1);</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>You can learn more about Components and their methods <code class="project_code">paint()</code> and <code class="project_code">resized()</code> in <a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a> and <a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a>.</dd></dl>
+<p>Running this program should create a plug-in that looks like this in the host editor:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/tutorial_code_basic_plugin_1.png" alt="">
+</div>
+<h2><a class="anchor" id="tutorial_code_basic_plugin_processor"></a>
+Pass control information to the processor class</h2>
+<p>We now have an control that we can adjust, but that doesn’t actually control anything. We need to intercept the incoming MIDI data and replace the note on volume with the volume of our slider, and this is done in the processor. In order to get the slider value to control the MIDI effect on the processor thread we need to create a new variable on the processor thread that we can use the slider to change.</p>
+<p>Create a new public float variable called <code class="project_code">noteOnVel</code> in the processor class header. This is the variable that we will set with the slider.</p>
+<div class="fragment"><div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keywordtype">float</span> noteOnVel;</div>
+</div><!-- fragment --><p>We need to set this value whenever the slider is changed. To do this we use a slider listener callback function. Any class can inherit slider listener functionality but for the purposes of this tutorial we will add this functionality to the editor class.</p>
+<dl class="section note"><dt>Note</dt><dd>For a more in-depth description of listeners please see <a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a>.</dd></dl>
+<p>Add the inheritance <span class="comment">[2]</span> and the default callback function <span class="comment">[3]</span> so the editor class looks like this:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>TutorialPluginAudioProcessorEditor : <span class="keyword">public</span> juce::AudioProcessorEditor,</div>
+<div class="line">                                           <span class="keyword">private</span> juce::Slider::Listener     <span class="comment">// [2]</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    TutorialPluginAudioProcessorEditor (TutorialPluginAudioProcessor&amp;);</div>
+<div class="line">    ~TutorialPluginAudioProcessorEditor();</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==================================================================</span></div>
+<div class="line">    <span class="comment">// This is just a standard Juce paint method...</span></div>
+<div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp; g) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> resized() <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keywordtype">void</span> sliderValueChanged (juce::Slider* <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9">slider</a>) <span class="keyword">override</span>; <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==================================================================</span></div>
+<div class="line">    <span class="comment">// This reference is provided as a quick way for your editor to</span></div>
+<div class="line">    <span class="comment">// access the processor object that created it.</span></div>
+<div class="line">    TutorialPluginAudioProcessor&amp; audioProcessor;</div>
+<div class="line"> </div>
+<div class="line">    juce::Slider midiVolume;</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (TutorialPluginAudioProcessorEditor)</div>
+<div class="line">};</div>
+<div class="ttc" id="agroup__juce__gui__basics-accessibility_html_ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9">AccessibilityRole::slider</a></div><div class="ttdeci">@ slider</div></div>
+</div><!-- fragment --><p>Now we add the slider listener to our volume slider in the editor constructor:</p>
+<div class="fragment"><div class="line">TutorialPluginAudioProcessorEditor::TutorialPluginAudioProcessorEditor (TutorialPluginAudioProcessor&amp; p)</div>
+<div class="line">    : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorEditor.html">AudioProcessorEditor</a> (&amp;p), audioProcessor (p)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// ...</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// add the listener to the slider</span></div>
+<div class="line">    midiVolume.addListener (<span class="keyword">this</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>...and insert the listener function that sets our public processor volume variable:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> TutorialPluginAudioProcessorEditor::sliderValueChanged (juce::Slider* <a class="code hl_enumvalue" href="https://docs.juce.com/master/group__juce__gui__basics-accessibility.html#ggaf1349587ab6cac7e882cd63e1976682ca10bf08f0bbd6689475be65b4ae441bd9">slider</a>)</div>
+<div class="line">{</div>
+<div class="line">    audioProcessor.noteOnVel = midiVolume.getValue();</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>We now have a slider that controls our variable in the processor class. We now need to use this processor variable to alter our MIDI data.</p>
+<h2><a class="anchor" id="tutorial_code_basic_plugin_midi"></a>
+Modify MIDI notes</h2>
+<p>The <code class="project_code">processBlock()</code> method in the processor class receives and produces both MIDI and audio buffers in real time. We are going to iterate through the midi buffer to intercept signals of <code class="project_code">noteOn</code> type and set their velocity to the value of our slider.</p>
+<p>The MIDI messages are all passed through this function. To alter the MIDI as it passes through we create a new <a class="el" href="https://docs.juce.com/master/classMidiBuffer.html" title="Holds a sequence of time-stamped midi events.">MidiBuffer</a> object called <code class="project_code">processedMidi</code> and append our modified MIDI signals to this new buffer before swapping it with the original at the end (this avoids direct modification problems). Remove the current code in the <code class="project_code">processBlock()</code> method (this handles the audio buffer, which we do not need for this tutorial) and replace it with the code below.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> TutorialPluginAudioProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)</div>
+<div class="line">{</div>
+<div class="line">    buffer.clear();</div>
+<div class="line"> </div>
+<div class="line">    juce::MidiBuffer processedMidi;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> metadata : midiMessages)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> message = metadata.getMessage();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> time = metadata.samplePosition;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (message.isNoteOn())</div>
+<div class="line">        {</div>
+<div class="line">            message = juce::MidiMessage::noteOn (message.getChannel(),</div>
+<div class="line">                                                 message.getNoteNumber(),</div>
+<div class="line">                                                 (juce::uint8) noteOnVel);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        processedMidi.addEvent (message, time);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    midiMessages.swapWith (processedMidi);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Run the plug-in in the host environment and you will see that all MIDI note on signals are coming through our plug-in have the value set with our slider. The <code class="code">if()</code> statement above can be also used to modify and apply various transformations and effects to other types of incoming MIDI signals. With these methods you can build more complex effects and GUIs.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Experiment with other GUI components such as buttons and sliders, check the JUCE DemoRunner for a taste of JUCE’s capabilities, and refer back to the API documentation for more information. </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>Generating audio using the incoming MIDI notes will be covered in a future tutorial (see <a class="el" href="https://docs.juce.com/master/tutorial_synth_using_midi_input.html">Tutorial: Build a MIDI synthesiser</a>). For now, please have a look at the <code class="filename">AudioPluginDemo</code> , which is located in <code class="filename">JUCE/examples/Plugins</code> .</dd></dl>
+<h1><a class="anchor" id="tutorial_code_basic_plugin_summary"></a>
+Summary</h1>
+<p>After reading this tutorial, you should be able to:</p>
+<ul>
+<li>Create an audio plug-in with a basic GUI,</li>
+<li>Let your plug-in receive MIDI data.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_code_basic_plugin_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_create_projucer_basic_plugin.html">Tutorial: Create a basic Audio/MIDI plugin, Part 1: Setting up</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_plugin_examples.html">Tutorial: Plugin examples</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_bus_layouts.html">Tutorial: Configuring the right bus layouts for your plugins</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_main_component.html">Tutorial: The main component</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_graphics_class.html">Tutorial: The Graphics class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_component_parents_children.html">Tutorial: Parent and child components</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Create a basic Audio_MIDI plugin, Part 2_ Coding your plug-in_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

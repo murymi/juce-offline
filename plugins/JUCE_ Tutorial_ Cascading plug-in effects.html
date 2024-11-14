@@ -1,0 +1,779 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0064)https://docs.juce.com/master/tutorial_audio_processor_graph.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: Cascading plug-in effects</title>
+<link href="./JUCE_ Tutorial_ Cascading plug-in effects_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ Cascading plug-in effects_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ Cascading plug-in effects_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ Cascading plug-in effects_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ Cascading plug-in effects_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ Cascading plug-in effects_files/css">
+<script src="./JUCE_ Tutorial_ Cascading plug-in effects_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: Cascading plug-in effects</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_setting_audio_processor_graph">Setting up the AudioProcessorGraph</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_implementing_different_processors">Implementing different processors</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_implementing_oscillator">Implementing an oscillator</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_implementing_gain_control">Implementing a gain control</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_implementing_filter">Implementing a filter</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_connecting_graph_nodes">Connecting graph nodes together</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_convert_plugin_application">Convert the plugin into an application</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_audio_processor_graph.html#tutorial_audio_processor_graph_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Create your own channel strip by learning how to daisy chain audio processors or plugins using an <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>. Learn how to use the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> in both a plugin and standalone application context.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a>, <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a>, <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>, <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph_1_1AudioGraphIOProcessor.html" title="A special type of AudioProcessor that can live inside an AudioProcessorGraph in order to use the audi...">AudioProcessorGraph::AudioGraphIOProcessor</a>, <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph_1_1Node.html" title="Represents one of the nodes, or processors, in an AudioProcessorGraph.">AudioProcessorGraph::Node</a>, <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a></p>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/AudioProcessorGraphTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/AudioProcessorGraphTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_demo_project"></a>
+The demo project</h1>
+<p>The demo project simulates a channel strip where different audio processors can be applied in series. There are three available slots that can be individually bypassed and three different processors including an oscillator, a gain control and a filter that can be chosen from. The plugin applies processing on incoming audio and propagates the modified signal to the output.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ Cascading plug-in effects_files/tutorial_audio_processor_graph_screenshot1.png" alt="">
+<div class="caption">
+The channel strip plugin window</div></div>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_setting_audio_processor_graph"></a>
+Setting up the AudioProcessorGraph</h1>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> is a special type of <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> that allows us to connect several <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> objects together as nodes in a graph and play back the result of the combined processing. In order to wire-up graph nodes together, we have to add connections between channels of nodes in the order we wish to process the audio signal.</p>
+<p>The <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> class also offers special node types for input and output handling of audio and midi signals within the graph. An example graph of the channel strip would look something like this when connected properly:</p>
+<div class="dotgraph">
+<iframe scrolling="no" frameborder="0" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/dot_inline_dotgraph_7.svg" width="264" height="480"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p>Let's start by setting up the main <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> to receive incoming signals and send them back to the corresponding output unprocessed.</p>
+<p>In order to reduce the character count for nested classes used frequently in this tutorial, we first declare a <code class="code">using</code> for the AudioGraphIOProcessor class and the Node class in the <code class="project_code">TutorialProcessor</code> class as follows:</p>
+<div class="fragment"><div class="line">    <span class="keyword">using </span>AudioGraphIOProcessor = juce::AudioProcessorGraph::AudioGraphIOProcessor;</div>
+<div class="line">    <span class="keyword">using </span>Node = juce::AudioProcessorGraph::Node;</div>
+</div><!-- fragment --><p>Then we declare the following private member variables using the shortened version of class names like so:</p>
+<div class="fragment"><div class="line">    std::unique_ptr&lt;juce::AudioProcessorGraph&gt; mainProcessor;</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">    Node::Ptr audioInputNode;</div>
+<div class="line">    Node::Ptr audioOutputNode;</div>
+<div class="line">    Node::Ptr midiInputNode;</div>
+<div class="line">    Node::Ptr midiOutputNode;</div>
+</div><!-- fragment --><p>Here we create pointers to the main <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> as well as the input and output processor nodes which will be instantiated later on within the graph.</p>
+<p>Next, in the <code class="project_code">TutorialProcessor</code> contructor we set the default bus properties for the plugin and instantiate the main <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> as shown here:</p>
+<div class="fragment"><div class="line">    TutorialProcessor()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a> (BusesProperties().withInput  (<span class="stringliteral">"Input"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), true)</div>
+<div class="line">                                           .withOutput (<span class="stringliteral">"Output"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), true)),</div>
+<div class="line">          mainProcessor  (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorGraph.html">AudioProcessorGraph</a>()),</div>
+</div><!-- fragment --><p>Since we are dealing with a plugin, we need to implement the isBusesLayoutSupported() callback to inform the plugin host or DAW about which channel sets we support. In this example we decide to only support mono-to-mono and stereo-to-stereo configurations like this:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> isBusesLayoutSupported (<span class="keyword">const</span> BusesLayout&amp; layouts)<span class="keyword"> const override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (layouts.getMainInputChannelSet()  == juce::AudioChannelSet::disabled()</div>
+<div class="line">         || layouts.getMainOutputChannelSet() == juce::AudioChannelSet::disabled())</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()</div>
+<div class="line">         &amp;&amp; layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())</div>
+<div class="line">            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> layouts.getMainInputChannelSet() == layouts.getMainOutputChannelSet();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>If you want to learn more about bus layouts of plugins, please refer to <a class="el" href="https://docs.juce.com/master/tutorial_audio_bus_layouts.html">Tutorial: Configuring the right bus layouts for your plugins</a>.</dd></dl>
+<p>For the <code class="project_code">TutorialProcessor</code> to be able to process audio through the graph provided, we have to override the three main functions of the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> class that perform signal processing namely the prepareToPlay(), releaseResources() and processBlock() functions and call the same respective functions on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>.</p>
+<p>Let's start with the prepareToPlay() function. First we inform the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> on the number of I/O channels, the sample rate and the number of samples per block by calling the setPlayConfigDetails() function like follows:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> sampleRate, <span class="keywordtype">int</span> samplesPerBlock)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        mainProcessor-&gt;setPlayConfigDetails (getMainBusNumInputChannels(),</div>
+<div class="line">                                             getMainBusNumOutputChannels(),</div>
+<div class="line">                                             sampleRate, samplesPerBlock);</div>
+<div class="line"> </div>
+<div class="line">        mainProcessor-&gt;prepareToPlay (sampleRate, samplesPerBlock);</div>
+<div class="line"> </div>
+<div class="line">        initialiseGraph();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>We then call the prepareToPlay() function on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> with the same information and call the <code class="project_code">initialiseGraph()</code> helper function which we define later on to create and connect the nodes in the graph.</p>
+<p>The releaseResources() function is self-explanatory and simply calls the same function on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> instance:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> releaseResources()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        mainProcessor-&gt;releaseResources();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Finally in the processBlock() function, we clear the samples contained in any additional channels that may contain garbage data just in case and call the <code class="project_code">updateGraph()</code> helper function later defined that will rebuild the graph if the channel strip configuration was changed. The processBlock() function is eventually called on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> at the end of the function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioSampleBuffer&amp; buffer, juce::MidiBuffer&amp; midiMessages)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = getTotalNumInputChannels(); i &lt; getTotalNumOutputChannels(); ++i)</div>
+<div class="line">            buffer.clear (i, 0, buffer.getNumSamples());</div>
+<div class="line"> </div>
+<div class="line">        updateGraph();</div>
+<div class="line"> </div>
+<div class="line">        mainProcessor-&gt;processBlock (buffer, midiMessages);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <code class="project_code">initialiseGraph()</code> function called earlier in the prepareToPlay() callback starts by clearing the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> of any nodes and connections that were previously present. This also takes care of deleting the corresponding <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> instances associated to the deleted nodes in the graph. We then proceed to instantiate the AudioGraphIOProcessor objects for the graph I/O and add the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> objects as nodes in the graph.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> initialiseGraph()</div>
+<div class="line">    {</div>
+<div class="line">        mainProcessor-&gt;clear();</div>
+<div class="line"> </div>
+<div class="line">        audioInputNode  = mainProcessor-&gt;addNode (std::make_unique&lt;AudioGraphIOProcessor&gt; (AudioGraphIOProcessor::audioInputNode));</div>
+<div class="line">        audioOutputNode = mainProcessor-&gt;addNode (std::make_unique&lt;AudioGraphIOProcessor&gt; (AudioGraphIOProcessor::audioOutputNode));</div>
+<div class="line">        midiInputNode   = mainProcessor-&gt;addNode (std::make_unique&lt;AudioGraphIOProcessor&gt; (AudioGraphIOProcessor::midiInputNode));</div>
+<div class="line">        midiOutputNode  = mainProcessor-&gt;addNode (std::make_unique&lt;AudioGraphIOProcessor&gt; (AudioGraphIOProcessor::midiOutputNode));</div>
+<div class="line"> </div>
+<div class="line">        connectAudioNodes();</div>
+<div class="line">        connectMidiNodes();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>We still have to add connections between the newly-created nodes in the graph to propagate the audio/midi data and this is performed with the following helper functions:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> connectAudioNodes()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> channel = 0; channel &lt; 2; ++channel)</div>
+<div class="line">            mainProcessor-&gt;addConnection ({ { audioInputNode-&gt;nodeID,  channel },</div>
+<div class="line">                                            { audioOutputNode-&gt;nodeID, channel } });</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we call the addConnection() function on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> instance by passing the source and destination nodes we wish to connect in the form of a Connection object. These require a nodeID and a channel index for building the appropriate connections and the whole process is repeated for all the required channels.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> connectMidiNodes()</div>
+<div class="line">    {</div>
+<div class="line">        mainProcessor-&gt;addConnection ({ { midiInputNode-&gt;nodeID,  juce::AudioProcessorGraph::midiChannelIndex },</div>
+<div class="line">                                        { midiOutputNode-&gt;nodeID, juce::AudioProcessorGraph::midiChannelIndex } });</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The same is performed on the midi I/O nodes with the exception of the channel index argument. Since the midi signals are not sent through regular audio channels, we have to supply a special channel index specified as an enum in the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> class.</p>
+<p>At this stage of the tutorial, we should be able to hear the signal pass through the graph without being altered.</p>
+<dl class="section warning"><dt>Warning</dt><dd>Beware of screaming feedback when testing the plugin with built-in inputs and outputs. You can avoid this problem by using headphones.</dd></dl>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_implementing_different_processors"></a>
+Implementing different processors</h1>
+<p>In this part of the tutorial, we create different processors that we can use within our channel strip plugin to alter the incoming audio signal. Feel free to create additional processors or customise the following ones to your taste.</p>
+<p>In order to avoid repeated code for the different processors we want to create, let's start by declaring an <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> base class that will be inherited by the individual processors and override the necessary functions only once for simplicity's sake.</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>ProcessorBase  : <span class="keyword">public</span> juce::AudioProcessor</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    ProcessorBase()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a> (BusesProperties().withInput (<span class="stringliteral">"Input"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo())</div>
+<div class="line">                                           .withOutput (<span class="stringliteral">"Output"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo()))</div>
+<div class="line">    {}</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span>, <span class="keywordtype">int</span>)<span class="keyword"> override </span>{}</div>
+<div class="line">    <span class="keywordtype">void</span> releaseResources()<span class="keyword"> override </span>{}</div>
+<div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioSampleBuffer&amp;, juce::MidiBuffer&amp;)<span class="keyword"> override </span>{}</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::AudioProcessorEditor* createEditor()<span class="keyword"> override          </span>{ <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line">    <span class="keywordtype">bool</span> hasEditor()<span class="keyword"> const override                              </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keyword">const</span> juce::String getName()<span class="keyword"> const override                  </span>{ <span class="keywordflow">return</span> {}; }</div>
+<div class="line">    <span class="keywordtype">bool</span> acceptsMidi()<span class="keyword"> const override                            </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line">    <span class="keywordtype">bool</span> producesMidi()<span class="keyword"> const override                           </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line">    <span class="keywordtype">double</span> getTailLengthSeconds()<span class="keyword"> const override                 </span>{ <span class="keywordflow">return</span> 0; }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keywordtype">int</span> getNumPrograms()<span class="keyword"> override                                </span>{ <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    <span class="keywordtype">int</span> getCurrentProgram()<span class="keyword"> override                             </span>{ <span class="keywordflow">return</span> 0; }</div>
+<div class="line">    <span class="keywordtype">void</span> setCurrentProgram (<span class="keywordtype">int</span>)<span class="keyword"> override                        </span>{}</div>
+<div class="line">    <span class="keyword">const</span> juce::String getProgramName (<span class="keywordtype">int</span>)<span class="keyword"> override             </span>{ <span class="keywordflow">return</span> {}; }</div>
+<div class="line">    <span class="keywordtype">void</span> changeProgramName (<span class="keywordtype">int</span>, <span class="keyword">const</span> juce::String&amp;)<span class="keyword"> override   </span>{}</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <span class="keywordtype">void</span> getStateInformation (juce::MemoryBlock&amp;)<span class="keyword"> override       </span>{}</div>
+<div class="line">    <span class="keywordtype">void</span> setStateInformation (<span class="keyword">const</span> <span class="keywordtype">void</span>*, <span class="keywordtype">int</span>)<span class="keyword"> override         </span>{}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (ProcessorBase)</div>
+<div class="line">};</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The following three processors will make use of the DSP module to facilitate implementation and if you want to learn more about DSP you can refer to <a class="el" href="https://docs.juce.com/master/tutorial_dsp_introduction.html">Tutorial: Introduction to DSP</a> for a more in-depth explanation.</dd></dl>
+<h2><a class="anchor" id="tutorial_audio_processor_graph_implementing_oscillator"></a>
+Implementing an oscillator</h2>
+<p>The first processor is a simple oscillator that generates a constant sine wave tone at 440Hz.</p>
+<p>We derive the <code class="project_code">OscillatorProcessor</code> class from the previously-defined <code class="project_code">ProcessorBase</code> , override the getName() function to provide a meaningful name and declare a <a class="el" href="https://docs.juce.com/master/classdsp_1_1Oscillator.html" title="Generates a signal based on a user-supplied function.">dsp::Oscillator</a> object from the DSP module:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>OscillatorProcessor  : <span class="keyword">public</span> ProcessorBase</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line">    <span class="keyword">const</span> juce::String getName()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">"Oscillator"</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::dsp::Oscillator&lt;float&gt; oscillator;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>In the constructor, we set the frequency and the waveform of the oscillator by calling respectively the setFrequency() and initialise() functions on the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Oscillator.html" title="Generates a signal based on a user-supplied function.">dsp::Oscillator</a> object as follows:</p>
+<div class="fragment"><div class="line">    OscillatorProcessor()</div>
+<div class="line">    {</div>
+<div class="line">        oscillator.setFrequency (440.0f);</div>
+<div class="line">        oscillator.initialise ([] (<span class="keywordtype">float</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>) { <span class="keywordflow">return</span> std::sin (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>); });</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the prepareToPlay() function, we create a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html" title="This structure is passed into a DSP algorithm&#39;s prepare() method, and contains information about vari...">dsp::ProcessSpec</a> object to describe the sample rate and number of samples per block to the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Oscillator.html" title="Generates a signal based on a user-supplied function.">dsp::Oscillator</a> object and pass the specifications by calling the prepare() function on it like so:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> sampleRate, <span class="keywordtype">int</span> samplesPerBlock)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::dsp::ProcessSpec spec { sampleRate, <span class="keyword">static_cast&lt;</span>juce::uint32<span class="keyword">&gt;</span> (samplesPerBlock), 2 };</div>
+<div class="line">        oscillator.prepare (spec);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, in the processBlock() function we create a <a class="el" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html" title="Minimal and lightweight data-structure which contains a list of pointers to channels containing some ...">dsp::AudioBlock</a> object from the AudioSampleBuffer passed as an argument and declare the processing context from it as a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html" title="Contains context information that is passed into an algorithm&#39;s process method.">dsp::ProcessContextReplacing</a> object that is subsequently passed to the process() function of the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Oscillator.html" title="Generates a signal based on a user-supplied function.">dsp::Oscillator</a> object as shown here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioSampleBuffer&amp; buffer, juce::MidiBuffer&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::dsp::AudioBlock&lt;float&gt; block (buffer);</div>
+<div class="line">        juce::dsp::ProcessContextReplacing&lt;float&gt; context (block);</div>
+<div class="line">        oscillator.process (context);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Finally, we can reset the state of the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Oscillator.html" title="Generates a signal based on a user-supplied function.">dsp::Oscillator</a> object by overriding the reset() function of the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> and calling the same function onto it:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        oscillator.reset();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>We now have an oscillator that we can use in our channel strip plugin.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the initialise() function of the oscillator to produce a different waveform and change the target frequency. </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_audio_processor_graph_implementing_gain_control"></a>
+Implementing a gain control</h2>
+<p>The second processor is a simple gain control that attenuates the incoming signal by -6dB.</p>
+<p>We derive the <code class="project_code">GainProcessor</code> class from the previously-defined <code class="project_code">ProcessorBase</code> , override the getName() function to provide a meaningful name and declare a <a class="el" href="https://docs.juce.com/master/classdsp_1_1Gain.html" title="Applies a gain to audio samples as single samples or AudioBlocks.">dsp::Gain</a> object from the DSP module:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>GainProcessor  : <span class="keyword">public</span> ProcessorBase</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line">    <span class="keyword">const</span> juce::String getName()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">"Gain"</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::dsp::Gain&lt;float&gt; gain;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>In the constructor, we set the gain in decibels of the gain control by calling the setGainDecibels() function on the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Gain.html" title="Applies a gain to audio samples as single samples or AudioBlocks.">dsp::Gain</a> object as follows:</p>
+<div class="fragment"><div class="line">    GainProcessor()</div>
+<div class="line">    {</div>
+<div class="line">        gain.setGainDecibels (-6.0f);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the prepareToPlay() function, we create a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html" title="This structure is passed into a DSP algorithm&#39;s prepare() method, and contains information about vari...">dsp::ProcessSpec</a> object to describe the sample rate, number of samples per block and number of channels to the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Gain.html" title="Applies a gain to audio samples as single samples or AudioBlocks.">dsp::Gain</a> object and pass the specifications by calling the prepare() function on it like so:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> sampleRate, <span class="keywordtype">int</span> samplesPerBlock)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::dsp::ProcessSpec spec { sampleRate, <span class="keyword">static_cast&lt;</span>juce::uint32<span class="keyword">&gt;</span> (samplesPerBlock), 2 };</div>
+<div class="line">        gain.prepare (spec);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, in the processBlock() function we create a <a class="el" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html" title="Minimal and lightweight data-structure which contains a list of pointers to channels containing some ...">dsp::AudioBlock</a> object from the AudioSampleBuffer passed as an argument and declare the processing context from it as a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html" title="Contains context information that is passed into an algorithm&#39;s process method.">dsp::ProcessContextReplacing</a> object that is subsequently passed to the process() function of the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Gain.html" title="Applies a gain to audio samples as single samples or AudioBlocks.">dsp::Gain</a> object as shown here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioSampleBuffer&amp; buffer, juce::MidiBuffer&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::dsp::AudioBlock&lt;float&gt; block (buffer);</div>
+<div class="line">        juce::dsp::ProcessContextReplacing&lt;float&gt; context (block);</div>
+<div class="line">        gain.process (context);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Finally, we can reset the state of the <a class="el" href="https://docs.juce.com/master/classdsp_1_1Gain.html" title="Applies a gain to audio samples as single samples or AudioBlocks.">dsp::Gain</a> object by overriding the reset() function of the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> and calling the same function onto it:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        gain.reset();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>We now have a gain control that we can use in our channel strip plugin.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the setGainDecibels() function of the gain control to reduce the gain furthermore or boost the signal. (Careful with levels when boosting!) </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_audio_processor_graph_implementing_filter"></a>
+Implementing a filter</h2>
+<p>The third processor is a simple high pass filter that reduces the frequencies below 1kHz.</p>
+<p>We derive the <code class="project_code">FilterProcessor</code> class from the previously-defined <code class="project_code">ProcessorBase</code> , override the getName() function to provide a meaningful name and declare a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessorDuplicator.html" title="Converts a mono processor class into a multi-channel version by duplicating it and applying multichan...">dsp::ProcessorDuplicator</a> object from the DSP module. This allows us to use a mono processor of the <a class="el" href="https://docs.juce.com/master/classdsp_1_1IIR_1_1Filter.html" title="A processing class that can perform IIR filtering on an audio signal, using the Transposed Direct For...">dsp::IIR::Filter</a> class and convert it into a multi-channel version by providing its shared state as a <a class="el" href="https://docs.juce.com/master/structdsp_1_1IIR_1_1Coefficients.html" title="A set of coefficients for use in an Filter object.">dsp::IIR::Coefficients</a> class:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>FilterProcessor  : <span class="keyword">public</span> ProcessorBase</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    FilterProcessor() {}</div>
+<div class="line">    <span class="comment">//...</span></div>
+<div class="line">    <span class="keyword">const</span> juce::String getName()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">"Filter"</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::dsp::ProcessorDuplicator&lt;juce::dsp::IIR::Filter&lt;float&gt;, juce::dsp::IIR::Coefficients&lt;float&gt;&gt; filter;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>In the prepareToPlay() function, we first generate the coefficients used for the filter by using the makeHighPass() function and assign it as the shared processing state to the duplicator. We then create a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessSpec.html" title="This structure is passed into a DSP algorithm&#39;s prepare() method, and contains information about vari...">dsp::ProcessSpec</a> object to describe the sample rate, number of samples per block and number of channels to the <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessorDuplicator.html" title="Converts a mono processor class into a multi-channel version by duplicating it and applying multichan...">dsp::ProcessorDuplicator</a> object and pass the specifications by calling the prepare() function on it like so:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> prepareToPlay (<span class="keywordtype">double</span> sampleRate, <span class="keywordtype">int</span> samplesPerBlock)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        *filter.state = *juce::dsp::IIR::Coefficients&lt;float&gt;::makeHighPass (sampleRate, 1000.0f);</div>
+<div class="line"> </div>
+<div class="line">        juce::dsp::ProcessSpec spec { sampleRate, <span class="keyword">static_cast&lt;</span>juce::uint32<span class="keyword">&gt;</span> (samplesPerBlock), 2 };</div>
+<div class="line">        filter.prepare (spec);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Next, in the processBlock() function we create a <a class="el" href="https://docs.juce.com/master/classdsp_1_1AudioBlock.html" title="Minimal and lightweight data-structure which contains a list of pointers to channels containing some ...">dsp::AudioBlock</a> object from the AudioSampleBuffer passed as an argument and declare the processing context from it as a <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessContextReplacing.html" title="Contains context information that is passed into an algorithm&#39;s process method.">dsp::ProcessContextReplacing</a> object that is subsequently passed to the process() function of the <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessorDuplicator.html" title="Converts a mono processor class into a multi-channel version by duplicating it and applying multichan...">dsp::ProcessorDuplicator</a> object as shown here:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> processBlock (juce::AudioSampleBuffer&amp; buffer, juce::MidiBuffer&amp;)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::dsp::AudioBlock&lt;float&gt; block (buffer);</div>
+<div class="line">        juce::dsp::ProcessContextReplacing&lt;float&gt; context (block);</div>
+<div class="line">        filter.process (context);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Finally, we can reset the state of the <a class="el" href="https://docs.juce.com/master/structdsp_1_1ProcessorDuplicator.html" title="Converts a mono processor class into a multi-channel version by duplicating it and applying multichan...">dsp::ProcessorDuplicator</a> object by overriding the reset() function of the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> and calling the same function onto it:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> reset()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        filter.reset();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>We now have a filter that we can use in our channel strip plugin.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the coefficients of the filter to produce a low pass or band pass filter with different cut-off frequencies and resonance. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_connecting_graph_nodes"></a>
+Connecting graph nodes together</h1>
+<p>Now that we have implemented multiple processors that can be used within the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>, let's start connecting them together depending on the user selection.</p>
+<p>In the <code class="project_code">TutorialProcessor</code> class, we add three <a class="el" href="https://docs.juce.com/master/classAudioParameterChoice.html" title="Provides a class of AudioProcessorParameter that can be used to select an indexed,...">AudioParameterChoice</a> and four <a class="el" href="https://docs.juce.com/master/classAudioParameterBool.html" title="Provides a class of AudioProcessorParameter that can be used as a boolean value.">AudioParameterBool</a> pointers as private member variables to store the parameters chosen in the channel strip and their corresponding bypass states. We also declare node pointers to the three processor slots when later instantiated within the graph and provide the selectable choices as a <a class="el" href="https://docs.juce.com/master/classStringArray.html" title="A special array for holding a list of strings.">StringArray</a> for convenience.</p>
+<div class="fragment"><div class="line">    juce::StringArray processorChoices { <span class="stringliteral">"Empty"</span>, <span class="stringliteral">"Oscillator"</span>, <span class="stringliteral">"Gain"</span>, <span class="stringliteral">"Filter"</span> };</div>
+<div class="line"> </div>
+<div class="line">    std::unique_ptr&lt;juce::AudioProcessorGraph&gt; mainProcessor;</div>
+<div class="line"> </div>
+<div class="line">    juce::AudioParameterBool* muteInput;</div>
+<div class="line"> </div>
+<div class="line">    juce::AudioParameterChoice* processorSlot1;</div>
+<div class="line">    juce::AudioParameterChoice* processorSlot2;</div>
+<div class="line">    juce::AudioParameterChoice* processorSlot3;</div>
+<div class="line"> </div>
+<div class="line">    juce::AudioParameterBool* bypassSlot1;</div>
+<div class="line">    juce::AudioParameterBool* bypassSlot2;</div>
+<div class="line">    juce::AudioParameterBool* bypassSlot3;</div>
+<div class="line"> </div>
+<div class="line">    Node::Ptr audioInputNode;</div>
+<div class="line">    Node::Ptr audioOutputNode;</div>
+<div class="line">    Node::Ptr midiInputNode;</div>
+<div class="line">    Node::Ptr midiOutputNode;</div>
+<div class="line"> </div>
+<div class="line">    Node::Ptr slot1Node;</div>
+<div class="line">    Node::Ptr slot2Node;</div>
+<div class="line">    Node::Ptr slot3Node;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (TutorialProcessor)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Then in the constructor we can instantiate the audio parameters and call the addParameter() function to tell the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> about which parameters should be available in the plugin.</p>
+<div class="fragment"><div class="line">    TutorialProcessor()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessor.html">AudioProcessor</a> (BusesProperties().withInput  (<span class="stringliteral">"Input"</span>,  <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), true)</div>
+<div class="line">                                           .withOutput (<span class="stringliteral">"Output"</span>, <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioChannelSet.html">AudioChannelSet</a>::stereo(), true)),</div>
+<div class="line">          mainProcessor  (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorGraph.html">AudioProcessorGraph</a>()),</div>
+<div class="line">          muteInput      (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterBool.html">AudioParameterBool</a>   (<span class="stringliteral">"mute"</span>,    <span class="stringliteral">"Mute Input"</span>, true)),</div>
+<div class="line">          processorSlot1 (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterChoice.html">AudioParameterChoice</a> (<span class="stringliteral">"slot1"</span>,   <span class="stringliteral">"Slot 1"</span>,     processorChoices, 0)),</div>
+<div class="line">          processorSlot2 (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterChoice.html">AudioParameterChoice</a> (<span class="stringliteral">"slot2"</span>,   <span class="stringliteral">"Slot 2"</span>,     processorChoices, 0)),</div>
+<div class="line">          processorSlot3 (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterChoice.html">AudioParameterChoice</a> (<span class="stringliteral">"slot3"</span>,   <span class="stringliteral">"Slot 3"</span>,     processorChoices, 0)),</div>
+<div class="line">          bypassSlot1    (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterBool.html">AudioParameterBool</a>   (<span class="stringliteral">"bypass1"</span>, <span class="stringliteral">"Bypass 1"</span>,   false)),</div>
+<div class="line">          bypassSlot2    (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterBool.html">AudioParameterBool</a>   (<span class="stringliteral">"bypass2"</span>, <span class="stringliteral">"Bypass 2"</span>,   false)),</div>
+<div class="line">          bypassSlot3    (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioParameterBool.html">AudioParameterBool</a>   (<span class="stringliteral">"bypass3"</span>, <span class="stringliteral">"Bypass 3"</span>,   false))</div>
+<div class="line">    {</div>
+<div class="line">        addParameter (muteInput);</div>
+<div class="line"> </div>
+<div class="line">        addParameter (processorSlot1);</div>
+<div class="line">        addParameter (processorSlot2);</div>
+<div class="line">        addParameter (processorSlot3);</div>
+<div class="line"> </div>
+<div class="line">        addParameter (bypassSlot1);</div>
+<div class="line">        addParameter (bypassSlot2);</div>
+<div class="line">        addParameter (bypassSlot3);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>This tutorial makes use of the <a class="el" href="https://docs.juce.com/master/classGenericAudioProcessorEditor.html" title="A type of UI component that displays the parameters of an AudioProcessor as a simple list of sliders,...">GenericAudioProcessorEditor</a> class, which automatically creates a <a class="el" href="https://docs.juce.com/master/classComboBox.html" title="A component that lets the user choose from a drop-down list of choices.">ComboBox</a> for each of the parameters in the plug-in's processor that is an <a class="el" href="https://docs.juce.com/master/classAudioParameterChoice.html" title="Provides a class of AudioProcessorParameter that can be used to select an indexed,...">AudioParameterChoice</a> type and a <a class="el" href="https://docs.juce.com/master/classToggleButton.html" title="A button that can be toggled on/off.">ToggleButton</a> for each <a class="el" href="https://docs.juce.com/master/classAudioParameterBool.html" title="Provides a class of AudioProcessorParameter that can be used as a boolean value.">AudioParameterBool</a> type.</p>
+<dl class="section note"><dt>Note</dt><dd>To learn more about audio parameters and how to customise them, please refer to <a class="el" href="https://docs.juce.com/master/tutorial_audio_parameter.html">Tutorial: Adding plug-in parameters</a>. For a more seamless and elegant method for saving and loading parameters, you can take a look at <a class="el" href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html">Tutorial: Saving and loading your plug-in state</a>.</dd></dl>
+<p>In the first part of the tutorial when setting up the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>, we noticed that we call the <code class="project_code">updateGraph()</code> helper function in the processBlock() callback of the <code class="project_code">TutorialProcessor</code> class. The purpose of this function is to update the graph by reinstantiating the proper <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> objects and nodes as well as reconnecting the graph depending on the current choices selected by the user so let's implement that helper function like this:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> updateGraph()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordtype">bool</span> hasChanged = <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">        juce::Array&lt;juce::AudioParameterChoice*&gt; choices { processorSlot1,</div>
+<div class="line">                                                           processorSlot2,</div>
+<div class="line">                                                           processorSlot3 };</div>
+<div class="line"> </div>
+<div class="line">        juce::Array&lt;juce::AudioParameterBool*&gt; bypasses { bypassSlot1,</div>
+<div class="line">                                                          bypassSlot2,</div>
+<div class="line">                                                          bypassSlot3 };</div>
+<div class="line"> </div>
+<div class="line">        juce::ReferenceCountedArray&lt;Node&gt; slots;</div>
+<div class="line">        slots.add (slot1Node);</div>
+<div class="line">        slots.add (slot2Node);</div>
+<div class="line">        slots.add (slot3Node);</div>
+</div><!-- fragment --><p>The function starts by declaring a local variable representing the state of the graph and whether it has changed since the last iteration of the audio block processing. It also creates arrays to facilitate iteration over the processor choices, bypass states and their corresponding nodes in the graph.</p>
+<p>In the next part, we iterate over the three available processor slots and check the options that were selected for each of the <a class="el" href="https://docs.juce.com/master/classAudioParameterChoice.html" title="Provides a class of AudioProcessorParameter that can be used to select an indexed,...">AudioParameterChoice</a> objects as follows:</p>
+<div class="fragment"><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>&amp; choice = choices.getReference (i);</div>
+<div class="line">            <span class="keyword">auto</span>  slot   = slots  .getUnchecked (i);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (choice-&gt;getIndex() == 0)            <span class="comment">// [1]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    mainProcessor-&gt;removeNode (slot.get());</div>
+<div class="line">                    slots.set (i, <span class="keyword">nullptr</span>);</div>
+<div class="line">                    hasChanged = <span class="keyword">true</span>;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (choice-&gt;getIndex() == 1)       <span class="comment">// [2]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">if</span> (slot-&gt;getProcessor()-&gt;getName() == <span class="stringliteral">"Oscillator"</span>)</div>
+<div class="line">                        <span class="keywordflow">continue</span>;</div>
+<div class="line"> </div>
+<div class="line">                    mainProcessor-&gt;removeNode (slot.get());</div>
+<div class="line">                }</div>
+<div class="line"> </div>
+<div class="line">                slots.set (i, mainProcessor-&gt;addNode (std::make_unique&lt;OscillatorProcessor&gt;()));</div>
+<div class="line">                hasChanged = <span class="keyword">true</span>;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (choice-&gt;getIndex() == 2)       <span class="comment">// [3]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">if</span> (slot-&gt;getProcessor()-&gt;getName() == <span class="stringliteral">"Gain"</span>)</div>
+<div class="line">                        <span class="keywordflow">continue</span>;</div>
+<div class="line"> </div>
+<div class="line">                    mainProcessor-&gt;removeNode (slot.get());</div>
+<div class="line">                }</div>
+<div class="line"> </div>
+<div class="line">                slots.set (i, mainProcessor-&gt;addNode (std::make_unique&lt;GainProcessor&gt;()));</div>
+<div class="line">                hasChanged = <span class="keyword">true</span>;</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (choice-&gt;getIndex() == 3)       <span class="comment">// [4]</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">if</span> (slot-&gt;getProcessor()-&gt;getName() == <span class="stringliteral">"Filter"</span>)</div>
+<div class="line">                        <span class="keywordflow">continue</span>;</div>
+<div class="line"> </div>
+<div class="line">                    mainProcessor-&gt;removeNode (slot.get());</div>
+<div class="line">                }</div>
+<div class="line"> </div>
+<div class="line">                slots.set (i, mainProcessor-&gt;addNode (std::make_unique&lt;FilterProcessor&gt;()));</div>
+<div class="line">                hasChanged = <span class="keyword">true</span>;</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : If the choice remains in the "Empty" state, we first check whether the node was previously instantiated to a different processor and if so, we remove the node from the graph, clear the reference to the node and set the <code class="project_code">hasChanged</code> flag to true. Otherwise, the state has not changed and the graph does not need rebuilding.</li>
+<li><span class="comment">[2]</span> : If the user chooses the "Oscillator" state, we first check whether the currently instantiated node is already an oscillator processor and if so, the state has not changed and we continue onto the next slot. Otherwise, if the slot was already occupied we remove the node from the graph, set the reference to a new node by instantiating the oscillator and set the <code class="project_code">hasChanged</code> flag to true.</li>
+<li><span class="comment">[3]</span> : We proceed to do the same for the "Gain" state and instantiate a gain processor if necessary.</li>
+<li><span class="comment">[4]</span> : Again, we repeat the same process for the "Filter" state and instantiate a filter processor if needed.</li>
+</ul>
+<p>The next section is only performed if the state of the graph has changed and we start connecting the nodes as follows:</p>
+<div class="fragment"><div class="line">        <span class="keywordflow">if</span> (hasChanged)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> connection : mainProcessor-&gt;getConnections())     <span class="comment">// [5]</span></div>
+<div class="line">                mainProcessor-&gt;removeConnection (connection);</div>
+<div class="line"> </div>
+<div class="line">            juce::ReferenceCountedArray&lt;Node&gt; activeSlots;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> slot : slots)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    activeSlots.add (slot);                             <span class="comment">// [6]</span></div>
+<div class="line"> </div>
+<div class="line">                    slot-&gt;getProcessor()-&gt;setPlayConfigDetails (getMainBusNumInputChannels(),</div>
+<div class="line">                                                                getMainBusNumOutputChannels(),</div>
+<div class="line">                                                                getSampleRate(), getBlockSize());</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (activeSlots.isEmpty())                                  <span class="comment">// [7]</span></div>
+<div class="line">            {</div>
+<div class="line">                connectAudioNodes();</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span></div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; activeSlots.size() - 1; ++i)        <span class="comment">// [8]</span></div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> channel = 0; channel &lt; 2; ++channel)</div>
+<div class="line">                        mainProcessor-&gt;addConnection ({ { activeSlots.getUnchecked (i)-&gt;nodeID,      channel },</div>
+<div class="line">                                                        { activeSlots.getUnchecked (i + 1)-&gt;nodeID,  channel } });</div>
+<div class="line">                }</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> channel = 0; channel &lt; 2; ++channel)           <span class="comment">// [9]</span></div>
+<div class="line">                {</div>
+<div class="line">                    mainProcessor-&gt;addConnection ({ { audioInputNode-&gt;nodeID,         channel },</div>
+<div class="line">                                                    { activeSlots.getFirst()-&gt;nodeID, channel } });</div>
+<div class="line">                    mainProcessor-&gt;addConnection ({ { activeSlots.getLast()-&gt;nodeID,  channel },</div>
+<div class="line">                                                    { audioOutputNode-&gt;nodeID,        channel } });</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            connectMidiNodes();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> node : mainProcessor-&gt;getNodes())                 <span class="comment">// [10]</span></div>
+<div class="line">                node-&gt;getProcessor()-&gt;enableAllBuses();</div>
+<div class="line">        }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[5]</span> : First we remove all the connections in the graph to start from a blank state.</li>
+<li><span class="comment">[6]</span> : Then, we iterate over the slots and check whether they have an <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> node within the graph. If so we add the node to our temporary array of active nodes and make sure to call the setPlayConfigDetails() function on the corresponding processor instance with channel, sample rate and block size information to prepare the node for future processing.</li>
+<li><span class="comment">[7]</span> : Next, if there are no active slots found this means that all the choices are in an "Empty" state and the audio I/O processor nodes can be simply connected together.</li>
+<li><span class="comment">[8]</span> : Otherwise, it means that there is at least one node that should lie between the audio I/O processor nodes. Therefore we can start connecting the active slots together in an ascending order of slot number. Notice here that the number of pairs of connections we need is only the number of active slots minus one.</li>
+<li><span class="comment">[9]</span> : We can then finish connecting the graph by linking the audio input processor node to the first active slot in the chain and the last active slot to the audio output processor node.</li>
+<li><span class="comment">[10]</span> : Finally, we connect the midi I/O nodes together and make sure that all the buses in the audio processors are enabled.</li>
+</ul>
+<div class="fragment"><div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 3; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>  slot   = slots   .getUnchecked (i);</div>
+<div class="line">            <span class="keyword">auto</span>&amp; bypass = bypasses.getReference (i);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                slot-&gt;setBypassed (bypass-&gt;get());</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        audioInputNode-&gt;setBypassed (muteInput-&gt;get());</div>
+<div class="line"> </div>
+<div class="line">        slot1Node = slots.getUnchecked (0);</div>
+<div class="line">        slot2Node = slots.getUnchecked (1);</div>
+<div class="line">        slot3Node = slots.getUnchecked (2);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the last section of the <code class="project_code">updateGraph()</code> helper function, we deal with the bypass state of the processors by checking whether the slot is active and bypass the <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> if the check box is toggled. We also check whether to mute the input to avoid feedback loops when testing. Then, we assign back the newly-created nodes to their corresponding slots for the next iteration.</p>
+<p>The plugin should now run by processing incoming audio through the loaded processors within the graph.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Create an additional processor node of your choice and add it to the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>. (For example a processor handling midi messages.) </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_convert_plugin_application"></a>
+Convert the plugin into an application</h1>
+<p>If you are interested in using the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> within a standalone app, this optional section will delve into this in detail.</p>
+<p>First of all, we have to convert our main <code class="project_code">TutorialProcessor</code> class into a subclass of <a class="el" href="https://docs.juce.com/master/classComponent.html" title="The base class for all JUCE user-interface objects.">Component</a> instead of <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a>. To match the naming convention of other JUCE GUI applications we also rename the class name to <code class="project_code">MainComponent</code> as follows:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainComponent  : <span class="keyword">public</span> juce::Component,</div>
+<div class="line">                       <span class="keyword">private</span> juce::Timer</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>If using a PIP file to follow this tutorial, make sure to change the "mainClass" and "type" fields to reflect the change and amend the "dependencies" field appropriately. If using the ZIP version of the project, make sure that the <code class="filename">Main.cpp</code> file follows the "GUI Application" template format.</dd></dl>
+<p>When creating a plugin, all the IO device management and playback functionalities are controlled by the host and therefore we don't need to worry about setting these up. However, in a standalone application we have to manage this ourselves. This is why we declare an <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a> and an <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> as private member variables in the <code class="project_code">MainComponent</code> class to allow communication between our <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> and the audio IO devices available on the system.</p>
+<div class="fragment"><div class="line">    juce::AudioDeviceManager deviceManager;</div>
+<div class="line">    juce::AudioProcessorPlayer player;</div>
+</div><!-- fragment --><p>The <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a> is a convenient class that manages audio and midi devices on all platforms and the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> allows for easy playback through an <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>.</p>
+<p>In the constructor, instead of initialising plugin parameters we create regular GUI components and initialise the <a class="el" href="https://docs.juce.com/master/classAudioDeviceManager.html" title="Manages the state of some audio and midi i/o devices.">AudioDeviceManager</a> and the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> like so:</p>
+<div class="fragment"><div class="line">    MainComponent()</div>
+<div class="line">        : mainProcessor (new <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classAudioProcessorGraph.html">AudioProcessorGraph</a>())</div>
+<div class="line">    {</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">        <span class="keyword">auto</span> inputDevice  = juce::MidiInput::getDefaultDevice();</div>
+<div class="line">        <span class="keyword">auto</span> outputDevice = juce::MidiOutput::getDefaultDevice();</div>
+<div class="line"> </div>
+<div class="line">        mainProcessor-&gt;enableAllBuses();</div>
+<div class="line"> </div>
+<div class="line">        deviceManager.initialiseWithDefaultDevices (2, 2);                          <span class="comment">// [1]</span></div>
+<div class="line">        deviceManager.addAudioCallback (&amp;player);                                   <span class="comment">// [2]</span></div>
+<div class="line">        deviceManager.setMidiInputDeviceEnabled (inputDevice.identifier, <span class="keyword">true</span>);</div>
+<div class="line">        deviceManager.addMidiInputDeviceCallback (inputDevice.identifier, &amp;player); <span class="comment">// [3]</span></div>
+<div class="line">        deviceManager.setDefaultMidiOutputDevice (outputDevice.identifier);</div>
+<div class="line"> </div>
+<div class="line">        initialiseGraph();</div>
+<div class="line"> </div>
+<div class="line">        player.setProcessor (mainProcessor.get());                                  <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        setSize (600, 400);</div>
+<div class="line">        startTimer (100);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we first initialise the device manager with the default audio device and two inputs and outputs each <span class="comment">[1]</span> . We then add the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> as an audio callback to the device manager <span class="comment">[2]</span> and as a midi callback by using the default midi device <span class="comment">[3]</span> . After graph initialisation, we can set the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> as the processor to play by calling the setProcessor() function on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> <span class="comment">[4]</span> .</p>
+<div class="fragment"><div class="line">    ~MainComponent()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">auto</span> device = juce::MidiInput::getDefaultDevice();</div>
+<div class="line"> </div>
+<div class="line">        deviceManager.removeAudioCallback (&amp;player);</div>
+<div class="line">        deviceManager.setMidiInputDeviceEnabled (device.identifier, <span class="keyword">false</span>);</div>
+<div class="line">        deviceManager.removeMidiInputDeviceCallback (device.identifier, &amp;player);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Then in the destructor, we make sure to remove the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> as an audio and midi callback on application shutdown.</p>
+<p>Notice that unlike the plugin implementation, the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> deals with processing the audio automatically and therefore it will take care of calling the prepareToPlay() and processBlock() functions on the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> for us.</p>
+<p>However we still need to find a way to update the graph when the user changes parameters and we do so by deriving the <code class="project_code">MainComponent</code> from the <a class="el" href="https://docs.juce.com/master/classTimer.html" title="Makes repeated callbacks to a virtual method at a specified time interval.">Timer</a> class and overriding the timerCallback() function like so:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> timerCallback()<span class="keyword"> override </span>{ updateGraph(); }</div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Using a timer callback is not the most efficient solution and it is generally best practice to register as a listener to the appropriate components.</dd></dl>
+<p>Finally, we modify the <code class="project_code">updateGraph()</code> function to set the playback configuration details from the <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> instead of the main <a class="el" href="https://docs.juce.com/master/classAudioProcessor.html" title="Base class for audio processing classes or plugins.">AudioProcessor</a> since the latter was replaced by the <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a> in our standalone app scenario:</p>
+<div class="fragment"><div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> slot : slots)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">if</span> (slot != <span class="keyword">nullptr</span>)</div>
+<div class="line">                {</div>
+<div class="line">                    activeSlots.add (slot);</div>
+<div class="line"> </div>
+<div class="line">                    slot-&gt;getProcessor()-&gt;setPlayConfigDetails (mainProcessor-&gt;getMainBusNumInputChannels(),</div>
+<div class="line">                                                                mainProcessor-&gt;getMainBusNumOutputChannels(),</div>
+<div class="line">                                                                mainProcessor-&gt;getSampleRate(),</div>
+<div class="line">                                                                mainProcessor-&gt;getBlockSize());</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+</div><!-- fragment --><p>Your plugin should now run as an application after these changes.</p>
+<dl class="section warning"><dt>Warning</dt><dd>Again, beware of screaming feedback when testing the app with built-in inputs and outputs. You can avoid this problem by using headphones.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The source code for this modified version of the plug-in can be found in the <code class="filename">AudioProcessorGraphTutorial_02.h</code> file of the demo project.</dd></dl>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to manipulate an <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a> to cascade the effects of plugins. In particular, we have:</p>
+<ul>
+<li>Built a channel strip with a series of audio processors.</li>
+<li>Learnt how to connect nodes in an <a class="el" href="https://docs.juce.com/master/classAudioProcessorGraph.html" title="A type of AudioProcessor which plays back a graph of other AudioProcessors.">AudioProcessorGraph</a>.</li>
+<li>Created a standalone app from the graph using an <a class="el" href="https://docs.juce.com/master/classAudioProcessorPlayer.html" title="An AudioIODeviceCallback object which streams audio through an AudioProcessor.">AudioProcessorPlayer</a>.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_audio_processor_graph_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_parameter.html">Tutorial: Adding plug-in parameters</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_processor_value_tree_state.html">Tutorial: Saving and loading your plug-in state</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_audio_bus_layouts.html">Tutorial: Configuring the right bus layouts for your plugins</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ Cascading plug-in effects_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

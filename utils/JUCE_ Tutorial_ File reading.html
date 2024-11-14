@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0055)https://docs.juce.com/master/tutorial_file_reading.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: File reading</title>
+<link href="./JUCE_ Tutorial_ File reading_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ File reading_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ File reading_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ File reading_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ File reading_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ File reading_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ File reading_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ File reading_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ File reading_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ File reading_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ File reading_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ File reading_files/css">
+<script src="./JUCE_ Tutorial_ File reading_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ File reading_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ File reading_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: File reading</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_files">Files in JUCE</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_file_class">The File class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_filenamecomponent">The FilenameComponent class</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_reading_file_to_string">Reading a whole file into a string</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_reading_file_lines">Reading a file line by line</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_reading_file_bytes">Reading a file byte by byte</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_binary_data">Reading binary data</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_file_reading.html#tutorial_file_reading_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Open and read data from text and binary files.</p>
+<p><span class="headerlabel">Level:</span> Beginner</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a>, <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a>, <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a>, <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a>, <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a>, <a class="el" href="https://docs.juce.com/master/classMemoryBlock.html" title="A class to hold a resizable block of raw data.">MemoryBlock</a></p>
+<h1><a class="anchor" id="tutorial_file_reading_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/FileReadingTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/FileReadingTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_file_reading_demo_project"></a>
+The demo project</h1>
+<p>The demo project presents a simple window which allows you to select a file, using a <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> object. This file is opened, read as a string, and displayed in a <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> component.</p>
+<h1><a class="anchor" id="tutorial_file_reading_files"></a>
+Files in JUCE</h1>
+<p>This tutorial illustrates the basic techniques for reading files using JUCE. Files are one aspect of cross-platform development that need to be handled carefully because file systems on different operating systems sometimes work in quite different ways. As a developer using JUCE you are not immune to these problems, but JUCE makes the experience more consistent across different platforms and will often raise assertions in your debug builds if it can see that your code does something that may lead to problems.</p>
+<h2><a class="anchor" id="tutorial_file_reading_file_class"></a>
+The File class</h2>
+<p>The <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> class in JUCE represents an <em>absolute</em> path to a file or a directory (whether it actually exists or not). The simplest way to create a <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> object is to pass it a <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> that contains the absolute path. For example, on macOS , Linux or Android the following would be an absolute path:</p>
+<div class="fragment"><div class="line">juce::File path (<span class="stringliteral">"/path/to/file.txt"</span>);</div>
+</div><!-- fragment --><p>But the <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> class enables ways of manipulating paths by requesting child files that are relative to a parent directory, obtaining the parent directory, and so on. For example, the code above could be rewritten using the <a class="el" href="https://docs.juce.com/master/classFile.html#a087bb8f0a60069234b13ab965fb5014a" title="Returns a file that represents a relative (or absolute) sub-path of the current one.">File::getChildFile()</a> function like so:</p>
+<div class="fragment"><div class="line">juce::File path (<a class="code hl_class" href="https://docs.juce.com/master/classFile.html">File</a> (<span class="stringliteral">"/path"</span>).getChildFile (<span class="stringliteral">"to"</span>).getChildFile (<span class="stringliteral">"file.txt"</span>));</div>
+<div class="ttc" id="aclassFile_html"><div class="ttname"><a href="https://docs.juce.com/master/classFile.html">File</a></div><div class="ttdoc">Represents a local file or directory.</div><div class="ttdef"><b>Definition</b> juce_File.h:60</div></div>
+</div><!-- fragment --><p>In this example the code has become more verbose but in real-world scenarios it is common to need to access multiple files from the same directory. Therefore, it makes sense to store the parent directory in one <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> object and request child files as and when they are needed.</p>
+<p>On Windows, an equivalent absolute path might be:</p>
+<div class="fragment"><div class="line">juce::File path (<span class="stringliteral">"C:\path\to\file.txt"</span>);</div>
+</div><!-- fragment --><p>Dealing with child and parent directories is the same on each platform. JUCE handles the platform differences (such as path separators).</p>
+<h2><a class="anchor" id="tutorial_file_reading_filenamecomponent"></a>
+The FilenameComponent class</h2>
+<p>In this tutorial we are going to use a <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> object to allow the user to select a file using a standard operating system window. We can attach a listener to the <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> object (see <a class="el" href="https://docs.juce.com/master/tutorial_listeners_and_broadcasters.html">Tutorial: Listeners and Broadcasters</a>) and when the file changes we can obtain the currently chosen file as a <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> object.</p>
+<p>A <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> object shows a text box that contains an absolute path. It also provides a button for the user to select a file from the operating system. There is also a drop-down menu that contains a list of recently used files. This is populated automatically during use, but these recently-used files can be added manually too (for example, hardcoded into your application or from a preferences file).</p>
+<p>As we will see in a moment, the <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> constructor has quite a few arguments—and it doesn't have a default constructor. When this is the case, it is often easier to store child components in std::unique_ptr objects. (Since this means that they don't have to be initialised in the class initialiser list in the constructor.) We also need a <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> component, which we will use to display the file's contents. The <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> class <em>does</em> have a default constructor, but for consistency we store both component objects in std::unique_ptr objects:</p>
+<div class="fragment"><div class="line">    std::unique_ptr&lt;juce::FilenameComponent&gt; fileComp;</div>
+<div class="line">    std::unique_ptr&lt;juce::TextEditor&gt;        textContent;</div>
+</div><!-- fragment --><p>In our <code class="project_code">MainContentComponent</code> constructor we allocate a new <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> object and initialise it with some settings suitable for opening files (since the <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> class can also be used for choosing locations for saving files too). Within this constructor we can provide a list of file suffixes that we wish to be able to select (for example, <code class="code">"*.txt;*.foo"</code> ). We can also enforce a suffix (which is more useful for saving files). In both of these arguments we pass an empty string, which means that no filtering will be performed. Other arguments are self-explanatory, defining other ways that we want the <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> object to behave (see the comments in the code):</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        fileComp.reset (<span class="keyword">new</span> juce::FilenameComponent (<span class="stringliteral">"fileComp"</span>,</div>
+<div class="line">                                                     {},                       <span class="comment">// current file</span></div>
+<div class="line">                                                     <span class="keyword">false</span>,                    <span class="comment">// can edit file name,</span></div>
+<div class="line">                                                     <span class="keyword">false</span>,                    <span class="comment">// is directory,</span></div>
+<div class="line">                                                     <span class="keyword">false</span>,                    <span class="comment">// is for saving,</span></div>
+<div class="line">                                                     {},                       <span class="comment">// browser wildcard suffix,</span></div>
+<div class="line">                                                     {},                       <span class="comment">// enforced suffix,</span></div>
+<div class="line">                                                     <span class="stringliteral">"Select file to open"</span>));  <span class="comment">// text when nothing selected</span></div>
+<div class="line">        addAndMakeVisible (fileComp.get());</div>
+<div class="line">        fileComp-&gt;addListener (<span class="keyword">this</span>);</div>
+</div><!-- fragment --><p>In the <a class="el" href="https://docs.juce.com/master/classFilenameComponentListener.html" title="Listens for events happening to a FilenameComponent.">FilenameComponentListener</a> callback we obtain the currently chosen file and pass it to our <code class="project_code">readFile()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> filenameComponentChanged (juce::FilenameComponent* fileComponentThatHasChanged)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keywordflow">if</span> (fileComponentThatHasChanged == fileComp.get())</div>
+<div class="line">            readFile (fileComp-&gt;getCurrentFile());</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In each of the examples that follow, the <code class="project_code">readFile()</code> function will read the chosen file in different ways. But we need somewhere to display the results, so we set up a <a class="el" href="https://docs.juce.com/master/classTextEditor.html" title="An editable text box.">TextEditor</a> component in our <code class="project_code">MainContentComponent</code> constructor too:</p>
+<div class="fragment"><div class="line">        textContent.reset (<span class="keyword">new</span> juce::TextEditor());</div>
+<div class="line">        addAndMakeVisible (textContent.get());</div>
+<div class="line">        textContent-&gt;setMultiLine (<span class="keyword">true</span>);</div>
+<div class="line">        textContent-&gt;setReadOnly (<span class="keyword">true</span>);</div>
+<div class="line">        textContent-&gt;setCaretVisible (<span class="keyword">false</span>);</div>
+<div class="line"> </div>
+<div class="line">        setSize (600, 400);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_file_reading_reading_file_to_string"></a>
+Reading a whole file into a string</h2>
+<p>While the <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> class is designed primarily to store and manipulate paths to files, there are a few convenient functions for reading files in really simple ways. For example, the <a class="el" href="https://docs.juce.com/master/classFile.html#a07b95f6831ee4ed5b49241ce6af8539d" title="Reads a file into memory as a string.">File::loadFileAsString()</a> function does exactly what it says: it reads a whole file into a <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> object. Of course, if the file selected isn't a text file then the result may be impossible to make sense of (although JUCE won't crash). This function can detect and read both UTF-8 and UTF-16 formats:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> readFile (<span class="keyword">const</span> juce::File&amp; fileToRead)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (! fileToRead.existsAsFile()) <span class="comment">// [1]</span></div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> fileText = fileToRead.loadFileAsString();</div>
+<div class="line"> </div>
+<div class="line">        textContent-&gt;setText (fileText);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Notice that we check to see if the file chosen actually exists <span class="comment">[1]</span> . Since we chose the file from the operating systems then this shouldn't fail, but it's good practice to make these kinds of checks when dealing with files. Run the app and load the <code class="filename">juce.txt</code> text file provided in the <code class="filename">Resources</code> directory of the demo project. The result will be as shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ File reading_files/tutorial_file_reading_screenshot1.png" alt="">
+<div class="caption">
+Reading and displaying a text file</div></div>
+<p>There is an equivalent function—<a class="el" href="https://docs.juce.com/master/classFile.html#a889b8b0784b4f97c5bf93ffc24c3650d" title="Loads a file&#39;s contents into memory as a block of binary data.">File::loadFileAsData()</a>—to read an entire file into a <a class="el" href="https://docs.juce.com/master/classMemoryBlock.html" title="A class to hold a resizable block of raw data.">MemoryBlock</a> object.</p>
+<h2><a class="anchor" id="tutorial_file_reading_reading_file_lines"></a>
+Reading a file line by line</h2>
+<p>For more control over the file reading process, you will need to use a <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a> object. One way to do this is to construct a <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a> object by passing its constructor the <a class="el" href="https://docs.juce.com/master/classFile.html" title="Represents a local file or directory.">File</a> object that represents the file you want to read <span class="comment">[2]</span> .</p>
+<dl class="section note"><dt>Note</dt><dd>The <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a> class is a subclass of the <a class="el" href="https://docs.juce.com/master/classInputStream.html" title="The base class for streams that read data.">InputStream</a> class, which is the base class for streams that read data.</dd></dl>
+<p>Add the following code:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> readFile (<span class="keyword">const</span> juce::File&amp; fileToRead)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (! fileToRead.existsAsFile())</div>
+<div class="line">            <span class="keywordflow">return</span>;  <span class="comment">// file doesn't exist</span></div>
+<div class="line"> </div>
+<div class="line">        juce::FileInputStream inputStream (fileToRead); <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (! inputStream.openedOk())</div>
+<div class="line">            <span class="keywordflow">return</span>;  <span class="comment">// failed to open</span></div>
+</div><!-- fragment --><p>We are going to read the file line by line, but we are also going to detect lines that start with the "*" character. Then we'll format these lines in a different font, using these lines as headings for the other text. Add the following code:</p>
+<div class="fragment"><div class="line">        textContent-&gt;clear();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> normalFont = textContent-&gt;getFont();</div>
+<div class="line">        <span class="keyword">auto</span> titleFont  = normalFont.withHeight (normalFont.getHeight() * 1.5f).boldened();</div>
+<div class="line">        juce::String asterix (<span class="stringliteral">"*"</span>);</div>
+</div><!-- fragment --><p>The next part is to read data from the <code class="project_code">inputStream</code> object, in a <code class="code">while()</code> loop, until the stream is exhausted <span class="comment">[3]</span> . Add this:</p>
+<div class="fragment"><div class="line">        <span class="keywordflow">while</span> (! inputStream.isExhausted()) <span class="comment">// [3]</span></div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> line = inputStream.readNextLine();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (line.startsWith (asterix))</div>
+<div class="line">            {</div>
+<div class="line">                line = line.removeCharacters (asterix);</div>
+<div class="line">                textContent-&gt;setFont (titleFont);</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">else</span></div>
+<div class="line">            {</div>
+<div class="line">                textContent-&gt;setFont (normalFont);</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            <span class="comment">// append the text to the textContent</span></div>
+<div class="line">            textContent-&gt;insertTextAtCaret (line + juce::newLine);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>You can see that this:</p><ul>
+<li>reads a line, using the <a class="el" href="https://docs.juce.com/master/classInputStream.html#af16acc8f2fd769adb559a781ece8e903" title="Reads a UTF-8 string from the stream, up to the next linefeed or carriage return.">InputStream::readNextLine()</a> function,</li>
+<li>checks to see if the line starts with a "*",</li>
+<li>sets the font for the <code class="project_code">textContent</code> object accordingly,</li>
+<li>removes any "*" characters, if necessary, and</li>
+<li>appends line of text to the <code class="project_code">textContent</code> object.</li>
+</ul>
+<p>Loading the same <code class="filename">juce.txt</code> file should result in the something like the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ File reading_files/tutorial_file_reading_screenshot2.png" alt="">
+<div class="caption">
+Reading the file line by line</div></div>
+<dl class="section note"><dt>Note</dt><dd>The code for the example in this subsection can be found in the <code class="filename">FileReadingTutorial_02.h</code> file of the demo project.</dd></dl>
+<h2><a class="anchor" id="tutorial_file_reading_reading_file_bytes"></a>
+Reading a file byte by byte</h2>
+<p>The <a class="el" href="https://docs.juce.com/master/classInputStream.html" title="The base class for streams that read data.">InputStream</a>, and therefore <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a>, classes also have functions for reading files in smaller pieces, right down to reading a byte at a time. To illustrate this, let's load a text file and display each word in a different colour. First let's add a function to generate random colours. Add this function which generates a random colour, but clips the brightness to a specified minimum (this is to ensure that the colour will be visible against the black background):</p>
+<div class="fragment"><div class="line">    <span class="keyword">static</span> juce::Colour getRandomColour (<span class="keywordtype">float</span> minBrightness)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span>&amp; random = juce::Random::getSystemRandom();</div>
+<div class="line">        juce::Colour colour ((juce::uint8) random.nextInt (256),</div>
+<div class="line">                             (juce::uint8) random.nextInt (256),</div>
+<div class="line">                             (juce::uint8) random.nextInt (256));</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> colour.getBrightness() &gt;= minBrightness ? colour</div>
+<div class="line">                                                       : colour.withBrightness (minBrightness);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Now let's add a function that reads data from a <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a> object until it reaches a space character. This will then return the text up to, and including, the space. It creates a small memory buffer, using the <a class="el" href="https://docs.juce.com/master/classMemoryBlock.html" title="A class to hold a resizable block of raw data.">MemoryBlock</a> class, then uses the <a class="el" href="https://docs.juce.com/master/classInputStream.html#a2e5944641712d84b6da2eee5d394326a" title="Reads a byte from the stream.">InputStream::readByte()</a> function to read bytes one at a time from the <code class="project_code">inputStream</code> object:</p>
+<div class="fragment"><div class="line">    <span class="keyword">static</span> juce::String readUpToNextSpace (juce::FileInputStream&amp; inputStream)</div>
+<div class="line">    {</div>
+<div class="line">        juce::MemoryBlock buffer (256);</div>
+<div class="line">        <span class="keyword">auto</span>* data = <span class="keyword">static_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span> (buffer.getData());</div>
+<div class="line">        <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">while</span> ((data[i] = inputStream.readByte()) != 0 &amp;&amp; i &lt; buffer.getSize())</div>
+<div class="line">            <span class="keywordflow">if</span> (data[i++] == <span class="charliteral">' '</span>)</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> juce::String::fromUTF8 (data, (<span class="keywordtype">int</span>) i); <span class="comment">// [4]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>The <a class="el" href="https://docs.juce.com/master/classString.html#aa0116dc51d7bdd363d14c72bba60060a" title="Creates a String from a UTF-8 encoded buffer.">String::fromUTF8()</a> <span class="comment">[4]</span> function attempts to convert the raw binary data to a <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> object.</p>
+<p>Finally, in our <code class="project_code">readFile()</code> function, we use our <code class="project_code">readUpToNextSpace</code> function to read the words from the text file until the stream is exhausted. Add the following code:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> readFile (<span class="keyword">const</span> juce::File&amp; fileToRead)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">if</span> (! fileToRead.existsAsFile())</div>
+<div class="line">        <span class="keywordflow">return</span>;  <span class="comment">// file doesn't exist</span></div>
+<div class="line"> </div>
+<div class="line">    juce::FileInputStream inputStream (fileToRead);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (! inputStream.openedOk())</div>
+<div class="line">        <span class="keywordflow">return</span>;  <span class="comment">// failed to open</span></div>
+<div class="line"> </div>
+<div class="line">    textContent-&gt;clear();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">while</span> (! inputStream.isExhausted())</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> nextWord = readUpToNextSpace (inputStream);</div>
+<div class="line">        textContent-&gt;setColour (juce::TextEditor::textColourId, getRandomColour (0.75f));</div>
+<div class="line">        textContent-&gt;insertTextAtCaret (nextWord);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Running this code will result in something like the following screenshot.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ File reading_files/tutorial_file_reading_screenshot3.png" alt="">
+<div class="caption">
+Reading the file in smaller chunks</div></div>
+<dl class="section note"><dt>Note</dt><dd>The code for the example in this subsection can be found in the <code class="filename">FileReadingTutorial_03.h</code> file of the demo project.</dd></dl>
+<p>An alternative way of creating a <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a> object is to use the <a class="el" href="https://docs.juce.com/master/classFile.html#a668db4b90ac7839c70f0a9ac22124c29" title="Creates a stream to read from this file.">File::createInputStream()</a> function. This function returns a <a class="el" href="https://docs.juce.com/master/classFileInputStream.html" title="An input stream that reads from a local file.">FileInputStream</a> object on the heap, allocated using the <code class="code">new</code> operator. This means that it is <em>very</em> important that you deallocate the object when you are finished. Ideally, you should use a std::unique_ptr object for this. A slight difference here is that the <a class="el" href="https://docs.juce.com/master/classFile.html#a668db4b90ac7839c70f0a9ac22124c29" title="Creates a stream to read from this file.">File::createInputStream()</a> function will return a <code class="code">nullptr</code> value if the file stream fails to open. The following code shows the typical pattern that you should use in this case:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> readFile (<span class="keyword">const</span> juce::File&amp; fileToRead)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">if</span> (! fileToRead.existsAsFile())</div>
+<div class="line">            <span class="keywordflow">return</span>;  <span class="comment">// file doesn't exist</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (std::unique_ptr&lt;juce::FileInputStream&gt; inputStream { fileToRead.createInputStream() })</div>
+<div class="line">        {</div>
+<div class="line">            textContent-&gt;clear();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">while</span> (! inputStream-&gt;isExhausted())</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keyword">auto</span> nextWord = readUpToNextSpace (*inputStream);</div>
+<div class="line">                textContent-&gt;setColour (juce::TextEditor::textColourId, getRandomColour (0.75f));</div>
+<div class="line">                textContent-&gt;insertTextAtCaret (nextWord);</div>
+<div class="line">            }</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section attention">
+<dt>Exercise</dt>
+<dd>You may notice that the colours of words at the ends of some lines are identical to the colour of the word at the start of the next line. This is because we are looking only for the space character as a delimiter. Modify the code to look for new line, carriage return, and tab characters too. (These are characters <code class="code">'\n'</code> , <code class="code">'\r'</code> , and <code class="code">'\t'</code> .) </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_file_reading_binary_data"></a>
+Reading binary data</h1>
+<p>In this tutorial we have looked at reading string data from a file. In addition to reading single bytes from a file, the <a class="el" href="https://docs.juce.com/master/classInputStream.html" title="The base class for streams that read data.">InputStream</a> class also includes functions for reading other fundamental types. For example:</p>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/classInputStream.html#a59eb456ebfbe9d4c7fdfd4c14337e19a" title="Reads four bytes from the stream as a little-endian 32-bit value.">InputStream::readInt()</a> — reads an <code class="code">int</code> (32-bit) from the stream.</li>
+<li><a class="el" href="https://docs.juce.com/master/classInputStream.html#a0c4b0f9f1fa9515fea5a98d2ffe7ae02" title="Reads two bytes from the stream as a little-endian 16-bit value.">InputStream::readShort()</a> — reads a <code>short</code> (16-bit) integer from the stream.</li>
+<li><a class="el" href="https://docs.juce.com/master/classInputStream.html#a46d7f191f1872bc27550db3fa0733f59" title="Reads four bytes as a 32-bit floating point value.">InputStream::readFloat()</a> — reads a <code class="code">float</code> (32-bit) from the stream.</li>
+</ul>
+<p>These all read multi-byte values using the little endian byte order. To read them as big endian values there are alternative versions—for example, the <a class="el" href="https://docs.juce.com/master/classInputStream.html#a84ab1bcc547eee621c4c6c2502af808d" title="Reads four bytes from the stream as a big-endian 32-bit value.">InputStream::readIntBigEndian()</a> function. You can also read a block of data from a stream using the <a class="el" href="https://docs.juce.com/master/classInputStream.html#aa5350c414bad6b97ae3b463a3401c0d6" title="Reads some data from the stream into a memory buffer.">InputStream::read()</a> or <a class="el" href="https://docs.juce.com/master/classInputStream.html#a7708d25af96e8d8b937a4642dcf55a23" title="Reads from the stream and appends the data to a MemoryBlock.">InputStream::readIntoMemoryBlock()</a> functions.</p>
+<p>These are useful if you need to read existing files in binary format, or if you really need to have your data stored as binary. In most cases, it is probably preferable to use XML (using the <a class="el" href="https://docs.juce.com/master/classXmlDocument.html" title="Parses a text-based XML document and creates an XmlElement object from it.">XmlDocument</a> and <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> classes) or <a class="el" href="https://docs.juce.com/master/classJSON.html" title="Contains static methods for converting JSON-formatted text to and from var objects.">JSON</a> (by storing data in var objects) for storing and reading your data.</p>
+<h1><a class="anchor" id="tutorial_file_reading_summary"></a>
+Summary</h1>
+<p>This tutorial has introduced simple file reading technique using JUCE through reading a text file in various ways. In particular you should be able to:</p>
+<ul>
+<li>Use the <a class="el" href="https://docs.juce.com/master/classFilenameComponent.html" title="Shows a filename as an editable text box, with a &#39;browse&#39; button and a drop-down list for recently se...">FilenameComponent</a> and the <a class="el" href="https://docs.juce.com/master/classFilenameComponentListener.html" title="Listens for events happening to a FilenameComponent.">FilenameComponentListener</a> to store a file path and offer the user a means of choosing a file.</li>
+<li>Read the entire contents of a file into a <a class="el" href="https://docs.juce.com/master/classString.html" title="The JUCE String class!">String</a> object.</li>
+<li>Read a file in smaller chunks using the appropriate <a class="el" href="https://docs.juce.com/master/classInputStream.html" title="The base class for streams that read data.">InputStream</a> functions.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_file_reading_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_colours.html">Tutorial: Colours in JUCE</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_label.html">Tutorial: The Label class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_playing_sound_files.html">Tutorial: Build an audio player</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ File reading_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

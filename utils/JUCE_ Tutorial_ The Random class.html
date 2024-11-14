@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)https://docs.juce.com/master/tutorial_random.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: The Random class</title>
+<link href="./JUCE_ Tutorial_ The Random class_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Random class_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Random class_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ The Random class_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Random class_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Random class_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ The Random class_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Random class_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ The Random class_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ The Random class_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ The Random class_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ The Random class_files/css">
+<script src="./JUCE_ Tutorial_ The Random class_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ The Random class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ The Random class_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: The Random class</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_test_bed">Test bed code</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_limiting_ranges">Limiting ranges</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_maximum_value">Setting a maximum value</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_minimum_and_maximum_value">Setting a minimum and maximum value</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_other_numerical_type">Other numerical types</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_larger_integers">Larger integers</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_floating_point_values">Floating point values</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_visualising_values">Visualising values</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_random_rects_pos">Random rectangle positions</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_random_rects_size">Random rectangle sizes</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_random_colours">Random colours</a></li>
+<li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_choosing_randomly_from_arry">Choosing randomly from an array</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_other_distributions">Other distributions</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_weighted_distributions">Weighted distributions</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_random.html#tutorial_random_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>This tutorial introduces generating random numbers using the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class. <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> numbers are useful in all sorts of situations including games, cryptography, and audio.</p>
+<p><span class="headerlabel">Level:</span> Beginner</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a>, <a class="el" href="https://docs.juce.com/master/classRange.html" title="A general-purpose range object, that simply represents any linear range with a start and end point.">Range</a>, <a class="el" href="https://docs.juce.com/master/classBigInteger.html" title="An arbitrarily large integer class.">BigInteger</a>, <a class="el" href="https://docs.juce.com/master/classColour.html" title="Represents a colour, also including a transparency value.">Colour</a></p>
+<h1><a class="anchor" id="tutorial_random_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/RandomTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/RandomTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<h1><a class="anchor" id="tutorial_random_demo_project"></a>
+The demo project</h1>
+<p>The demo project sets up a simple text console where we can display the results of various operations. This allows us to demonstrate some of the features of the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class in this tutorial.</p>
+<p>In its default configuration, the demo project displays a series of 100 randomly-generated 32-bit integers. These values should be distributed roughly uniformly in the range <span style="font-family: times; font-style: italic">-2,147,483,648 .. 2,147,483,647</span> . Of course these values aren't truly random. Since they are generated by a computer, they are <em>pseudorandom</em>. For most purposes the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object will be random enough, but you may need to use more sophisticated techniques for certain critical or specialist applications.</p>
+<h1><a class="anchor" id="tutorial_random_test_bed"></a>
+Test bed code</h1>
+<p>Throughout this tutorial we will modify parts of the demo project to demonstrate different features of the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class. All of the code under discussion is in the <code class="project_code">MainComponent</code> class. In fact, many of the changes in the first instance will be to the <code class="project_code">runExample()</code> function.</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> runExample()</div>
+<div class="line">    {</div>
+<div class="line">        logMessage (<span class="stringliteral">"------------------------- START --------------------------"</span>);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> iteration = 0; iteration &lt; 100; ++iteration)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span> randomInt = juce::Random::getSystemRandom().nextInt();</div>
+<div class="line"> </div>
+<div class="line">            logMessage (juce::String (randomInt));</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        logMessage (<span class="stringliteral">"----------------------- FINISHED -------------------------"</span>);</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>Here we access a shared (global) <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object using the <a class="el" href="https://docs.juce.com/master/classRandom.html#ad7d9d42dd0efbb68d569e975b0778518" title="The overhead of creating a new Random object is fairly small, but if you want to avoid it,...">Random::getSystemRandom()</a> function. We call the <a class="el" href="https://docs.juce.com/master/classRandom.html#a69dd2014564478eb13ca41c03679c8f9" title="Returns the next random 32 bit integer.">Random::nextInt()</a> function with this system <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object to generate a random number. In most cases it is satisfactory to use this system random object for generating all of your random numbers. In some cases it is necessary to create your own instance of the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class. This is usually where the values you are generating are being generated on another thread — see <a class="el" href="https://docs.juce.com/master/tutorial_simple_synth_noise.html">Tutorial: Build a white noise generator</a>. If two (or more) threads try to access the system <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object then the sequence could get corrupted and may cause problems.</p>
+<h1><a class="anchor" id="tutorial_random_limiting_ranges"></a>
+Limiting ranges</h1>
+<p>You will almost certainly want to limit the range of values generated by the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class. While this can be done using simple arithmetic, the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class makes it even easier.</p>
+<h2><a class="anchor" id="tutorial_random_maximum_value"></a>
+Setting a maximum value</h2>
+<p>To set the maximum value you simply pass the <a class="el" href="https://docs.juce.com/master/classRandom.html#a69dd2014564478eb13ca41c03679c8f9" title="Returns the next random 32 bit integer.">Random::nextInt()</a> an integer like so:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> randomInt = juce::Random::getSystemRandom().nextInt (6);</div>
+</div><!-- fragment --><p>This will set the maximum value to one less than the argument passed. In this case the values will be in the range <span style="font-family: times; font-style: italic">0 .. 5</span> . It might be easier in this case to think of the argument as being the number of possible outcomes. Using 6 as the maximum value means there are 6 possible outcomes. This is just like rolling a die except the faces of the die are number <span style="font-family: times; font-style: italic">0 .. 5</span> rather than <span style="font-family: times; font-style: italic">1 .. 6</span> !</p>
+<h2><a class="anchor" id="tutorial_random_minimum_and_maximum_value"></a>
+Setting a minimum and maximum value</h2>
+<p>Of course, to generate values in the range <span style="font-family: times; font-style: italic">1 .. 6</span> we could just add 1 like this:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> randomInt = juce::Random::getSystemRandom().nextInt (6) + 1;</div>
+</div><!-- fragment --><p>But, the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class can handle this for us by passing it a <a class="el" href="https://docs.juce.com/master/classRange.html" title="A general-purpose range object, that simply represents any linear range with a start and end point.">Range</a> object</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> randomInt = juce::Random::getSystemRandom().nextInt (juce::Range&lt;int&gt; (1, 7));</div>
+</div><!-- fragment --><p>The maximum value still needs to be one larger than the maximum value we want the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> object to be able to generate. The minimum value is <em>inclusive</em> and the maximum value is <em>exclusive</em>.</p>
+<h1><a class="anchor" id="tutorial_random_other_numerical_type"></a>
+Other numerical types</h1>
+<p>In the examples above the values generated are all in the range of 32-bit integers. The <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class can generate 64-bit integer values and even arbitrarily large integers using the <a class="el" href="https://docs.juce.com/master/classBigInteger.html" title="An arbitrarily large integer class.">BigInteger</a> class.</p>
+<h2><a class="anchor" id="tutorial_random_larger_integers"></a>
+Larger integers</h2>
+<p>To generate 64-bit integers use the <a class="el" href="https://docs.juce.com/master/classRandom.html#aa78fa923adb76a168c5c67d072cfcef3" title="Returns the next 64-bit random number.">Random::nextInt64()</a> function:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> randomInt = juce::Random::getSystemRandom().nextInt64();</div>
+</div><!-- fragment --><p>This generates an integer in the range <span style="font-family: times; font-style: italic">−9,223,372,036,854,775,808 .. 9,223,372,036,854,775,807</span> . To specify a smaller range for 64-bit integers you would need to perform the arithmetic yourself.</p>
+<p>To generate arbitrarily large integers use the <a class="el" href="https://docs.juce.com/master/classRandom.html#af9aacfc547bfcdba8aa2fa8f04022896" title="Returns a BigInteger containing a random number.">Random::nextLargeNumber()</a> function. This returns a <a class="el" href="https://docs.juce.com/master/classBigInteger.html" title="An arbitrarily large integer class.">BigInteger</a> object and takes a single <a class="el" href="https://docs.juce.com/master/classBigInteger.html" title="An arbitrarily large integer class.">BigInteger</a> object as an argument to indicate the maximum value (again the maximum value is <em>exclusive</em>):</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> runExample()</div>
+<div class="line">{</div>
+<div class="line">    logMessage (<span class="stringliteral">"------------------------- START --------------------------"</span>);</div>
+<div class="line"> </div>
+<div class="line">    juce::BigInteger maximumValue;</div>
+<div class="line">    maximumValue.setBit (256);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> iteration = 0; iteration &lt; 100; ++iteration)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> randomInt = juce::Random::getSystemRandom().nextLargeNumber (maximumValue);</div>
+<div class="line">        logMessage (randomInt.toString (10));</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    logMessage (<span class="stringliteral">"----------------------- FINISHED -------------------------"</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>Here, we create a very large maximum value of <span style="font-family: times; font-style: italic">2<sup>256</sup></span> by setting bit 256 in the <code class="project_code">maximumValue</code> <a class="el" href="https://docs.juce.com/master/classBigInteger.html" title="An arbitrarily large integer class.">BigInteger</a> object. The output is some very large, randomly generated integers. For example:</p>
+<div class="fragment"><div class="line">...</div>
+<div class="line">104920467355765962354471349450287456411052143302125448224736731840703932891139</div>
+<div class="line">113537286625531390989138082815985050172086775818737779507269901485377454431686</div>
+<div class="line">57847088262227027688174446009482649397747696846679750345153185249067937632876</div>
+<div class="line">54822036781617285561665007930420018266697875685845320423632890189355412858007</div>
+<div class="line">69785221527278648790869522951189615281519473001003509768672723497611119666776</div>
+<div class="line">53474255551114041705196319572561227500136240211575200675493708156631961926592</div>
+<div class="line">99704173402721617789464355135995656339243151513499563088758939994549638940776</div>
+<div class="line">89393625021259981953975863158742834192382645809510667002452217673394247775970</div>
+<div class="line">16555501734946882319812302845214545517919239951054372751749796998179564377182</div>
+<div class="line">----------------------- FINISHED -------------------------</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_random_floating_point_values"></a>
+Floating point values</h2>
+<p>The <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class can generate floating-point values too:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> runExample()</div>
+<div class="line">{</div>
+<div class="line">    logMessage (<span class="stringliteral">"------------------------- START --------------------------"</span>);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> iteration = 0; iteration &lt; 100; ++iteration)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> randomValue = juce::Random::getSystemRandom().nextFloat();</div>
+<div class="line"> </div>
+<div class="line">        logMessage (juce::String (randomValue));</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    logMessage (<span class="stringliteral">"----------------------- FINISHED -------------------------"</span>);</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>And it can generate <code class="code">double</code> values:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> randomValue = juce::Random::getSystemRandom().nextDouble();</div>
+</div><!-- fragment --><p>In both of these cases the values returned are in the range <span style="font-family: times; font-style: italic">0.0 .. 1.0</span> . To generate a different range you will need to apply the arithmetic yourself (see <a class="el" href="https://docs.juce.com/master/tutorial_simple_synth_noise.html">Tutorial: Build a white noise generator</a> for an example). You can use the <a class="el" href="https://docs.juce.com/master/group__juce__core-maths.html#ga53851e83e8f5c5faeb5dbc64196bb329">jmap()</a> function for this.</p>
+<h1><a class="anchor" id="tutorial_random_visualising_values"></a>
+Visualising values</h1>
+<p>It can be useful to visualise the random values generated, rather than looking at long lists of numbers. This is especially useful if you need a set of random values with a distribution other than a uniform distribution. This can also create some interesting patterns.</p>
+<h2><a class="anchor" id="tutorial_random_random_rects_pos"></a>
+Random rectangle positions</h2>
+<p>Change the <code class="project_code">MainContentComponent</code> to the following simple code:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::Component</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        setSize (600, 600);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    ~MainContentComponent() {}</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        g.fillAll (juce::Colours::black);</div>
+<div class="line">        g.setColour (juce::Colours::orange);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span>&amp; random = juce::Random::getSystemRandom();</div>
+<div class="line">        juce::Rectangle&lt;int&gt; rect (0, 0, 20, 20);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 100; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            rect.setCentre (random.nextInt (getWidth()), random.nextInt (getHeight()));</div>
+<div class="line">            g.drawRect (rect);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+<div class="ttc" id="agroup__juce__core-system_html_ga851b02724a8158a7f746c66b5758b3dd"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a></div><div class="ttdeci">#define JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(className)</div><div class="ttdoc">This is a shorthand way of writing both a JUCE_DECLARE_NON_COPYABLE and JUCE_LEAK_DETECTOR macro for ...</div><div class="ttdef"><b>Definition</b> juce_PlatformDefs.h:262</div></div>
+</div><!-- fragment --><p>This should generate an image something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot1.png" alt="">
+<div class="caption">
+100 randomly generated rectangles</div></div>
+<p>Try resizing the window. You will notice that a new set of rectangles is generated each time the window is resized and the <code class="project_code">paint()</code> function is called.</p>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Try changing the number of rectangles and the size of the rectangles. You could make the rectangle size proportion to the size of the window, for example. Try drawing circles instead of rectangles. </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_random_random_rects_size"></a>
+Random rectangle sizes</h2>
+<p>To randomise the size of the rectangles we could do this:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> paint (<a class="code hl_class" href="https://docs.juce.com/master/classGraphics.html">Graphics</a>&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    g.<a class="code hl_function" href="https://docs.juce.com/master/classGraphics.html#a46fc8346e7c7c7cc6c9ff2aad76fa442">fillAll</a> (juce::Colours::black);</div>
+<div class="line">    g.<a class="code hl_function" href="https://docs.juce.com/master/classGraphics.html#a9a944a0006b7277fda473f0b1b4f028f">setColour</a> (juce::Colours::orange);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span>&amp; random = juce::Random::getSystemRandom();</div>
+<div class="line">    juce::Rectangle&lt;int&gt; rect (0, 0, 20, 20);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 100; ++i)</div>
+<div class="line">    {</div>
+<div class="line">        rect.setSize (random.nextInt (getWidth() / 4), random.nextInt (getHeight() / 4));</div>
+<div class="line">        rect.setCentre (random.nextInt (getWidth()), random.nextInt (getHeight()));</div>
+<div class="line">        g.<a class="code hl_function" href="https://docs.juce.com/master/classGraphics.html#a42dc569175294c1e20e8177031a761af">drawRect</a> (rect);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassGraphics_html"><div class="ttname"><a href="https://docs.juce.com/master/classGraphics.html">Graphics</a></div><div class="ttdoc">A graphics context, used for drawing a component or image.</div><div class="ttdef"><b>Definition</b> juce_GraphicsContext.h:57</div></div>
+<div class="ttc" id="aclassGraphics_html_a42dc569175294c1e20e8177031a761af"><div class="ttname"><a href="https://docs.juce.com/master/classGraphics.html#a42dc569175294c1e20e8177031a761af">Graphics::drawRect</a></div><div class="ttdeci">void drawRect(int x, int y, int width, int height, int lineThickness=1) const</div><div class="ttdoc">Draws a rectangular outline, using the current colour or brush.</div></div>
+<div class="ttc" id="aclassGraphics_html_a46fc8346e7c7c7cc6c9ff2aad76fa442"><div class="ttname"><a href="https://docs.juce.com/master/classGraphics.html#a46fc8346e7c7c7cc6c9ff2aad76fa442">Graphics::fillAll</a></div><div class="ttdeci">void fillAll() const</div><div class="ttdoc">Fills the context's entire clip region with the current colour or brush.</div></div>
+<div class="ttc" id="aclassGraphics_html_a9a944a0006b7277fda473f0b1b4f028f"><div class="ttname"><a href="https://docs.juce.com/master/classGraphics.html#a9a944a0006b7277fda473f0b1b4f028f">Graphics::setColour</a></div><div class="ttdeci">void setColour(Colour newColour)</div><div class="ttdoc">Changes the current drawing colour.</div></div>
+</div><!-- fragment --><p>To make this generate squares each time we could do this:</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 100; ++i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> size = random.nextInt (<a class="code hl_function" href="https://docs.juce.com/master/group__juce__core-maths.html#gae8394cdf11279b266f4aa741758c1669">jmin</a> (getWidth(), getHeight()) / 4);</div>
+<div class="line">    rect.setSize (size, size);</div>
+<div class="line">    rect.setCentre (random.nextInt (getWidth()), random.nextInt (getHeight()));</div>
+<div class="line">    g.<a class="code hl_function" href="https://docs.juce.com/master/classGraphics.html#a42dc569175294c1e20e8177031a761af">drawRect</a> (rect);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__juce__core-maths_html_gae8394cdf11279b266f4aa741758c1669"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__core-maths.html#gae8394cdf11279b266f4aa741758c1669">jmin</a></div><div class="ttdeci">constexpr Type jmin(Type a, Type b)</div><div class="ttdoc">Returns the smaller of two values.</div><div class="ttdef"><b>Definition</b> juce_MathsFunctions.h:367</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_random_random_colours"></a>
+Random colours</h2>
+<p><a class="el" href="https://docs.juce.com/master/namespaceColours.html" title="Contains a set of predefined named colours (mostly standard HTML colours)">Colours</a> can be randomised too, but to create colours that work well together using randomisation is a little trickier. For example, this generates a new random colour for each of the rectangles. But this colour could be <em>any</em> colour:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    g.fillAll (juce::Colours::black);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span>&amp; random = juce::Random::getSystemRandom();</div>
+<div class="line">    juce::Rectangle&lt;int&gt; rect (0, 0, 20, 20);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 100; ++i)</div>
+<div class="line">    {</div>
+<div class="line">        juce::Colour colour (random.nextInt (256),</div>
+<div class="line">                             random.nextInt (256),</div>
+<div class="line">                             random.nextInt (256));</div>
+<div class="line"> </div>
+<div class="line">        g.setColour (colour);</div>
+<div class="line"> </div>
+<div class="line">        rect.setCentre (random.nextInt (getWidth()), random.nextInt (getHeight()));</div>
+<div class="line">        g.drawRect (rect);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>This should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot2.png" alt="">
+<div class="caption">
+Randomly generated colours</div></div>
+<p>To limit the colours in a simple way we could randomise only one or two of the elements (red, green, or blue) and limit the range of values:</p>
+<div class="fragment"><div class="line">juce::Colour colour (random.nextInt (juce::Range&lt;int&gt; (100, 256)),</div>
+<div class="line">                     random.nextInt (juce::Range&lt;int&gt; (50,  200)),</div>
+<div class="line">                     200);</div>
+<div class="line"> </div>
+<div class="line">g.setColour (colour);</div>
+</div><!-- fragment --><p>This produces colours in the pink and purple shades:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot3.png" alt="">
+<div class="caption">
+Pinks and purples</div></div>
+<p>To be more specific, you could generate colours using hue, saturation, and brightness. For example, the oranges are at a hue of around 30° (or 0.083 in the <span style="font-family: times; font-style: italic">0 .. 1</span> range). If we generate random hues in the range <span style="font-family: times; font-style: italic">0.05 .. 0.15</span> these should all be different shades of orange.</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 100; ++i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> hue = juce::jmap (random.nextFloat(), 0.05f, 0.15f);</div>
+<div class="line">    g.setColour (juce::Colour::fromHSV (hue, 0.9f, 0.9f, 1.0f));</div>
+<div class="line"> </div>
+<div class="line">    rect.setCentre (random.nextInt (getWidth()), random.nextInt (getHeight()));</div>
+<div class="line">    g.drawRect (rect);</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot4.png" alt="">
+<div class="caption">
+Randomly generated orange hues</div></div>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Try generating other collections of random colours that work well together. </dd>
+</dl>
+<h2><a class="anchor" id="tutorial_random_choosing_randomly_from_arry"></a>
+Choosing randomly from an array</h2>
+<p>You could choose randomly from a specific set of colours by using an array:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> <a class="code hl_class" href="https://docs.juce.com/master/classComponent.html">Component</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        colours.add (juce::Colours::white);</div>
+<div class="line">        colours.add (juce::Colours::orange);</div>
+<div class="line">        colours.add (juce::Colours::lightgreen);</div>
+<div class="line"> </div>
+<div class="line">        setSize (400, 400);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    ~MainContentComponent() {}</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        g.fillAll (juce::Colours::black);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span>&amp; random = <a class="code hl_function" href="https://docs.juce.com/master/classRandom.html#ad7d9d42dd0efbb68d569e975b0778518">Random::getSystemRandom</a>();</div>
+<div class="line">        juce::Rectangle&lt;float&gt; rect (0.0f, 0.0f, 5.0f, 5.0f);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 1000; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            g.setColour (colours[random.nextInt (colours.size())]);</div>
+<div class="line">            rect.setCentre ((<span class="keywordtype">float</span>) random.nextInt (getWidth()),</div>
+<div class="line">                            (<span class="keywordtype">float</span>) random.nextInt (getHeight()));</div>
+<div class="line">            g.drawEllipse (rect, 1.0f);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    juce::Array&lt;Colour&gt; colours;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+<div class="ttc" id="aclassComponent_html"><div class="ttname"><a href="https://docs.juce.com/master/classComponent.html">Component</a></div><div class="ttdoc">The base class for all JUCE user-interface objects.</div><div class="ttdef"><b>Definition</b> juce_Component.h:48</div></div>
+<div class="ttc" id="aclassRandom_html_ad7d9d42dd0efbb68d569e975b0778518"><div class="ttname"><a href="https://docs.juce.com/master/classRandom.html#ad7d9d42dd0efbb68d569e975b0778518">Random::getSystemRandom</a></div><div class="ttdeci">static Random &amp; getSystemRandom() noexcept</div><div class="ttdoc">The overhead of creating a new Random object is fairly small, but if you want to avoid it,...</div></div>
+</div><!-- fragment --><p>Here we store the items in an array. To select an item at random we generate a random value based on the array's size. Then we use this value as the index into the array.</p>
+<h1><a class="anchor" id="tutorial_random_other_distributions"></a>
+Other distributions</h1>
+<p>All of the random numbers generated in this tutorial so far have been uniformly distributed between the minimum and maximum values. While this is not a tutorial on statistics, it can be useful to know some simple methods of making certain randomly-generated values more likely to occur than others. This has application in games, computer-generated art, and generative sound and music.</p>
+<p>In the following code we generate 1,000 circles distributed uniformly across the window:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword"></span>{</div>
+<div class="line">    g.fillAll (juce::Colours::black);</div>
+<div class="line">    g.setColour (juce::Colours::orange);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span>&amp; random = juce::Random::getSystemRandom();</div>
+<div class="line">    juce::Rectangle&lt;float&gt; rect (0.0f, 0.0f, 5.0f, 5.0f);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 1000; ++i)</div>
+<div class="line">    {</div>
+<div class="line">        rect.setCentre ((<span class="keywordtype">float</span>) random.nextInt (getWidth()),</div>
+<div class="line">                        (<span class="keywordtype">float</span>) random.nextInt (getHeight()));</div>
+<div class="line">        g.drawEllipse (rect, 1.0f);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot5.png" alt="">
+<div class="caption">
+Uniformly distributed circles</div></div>
+<p>You can see from the image that the circles are roughly distributed uniformly.</p>
+<p>A linear distribution is where values at one end of the range are more likely than others. Values across the range become less likely towards the other end of the range. The probability between these two points changes in a linear fashion. A simple way to implement this is to generate one random value based on the outcome of another random value. In the following example we generate linearly-distributed values for both the <span style="font-family: times; font-style: italic">x</span> and <span style="font-family: times; font-style: italic">y</span> coordinates of the circles.</p>
+<div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 1000; ++i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a> = random.nextInt (random.nextInt (<a class="code hl_class" href="https://docs.juce.com/master/classRange.html">Range&lt;int&gt;</a> (1, getWidth())));</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a> = random.nextInt (random.nextInt (<a class="code hl_class" href="https://docs.juce.com/master/classRange.html">Range&lt;int&gt;</a> (1, getHeight())));</div>
+<div class="line"> </div>
+<div class="line">    rect.setCentre (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>);</div>
+<div class="line">    g.drawEllipse (rect, 1.0f);</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassRange_html"><div class="ttname"><a href="https://docs.juce.com/master/classRange.html">Range</a></div><div class="ttdoc">A general-purpose range object, that simply represents any linear range with a start and end point.</div><div class="ttdef"><b>Definition</b> juce_Range.h:55</div></div>
+<div class="ttc" id="agroup__juce__audio__plugin__client-Unity_html_gad0da36b2558901e21e7a30f6c227a45e"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> juce_UnityPluginInterface.h:200</div></div>
+<div class="ttc" id="agroup__juce__audio__plugin__client-Unity_html_gae9ace15db486f33243a35ce689893fd9"><div class="ttname"><a href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a></div><div class="ttdeci">float float y</div><div class="ttdef"><b>Definition</b> juce_UnityPluginInterface.h:200</div></div>
+</div><!-- fragment --><p>Here you can see that we generate one random value then pass the result to the <a class="el" href="https://docs.juce.com/master/classRandom.html#a69dd2014564478eb13ca41c03679c8f9" title="Returns the next random 32 bit integer.">Random::nextInt()</a> function to generate the final value.</p>
+<dl class="section note"><dt>Note</dt><dd>We can't use zero as the maximum value passed to the <a class="el" href="https://docs.juce.com/master/classRandom.html#a69dd2014564478eb13ca41c03679c8f9" title="Returns the next random 32 bit integer.">Random::nextInt()</a> function so we have to make sure the first random number has a minimum of 1.</dd></dl>
+<p>The result should look something like this:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot6.png" alt="">
+<div class="caption">
+Circles focused around the top-left corner</div></div>
+<p>Since values towards zero are more likely, the circles appear to be focused around the top-left corner. To focus the circles around the centre we could change the code like so:</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> centreX = getWidth()  / 2;</div>
+<div class="line"><span class="keyword">auto</span> centreY = getHeight() / 2;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 1000; ++i)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> x0 = random.nextInt (juce::Range&lt;int&gt; (1, getWidth()  / 2));</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>  = random.nextInt (juce::Range&lt;int&gt; (centreX - x0, centreX + x0));</div>
+<div class="line">    <span class="keyword">auto</span> y0 = random.nextInt (juce::Range&lt;int&gt; (1, getHeight() / 2));</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>  = random.nextInt (juce::Range&lt;int&gt; (centreY - y0, centreY + y0));</div>
+<div class="line"> </div>
+<div class="line">    rect.setCentre (<a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gad0da36b2558901e21e7a30f6c227a45e">x</a>, <a class="code hl_variable" href="https://docs.juce.com/master/group__juce__audio__plugin__client-Unity.html#gae9ace15db486f33243a35ce689893fd9">y</a>);</div>
+<div class="line">    g.drawEllipse (rect, 1.0f);</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_random_weighted_distributions"></a>
+Weighted distributions</h2>
+<p>In some cases you may want to weight the probability of certain outcomes specifically. Let's take our earlier example where we chose randomly from three colours in an array. Let's say we want white to be the most likely, orange less likely, and green even less likely than orange. We could define probabilities as shown in the following table:</p>
+<table class="markdownTable">
+<tbody><tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Colour   </th><th class="markdownTableHeadNone">Probability    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">White   </td><td class="markdownTableBodyNone">70%    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Orange   </td><td class="markdownTableBodyNone">25%    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Green   </td><td class="markdownTableBodyNone">5%   </td></tr>
+</tbody></table>
+<p>We could add an additional array of <em>weights</em> to our code where the indices of the weights correspond with the indices of the colours:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>MainContentComponent   : <span class="keyword">public</span> juce::Component</div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        colours.add (juce::Colours::white);</div>
+<div class="line">        weights.add (0.7f);</div>
+<div class="line"> </div>
+<div class="line">        colours.add (juce::Colours::orange);</div>
+<div class="line">        weights.add (0.25f);</div>
+<div class="line"> </div>
+<div class="line">        colours.add (juce::Colours::lightgreen);</div>
+<div class="line">        weights.add (0.05f);</div>
+<div class="line"> </div>
+<div class="line">        setSize (400, 400);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> paint (juce::Graphics&amp; g)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        g.fillAll (juce::Colours::black);</div>
+<div class="line"> </div>
+<div class="line">        juce::Random random;</div>
+<div class="line">        juce::Rectangle&lt;float&gt; rect (0.0f, 0.0f, 5.0f, 5.0f);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> sumOfWeights = sumFloatArray (weights); <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; 1000; ++i)</div>
+<div class="line">        {</div>
+<div class="line">            g.setColour (colourAtQuantile (random.nextFloat() * sumOfWeights)); <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">            rect.setCentre ((<span class="keywordtype">float</span>) random.nextInt (getWidth()),</div>
+<div class="line">                            (<span class="keywordtype">float</span>) random.nextInt (getHeight()));</div>
+<div class="line"> </div>
+<div class="line">            g.drawEllipse (rect, 1.0f);</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">float</span> sumFloatArray (<span class="keyword">const</span> juce::Array&lt;float&gt;&amp; values)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> sum = 0.0f;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> value : values)</div>
+<div class="line">            sum += value;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> sum;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">int</span> indexOfQuantile (<span class="keyword">const</span> juce::Array&lt;float&gt;&amp; weights, <span class="keywordtype">float</span> quantile)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> runningTotal = 0.0f; <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> weight : weights)</div>
+<div class="line">        {</div>
+<div class="line">            runningTotal += weight;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (quantile &lt; runningTotal) <span class="comment">// [5]</span></div>
+<div class="line">                <span class="keywordflow">return</span> weights.indexOf (weight);</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> -1;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    juce::Colour colourAtQuantile (<span class="keywordtype">float</span> quantile) <span class="keyword">const</span>  <span class="comment">// [3]</span></div>
+<div class="line">    {</div>
+<div class="line">        <span class="keyword">auto</span> index = indexOfQuantile (weights, quantile);</div>
+<div class="line">        <span class="keywordflow">return</span> index &lt; 0 ? juce::Colours::transparentBlack : colours[index];</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    juce::Array&lt;juce::Colour&gt; colours;</div>
+<div class="line">    juce::Array&lt;float&gt; weights;</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">//==============================================================================</span></div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>This works as follows:</p><ul>
+<li><span class="comment">[1]</span> : To generate the random number, first take the sum of the weights. In this case we know that the sum of the weights is 1.0, but using this technique the weights do not <em>need</em> to sum to 1.0.</li>
+<li><span class="comment">[2]</span> : Then generate a random number in the range <span style="font-family: times; font-style: italic">0 .. sum</span> .</li>
+<li><span class="comment">[3]</span> : The <code class="project_code">colourAtQuantile()</code> function uses this value to find the colour.</li>
+<li><span class="comment">[4]</span> : This is achieved by keeping a running total of the weights as we iterate over the the array of weights.</li>
+<li><span class="comment">[5]</span> : When the running total exceeds the randomly generated value we have found the colour.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>The code for this final example can be found in the <code class="filename">RandomTutorial_02.h</code> file of the demo project.</dd></dl>
+<p>The result is shown in the following screenshot:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ The Random class_files/tutorial_random_screenshot7.png" alt="">
+<div class="caption">
+Weighted choices of colours</div></div>
+<h1><a class="anchor" id="tutorial_random_summary"></a>
+Summary</h1>
+<p>In this tutorial we have introduced the <a class="el" href="https://docs.juce.com/master/classRandom.html" title="A random number generator.">Random</a> class and generating random numbers in general. After reading this tutorial you should be able to:</p>
+<ul>
+<li>Generate random integers and floating point values.</li>
+<li>Limit the range of the random numbers generated.</li>
+<li>Use random values to perform drawing tasks.</li>
+<li>Generate specific ranges of randomly generated colours.</li>
+<li>Choose values randomly from an array, including weighting the probability of these choices.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_random_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_big_integer.html">Tutorial: The BigInteger class</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_colours.html">Tutorial: Colours in JUCE</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_file_reading.html">Tutorial: File reading</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_simple_synth_noise.html">Tutorial: Build a white noise generator</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ The Random class_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>

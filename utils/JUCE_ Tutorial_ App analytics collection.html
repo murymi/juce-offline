@@ -1,0 +1,614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0063)https://docs.juce.com/master/tutorial_analytics_collection.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<meta name="generator" content="Doxygen 1.11.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JUCE: Tutorial: App analytics collection</title>
+<link href="./JUCE_ Tutorial_ App analytics collection_files/tabs.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ App analytics collection_files/jquery.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ App analytics collection_files/dynsections.js"></script>
+<link href="./JUCE_ Tutorial_ App analytics collection_files/navtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ App analytics collection_files/resize.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ App analytics collection_files/cookie.js"></script>
+<link href="./JUCE_ Tutorial_ App analytics collection_files/search.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./JUCE_ Tutorial_ App analytics collection_files/searchdata.js"></script>
+<script type="text/javascript" src="./JUCE_ Tutorial_ App analytics collection_files/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="./JUCE_ Tutorial_ App analytics collection_files/doxygen.css" rel="stylesheet" type="text/css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://docs.juce.com/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://docs.juce.com/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://docs.juce.com/favicons/favicon-16x16.png">
+<link rel="manifest" href="https://docs.juce.com/favicons/site.webmanifest">
+<link rel="mask-icon" href="https://docs.juce.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://docs.juce.com/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-config" content="../favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" as="style" href="./JUCE_ Tutorial_ App analytics collection_files/css">
+<link rel="stylesheet" href="./JUCE_ Tutorial_ App analytics collection_files/css">
+<script src="./JUCE_ Tutorial_ App analytics collection_files/script.js" site="COHIAING" defer=""></script>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+  <header id="_header-4-13" class="oxy-header-wrapper oxy-overlay-header oxy-header"><div id="_header_row-5-13" class="oxy-header-row"><div class="oxy-header-container"><div id="_header_left-6-13" class="oxy-header-left"><a id="link-7-13" class="ct-link" href="https://juce.com/"><img id="image-8-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ App analytics collection_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="_header_center-9-13" class="oxy-header-center"></div><div id="_header_right-10-13" class="oxy-header-right"><nav id="_nav_menu-11-13" class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns"><div class="oxy-menu-toggle"><div class="oxy-nav-menu-hamburger-wrap"><div class="oxy-nav-menu-hamburger"><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div><div class="oxy-nav-menu-hamburger-line"></div></div></div></div><div class="menu-main-menu-container"><ul id="menu-main-menu" class="oxy-nav-menu-list"><li id="menu-item-290" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-290"><a href="https://juce.com/juce/whats-new/">Discover</a>
+    <ul class="sub-menu">
+        <li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="https://juce.com/juce/whats-new/">What's New</a></li>
+        <li id="menu-item-252" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-252"><a href="https://juce.com/juce/features/">Features</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-291" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-291"><a href="https://juce.com/learn/documentation/">Learn</a>
+    <ul class="sub-menu">
+        <li id="menu-item-241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-241"><a href="https://juce.com/learn/documentation/">Documentation</a></li>
+        <li id="menu-item-240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-240"><a href="https://juce.com/learn/tutorials/">Tutorials</a></li>
+        <li id="menu-item-275" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-275"><a href="https://juce.com/stories/">Made with JUCE</a></li>
+        <li id="menu-item-242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-242"><a href="https://juce.com/resources/">Resources</a></li>
+    </ul>
+    </li>
+    <li id="menu-item-230" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230"><a href="https://forum.juce.com/">Forum</a></li>
+    </ul></div></nav><a id="link-28-13" class="ct-link" href="https://account.juce.com/account/dashboard" target="_self"><div id="fancy_icon-27-13" class="ct-fancy-icon"><svg id="svg-fancy_icon-27-13"><use xlink:href="#FontAwesomeicon-user-circle"></use></svg></div></a><a id="link_button-23-13" class="ct-link-button " href="https://juce.com/get-juce/">Get JUCE</a></div></div></div></header>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"><defs><symbol id="FontAwesomeicon-user-circle" viewBox="0 0 28 28"><title>user-circle</title><path d="M23.797 20.922c-0.406-2.922-1.594-5.516-4.25-5.875-1.375 1.5-3.359 2.453-5.547 2.453s-4.172-0.953-5.547-2.453c-2.656 0.359-3.844 2.953-4.25 5.875 2.172 3.063 5.75 5.078 9.797 5.078s7.625-2.016 9.797-5.078zM20 10c0-3.313-2.688-6-6-6s-6 2.688-6 6 2.688 6 6 6 6-2.688 6-6zM28 14c0 7.703-6.25 14-14 14-7.734 0-14-6.281-14-14 0-7.734 6.266-14 14-14s14 6.266 14 14z"></path></symbol></defs></svg>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('click', '.oxy-menu-toggle', function() {
+                jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+                jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+            });
+            var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+            jQuery('body').on('click', selector, function(){
+                jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+                jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+                jQuery(this).click();
+            });
+        });
+    </script>
+<!-- Generated by Doxygen 1.11.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() { codefold.init(0); });
+/* @license-end */
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="https://docs.juce.com/master/index.html"><span>Tags</span></a></li>
+      <li><a href="https://docs.juce.com/master/topics.html"><span>JUCE&nbsp;Modules</span></a></li>
+      <li><a href="https://docs.juce.com/master/classes.html"><span>Alphabetical</span></a></li>
+      <li><a href="https://juce.com/learn/tutorials"><span>Tutorials</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" tabindex="0">&nbsp;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S" onfocus="searchBox.OnSearchFieldFocus(true)" onblur="searchBox.OnSearchFieldFocus(false)" onkeyup="searchBox.OnSearchFieldChange(event)">
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="./JUCE_ Tutorial_ App analytics collection_files/close.svg" alt=""></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){ initResizable(false); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()" onkeydown="return searchBox.OnSearchSelectKey(event)" tabindex="0">
+<a class="SelectItem" onclick="searchBox.OnSelectItem(0)" href="javascript:void(0)"><span class="SelectionMark">•</span>All</a><a class="SelectItem" onclick="searchBox.OnSelectItem(1)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Classes</a><a class="SelectItem" onclick="searchBox.OnSelectItem(2)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Namespaces</a><a class="SelectItem" onclick="searchBox.OnSelectItem(3)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Files</a><a class="SelectItem" onclick="searchBox.OnSelectItem(4)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Functions</a><a class="SelectItem" onclick="searchBox.OnSelectItem(5)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Variables</a><a class="SelectItem" onclick="searchBox.OnSelectItem(6)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Typedefs</a><a class="SelectItem" onclick="searchBox.OnSelectItem(7)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerations</a><a class="SelectItem" onclick="searchBox.OnSelectItem(8)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Enumerator</a><a class="SelectItem" onclick="searchBox.OnSelectItem(9)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Friends</a><a class="SelectItem" onclick="searchBox.OnSelectItem(10)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Macros</a><a class="SelectItem" onclick="searchBox.OnSelectItem(11)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Modules</a><a class="SelectItem" onclick="searchBox.OnSelectItem(12)" href="javascript:void(0)"><span class="SelectionMark">&nbsp;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div id="doc-content" style="height: 807.891px;">
+<div><div class="header">
+  <div class="headertitle"><div class="title">Tutorial: App analytics collection</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul><li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_getting_started">Getting started</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_demo_project">The demo project</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_anatomy_events">Anatomy of events</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_api_key">API key set up</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_tracking_app_startup">Tracking app startup</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_tracking_button_behaviour">Tracking Button behaviour</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_sending_events">Sending events</a><ul><li class="level2"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_formatting_http_request">Formatting the HTTP request</a></li>
+</ul>
+</li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_save_restore_unlogged_events">Save and restore unlogged events</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_summary">Summary</a></li>
+<li class="level1"><a href="https://docs.juce.com/master/tutorial_analytics_collection.html#tutorial_analytics_collection_see_also">See also</a></li>
+</ul>
+</div>
+<div class="textblock"><p>Collect app usage data from users in JUCE applications. Send analytics events to Google Analytics using the analytics module.</p>
+<p><span class="headerlabel">Level:</span> Intermediate</p>
+<p><span class="headerlabel">Platforms:</span> Windows , macOS , Linux , iOS , Android</p>
+<p><span class="headerlabel">Classes:</span> <a class="el" href="https://docs.juce.com/master/classThreadedAnalyticsDestination.html" title="A base class for dispatching analytics events on a dedicated thread.">ThreadedAnalyticsDestination</a>, <a class="el" href="https://docs.juce.com/master/classButtonTracker.html" title="A class that automatically sends analytics events to the Analytics singleton when a button is clicked...">ButtonTracker</a>, <a class="el" href="https://docs.juce.com/master/classWebInputStream.html" title="An InputStream which can be used to read from a given URL.">WebInputStream</a>, <a class="el" href="https://docs.juce.com/master/classCriticalSection.html" title="A re-entrant mutex.">CriticalSection</a>, <a class="el" href="https://docs.juce.com/master/classCriticalSection.html#a4d398019b977a4c2151c6f1e2a06210b" title="Provides the type of scoped lock to use with a CriticalSection.">CriticalSection::ScopedLockType</a></p>
+<dl class="section warning"><dt>Warning</dt><dd>This project requires a Google Analytics account. If you need help with this, follow the instructions on the <a href="https://support.google.com/analytics/">Google Analytics website</a> to open an account.</dd></dl>
+<h1><a class="anchor" id="tutorial_analytics_collection_getting_started"></a>
+Getting started</h1>
+<p>Download the demo project for this tutorial here: <a href="https://docs.juce.com/tutorials/PIPs/AnalyticsCollectionTutorial.zip">PIP</a> | <a href="https://docs.juce.com/tutorials/ZIPs/AnalyticsCollectionTutorial.zip">ZIP</a> . Unzip the project and open the first header file in the Projucer.</p>
+<p>If you need help with this step, see <a class="el" href="https://docs.juce.com/master/tutorial_new_projucer_project.html">Tutorial: Projucer Part 1: Getting started with the Projucer</a>.</p>
+<p>Please make sure you have your Google Analytics API key written down and ready for this tutorial to fully work.</p>
+<h1><a class="anchor" id="tutorial_analytics_collection_demo_project"></a>
+The demo project</h1>
+<p>The demo project shows a very simple UI with two buttons sending analytics events when pressed. Since the API key has not been set up yet, Google will not receive any events before implementation.</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ App analytics collection_files/tutorial_analytics_collection_screenshot1.png" alt="">
+<div class="caption">
+The demo project app window</div></div>
+<dl class="section note"><dt>Note</dt><dd>This project uses Google Analytics to track app analytics but you can apply this to any other service you wish to use.</dd>
+<dd>
+The code presented here is broadly similar to the <b class="onscreen_text">AnalyticsCollection</b> from the JUCE Examples.</dd></dl>
+<h1><a class="anchor" id="tutorial_analytics_collection_anatomy_events"></a>
+Anatomy of events</h1>
+<p>Events describe how the user has interacted with the content in applications and are sent to the analytics tracking system. To better categorise and filter the interactions, events are structured using the following keywords:</p>
+<ul>
+<li>Category: Describes groups of events that are combined under the analytics reports.</li>
+<li>Action: Specifies the action that was performed to trigger the event.</li>
+<li>Label: Additional information explaining the specific object that interacted with the user.</li>
+<li>Value: <a class="el" href="https://docs.juce.com/master/classOptional.html" title="A simple optional type.">Optional</a> integer to provide numerical data to the event in question.</li>
+</ul>
+<p>All the events are sent with a unique user ID and a timestamp along with the keywords mentioned above. Additionally, users can be grouped into categories to better describe their capacity such as beta testers or developers.</p>
+<h1><a class="anchor" id="tutorial_analytics_collection_api_key"></a>
+API key set up</h1>
+<p>The first step for the project to work properly is to set up the Google Analytics API key. You can find the Tracking ID in your Google Analytics dashboard here:</p>
+<div class="image">
+<img src="./JUCE_ Tutorial_ App analytics collection_files/tutorial_analytics_collection_screenshot2.png" alt="">
+<div class="caption">
+Google Analytics Tracking ID</div></div>
+<p>Copy this ID, and replace the <code class="project_code">apiKey</code> placeholder variable in the <code class="project_code">GoogleAnalyticsDestination</code> class:</p>
+<div class="fragment"><div class="line">            apiKey = <span class="stringliteral">"UA-XXXXXXXXX-1"</span>;</div>
+</div><!-- fragment --><dl class="section warning"><dt>Warning</dt><dd>Ideally, this API key should not be visible in your binary distribution as there could be all sorts of malicious uses if discovered and may pollute your analytics data with spam. One way to prevent this would be to retrieve the API key dynamically at runtime (such as from your own server).</dd></dl>
+<h1><a class="anchor" id="tutorial_analytics_collection_tracking_app_startup"></a>
+Tracking app startup</h1>
+<p>Let's first start by tracking user-independent information such as app launches and define constant user information that will be used by the analytics system. In the constructor of the <code class="project_code">MainContentComponent</code> class, we start by getting a reference to the <a class="el" href="https://docs.juce.com/master/classAnalytics.html" title="A singleton class to manage analytics data.">Analytics</a> singleton by calling <code class="project_code">Analytics::getInstance()</code> .</p>
+<p>We can then set the user ID with <code class="project_code">setUserID()</code> by choosing a unique identifier for this user <span class="comment">[1]</span> . Make sure not to include any sensitive personal information in this identifier. We can also set a user group on this user by calling <code class="project_code">setUserProperties()</code> using a <a class="el" href="https://docs.juce.com/master/classStringPairArray.html" title="A container for holding a set of strings which are keyed by another string.">StringPairArray</a> <span class="comment">[2]</span> .</p>
+<p>For the events to be received, we need to specify at least one destination to our <a class="el" href="https://docs.juce.com/master/classAnalytics.html" title="A singleton class to manage analytics data.">Analytics</a> instance. We can optionally add multiple destinations if we wish. In this case we add an instance of the GoogleAnalyticsDestination class to the singleton <span class="comment">[3]</span> .</p>
+<p>Since the <code class="project_code">MainContentComponent</code> constructor gets called when the MainWindow is instantiated, we can log this event using the function <code class="project_code">logEvent()</code> right when the component gets owned by the MainWindow <span class="comment">[4]</span> .</p>
+<div class="fragment"><div class="line">    MainContentComponent()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// Add an analytics identifier for the user. Make sure you don't accidentally</span></div>
+<div class="line">        <span class="comment">// collect identifiable information if you haven't asked for permission!</span></div>
+<div class="line">        juce::Analytics::getInstance()-&gt;setUserId (<span class="stringliteral">"AnonUser1234"</span>);                                 <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Add any other constant user information.</span></div>
+<div class="line">        juce::StringPairArray userData;</div>
+<div class="line">        userData.set (<span class="stringliteral">"group"</span>, <span class="stringliteral">"beta"</span>);</div>
+<div class="line">        juce::Analytics::getInstance()-&gt;setUserProperties (userData);                               <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Add any analytics destinations we want to use to the Analytics singleton.</span></div>
+<div class="line">        juce::Analytics::getInstance()-&gt;addDestination (<span class="keyword">new</span> GoogleAnalyticsDestination());          <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// The event type here should probably be DemoAnalyticsEventTypes::sessionStart</span></div>
+<div class="line">        <span class="comment">// in a more advanced app.</span></div>
+<div class="line">        juce::Analytics::getInstance()-&gt;logEvent (<span class="stringliteral">"startup"</span>, {}, DemoAnalyticsEventTypes::event);   <span class="comment">// [4]</span></div>
+</div><!-- fragment --><p>Likewise, we can log the shutdown event in the <code class="project_code">MainContentComponent</code> destructor right when the MainWindow gets deleted <span class="comment">[5]</span> .</p>
+<div class="fragment"><div class="line">    ~MainContentComponent()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// The event type here should probably be DemoAnalyticsEventTypes::sessionEnd</span></div>
+<div class="line">        <span class="comment">// in a more advanced app.</span></div>
+<div class="line">        juce::Analytics::getInstance()-&gt;logEvent (<span class="stringliteral">"shutdown"</span>, {}, DemoAnalyticsEventTypes::event);  <span class="comment">// [5]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><h1><a class="anchor" id="tutorial_analytics_collection_tracking_button_behaviour"></a>
+Tracking Button behaviour</h1>
+<p>In order to add tracking to specific user actions, we need to define which user interactions we want recorded and sent. Fortunately to record button behaviour, we can use a handy class included in the JUCE analytics module called <a class="el" href="https://docs.juce.com/master/classButtonTracker.html" title="A class that automatically sends analytics events to the Analytics singleton when a button is clicked...">ButtonTracker</a> that will automatically handle this for us.</p>
+<p>Let's first declare a <a class="el" href="https://docs.juce.com/master/classButtonTracker.html" title="A class that automatically sends analytics events to the Analytics singleton when a button is clicked...">ButtonTracker</a> as a member variable in the <code class="project_code">MainContentComponent</code> class <span class="comment">[1]</span> .</p>
+<div class="fragment"><div class="line">    juce::TextButton eventButton { <span class="stringliteral">"Press me!"</span> }, crashButton { <span class="stringliteral">"Simulate crash!"</span> };</div>
+<div class="line">    std::unique_ptr&lt;juce::ButtonTracker&gt; logEventButtonPress;   <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#ga851b02724a8158a7f746c66b5758b3dd">JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR</a> (MainContentComponent)</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>Now in the MainContentComponent constructor, we can link the specific <a class="el" href="https://docs.juce.com/master/classTextButton.html" title="A button that uses the standard lozenge-shaped background with a line of text on it.">TextButton</a> object we want to track by passing it as an argument to the <a class="el" href="https://docs.juce.com/master/classButtonTracker.html" title="A class that automatically sends analytics events to the Analytics singleton when a button is clicked...">ButtonTracker</a> constructor. We also set the event category and action properties to send when the event is fired <span class="comment">[2]</span> .</p>
+<div class="fragment"><div class="line">        juce::StringPairArray logButtonPressParameters;</div>
+<div class="line">        logButtonPressParameters.set (<span class="stringliteral">"id"</span>, <span class="stringliteral">"a"</span>);</div>
+<div class="line">        logEventButtonPress.reset (<span class="keyword">new</span> juce::ButtonTracker (eventButton, <span class="stringliteral">"button_press"</span>, logButtonPressParameters)); <span class="comment">// [2]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><dl class="section attention">
+<dt>Exercise</dt>
+<dd>Create additional GUI components and implement tracking on them with different event parameters. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_analytics_collection_sending_events"></a>
+Sending events</h1>
+<p>The JUCE analytics module handles the logging of events on a dedicated thread and sends the analytics data in batches periodically. Therefore, we need to temporarily store the events on local storage until the data is sent. In the rest of this tutorial, we will be working in the <code class="project_code">GoogleAnalyticsDestination</code> class.</p>
+<p>We first need to specify a location to store our analytics event data in the application data directory. For this we use the special location <code class="project_code"><a class="el" href="https://docs.juce.com/master/classFile.html#a3e19cafabb03c5838160263a6e76313da0c9f89d8dc9f9f32c9eb42428385351d" title="The folder in which applications store their persistent user-specific settings.">File::userApplicationDataDirectory</a></code> to find the correct location and navigate to the corresponding application folder for our app <span class="comment">[1]</span> . If the location does not exist we create the folder <span class="comment">[2]</span> and save the file path as an XML file name extension <span class="comment">[3]</span> .</p>
+<p>We can now start the thread by using the <code class="project_code">startAnalyticsThread()</code> function and specifying the waiting time between batches of events in milliseconds <span class="comment">[4]</span> .</p>
+<div class="fragment"><div class="line">    GoogleAnalyticsDestination()</div>
+<div class="line">        : <a class="code hl_class" href="https://docs.juce.com/master/classThreadedAnalyticsDestination.html">ThreadedAnalyticsDestination</a> (<span class="stringliteral">"GoogleAnalyticsThread"</span>)</div>
+<div class="line">    {</div>
+<div class="line">        {</div>
+<div class="line">            <span class="comment">// Choose where to save any unsent events.</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">auto</span> appDataDir = juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)</div>
+<div class="line">                                   .getChildFile (juce::JUCEApplication::getInstance()-&gt;getApplicationName());  <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (! appDataDir.exists())</div>
+<div class="line">                appDataDir.createDirectory();                                                                   <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">            savedEventsFile = appDataDir.getChildFile (<span class="stringliteral">"analytics_events.xml"</span>);                                 <span class="comment">// [3]</span></div>
+<div class="line">        }</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">        startAnalyticsThread (initialPeriodMs);                                                                 <span class="comment">// [4]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>In the class destructor, we have to ensure that the last batch of events can be sent without the application being killed by the operating system. To allow this, we provide one last batch period while sleeping the thread before stopping it forcibly after 1 second. This provides enough time for one last sending attempt without elongating too much the application shutdown time.</p>
+<div class="fragment"><div class="line">    ~GoogleAnalyticsDestination()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Here we sleep so that our background thread has a chance to send the</span></div>
+<div class="line">        <span class="comment">// last lot of batched events. Be careful - if your app takes too long to</span></div>
+<div class="line">        <span class="comment">// shut down then some operating systems will kill it forcibly!</span></div>
+<div class="line">        juce::Thread::sleep (initialPeriodMs);  <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        stopAnalyticsThread (1000);             <span class="comment">// [6]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>We can supply the maximum number of events to send in batches by overriding the <code class="project_code">getMaximumBatchSize()</code> function like so:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">int</span> getMaximumBatchSize()<span class="keyword"> override   </span>{ <span class="keywordflow">return</span> 20; }</div>
+</div><!-- fragment --><h2><a class="anchor" id="tutorial_analytics_collection_formatting_http_request"></a>
+Formatting the HTTP request</h2>
+<p>Now we need to format the correct HTTP request to log these events to the analytics server. The <a class="el" href="https://docs.juce.com/master/classURL.html" title="Represents a URL and has a bunch of useful functions to manipulate it.">URL</a> we are trying to construct with its corresponding POST data in the case of a button press behaviour for example looks something like this:</p>
+<div class="fragment"><div class="line">POST /batch HTTP/1.1</div>
+<div class="line">Host: www.google-analytics.com</div>
+<div class="line"> </div>
+<div class="line">v=1                            // Version Number</div>
+<div class="line">&amp;aip=1                         // Anonymise IP</div>
+<div class="line">&amp;tid=UA-XXXXXXXXX-1            // Tracking ID</div>
+<div class="line">&amp;t=event                       // Log Type</div>
+<div class="line">&amp;ec=button_press               // Event Category</div>
+<div class="line">&amp;ea=a                          // Event Action</div>
+<div class="line">&amp;cid=AnonUser1234              // User ID</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[v]</span> : The batch logging API version.</li>
+<li><span class="comment">[aip]</span> : The IP address of the sender is anonymised.</li>
+<li><span class="comment">[tid]</span> : The Tracking ID for the corresponding app.</li>
+<li><span class="comment">[t]</span> : The type of logging for the analytics system.</li>
+<li><span class="comment">[ec]</span> : The category identifier for the logged event.</li>
+<li><span class="comment">[ea]</span> : The action identifier for the logged event.</li>
+<li><span class="comment">[cid]</span> : The user ID for the corresponding user.</li>
+</ul>
+<p>In a typical app lifecycle, the batched logger will first process the appStarted event when the application is fired up. Then when the user clicks on the button we log the button_press event and finally log the appStopped event when the application quits.</p>
+<p>In order to account for these 3 logging scenarios, we need to construct different requests in the <code class="project_code">logBatchedEvents()</code> function:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">bool</span> logBatchedEvents (<span class="keyword">const</span> juce::Array&lt;AnalyticsEvent&gt;&amp; events)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Send events to Google Analytics.</span></div>
+<div class="line"> </div>
+<div class="line">        juce::String appData (<span class="stringliteral">"v=1&amp;aip=1&amp;tid="</span> + apiKey);       <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        juce::StringArray postData;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; event : events)                              <span class="comment">// [2]</span></div>
+<div class="line">        {</div>
+<div class="line">            juce::StringPairArray data;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">switch</span> (event.eventType)</div>
+<div class="line">            {</div>
+<div class="line">                <span class="keywordflow">case</span> (DemoAnalyticsEventTypes::event):</div>
+<div class="line">                {</div>
+<div class="line">                    data.set (<span class="stringliteral">"t"</span>, <span class="stringliteral">"event"</span>);</div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">if</span> (event.name == <span class="stringliteral">"startup"</span>)</div>
+<div class="line">                    {</div>
+<div class="line">                        data.set (<span class="stringliteral">"ec"</span>,  <span class="stringliteral">"info"</span>);</div>
+<div class="line">                        data.set (<span class="stringliteral">"ea"</span>,  <span class="stringliteral">"appStarted"</span>);</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.name == <span class="stringliteral">"shutdown"</span>)</div>
+<div class="line">                    {</div>
+<div class="line">                        data.set (<span class="stringliteral">"ec"</span>,  <span class="stringliteral">"info"</span>);</div>
+<div class="line">                        data.set (<span class="stringliteral">"ea"</span>,  <span class="stringliteral">"appStopped"</span>);</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.name == <span class="stringliteral">"button_press"</span>)</div>
+<div class="line">                    {</div>
+<div class="line">                        data.set (<span class="stringliteral">"ec"</span>,  <span class="stringliteral">"button_press"</span>);</div>
+<div class="line">                        data.set (<span class="stringliteral">"ea"</span>,  event.parameters[<span class="stringliteral">"id"</span>]);</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.name == <span class="stringliteral">"crash"</span>)</div>
+<div class="line">                    {</div>
+<div class="line">                        data.set (<span class="stringliteral">"ec"</span>,  <span class="stringliteral">"crash"</span>);</div>
+<div class="line">                        data.set (<span class="stringliteral">"ea"</span>,  <span class="stringliteral">"crash"</span>);</div>
+<div class="line">                    }</div>
+<div class="line">                    <span class="keywordflow">else</span></div>
+<div class="line">                    {</div>
+<div class="line">                        <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#gadc044ce5efecbecf2f5a44cd00db67b3">jassertfalse</a>;</div>
+<div class="line">                        <span class="keywordflow">continue</span>;</div>
+<div class="line">                    }</div>
+<div class="line"> </div>
+<div class="line">                    <span class="keywordflow">break</span>;</div>
+<div class="line">                }</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordflow">default</span>:</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="comment">// Unknown event type! In this demo app we're just using a</span></div>
+<div class="line">                    <span class="comment">// single event type, but in a real app you probably want to</span></div>
+<div class="line">                    <span class="comment">// handle multiple ones.</span></div>
+<div class="line">                    <a class="code hl_define" href="https://docs.juce.com/master/group__juce__core-system.html#gadc044ce5efecbecf2f5a44cd00db67b3">jassertfalse</a>;</div>
+<div class="line">                    <span class="keywordflow">break</span>;</div>
+<div class="line">                }</div>
+<div class="line">            }</div>
+<div class="line"> </div>
+<div class="line">            data.set (<span class="stringliteral">"cid"</span>, event.userID);                                 <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">            juce::StringArray eventData;</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; key : data.getAllKeys())                             <span class="comment">// [4]</span></div>
+<div class="line">                eventData.add (key + <span class="stringliteral">"="</span> + <a class="code hl_namespace" href="https://docs.juce.com/master/namespacejuce.html">juce</a>::<a class="code hl_class" href="https://docs.juce.com/master/classURL.html">URL</a>::addEscapeChars (data[key], true));</div>
+<div class="line"> </div>
+<div class="line">            postData.add (appData + <span class="stringliteral">"&amp;"</span> + eventData.joinIntoString (<span class="stringliteral">"&amp;"</span>));  <span class="comment">// [5]</span></div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> url = juce::URL (<span class="stringliteral">"https://www.google-analytics.com/batch"</span>)</div>
+<div class="line">                       .withPOSTData (postData.joinIntoString (<span class="stringliteral">"\n"</span>));      <span class="comment">// [6]</span></div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : We start by adding the version number, anonymised IP and tracking ID to the appData string variable.</li>
+<li><span class="comment">[2]</span> : Then for each event in the batch, we determine the type of event in question to set its category and action properties. If the event is a startup or a shutdown, we set the event category to "info" and set the action property to "appStarted" or "appStopped" respectively. If the event is a button pressing, we set the event category to "button_press" and retrieve its action property from the id parameter of the <a class="el" href="https://docs.juce.com/master/classButtonTracker.html" title="A class that automatically sends analytics events to the Analytics singleton when a button is clicked...">ButtonTracker</a>.</li>
+<li><span class="comment">[3]</span> : We also set the user ID for the event to log.</li>
+<li><span class="comment">[4]</span> : Now for all the individual <a class="el" href="https://docs.juce.com/master/classStringPairArray.html" title="A container for holding a set of strings which are keyed by another string.">StringPairArray</a> entries, we concatenate keys with their corresponding values by inserting an equal sign in between and escaping any special characters from the <a class="el" href="https://docs.juce.com/master/classURL.html" title="Represents a URL and has a bunch of useful functions to manipulate it.">URL</a>.</li>
+<li><span class="comment">[5]</span> : Finally, we can join all the event parameters together with ampersand signs in between and by prepending the initial appData content to the front.</li>
+<li><span class="comment">[6]</span> : The <a class="el" href="https://docs.juce.com/master/classURL.html" title="Represents a URL and has a bunch of useful functions to manipulate it.">URL</a> is eventually constructed with its POST data appended line by line. This way we can send multiple events in a single HTTP request.</li>
+</ul>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Modify the code above to handle all event properties including label and value attributes. </dd>
+</dl>
+<p>Now that we have our <a class="el" href="https://docs.juce.com/master/classURL.html" title="Represents a URL and has a bunch of useful functions to manipulate it.">URL</a> ready we need to send the request to the server by creating a <a class="el" href="https://docs.juce.com/master/classWebInputStream.html" title="An InputStream which can be used to read from a given URL.">WebInputStream</a>. We first have to lock the <a class="el" href="https://docs.juce.com/master/classCriticalSection.html" title="A re-entrant mutex.">CriticalSection</a> mutex declared as a member variable called webStreamCreation. Using a ScopedLock object allows us to automatically lock and unlock the mutex for the piece of code delimited by the curly brackets <span class="comment">[1]</span> .</p>
+<p>If the <code class="project_code">stopLoggingEvents()</code> function was previously called due to the application terminating, we return immediately without attempting to initialise the <a class="el" href="https://docs.juce.com/master/classWebInputStream.html" title="An InputStream which can be used to read from a given URL.">WebInputStream</a> <span class="comment">[2]</span> . Otherwise, we can create it in a std::unique_ptr by passing the previously constructed <a class="el" href="https://docs.juce.com/master/classURL.html" title="Represents a URL and has a bunch of useful functions to manipulate it.">URL</a> as an argument and using POST as the method <span class="comment">[3]</span> .</p>
+<p>We can then connect to the specified <a class="el" href="https://docs.juce.com/master/classURL.html" title="Represents a URL and has a bunch of useful functions to manipulate it.">URL</a> and perform the request using the <code class="project_code">connect()</code> function on the <a class="el" href="https://docs.juce.com/master/classWebInputStream.html" title="An InputStream which can be used to read from a given URL.">WebInputStream</a> <span class="comment">[4]</span> . If the response is successful, we just return positively from the function. Otherwise, we set an exponential decay on the batch period by multiplying the previous rate by 2 and return negatively from the function <span class="comment">[5]</span> .</p>
+<div class="fragment"><div class="line"> </div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">const</span> juce::ScopedLock lock (webStreamCreation);        <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">if</span> (shouldExit)                                         <span class="comment">// [2]</span></div>
+<div class="line">                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">            webStream.reset (<span class="keyword">new</span> juce::WebInputStream (url, <span class="keyword">true</span>)); <span class="comment">// [3]</span></div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> success = webStream-&gt;connect (<span class="keyword">nullptr</span>);                <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// Do an exponential backoff if we failed to connect.</span></div>
+<div class="line">        <span class="keywordflow">if</span> (success)</div>
+<div class="line">            periodMs = initialPeriodMs;</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            periodMs *= 2;</div>
+<div class="line"> </div>
+<div class="line">        setBatchPeriod (periodMs);                                  <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">return</span> success;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>When the application shuts down, we need to cancel connections to the <a class="el" href="https://docs.juce.com/master/classWebInputStream.html" title="An InputStream which can be used to read from a given URL.">WebInputStream</a> if there are any that are concurrently running. By first acquiring the lock from the same <a class="el" href="https://docs.juce.com/master/classCriticalSection.html" title="A re-entrant mutex.">CriticalSection</a> object using a ScopedLock, we ensure that the previously encountered critical section of the code in the <code class="project_code">logBatchedEvents()</code> function will have terminated before <span class="comment">[1]</span> . Setting the shouldExit boolean to true prevents any new connections from being created subsequently <span class="comment">[2]</span> . Then we can finally cancel any <a class="el" href="https://docs.juce.com/master/classWebInputStream.html" title="An InputStream which can be used to read from a given URL.">WebInputStream</a> connections using the <code class="project_code">cancel()</code> function if there are any <span class="comment">[3]</span> .</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> stopLoggingEvents()<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="keyword">const</span> juce::ScopedLock lock (webStreamCreation);            <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        shouldExit = <span class="keyword">true</span>;                                          <span class="comment">// [2]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (webStream.get() != <span class="keyword">nullptr</span>)                             <span class="comment">// [3]</span></div>
+<div class="line">            webStream-&gt;cancel();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><p>This completes the part of the tutorial dealing with logging events. However, if the transmission of event data fails and the application terminates, we currently have no way of keeping track of unlogged events.</p>
+<h1><a class="anchor" id="tutorial_analytics_collection_save_restore_unlogged_events"></a>
+Save and restore unlogged events</h1>
+<p>This section will cover the use of XML files to store any unlogged events to disk in the case of a lost connection.</p>
+<p>The XML document storing unlogged event information will look something like this for a single button press:</p>
+<div class="fragment"><div class="line">&lt;?<span class="keyword">xml</span> <span class="keyword">version</span>=<span class="stringliteral">"1.0"</span>?&gt;</div>
+<div class="line">&lt;<span class="keywordtype">events</span>&gt;                                                                                              // <span class="keyword">Root</span> <span class="keyword">XML</span> <span class="keyword">element</span> <span class="keyword">for</span> <span class="keyword">the</span> <span class="keyword">whole</span> <span class="keyword">document.</span></div>
+<div class="line">    &lt;<span class="keywordtype">google_analytics_event</span> <span class="keyword">name</span>=<span class="stringliteral">"button_press"</span> <span class="keyword">type</span>=<span class="stringliteral">"event"</span> <span class="keyword">timestamp</span>=<span class="stringliteral">"xxxx"</span> <span class="keyword">user_id</span>=<span class="stringliteral">"AnonUser1234"</span>&gt; // <span class="keyword">Event</span> <span class="keyword">node</span> <span class="keyword">with</span> <span class="keyword">name</span>, <span class="keyword">type</span>, <span class="keyword">timestamp</span> <span class="keyword">and</span> <span class="keyword">user</span> <span class="keyword">ID.</span></div>
+<div class="line">        &lt;<span class="keywordtype">parameters</span> <span class="keyword">id</span>=<span class="stringliteral">"a"</span>&gt;&lt;/<span class="keywordtype">parameters</span>&gt;                                                              // <span class="keyword">Parameters</span> <span class="keyword">related</span> <span class="keyword">to</span> <span class="keyword">the</span> <span class="keyword">parent</span> <span class="keyword">event.</span></div>
+<div class="line">        &lt;<span class="keywordtype">user_properties</span> <span class="keyword">group</span>=<span class="stringliteral">"beta"</span>&gt;&lt;/<span class="keywordtype">user_properties</span>&gt;                                              // <span class="keyword">Properties</span> <span class="keyword">for</span> <span class="keyword">the</span> <span class="keyword">user</span> <span class="keyword">in</span> <span class="keyword">the</span> <span class="keyword">parent</span> <span class="keyword">event.</span></div>
+<div class="line">    &lt;/<span class="keywordtype">google_analytics_event</span>&gt;</div>
+<div class="line">    //...</div>
+<div class="line">&lt;/<span class="keywordtype">events</span>&gt;</div>
+</div><!-- fragment --><p>We will look at the <code class="project_code">saveUnloggedEvents()</code> and <code class="project_code">restoreUnloggedEvents()</code> functions that deal with saving and restoring events respectively. The <code class="project_code">saveUnloggedEvents()</code> function will build an XML structure based on the format shown above and save the content in an XML file:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> saveUnloggedEvents (<span class="keyword">const</span> std::deque&lt;AnalyticsEvent&gt;&amp; eventsToSave)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        <span class="comment">// Save unsent events to disk. Here we use XML as a serialisation format, but</span></div>
+<div class="line">        <span class="comment">// you can use anything else as long as the restoreUnloggedEvents method can</span></div>
+<div class="line">        <span class="comment">// restore events from disk. If you're saving very large numbers of events then</span></div>
+<div class="line">        <span class="comment">// a binary format may be more suitable if it is faster - remember that this</span></div>
+<div class="line">        <span class="comment">// method is called on app shutdown so it needs to complete quickly!</span></div>
+<div class="line"> </div>
+<div class="line">        juce::XmlDocument previouslySavedEvents (savedEventsFile);</div>
+<div class="line">        std::unique_ptr&lt;juce::XmlElement&gt; xml (previouslySavedEvents.getDocumentElement()); <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (xml.get() == <span class="keyword">nullptr</span> || xml-&gt;getTagName() != <span class="stringliteral">"events"</span>)                          <span class="comment">// [2]</span></div>
+<div class="line">            xml.reset (<span class="keyword">new</span> juce::XmlElement (<span class="stringliteral">"events"</span>));</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; event : eventsToSave)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>* xmlEvent = <span class="keyword">new</span> juce::XmlElement (<span class="stringliteral">"google_analytics_event"</span>);               <span class="comment">// [3]</span></div>
+<div class="line">            xmlEvent-&gt;setAttribute (<span class="stringliteral">"name"</span>, event.name);</div>
+<div class="line">            xmlEvent-&gt;setAttribute (<span class="stringliteral">"type"</span>, event.eventType);</div>
+<div class="line">            xmlEvent-&gt;setAttribute (<span class="stringliteral">"timestamp"</span>, (<span class="keywordtype">int</span>) event.timestamp);</div>
+<div class="line">            xmlEvent-&gt;setAttribute (<span class="stringliteral">"user_id"</span>, event.userID);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">auto</span>* parameters = <span class="keyword">new</span> juce::XmlElement (<span class="stringliteral">"parameters"</span>);                         <span class="comment">// [4]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; key : event.parameters.getAllKeys())</div>
+<div class="line">                parameters-&gt;setAttribute (key, event.parameters[key]);</div>
+<div class="line"> </div>
+<div class="line">            xmlEvent-&gt;addChildElement (parameters);</div>
+<div class="line"> </div>
+<div class="line">            <span class="keyword">auto</span>* userProperties = <span class="keyword">new</span> juce::XmlElement (<span class="stringliteral">"user_properties"</span>);                <span class="comment">// [5]</span></div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; key : event.userProperties.getAllKeys())</div>
+<div class="line">                userProperties-&gt;setAttribute (key, event.userProperties[key]);</div>
+<div class="line"> </div>
+<div class="line">            xmlEvent-&gt;addChildElement (userProperties);</div>
+<div class="line"> </div>
+<div class="line">            xml-&gt;addChildElement (xmlEvent);                                                <span class="comment">// [6]</span></div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        xml-&gt;writeTo (savedEventsFile);                                                     <span class="comment">// [7]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : First we retrieve any previously saved events from the XML file stored at the previously defined file location and build an <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> based on it.</li>
+<li><span class="comment">[2]</span> : If the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> does not exist or does not have the root "events" node, we create it.</li>
+<li><span class="comment">[3]</span> : For each unsaved event in the queue, we create a "google_analytics_event" node with the event name, type, timestamp and user ID as attributes.</li>
+<li><span class="comment">[4]</span> : We also create a "parameters" node as a child node to the previously created one with event parameters as attributes to it.</li>
+<li><span class="comment">[5]</span> : At the same hierarchy level, we create a "user_properties" node as a child node with user properties as attributes to it.</li>
+<li><span class="comment">[6]</span> : We can then add the individual event nodes as children to the root "events" node.</li>
+<li><span class="comment">[7]</span> : Finally, we write the XML structure to the XML file and store the events.</li>
+</ul>
+<p>On the other hand, the <code class="project_code">restoreUnloggedEvents()</code> function will in turn read an XML structure based on the same format shown previously and fill up the event queue:</p>
+<div class="fragment"><div class="line">    <span class="keywordtype">void</span> restoreUnloggedEvents (std::deque&lt;AnalyticsEvent&gt;&amp; restoredEventQueue)<span class="keyword"> override</span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">        juce::XmlDocument savedEvents (savedEventsFile);</div>
+<div class="line">        std::unique_ptr&lt;juce::XmlElement&gt; xml (savedEvents.getDocumentElement());           <span class="comment">// [1]</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (xml.get() == <span class="keyword">nullptr</span> || xml-&gt;getTagName() != <span class="stringliteral">"events"</span>)                          <span class="comment">// [2]</span></div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">auto</span> numEvents = xml-&gt;getNumChildElements();</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span> iEvent = 0; iEvent &lt; numEvents; ++iEvent)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keyword">auto</span>* xmlEvent = xml-&gt;getChildElement (iEvent);                                 <span class="comment">// [3]</span></div>
+<div class="line"> </div>
+<div class="line">            juce::StringPairArray parameters;</div>
+<div class="line">            <span class="keyword">auto</span>* xmlParameters = xmlEvent-&gt;getChildByName (<span class="stringliteral">"parameters"</span>);                  <span class="comment">// [4]</span></div>
+<div class="line">            <span class="keyword">auto</span> numParameters = xmlParameters-&gt;getNumAttributes();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> iParam = 0; iParam &lt; numParameters; ++iParam)</div>
+<div class="line">                parameters.set (xmlParameters-&gt;getAttributeName (iParam),</div>
+<div class="line">                                xmlParameters-&gt;getAttributeValue (iParam));</div>
+<div class="line"> </div>
+<div class="line">            juce::StringPairArray userProperties;</div>
+<div class="line">            <span class="keyword">auto</span>* xmlUserProperties = xmlEvent-&gt;getChildByName (<span class="stringliteral">"user_properties"</span>);         <span class="comment">// [5]</span></div>
+<div class="line">            <span class="keyword">auto</span> numUserProperties = xmlUserProperties-&gt;getNumAttributes();</div>
+<div class="line"> </div>
+<div class="line">            <span class="keywordflow">for</span> (<span class="keyword">auto</span> iProp = 0; iProp &lt; numUserProperties; ++iProp)</div>
+<div class="line">                userProperties.set (xmlUserProperties-&gt;getAttributeName (iProp),</div>
+<div class="line">                                    xmlUserProperties-&gt;getAttributeValue (iProp));</div>
+<div class="line"> </div>
+<div class="line">            restoredEventQueue.push_back ({</div>
+<div class="line">                xmlEvent-&gt;getStringAttribute (<span class="stringliteral">"name"</span>),                                      <span class="comment">// [6]</span></div>
+<div class="line">                xmlEvent-&gt;getIntAttribute (<span class="stringliteral">"type"</span>),</div>
+<div class="line">                <span class="keyword">static_cast&lt;</span>juce::uint32<span class="keyword">&gt;</span> (xmlEvent-&gt;getIntAttribute (<span class="stringliteral">"timestamp"</span>)),</div>
+<div class="line">                parameters,</div>
+<div class="line">                xmlEvent-&gt;getStringAttribute (<span class="stringliteral">"user_id"</span>),</div>
+<div class="line">                userProperties</div>
+<div class="line">            });</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        savedEventsFile.deleteFile();                                                       <span class="comment">// [7]</span></div>
+<div class="line">    }</div>
+</div><!-- fragment --><ul>
+<li><span class="comment">[1]</span> : Same as before, we retrieve any previously saved events from the XML file stored at the previously defined file location and build an <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> based on it.</li>
+<li><span class="comment">[2]</span> : If the <a class="el" href="https://docs.juce.com/master/classXmlElement.html" title="Used to build a tree of elements representing an XML document.">XmlElement</a> does not exist or does not have the root "events" node, we return from the function as there is nothing to do.</li>
+<li><span class="comment">[3]</span> : We first retrieve a single event child node to parse from the root parent.</li>
+<li><span class="comment">[4]</span> : For each attribute from the child "parameters" node, we set a key/value pair and add it to a <a class="el" href="https://docs.juce.com/master/classStringPairArray.html" title="A container for holding a set of strings which are keyed by another string.">StringPairArray</a>.</li>
+<li><span class="comment">[5]</span> : For each attribute from the child "user_properties" node, we set a key/value pair and add it to a <a class="el" href="https://docs.juce.com/master/classStringPairArray.html" title="A container for holding a set of strings which are keyed by another string.">StringPairArray</a>.</li>
+<li><span class="comment">[6]</span> : We can then push the individual events back into the event queue by setting the corresponding parameters from the <a class="el" href="https://docs.juce.com/master/classStringPairArray.html" title="A container for holding a set of strings which are keyed by another string.">StringPairArray</a> objects.</li>
+<li><span class="comment">[7]</span> : Finally, we delete the XML file from disk when done.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>We used XML as a serialisation format but if we need to save large amounts of unsaved events, a binary format would be more efficient.</dd></dl>
+<dl class="section attention">
+<dt>Exercise</dt>
+<dd>Save and restore unlogged events in a different serialisation format such as <a class="el" href="https://docs.juce.com/master/classJSON.html" title="Contains static methods for converting JSON-formatted text to and from var objects.">JSON</a> or in a binary format. </dd>
+</dl>
+<h1><a class="anchor" id="tutorial_analytics_collection_summary"></a>
+Summary</h1>
+<p>In this tutorial, we have learnt how to track usage data with Google Analytics and the JUCE analytics module. In particular, we have:</p>
+<ul>
+<li>Sent analytics events to Google Analytics on a separate thread.</li>
+<li>Stored unsent events locally in an XML document.</li>
+<li>Restored saved events from the XML document to the event queue.</li>
+</ul>
+<h1><a class="anchor" id="tutorial_analytics_collection_see_also"></a>
+See also</h1>
+<ul>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_android_studio.html">Tutorial: Getting started with Android</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_android_screen_sizes.html">Tutorial: Managing Android screen sizes</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_in_app_purchases.html">Tutorial: In-App Purchases on desktop and mobile devices</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_push_notifications.html">Tutorial: Push Notifications on desktop and mobile devices</a></li>
+<li><a class="el" href="https://docs.juce.com/master/tutorial_app_plugin_packaging.html">Tutorial: Package your app or plugin for distribution</a> </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<section id="section-10-81" class=" ct-section juce-sitemap"><div class="ct-section-inner-wrap"><div id="div_block-11-81" class="ct-div-block"><div id="new_columns-12-81" class="ct-new-columns"><div id="div_block-13-81" class="ct-div-block"><h3 id="headline-15-81" class="ct-headline ">Purchase</h3><a id="link_text-17-81" class="ct-link-text" href="https://juce.com/get-juce/">Get JUCE</a><h3 id="headline-20-81" class="ct-headline mt-xlrg">Discover</h3><a id="link_text-21-81" class="ct-link-text" href="https://juce.com/juce/whats-new/" target="_self">What's New in JUCE</a><a id="link_text-22-81" class="ct-link-text" href="https://juce.com/juce/features/" target="_self">Features</a><h3 id="headline-25-81" class="ct-headline mt-xlrg">Learn</h3><a id="link_text-27-81" class="ct-link-text" href="https://juce.com/learn/documentation/">Documentaion</a><a id="link_text-26-81" class="ct-link-text" href="https://juce.com/learn/tutorials/">Tutorials</a><a id="link_text-24-81" class="ct-link-text" href="https://juce.com/stories/" target="_self">Made with JUCE</a><a id="link_text-29-127" class="ct-link-text" href="https://juce.com/resources/" target="_self">Resources</a></div><div id="div_block-14-81" class="ct-div-block"><h3 id="headline-28-81" class="ct-headline">Support</h3><a id="link_text-31-81" class="ct-link-text" href="https://forum.juce.com/" target="_self">JUCE Forum</a><a class="ct-link-text" href="https://juce.com/newsletter" target="_self">Newsletter</a><a id="link_text-30-127" class="ct-link-text" href="https://juce.com/archive/">Archive</a><h3 id="headline-32-81" class="ct-headline mt-xlrg">About</h3><a id="link_text-29-81" class="ct-link-text" href="https://juce.com/contact-us/">Contact Us</a><a id="link_text-34-81" class="ct-link-text" href="https://juce.com/juce-legal/">JUCE Legal</a><a id="link_text-30-81" class="ct-link-text" href="https://juce.com/get-juce">JUCE Licensing FAQ</a><h3 id="headline-33-81" class="ct-headline mt-xlrg">Events</h3><a id="link_text-35-81" class="ct-link-text" href="https://audio.dev/" target="_blank">Audio Developer Conference</a></div><div id="div_block-38-81" class="ct-div-block"></div></div></div></div></section>
+<section id="section-13-13" class=" ct-section"><div class="ct-section-inner-wrap"><div id="new_columns-14-13" class="ct-new-columns"><div id="div_block-20-13" class="ct-div-block"><div id="_social_icons-22-13" class="oxy-social-icons"><a href="https://www.facebook.com/jucelibrary" target="_blank" class="oxy-social-icons-facebook"><svg><title>Visit our Facebook</title><use xlink:href="#oxy-social-icons-icon-facebook"></use></svg></a><a href="https://twitter.com/jucelibrary" target="_blank" class="oxy-social-icons-twitter"><svg><title>Visit our Twitter</title><use xlink:href="#oxy-social-icons-icon-twitter"></use></svg></a><a href="https://www.linkedin.com/company/juce-c-/" target="_blank" class="oxy-social-icons-linkedin"><svg><title>Visit our LinkedIn</title><use xlink:href="#oxy-social-icons-icon-linkedin"></use></svg></a><a href="https://www.youtube.com/c/JUCElibrary" target="_blank" class="oxy-social-icons-youtube"><svg><title>Visit our YouTube channel</title><use xlink:href="#oxy-social-icons-icon-youtube"></use></svg></a></div></div><div id="div_block-17-13" class="ct-div-block"><a id="link-18-13" class="ct-link" href="https://juce.com/"><img id="image-19-13" alt="JUCE Logo" src="./JUCE_ Tutorial_ App analytics collection_files/JUCE-logo-horiz-ondark.png" class="ct-image"></a></div><div id="div_block-15-13" class="ct-div-block"><div id="text_block-32-13" class="ct-text-block">© Raw Material Software Limited</div></div></div></div></section>
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <defs>
+      <symbol id="oxy-social-icons-icon-linkedin" viewBox="0 0 32 32">
+         <title>linkedin</title>
+         <path d="M12 12h5.535v2.837h0.079c0.77-1.381 2.655-2.837 5.464-2.837 5.842 0 6.922 3.637 6.922 8.367v9.633h-5.769v-8.54c0-2.037-0.042-4.657-3.001-4.657-3.005 0-3.463 2.218-3.463 4.509v8.688h-5.767v-18z"></path>
+         <path d="M2 12h6v18h-6v-18z"></path>
+         <path d="M8 7c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook" viewBox="0 0 32 32">
+         <title>facebook</title>
+         <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss" viewBox="0 0 32 32">
+         <title>rss</title>
+         <path d="M4.259 23.467c-2.35 0-4.259 1.917-4.259 4.252 0 2.349 1.909 4.244 4.259 4.244 2.358 0 4.265-1.895 4.265-4.244-0-2.336-1.907-4.252-4.265-4.252zM0.005 10.873v6.133c3.993 0 7.749 1.562 10.577 4.391 2.825 2.822 4.384 6.595 4.384 10.603h6.16c-0-11.651-9.478-21.127-21.121-21.127zM0.012 0v6.136c14.243 0 25.836 11.604 25.836 25.864h6.152c0-17.64-14.352-32-31.988-32z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-facebook-blank" viewBox="0 0 32 32">
+         <title>facebook-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h13v-14h-4v-4h4v-2c0-3.306 2.694-6 6-6h4v4h-4c-1.1 0-2 0.9-2 2v2h6l-1 4h-5v14h9c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-rss-blank" viewBox="0 0 32 32">
+         <title>rss-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM8.719 25.975c-1.5 0-2.719-1.206-2.719-2.706 0-1.488 1.219-2.712 2.719-2.712 1.506 0 2.719 1.225 2.719 2.712 0 1.5-1.219 2.706-2.719 2.706zM15.544 26c0-2.556-0.994-4.962-2.794-6.762-1.806-1.806-4.2-2.8-6.75-2.8v-3.912c7.425 0 13.475 6.044 13.475 13.475h-3.931zM22.488 26c0-9.094-7.394-16.5-16.481-16.5v-3.912c11.25 0 20.406 9.162 20.406 20.413h-3.925z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-linkedin-blank" viewBox="0 0 32 32">
+         <title>linkedin-blank</title>
+         <path d="M29 0h-26c-1.65 0-3 1.35-3 3v26c0 1.65 1.35 3 3 3h26c1.65 0 3-1.35 3-3v-26c0-1.65-1.35-3-3-3zM12 26h-4v-14h4v14zM10 10c-1.106 0-2-0.894-2-2s0.894-2 2-2c1.106 0 2 0.894 2 2s-0.894 2-2 2zM26 26h-4v-8c0-1.106-0.894-2-2-2s-2 0.894-2 2v8h-4v-14h4v2.481c0.825-1.131 2.087-2.481 3.5-2.481 2.488 0 4.5 2.238 4.5 5v9z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-pinterest-blank" viewBox="0 0 32 32">
+         <title>pinterest</title>
+         <path d="M16 2.138c-7.656 0-13.863 6.206-13.863 13.863 0 5.875 3.656 10.887 8.813 12.906-0.119-1.094-0.231-2.781 0.050-3.975 0.25-1.081 1.625-6.887 1.625-6.887s-0.412-0.831-0.412-2.056c0-1.925 1.119-3.369 2.506-3.369 1.181 0 1.756 0.887 1.756 1.95 0 1.188-0.756 2.969-1.15 4.613-0.331 1.381 0.688 2.506 2.050 2.506 2.462 0 4.356-2.6 4.356-6.35 0-3.319-2.387-5.638-5.787-5.638-3.944 0-6.256 2.956-6.256 6.019 0 1.194 0.456 2.469 1.031 3.163 0.113 0.137 0.131 0.256 0.094 0.4-0.106 0.438-0.338 1.381-0.387 1.575-0.063 0.256-0.2 0.306-0.463 0.188-1.731-0.806-2.813-3.337-2.813-5.369 0-4.375 3.175-8.387 9.156-8.387 4.806 0 8.544 3.425 8.544 8.006 0 4.775-3.012 8.625-7.194 8.625-1.406 0-2.725-0.731-3.175-1.594 0 0-0.694 2.644-0.863 3.294-0.313 1.206-1.156 2.712-1.725 3.631 1.3 0.4 2.675 0.619 4.106 0.619 7.656 0 13.863-6.206 13.863-13.863 0-7.662-6.206-13.869-13.863-13.869z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-youtube-blank" viewBox="0 0 32 32">
+         <title>youtube</title>
+         <path d="M31.681 9.6c0 0-0.313-2.206-1.275-3.175-1.219-1.275-2.581-1.281-3.206-1.356-4.475-0.325-11.194-0.325-11.194-0.325h-0.012c0 0-6.719 0-11.194 0.325-0.625 0.075-1.987 0.081-3.206 1.356-0.963 0.969-1.269 3.175-1.269 3.175s-0.319 2.588-0.319 5.181v2.425c0 2.587 0.319 5.181 0.319 5.181s0.313 2.206 1.269 3.175c1.219 1.275 2.819 1.231 3.531 1.369 2.563 0.244 10.881 0.319 10.881 0.319s6.725-0.012 11.2-0.331c0.625-0.075 1.988-0.081 3.206-1.356 0.962-0.969 1.275-3.175 1.275-3.175s0.319-2.587 0.319-5.181v-2.425c-0.006-2.588-0.325-5.181-0.325-5.181zM12.694 20.15v-8.994l8.644 4.513-8.644 4.481z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-twitter-blank" viewBox="0 0 32 32">
+         <title>twitter</title>
+         <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+      </symbol>
+      <symbol id="oxy-social-icons-icon-instagram-blank" viewBox="0 0 32 32">
+         <title>instagram</title>
+         <path d="M16 2.881c4.275 0 4.781 0.019 6.462 0.094 1.563 0.069 2.406 0.331 2.969 0.55 0.744 0.288 1.281 0.638 1.837 1.194 0.563 0.563 0.906 1.094 1.2 1.838 0.219 0.563 0.481 1.412 0.55 2.969 0.075 1.688 0.094 2.194 0.094 6.463s-0.019 4.781-0.094 6.463c-0.069 1.563-0.331 2.406-0.55 2.969-0.288 0.744-0.637 1.281-1.194 1.837-0.563 0.563-1.094 0.906-1.837 1.2-0.563 0.219-1.413 0.481-2.969 0.55-1.688 0.075-2.194 0.094-6.463 0.094s-4.781-0.019-6.463-0.094c-1.563-0.069-2.406-0.331-2.969-0.55-0.744-0.288-1.281-0.637-1.838-1.194-0.563-0.563-0.906-1.094-1.2-1.837-0.219-0.563-0.481-1.413-0.55-2.969-0.075-1.688-0.094-2.194-0.094-6.463s0.019-4.781 0.094-6.463c0.069-1.563 0.331-2.406 0.55-2.969 0.288-0.744 0.638-1.281 1.194-1.838 0.563-0.563 1.094-0.906 1.838-1.2 0.563-0.219 1.412-0.481 2.969-0.55 1.681-0.075 2.188-0.094 6.463-0.094zM16 0c-4.344 0-4.887 0.019-6.594 0.094-1.7 0.075-2.869 0.35-3.881 0.744-1.056 0.412-1.95 0.956-2.837 1.85-0.894 0.888-1.438 1.781-1.85 2.831-0.394 1.019-0.669 2.181-0.744 3.881-0.075 1.713-0.094 2.256-0.094 6.6s0.019 4.887 0.094 6.594c0.075 1.7 0.35 2.869 0.744 3.881 0.413 1.056 0.956 1.95 1.85 2.837 0.887 0.887 1.781 1.438 2.831 1.844 1.019 0.394 2.181 0.669 3.881 0.744 1.706 0.075 2.25 0.094 6.594 0.094s4.888-0.019 6.594-0.094c1.7-0.075 2.869-0.35 3.881-0.744 1.050-0.406 1.944-0.956 2.831-1.844s1.438-1.781 1.844-2.831c0.394-1.019 0.669-2.181 0.744-3.881 0.075-1.706 0.094-2.25 0.094-6.594s-0.019-4.887-0.094-6.594c-0.075-1.7-0.35-2.869-0.744-3.881-0.394-1.063-0.938-1.956-1.831-2.844-0.887-0.887-1.781-1.438-2.831-1.844-1.019-0.394-2.181-0.669-3.881-0.744-1.712-0.081-2.256-0.1-6.6-0.1v0z"></path>
+         <path d="M16 7.781c-4.537 0-8.219 3.681-8.219 8.219s3.681 8.219 8.219 8.219 8.219-3.681 8.219-8.219c0-4.537-3.681-8.219-8.219-8.219zM16 21.331c-2.944 0-5.331-2.387-5.331-5.331s2.387-5.331 5.331-5.331c2.944 0 5.331 2.387 5.331 5.331s-2.387 5.331-5.331 5.331z"></path>
+         <path d="M26.462 7.456c0 1.060-0.859 1.919-1.919 1.919s-1.919-0.859-1.919-1.919c0-1.060 0.859-1.919 1.919-1.919s1.919 0.859 1.919 1.919z"></path>
+      </symbol>
+   </defs>
+</svg>
+</div></body></html>
